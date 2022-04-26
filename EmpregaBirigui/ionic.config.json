@@ -1,0 +1,7 @@
+{
+  "name": "EmpregaBirigui",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
