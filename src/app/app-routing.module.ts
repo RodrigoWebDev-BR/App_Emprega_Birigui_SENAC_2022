@@ -10,16 +10,22 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },  {
+  },
+  {
     path: 'endereco',
     loadChildren: () => import('./endereco/endereco.module').then( m => m.EnderecoPageModule)
   },
   {
     path: 'idiomas',
     loadChildren: () => import('./idiomas/idiomas.module').then( m => m.IdiomasPageModule)
+  },
+  {
+    path: 'usuario',
+    loadChildren: () => import('./usuario/usuario.module').then( m => m.UsuarioPageModule)
   }
 
 ];
+ 
 
 @NgModule({
   imports: [
