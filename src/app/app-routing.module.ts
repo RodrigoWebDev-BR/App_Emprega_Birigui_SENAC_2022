@@ -13,6 +13,10 @@ const routes: Routes = [
   },  {
     path: 'contato',
     loadChildren: () => import('./contato/contato.module').then( m => m.ContatoPageModule)
+  },
+  {
+    path: 'exp-profissional',
+    loadChildren: () => import('./exp-profissional/exp-profissional.module').then( m => m.ExpProfissionalPageModule)
   }
 
 ];
