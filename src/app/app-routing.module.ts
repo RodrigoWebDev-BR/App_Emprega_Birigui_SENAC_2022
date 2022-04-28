@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'vaga-detalhes',
+    loadChildren: () => import('./vaga-detalhes/vaga-detalhes.module').then( m => m.VagaDetalhesPageModule)
   }
 
 ];
