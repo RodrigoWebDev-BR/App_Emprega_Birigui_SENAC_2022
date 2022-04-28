@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'endereco',
     loadChildren: () => import('./endereco/endereco.module').then( m => m.EnderecoPageModule)
+  },
+  {
+    path: 'idiomas',
+    loadChildren: () => import('./idiomas/idiomas.module').then( m => m.IdiomasPageModule)
   }
 ];
 
