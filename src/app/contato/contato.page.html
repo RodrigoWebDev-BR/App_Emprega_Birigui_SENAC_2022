@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="center">Contato</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-row >
+    <ion-col>
+      <ion-item class="roundedInput ion-margin-top">
+      <ion-label position="floating" class="ion-margin-horizontal">Tipo de contato</ion-label>
+      <ion-select interface="popover" >
+        <ion-select-option value="email">E-mail</ion-select-option>
+        <ion-select-option value="celular">Celular</ion-select-option>
+        <ion-select-option value="telefone">Telefone residencial</ion-select-option>
+        <ion-select-option value="linkedin">Likedin</ion-select-option>
+      </ion-select>
+    </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput ion-margin-top" >
+        <ion-label position="floating">Insira seu contato</ion-label>
+        <ion-input class="ion-margin-horizontal"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="center ion-margin-top">
+      <ion-button color="dark" expand="block">Salvar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-content>
+
+</ion-content>
