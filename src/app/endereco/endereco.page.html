@@ -1,0 +1,80 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="center">
+      Endereço
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Endereço</ion-label>
+        <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="endereco"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Número</ion-label>
+        <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="numero"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Complemento</ion-label>
+        <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="complemento"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Bairro</ion-label>
+        <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="bairro"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">CEP</ion-label>
+        <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="cep"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Cidade</ion-label>
+        <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="cidade"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Estado(UF)</ion-label>
+        <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="estado"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-button color="primary" shape="block" (click)="adicionarCandidato()">Cadastrar</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
