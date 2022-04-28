@@ -4,11 +4,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="fundobg" [fullscreen]="true">
 
   <ion-row >
     <ion-col class="espacamento">
-      <ion-label position="floating">Digite seu cpf</ion-label>
+      <ion-label position="floating" class="ion-margin-top">Digite seu cpf</ion-label>
     <ion-item class="roundedInput" lines="none"> 
         <ion-input class="black" expand="block" type="text" >
         </ion-input>
@@ -19,7 +19,7 @@
 
   <ion-row >
     <ion-col class="espacamento">
-      <ion-label position="floating">Digite seu senha</ion-label>
+      <ion-label position="floating" class="ion-margin-top">Digite seu senha</ion-label>
       <ion-item class="roundedInput " lines="none">
       <ion-input class="black" type="text" >
       </ion-input>
@@ -28,13 +28,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-row>
-    <ion-col class="espacamento margin-left">
-      <ion-item lines="none">
-        <h2 class="txtPassword white">Esqueceu sua senha ?</h2>
-      </ion-item>
-    </ion-col>
-  </ion-row>
+  
 
   <ion-row>
     <ion-col class="espacamento">
@@ -45,7 +39,15 @@
   <ion-row>
     <ion-col class="espacamento ">
       <ion-item lines="none">
-        <h2 class="txtNewAccount white center">Não possui uma conta? Clique aqui e cadastre-se</h2>
+        <h2 class="txtNewAccount black center">Não possui uma conta? Clique aqui e cadastre-se</h2>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="espacamento ">
+      <ion-item lines="none">
+        <h2 class="txtPassword black center">Esqueceu sua senha ?</h2>
       </ion-item>
     </ion-col>
   </ion-row>
