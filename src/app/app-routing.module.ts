@@ -26,9 +26,12 @@ const routes: Routes = [
   {
     path: 'idiomas',
     loadChildren: () => import('./idiomas/idiomas.module').then( m => m.IdiomasPageModule)
+  },
+  {
+    path: 'exp-profissional',
+    loadChildren: () => import('./exp-profissional/exp-profissional.module').then( m => m.ExpProfissionalPageModule)
   }
-];
-
+]
 
 @NgModule({
   imports: [
