@@ -18,8 +18,13 @@ const routes: Routes = [
   {
     path: 'idiomas',
     loadChildren: () => import('./idiomas/idiomas.module').then( m => m.IdiomasPageModule)
+  },
+  {
+    path: 'endereco',
+    loadChildren: () => import('./endereco/endereco.module').then( m => m.EnderecoPageModule)
   }
 ];
+
 
 @NgModule({
   imports: [
