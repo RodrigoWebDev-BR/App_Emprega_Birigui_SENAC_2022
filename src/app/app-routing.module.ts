@@ -31,10 +31,18 @@ const routes: Routes = [
   {
     path: 'usuario',
     loadChildren: () => import('./usuario/usuario.module').then( m => m.UsuarioPageModule)
-  }
-
-];
+  },
+    { path: 'inscricao-vaga',
+    loadChildren: () => import('./inscricao-vaga/inscricao-vaga.module').then( m => m.InscricaoVagaPageModule)
+    } 
+    ,
+    {
+    path: 'endereco',
+    loadChildren: () => import('./endereco/endereco.module').then( m => m.EnderecoPageModule)
+    }
+    ];
  
+    
 
 @NgModule({
   imports: [
