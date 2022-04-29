@@ -1,22 +1,21 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="fundobg" [fullscreen]="true">
   <div>
     <ion-row>
       <ion-col>
-        <h4>Cadastro de Usuário</h4>        
+        <h4 style="text-align: center;">Cadastro de usuário</h4>        
       </ion-col>
     </ion-row>
 
-  <div>
     <ion-row>
-      <ion-col> 
-        <ion-item class="roundedInput" line="none">
-          <ion-label position="floating">Nome</ion-label>
+      <ion-col class="espacamento">         
+          <ion-label position="floating" class="ion-margin-top">Nome</ion-label>
+          <ion-item class="roundedInput" line="none">
           <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="nome">
           </ion-input>
           <ion-icon name="person-outline" slot="end"></ion-icon>
@@ -25,9 +24,9 @@
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <ion-item class="roundedInput" line="none">
-          <ion-label position="floating">RG</ion-label>
+      <ion-col class="espacamento">        
+          <ion-label position="floating" class="ion-margin-top">RG</ion-label>
+          <ion-item class="roundedInput" line="none">
           <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="rg">
           </ion-input>
           <ion-icon name="id-card-outline" slot="end"></ion-icon>
@@ -36,9 +35,9 @@
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <ion-item class="roundedInput" line="none">
+      <ion-col class="espacamento">        
           <ion-label position="floating">CPF</ion-label>
+          <ion-item class="roundedInput" lines="none">
           <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="cpf">
           </ion-input>
           <ion-icon name="id-card-outline" slot="end"></ion-icon>
@@ -47,9 +46,9 @@
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <ion-item class="roundedInput" line="none">
-          <ion-label position="floating">Data de Nascimento</ion-label>
+      <ion-col class="espacamento">        
+          <ion-label position="floating" class="ion-margin-top">Data de Nascimento</ion-label>
+          <ion-item class="roundedInput" line="none">
           <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="dtNasc">
           </ion-input>
           <ion-icon name="calendar-outline" slot="end"></ion-icon>
@@ -58,10 +57,10 @@
     </ion-row>
 
     <ion-row>
-      <ion-col class="ion-margin-horizontal">
-        <ion-item class="roundedInput" line="none">
-          <ion-label position="floating">Gênero</ion-label>
-          <ion-select [(ngModel)]="genero" interface="popover">
+      <ion-col class="ion-margin-horizontal">        
+          <ion-label position="floating" class="ion-margin-top">Gênero</ion-label>
+          <ion-item class="roundedInput" line="none">
+          <ion-select [(ngModel)]="genero" interface="popover">           
             <ion-select-option value="Masculino">Masculino</ion-select-option>
             <ion-select-option value="Feminino">Feminino</ion-select-option>
             <ion-select-option value="Outros">Outros</ion-select-option>
@@ -71,9 +70,9 @@
     </ion-row>
 
     <ion-row>
-      <ion-col class="ion-margin-horizontal">
-        <ion-item class="roundedInput" line="none">
-          <ion-label position="floating">Estado Civil</ion-label>
+      <ion-col class="ion-margin-horizontal">        
+          <ion-label position="floating" class="ion-margin-top">Estado Civil</ion-label>
+          <ion-item class="roundedInput" line="none">
           <ion-select [(ngModel)]="estadoCivil" interface="popover">
             <ion-select-option value="Solteiro (a)">Solteiro (a)</ion-select-option>
             <ion-select-option value="Casado (a)">Casado (a)</ion-select-option>
@@ -87,8 +86,8 @@
 
     <ion-row>
       <ion-col class="ion-margin-horizontal">
-        <ion-item class="roundedInput" line="none"> 
-          <ion-label position="floating">Ocultas Idade?</ion-label>
+        <ion-label position="floating" class="ion-margin-top">Ocultas Idade?</ion-label>
+        <ion-item class="roundedInput" line="none">          
           <ion-select [(ngModel)]="ocultarIdade" interface="popover">
             <ion-select-option value="Sim">Sim</ion-select-option>
             <ion-select-option value="Não">Não</ion-select-option>  
@@ -96,9 +95,9 @@
         </ion-item>
       </ion-col>
     
-      <ion-col class="ion-margin-horizontal">
-        <ion-item class="roundedInput" line="none">
-          <ion-label position="floating">Está Empregado?</ion-label>
+      <ion-col class="ion-margin-horizontal">        
+          <ion-label position="floating" class="ion-margin-top">Está Empregado?</ion-label>
+          <ion-item class="roundedInput" line="none">
           <ion-select [(ngModel)]="estaEmpregado" interface="popover">
             <ion-select-option value="Sim">Sim</ion-select-option>
             <ion-select-option value="Não">Não</ion-select-option>            
@@ -108,10 +107,8 @@
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <ion-button color="primary" shape="block" >
-          PRÓXIMO
-        </ion-button>
+      <ion-col class="espacamento">
+        <ion-button shape="block">PRÓXIMO</ion-button>
       </ion-col>
     </ion-row> 
   </div>
