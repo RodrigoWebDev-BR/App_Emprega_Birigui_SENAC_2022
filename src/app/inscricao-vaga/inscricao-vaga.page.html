@@ -1,21 +1,21 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>inscricao_vaga</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="fundobg" [fullscreen]="true">
   <div>
     <ion-row>
       <ion-col>        
-        <h4>{{ quantidade }} vagas de emprego encontradas em {{ cidade }}</h4> 
-        <h4>Clique e leia a descrição da vaga</h4>       
+        <h4 style="text-align: center;">{{ quantidade }} vagas de emprego encontradas em {{ cidade }}</h4> 
+        <h4 style="text-align: center;">Clique e leia a descrição da vaga</h4>       
       </ion-col>     
     </ion-row>
   </div>
 
     <div>
-      <ion-card style="border-radius: 5.5%; box-shadow: 2.5px 5px; border-style: groove; border: 0.1%;">
+      <ion-card style="border-radius: 5.5%; box-shadow: 2.5px 5px #00bd2f; border-style: groove; border: 0.1%;">
         <ion-card-header>
           <div style="display: flex; justify-content: center; align-items: flex-start;">
             <img src="https://img1.gratispng.com/20180326/jaq/kisspng-google-logo-g-suite-google-guava-google-plus-5ab8b5b12e63f8.42394965152205457719.jpg" width="30%;">         
@@ -26,8 +26,7 @@
         </ion-card-header>
       
         <ion-card-content>
-           <h3>{{ salario }}</h3>
-          
+           <h3>{{ salario}}</h3>          
           <h4>Clique aqui para mais informações e cadastre seu currículo.</h4>
         </ion-card-content>
       </ion-card>     

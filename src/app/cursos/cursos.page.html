@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>cursos</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -8,45 +8,46 @@
   <div>
     <ion-row>
       <ion-col>
-        <h4>Cadastro de Currículo</h4>
-        <h4>Cursos</h4>
+        <h4 style="text-align: center;">Cadastro de Currículo</h4>
+        <h4 style="text-align: center;">Cursos</h4>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <ion-item class="roundedInput" line="none">
+      <ion-col class="espamanto">        
           <ion-label position="floating">Curso</ion-label>
+          <ion-item class="roundedInput" line="none">
           <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="curso">
           </ion-input>
-         
+
         </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <ion-item class="roundedInput" line="none">
+      <ion-col class="espacamanto">        
           <ion-label position="floating">Instituição de Ensino</ion-label>
+          <ion-item class="roundedInput" lines="none">
           <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="instEnsino">
           </ion-input>
-          
+
         </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col class="roundedInput" line="none">
-        <ion-item class="roundedInput" line="none">
+      <ion-col class="espacamento">        
           <ion-label position="floating">Data de início</ion-label>
+          <ion-item class="roundedInput" line="none">
           <ion-input type="date" class="ion-margin-horizontal" [(ngModel)]="dtInicio">
           </ion-input>
           <ion-icon name="calendar-outline"></ion-icon>
         </ion-item>
-      
-        <ion-col class="ion-margin-horizontal"></ion-col>
-        <ion-item class="roundedInput" line="none">
+      </ion-col>
+
+      <ion-col class="espacamento">        
           <ion-label position="floating">Data de conclusão</ion-label>
+          <ion-item class="roundedInput" line="none">
           <ion-input type="date" class="ion-margin-horizontal" [(ngModel)]="dtConclusao">
           </ion-input>
           <ion-icon name="calendar-outline"></ion-icon>
@@ -55,7 +56,7 @@
     </ion-row>
 
     <ion-row>
-      <ion-col>
+      <ion-col class="espacamento">
         <ion-button color="primary" shape="block">
           ADICIONAR CURSO
         </ion-button>
