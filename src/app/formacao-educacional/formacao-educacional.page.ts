@@ -11,5 +11,8 @@ export class FormacaoEducacionalPage implements OnInit {
 
   ngOnInit() {
   }
+  adicionarFormacao(){
+    console.log
+  }
 
 }
