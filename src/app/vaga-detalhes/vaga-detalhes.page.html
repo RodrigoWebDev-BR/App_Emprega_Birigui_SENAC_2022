@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="fundobg" [fullscreen]="true">
   <div class="header">
     <ion-row>
 
@@ -36,4 +36,120 @@
     </ion-row>
 
   </div><!--header-->
+
+  <div class="conteudo">
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <ion-icon style="margin-top: 3%;" name="chevron-back-outline"></ion-icon>
+          <h2 style="font-size: 20px;">Voltar e pesquisar nova vaga</h2>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+<br>
+<br>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <h2 style="font-size: 20px;" class="center">Detalhes sobre vaga x</h2>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+
+        <ion-item lines="none" color="transparent">
+          <h3 style="font-size: 10px; text-align: start;" >Descrição</h3> 
+        </ion-item>
+
+        <ion-row>
+          <div class="box1">
+            <h2 style="font-size: 15px; font-style: italic; margin-left: 5px;">Atividades: </h2>
+            <p style="font-size: 15px; margin-left: 5px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales tincidunt mauris.</p>
+          </div>
+        </ion-row>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+
+        <ion-item lines="none" color="transparent">
+          <h3 style="font-size: 10px; text-align: start;" >Benefícios</h3>
+        </ion-item>
+
+        <ion-row>
+          <div class="box2">
+            <h2 style="font-size: 15px; margin-left: 5px;">Assitencia médica, gympass, vale-alimentação</h2>
+          </div>
+        </ion-row>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+
+        <ion-item lines="none" color="transparent">
+          <h3 style="font-size: 10px; text-align: start;" >Horário</h3>
+        </ion-item>
+
+        <ion-row>
+          <div class="box2">
+            <h2 style="font-size: 15px; margin-left: 5px;">Segunda à sexta das 08:00hs às 17:00hs</h2>
+          </div>
+        </ion-row>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+
+        <ion-item lines="none" color="transparent">
+          <h3 style="font-size: 10px; text-align: start;" >Regime de contratação</h3>
+        </ion-item>
+
+        <ion-row>
+          <div class="box2">
+            <h2 style="font-size: 15px; margin-left: 5px;">CLT(efetivo)</h2>
+          </div>
+        </ion-row>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+
+        <ion-item lines="none" color="transparent">
+          <h3 style="font-size: 10px; text-align: start;" >Dados da empresa</h3>
+        </ion-item>
+
+        <ion-row>
+          <div class="box2">
+            <h2 style="font-size: 15px; margin-left: 5px;">Biripar Parafusos</h2>
+          </div>
+        </ion-row>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="espacamento">
+        <ion-button color="tertiary" shape="block">Inscrever-se <ion-icon name="caret-forward-circle-outline" slot="end"></ion-icon></ion-button>
+        
+      </ion-col>
+    </ion-row>
+
+   
+  </div><!--conteudo-->
+<br>
+  <ion-footer>
+    <div class="footer"></div><!--header-->
+  </ion-footer>
+  
 </ion-content>
+
