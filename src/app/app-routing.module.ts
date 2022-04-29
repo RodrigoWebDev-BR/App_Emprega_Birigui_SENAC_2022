@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'exp-profissional',
     loadChildren: () => import('./exp-profissional/exp-profissional.module').then( m => m.ExpProfissionalPageModule)
+  },
+  {
+    path: 'timeline-vaga',
+    loadChildren: () => import('./timeline-vaga/timeline-vaga.module').then( m => m.TimelineVagaPageModule)
   }
 
 ];
