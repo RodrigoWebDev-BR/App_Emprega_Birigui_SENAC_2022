@@ -1,24 +1,22 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="primary">
-    <ion-title class="center">
-      Cadastro de curriculo
-    </ion-title>
+    <ion-title>Cadastro de curriculo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="fundobg" [fullscreen]="true">
 
   <ion-row>
     <ion-col>
-      <H4 class="center">Cursos de Idiomas</H4>
+      <H4 class="centertext">Cursos de Idiomas</H4>
     </ion-col>
   </ion-row>
 
   <ion-row>
-    <ion-col type="number" class="ion-margin-horizontal">
-      <ion-item>
-        <ion-label position="floating">Idioma</ion-label>
-        <ion-select [(ngModel)]="estado">
+    <ion-col class="espacamento">
+      <ion-label position="floating" class="ion-margin-top">Idioma</ion-label>
+      <ion-item class="roundedInput" lines="none">
+        <ion-select [(ngModel)]="idioma.id_idioma" style="width: 100%;">
           <ion-select-option value="ingles">Inglês</ion-select-option>
           <ion-select-option value="espanhol">Espanhol</ion-select-option>
           <ion-select-option value="frances">Francês</ion-select-option>
@@ -30,10 +28,10 @@
   </ion-row>
 
   <ion-row>
-    <ion-col type="number" class="ion-margin-horizontal">
-      <ion-item>
-        <ion-label position="floating">Nível do idioma</ion-label>
-        <ion-select [(ngModel)]="nivel">
+    <ion-col class="espacamento">
+      <ion-label position="floating">Nível do idioma</ion-label>
+      <ion-item class="roundedInput " lines="none">
+        <ion-select [(ngModel)]="idioma.nivel" style="width: 100%;">
           <ion-select-option value="iniciante">Iniciante</ion-select-option>
           <ion-select-option value="basico">Básico</ion-select-option>
           <ion-select-option value="intermediario">Intermediário</ion-select-option>
@@ -45,8 +43,8 @@
   </ion-row>
 
   <ion-row>
-    <ion-col>
-      <ion-button color="primary" shape="block" (click)="adicionarIdioma()">Adicionar idioma</ion-button>
+    <ion-col class="espacamento">
+      <ion-button shape="block" (click)="adicionarIdioma()">Adicionar idioma</ion-button>
     </ion-col>
   </ion-row>
 
@@ -54,8 +52,8 @@
 
 <ion-footer>
   <ion-row>
-    <ion-col>
-      <ion-button color="primary" shape="block" (click)="proximo()">Proxima Página</ion-button>
+    <ion-col class="espacamento">
+      <ion-button shape="block" (click)="proximo()">Proxima Página</ion-button>
     </ion-col>
   </ion-row>
 </ion-footer>
