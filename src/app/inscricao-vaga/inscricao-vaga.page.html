@@ -15,7 +15,7 @@
   </div>
 
   <div>
-    <ion-card style="border-radius: 20px; box-shadow: 2.5px 5px #026e1d; border-style: groove; border: 0.1%;">
+    <ion-card style="border-radius: 20px; box-shadow: 2.5px 5px #026e1d; border-style: groove; border: 0.1%;" *ngFor="let vaga of vagas"> 
       <ion-card-header>
         <div style="display: flex; justify-content: center; align-items: flex-start;">
           <ion-row>
@@ -24,16 +24,15 @@
                 src="https://img1.gratispng.com/20180326/jaq/kisspng-google-logo-g-suite-google-guava-google-plus-5ab8b5b12e63f8.42394965152205457719.jpg"
                 width="100%;">
             </ion-col>
-            <ion-col size="8">
-              <ion-card-title>{{ vaga.nome }} TITULO</ion-card-title>
+            <ion-col size="6">
+              <ion-card-title>{{ vaga.nome }}</ion-card-title>
               <ion-card-subtitle>{{ vaga.quantidade }} vaga(s)</ion-card-subtitle>
               <ion-card-subtitle style="padding: 2%; font-size: 10pt; font-weight: 700;">
-                {{ vaga.salario }} R$ 2000.00
+                {{ vaga.salario }}
               </ion-card-subtitle>              
             </ion-col> 
-            <ion-col>
-              
-              <h4 style="color: #00bd2f; font-size: 14.5px;">{{ vaga.data }} 29/04</h4>
+            <ion-col size="4">              
+              <h4 style="color: #00bd2f; font-size: 12.5px;">{{ vaga.data }}</h4>
             </ion-col>           
           </ion-row>
         </div>

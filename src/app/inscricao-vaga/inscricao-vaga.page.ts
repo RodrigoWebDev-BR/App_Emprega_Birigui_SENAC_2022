@@ -14,9 +14,18 @@ export class InscricaoVagaPage implements OnInit {
     salario: ""    
   }
 
-  //console.log(inscricaoVaga)
-
-  public inscricao: any[] = []
+  public vagas: any[] = [{
+    nome: "teste",
+    quantidade: "10567",
+    data: "29/04/2022",
+    salario: "R$ 2000.00" ,
+  },
+  {
+    nome: "teste",
+    quantidade: "10567",
+    data: "29/04/2022",
+    salario: "R$ 2000.00" 
+  }]
 
   public vaga = {}
 
