@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
+  candidato = {cpf : '' , senha : ''};
+
+  confirmarLogin(){
+    console.log(this.candidato);
+  }
+
   constructor() { }
 
   ngOnInit() {
