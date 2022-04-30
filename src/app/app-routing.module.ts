@@ -66,9 +66,9 @@ const routes: Routes = [
        path: 'exp-profissional',
     loadChildren: () => import('./exp-profissional/exp-profissional.module').then( m => m.ExpProfissionalPageModule)
   },
- {
-    path: 'inscricao-vaga',
-    loadChildren: () => import('./inscricao-vaga/inscricao-vaga.module').then( m => m.InscricaoVagaPageModule)
+  {
+    path: 'timeline-vaga',
+    loadChildren: () => import('./timeline-vaga/timeline-vaga.module').then( m => m.TimelineVagaPageModule)
   }
 
 
