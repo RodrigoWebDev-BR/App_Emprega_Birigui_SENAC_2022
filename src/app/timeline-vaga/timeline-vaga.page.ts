@@ -7,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimelineVagaPage implements OnInit {
 
+  contato = { contato: '', id:''}; 
+
   constructor() { }
+
+  nomeContato(){
+
+    console.log(this.contato)
+
+  }
 
   ngOnInit() {
   }
