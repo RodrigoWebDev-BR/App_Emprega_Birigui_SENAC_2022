@@ -10,7 +10,7 @@
     <ion-col class="espacamento">
       <ion-label position="floating" class="ion-margin-top">Endereço</ion-label>
       <ion-item class="roundedInput" lines="none">
-        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco"></ion-input>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.endereco"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -19,7 +19,7 @@
     <ion-col class="espacamento">
       <ion-label position="floating" class="ion-margin-top">Número</ion-label>
       <ion-item class="roundedInput" lines="none">
-        <ion-input type="text" class="black" expand="block" [(ngModel)]="numero"></ion-input>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.numero"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -28,7 +28,7 @@
     <ion-col class="espacamento">
       <ion-label position="floating" class="ion-margin-top">Complemento</ion-label>
       <ion-item class="roundedInput" lines="none">
-        <ion-input type="text" class="black" expand="block" [(ngModel)]="complemento"></ion-input>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.complemento"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -37,7 +37,7 @@
     <ion-col class="espacamento">
       <ion-label position="floating" class="ion-margin-top">Bairro</ion-label>
       <ion-item class="roundedInput" lines="none">
-        <ion-input type="text" class="black" expand="block"[(ngModel)]="bairro"></ion-input>
+        <ion-input type="text" class="black" expand="block"[(ngModel)]="endereco.bairro"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -46,7 +46,7 @@
     <ion-col class="espacamento">
       <ion-label position="floating" class="ion-margin-top">CEP</ion-label>
       <ion-item class="roundedInput" lines="none">
-        <ion-input type="text" class="black" expand="block" [(ngModel)]="cep"></ion-input>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.cep"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -55,7 +55,7 @@
     <ion-col class="espacamento">
       <ion-label position="floating" class="ion-margin-top">Cidade</ion-label>
       <ion-item class="roundedInput" lines="none">
-        <ion-input type="text" class="black" expand="block" [(ngModel)]="cidade"></ion-input>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.cidade"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -64,14 +64,14 @@
     <ion-col class="espacamento">
       <ion-label position="floating" class="ion-margin-top">Estado(UF)</ion-label>
       <ion-item class="roundedInput" lines="none">
-        <ion-input type="text" class="black" expand="block" [(ngModel)]="estado"></ion-input>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.estado"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col class="espacamento">
-      <ion-button shape="block" (click)="cadastrarEndereco()">Cadastrar</ion-button>
+      <ion-button shape="block" (click)="confirmar()">Cadastrar</ion-button>
     </ion-col>
   </ion-row>
 

@@ -9,20 +9,26 @@ import { alertController } from '@ionic/core';
 })
 export class IdiomasPage {
 
-  constructor(public  mensagem: AlertController) { 
-}
+  idioma = {};
 
-async adicionarIdioma(){
+  constructor(public mensagem: AlertController) {
+  }
 
-  const alerta = await this.mensagem.create(
-    {
-      header: "ATENÇÃO",
-      subHeader: "",
-      message: "Idioma(s) armazenado(s) com sucesso",
-      buttons: ["OK"],
-      cssClass: "cssAlerta"
-    }
-  );
-  await alerta.present();
-}
+  async adicionarIdioma() {
+
+    const alerta = await this.mensagem.create(
+      {
+        header: "ATENÇÃO",
+        subHeader: "",
+        message: "Idioma(s) armazenado(s) com sucesso",
+        buttons: ["OK"],
+        cssClass: "cssAlerta"
+      }
+    );
+    await alerta.present();
+    console.log(this.idioma);
+  }
+  proximo() {
+    console.log(this.idioma)
+  }
 }
