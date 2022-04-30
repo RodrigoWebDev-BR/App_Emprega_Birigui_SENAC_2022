@@ -9,11 +9,13 @@ import { alertController } from '@ionic/core';
 })
 export class EnderecoPage {
 
-  constructor(public  mensagem: AlertController) { 
+  endereco = {endereco: '', numero: '', complemento: '', bairro: '', cep: '', cidade: '', estado: '',};
+
+  constructor(public mensagem: AlertController) {
   }
-  
-  async cadastrarEndereco(){
-  
+
+  async cadastrarEndereco() {
+
     const alerta = await this.mensagem.create(
       {
         header: "ATENÇÃO",
@@ -25,4 +27,7 @@ export class EnderecoPage {
     );
     await alerta.present();
   }
+  confirmar() {
+    console.log(this.endereco)
   }
+}
