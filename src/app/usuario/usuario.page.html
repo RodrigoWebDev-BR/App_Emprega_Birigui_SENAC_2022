@@ -16,7 +16,7 @@
       <ion-col class="espacamento">
         <ion-label position="floating" class="ion-margin-top">Nome</ion-label>
         <ion-item class="roundedInput" line="none">
-          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="nome">
+          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="usuario.nome">
           </ion-input>
           <ion-icon name="person-outline" slot="end"></ion-icon>
         </ion-item>
@@ -27,7 +27,7 @@
       <ion-col class="espacamento">
         <ion-label position="floating" class="ion-margin-top">RG</ion-label>
         <ion-item class="roundedInput" line="none">
-          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="rg">
+          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="usuario.rg">
           </ion-input>
           <ion-icon name="id-card-outline" slot="end"></ion-icon>
         </ion-item>
@@ -38,7 +38,7 @@
       <ion-col class="espacamento">
         <ion-label position="floating">CPF</ion-label>
         <ion-item class="roundedInput" lines="none">
-          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="cpf">
+          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="usuario.cpf">
           </ion-input>
           <ion-icon name="id-card-outline" slot="end"></ion-icon>
         </ion-item>
@@ -49,7 +49,7 @@
       <ion-col class="espacamento">
         <ion-label position="floating" class="ion-margin-top">Data de Nascimento</ion-label>
         <ion-item class="roundedInput" line="none">
-          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="dtNasc">
+          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="usuario.dataNasc">
           </ion-input>
           <ion-icon name="calendar-outline" slot="end"></ion-icon>
         </ion-item>
@@ -60,7 +60,7 @@
       <ion-col class="ion-margin-horizontal">
         <ion-label position="floating" class="ion-margin-top">Gênero</ion-label>
         <ion-item class="roundedInput" line="none">
-          <ion-select [(ngModel)]="genero" interface="popover">
+          <ion-select [(ngModel)]="usuario.genero" interface="popover">
             <ion-select-option value="Masculino">Masculino</ion-select-option>
             <ion-select-option value="Feminino">Feminino</ion-select-option>
             <ion-select-option value="Outros">Outros</ion-select-option>
@@ -73,7 +73,7 @@
       <ion-col class="ion-margin-horizontal">
         <ion-label position="floating" class="ion-margin-top">Estado Civil</ion-label>
         <ion-item class="roundedInput" line="none">
-          <ion-select [(ngModel)]="estadoCivil" interface="popover">
+          <ion-select [(ngModel)]="usuario.estadoCivil" interface="popover">
             <ion-select-option value="Solteiro (a)">Solteiro (a)</ion-select-option>
             <ion-select-option value="Casado (a)">Casado (a)</ion-select-option>
             <ion-select-option value="União Estável">União Estável</ion-select-option>
@@ -86,9 +86,9 @@
 
     <ion-row>
       <ion-col class="ion-margin-horizontal">
-        <ion-label position="floating" class="ion-margin-top">Ocultas Idade?</ion-label>
+        <ion-label position="floating" class="ion-margin-top">Ocultar Idade?</ion-label>
         <ion-item class="roundedInput" line="none">
-          <ion-select [(ngModel)]="ocultarIdade" interface="popover">
+          <ion-select [(ngModel)]="usuario.ocultarIdade" interface="popover">
             <ion-select-option value="Sim">Sim</ion-select-option>
             <ion-select-option value="Não">Não</ion-select-option>
           </ion-select>
@@ -98,7 +98,7 @@
       <ion-col class="ion-margin-horizontal">
         <ion-label position="floating" class="ion-margin-top">Está Empregado?</ion-label>
         <ion-item class="roundedInput" line="none">
-          <ion-select [(ngModel)]="estaEmpregado" interface="popover">
+          <ion-select [(ngModel)]="usuario.estaEmpregado" interface="popover">
             <ion-select-option value="Sim">Sim</ion-select-option>
             <ion-select-option value="Não">Não</ion-select-option>
           </ion-select>
@@ -108,7 +108,7 @@
 
     <ion-row>
       <ion-col class="espacamento">
-        <ion-button shape="block">PRÓXIMO</ion-button>
+        <ion-button shape="block" (click)="adicionarUsuario(usuario)">PRÓXIMO</ion-button>
       </ion-col>
     </ion-row>
   </div>
