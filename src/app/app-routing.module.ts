@@ -8,7 +8,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
+    path: 'folder',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./contato/contato.module').then( m => m.ContatoPageModule)
   },
   {
-    path: 'folder/:id',
+    path: 'folder',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
@@ -32,7 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'folder/:id',
+    path: 'folder',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
