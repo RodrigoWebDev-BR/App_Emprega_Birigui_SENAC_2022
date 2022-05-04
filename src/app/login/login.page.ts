@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +13,13 @@ export class LoginPage implements OnInit {
 
   confirmarLogin(){
     console.log(this.candidato);
+    this.rota.navigate(['folder']);
   }
 
-  constructor() { }
+  constructor( public rota : Router )
+  { 
+
+  }
 
   ngOnInit() {
   }
