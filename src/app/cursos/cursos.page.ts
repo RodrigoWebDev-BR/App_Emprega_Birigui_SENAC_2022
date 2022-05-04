@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cursos',
@@ -15,7 +16,7 @@ export class CursosPage implements OnInit {
     dataInicio: "",
     dataConclusao: ""
   }
-  constructor(public mensagem: AlertController) { }
+  constructor(public mensagem: AlertController, public rota: Router) { }
 
   ngOnInit() {
   }
@@ -77,6 +78,12 @@ export class CursosPage implements OnInit {
     Storage.remove({ key: "dataInicio" }) 
     Storage.remove({ key: "dataConclusao" }) 
 
+  }
+
+  // idioma
+  proximaPagina() {
+    console.log(this.proximaPagina)
+    this.rota.navigate(['idiomas'])
   }
 /*
   async removerCurso(cursoRemove) {

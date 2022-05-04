@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inscricao-vaga',
@@ -28,8 +29,13 @@ export class InscricaoVagaPage implements OnInit {
   }]
 
   public vaga = {}
+  
+  proximaPagina() {
+    console.log(this.proximaPagina)
+    this.rota.navigate(['vaga-detalhes'])
+  }
 
-  constructor() { }
+  constructor(public rota: Router) { }
 
   ngOnInit() {
   }
