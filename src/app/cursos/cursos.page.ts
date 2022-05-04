@@ -16,7 +16,14 @@ export class CursosPage implements OnInit {
     dataInicio: "",
     dataConclusao: ""
   }
-  constructor(public mensagem: AlertController, public rota: Router) { }
+
+  public cursos: any[] = []
+
+  //public c = {}  
+
+  constructor(public mensagem: AlertController, public rota: Router) { 
+    this.carregarDados()
+  }
 
   ngOnInit() {
   }
@@ -26,7 +33,7 @@ export class CursosPage implements OnInit {
       const alerta = await this.mensagem.create(
         {
           header: "ATENÇÃO!",
-          message: "Não é permitido adicionar um candidato sem nome.",
+          message: "Não é permitido adicionar um curso sem nome.",
           buttons: ["ok"],
           cssClass: "cssAlerta"
         } 
@@ -64,9 +71,9 @@ export class CursosPage implements OnInit {
         } 
       console.log(this.curso)
       
-    //var cursoCopy = JSON.parse(JSON.stringify(this.curso))
+    var cursoCopy = JSON.parse(JSON.stringify(this.curso))
 
-    // this.curso.push(cursoCopy)   
+    this.cursos.push(cursoCopy)   
 
     this.curso.nome = ""
     this.curso.instituicaoEnsino = ""  
@@ -80,12 +87,12 @@ export class CursosPage implements OnInit {
 
   }
 
-  // idioma
+  
   proximaPagina() {
     console.log(this.proximaPagina)
     this.rota.navigate(['idiomas'])
   }
-/*
+
   async removerCurso(cursoRemove) {
     let confirmaRemover = await this.mensagem.create({
       header: "ATENÇÃO!",
@@ -97,8 +104,8 @@ export class CursosPage implements OnInit {
       },
       {
         text: "Excluir", handler: () => {
-          const index = this.idiomas.indexOf(cursoRemove)
-          this.idiomas.splice(index, 1)
+          const index = this.cursos.indexOf(cursoRemove)
+          this.cursos.splice(index, 1)
         }
       }
       ]
@@ -123,7 +130,7 @@ export class CursosPage implements OnInit {
       })
     await alerta.present()
   }
-*/
+
   async carregarDados() {
     this.curso.nome = (await Storage.get({ key: "nome" })).value
     this.curso.instituicaoEnsino = (await Storage.get({ key: "instituicaoEnsino" })).value
