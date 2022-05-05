@@ -13,6 +13,10 @@ const routes: Routes = [
   },  {
     path: 'formacao-educacional',
     loadChildren: () => import('./formacao-educacional/formacao-educacional.module').then( m => m.FormacaoEducacionalPageModule)
+  },
+  {
+    path: 'notificacao',
+    loadChildren: () => import('./notificacao/notificacao.module').then( m => m.NotificacaoPageModule)
   }
 
 ];
