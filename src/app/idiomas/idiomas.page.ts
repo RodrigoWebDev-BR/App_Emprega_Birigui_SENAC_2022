@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { alertController } from '@ionic/core';
 
@@ -9,26 +10,70 @@ import { alertController } from '@ionic/core';
 })
 export class IdiomasPage {
 
-  idioma = {};
+  public idioma = {id_idioma: '', nivel: '', descricao: ''};
 
-  constructor(public mensagem: AlertController) {
-  }
+  public idiomas: any [] = [];
+
+  constructor(public mensagem: AlertController, public rota: Router) { }
 
   async adicionarIdioma() {
 
-    const alerta = await this.mensagem.create(
-      {
-        header: "ATENÇÃO",
-        subHeader: "",
-        message: "Idioma(s) armazenado(s) com sucesso",
-        buttons: ["OK"],
-        cssClass: "cssAlerta"
-      }
-    );
-    await alerta.present();
-    console.log(this.idioma);
+    if (this.idioma.id_idioma == '' || this.idioma.nivel == '') {
+      const alerta = await this.mensagem.create(
+        {
+          header: "ATENÇÃO",
+          subHeader: "",
+          message: "Não é permitido inserir um idioma com o campo vazio",
+          buttons: ["OK"],
+          cssClass: "cssAlerta"
+        }
+      );
+      await alerta.present();
+
+      return;
+    }
+    
+    var idiomaCopy = JSON.parse(JSON.stringify(this.idioma))
+    this.idiomas.push(idiomaCopy);
+
+    console.log(this.idiomas)
+
+    this.idioma.id_idioma = '';
+    this.idioma.nivel = '';
+
   }
-  proximo() {
-    console.log(this.idioma)
+  async removerIdioma(idiomaRemove) 
+  {
+    let confirmaRemover = await this.mensagem.create(
+    {
+      header: "ATENÇÃO",
+      message: "Confirma a exclusão do " + idiomaRemove.id_idioma + "?",
+      buttons: 
+      [
+        {
+          text: "Não",
+          role: "cancel",
+          handler: () => 
+          {
+            console.log("CANCELADO");
+          }
+        },
+        {
+          text: "Sim",
+          handler: () => 
+
+          {
+            const index = this.idiomas.indexOf(idiomaRemove);
+
+            this.idiomas.splice(index, 1);
+          }
+        }
+      ],
+    });
+    await confirmaRemover.present();
+  }
+    proximo() {
+    console.log(this.idioma);
+    this.rota.navigate(['exp-profissional']);
   }
 }
