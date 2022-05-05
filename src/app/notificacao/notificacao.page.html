@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar class="ion-text-center" color="primary">
-    <ion-title>Notificações gerais</ion-title>
+    <ion-title>Notificações</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="">
   <div class="ion-text-center">
     <h3>
       Voltar para pagina inicial
@@ -14,9 +14,13 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label position="floating">Filtro</ion-label>
-          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="filtro"></ion-input>
-          <ion-icon name="chevron-down-outline" slot="end"></ion-icon>
+          <ion-label>Filtro</ion-label>
+          <ion-select type="Vagas abertas" class="ion-margin-horizontal" [(ngModel)]="filtro" >
+            <ion-select type="Currículo em análise" class="ion-margin-horizontal" [(ngModel)]="filtro" ></ion-select>
+            <ion-select type="Currículo enviado" class="ion-margin-horizontal" [(ngModel)]="filtro" ></ion-select>
+            <ion-select type="Processo seletivo" class="ion-margin-horizontal" [(ngModel)]="filtro" ></ion-select>
+            <ion-select-option value="valor">text</ion-select-option>
+          </ion-select>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -40,6 +44,7 @@
         10:45 AM
       </ion-note>
     </ion-item>
+  </ion-item-sliding>
 
     <!-- Multi-line sliding item with icon options on both sides -->
     <ion-item-sliding id="item100">
@@ -54,6 +59,7 @@
           19:26 PM
         </ion-note>
       </ion-item>
+    </ion-item-sliding>
 
       <!-- Multi-line sliding item with icon options on both sides -->
       <ion-item-sliding id="item100">
@@ -62,12 +68,13 @@
             <h2>Animador de Festa</h2>
             <p>JM-Festas</p>
             <p>Data de inscrição 14/08/2021</p>
-            <p>Status: Currículo em análise</p>
+            <p>Status: Currículo enviado</p>
           </ion-label>
           <ion-note slot="end">
             8:00 AM
           </ion-note>
         </ion-item>
+      </ion-item-sliding>
 
         <!-- Multi-line sliding item with icon options on both sides -->
         <ion-item-sliding id="item100">
@@ -76,26 +83,28 @@
               <h2>Tecnico de enfermagem</h2>
               <p>UNIMED</p>
               <p>Data de inscrição 02/10/2019</p>
-              <p>Status: Currículo em análise</p>
+              <p>Status: Processo seletivo</p>
             </ion-label>
             <ion-note slot="end">
               13:18 PM
             </ion-note>
           </ion-item>
+        </ion-item-sliding>
 
           <!-- Multi-line sliding item with icon options on both sides -->
           <ion-item-sliding id="item100">
             <ion-item href="#">
               <ion-label>
-                <h2>segurança noturno</h2>
+                <h2>Segurança noturno</h2>
                 <p>Imperial</p>
                 <p>Data de inscrição 23/11/2024</p>
-                <p>Status: Vagas abertas</p>
+                <p>Status: Currículo enviado</p>
               </ion-label>
               <ion-note slot="end">
                 13:18 PM
               </ion-note>
             </ion-item>
+            </ion-item-sliding>
 
 
 
