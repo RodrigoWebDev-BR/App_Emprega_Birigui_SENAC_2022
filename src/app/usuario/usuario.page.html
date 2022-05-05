@@ -60,6 +60,7 @@
       <ion-col class="ion-margin-horizontal">
         <ion-label position="floating" class="ion-margin-top">Gênero</ion-label>
         <ion-item class="roundedInput" line="none">
+        <!--  <ion-item *ngFor="let genero of generos" lines="none"></ion-item> -->
           <ion-select [(ngModel)]="usuario.genero" interface="popover">
             <ion-select-option value="Masculino">Masculino</ion-select-option>
             <ion-select-option value="Feminino">Feminino</ion-select-option>

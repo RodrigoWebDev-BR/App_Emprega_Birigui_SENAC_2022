@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './cursos.page.html',
   styleUrls: ['./cursos.page.scss'],
 })
+
 export class CursosPage implements OnInit {
 
   public curso = {
@@ -18,8 +19,6 @@ export class CursosPage implements OnInit {
   }
 
   public cursos: any[] = []
-
-  //public c = {}  
 
   constructor(public mensagem: AlertController, public rota: Router) { 
     this.carregarDados()
@@ -96,7 +95,7 @@ export class CursosPage implements OnInit {
   async removerCurso(cursoRemove) {
     let confirmaRemover = await this.mensagem.create({
       header: "ATENÇÃO!",
-      message: "Confima exclusão de " + cursoRemove.curso + "? Essa ação é irreverssível.",
+      message: "Confima exclusão de " + cursoRemove.nome + "? Essa ação é irreverssível.",
       buttons: [{
         text: "Cancelar", role: "cancel", handler: () => {
           console.log("CANCELADO")

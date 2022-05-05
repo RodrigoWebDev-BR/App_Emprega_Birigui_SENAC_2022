@@ -19,8 +19,15 @@ export class UsuarioPage implements OnInit {
     ocultarIdade: "",
     estaEmpregado: ""
   }
+/*
+  public genero = {
+    Masculino: "",
+    Feminino: "",
+    Outros: ""    
+  }
 
-
+  public generos: any[] = []
+*/
   constructor(public mensagem: AlertController) { }
 
   ngOnInit() {
