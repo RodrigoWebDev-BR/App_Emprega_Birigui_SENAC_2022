@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vaga-detalhes',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VagaDetalhesPage implements OnInit {
 
-  constructor() { }
+  inscrever(){
+    this.rota.navigate(['folder']);
+  }
+
+  constructor(public rota : Router) { 
+
+
+  }
 
   ngOnInit() {
   }
