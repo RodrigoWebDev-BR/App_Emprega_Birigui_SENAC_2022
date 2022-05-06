@@ -49,43 +49,12 @@
     <div style="overflow-x: scroll; white-space: nowrap;">
       
 
-        <div class="box-vagas">
-            <h2 class="ion-no-margin" style="font-size: 13px; text-align: center; padding-top: 25px;">Cargo</h2>
+        <div class="box-vagas" *ngFor="let vaga of vagaDestaque">
+            <h2 class="ion-no-margin" style="font-size: 13px; text-align: center; padding-top: 25px;" >{{vaga.titulo}}</h2>
             <h2 style="font-size: 13px; text-align: center;">Cadastre seu currículo</h2>
-            <p style="font-size: 13px; text-align: center;">Cidade-UF</p>
+            <p style="font-size: 13px; text-align: center;">{{vaga.cidade}}-{{vaga.estado}}</p>
 
         </div>
-
-      
-
-     
-
-        <div class="box-vagas">
-            <h2 class="ion-no-margin" style="font-size: 13px; text-align: center; padding-top: 25px;">Cargo</h2>
-            <h2 style="font-size: 13px; text-align: center;">Cadastre seu currículo</h2>
-            <p style="font-size: 13px; text-align: center;">Cidade-UF</p>
-
-        </div>
-
-     
-
-      
-
-        <div class="box-vagas">
-            <h2 class="ion-no-margin" style="font-size: 13px; text-align: center; padding-top: 25px;">Cargo</h2>
-            <h2 style="font-size: 13px; text-align: center;">Cadastre seu currículo</h2>
-            <p style="font-size: 13px; text-align: center;">Cidade-UF</p>
-
-        </div>
-
-        <div class="box-vagas">
-          <h2 class="ion-no-margin" style="font-size: 13px; text-align: center; padding-top: 25px;">Cargo</h2>
-          <h2 style="font-size: 13px; text-align: center;">Cadastre seu currículo</h2>
-          <p style="font-size: 13px; text-align: center;">Cidade-UF</p>
-
-      </div>
-
-    
 
       </div> 
 
@@ -93,119 +62,23 @@
     <ion-row>
       <ion-col>
         
-        <div>
+        <div *ngFor="let vaga of vagaDisponivel">
 
-          <ion-row class="box-vagas-big">
+          <ion-row class="box-vagas-big" >
 
             <ion-col>
               <ion-row>
-                <h2>Vaga</h2>
-                <h2 style="margin-left: 250px;">00/00</h2> 
+                <h2>{{vaga.titulo}}</h2>
+                <h2 style="position: absolute; right: 0px;">{{vaga.data_publicacao}}</h2> 
               </ion-row>           
-                <h2>n° vagas</h2>
-                <h2>Salário</h2>
+                <h2>{{vaga.quantidade}}</h2>
+                <h2>{{vaga.salario}}</h2>
                 <h2>Clique aqui e cadastre seu currículo</h2>
               </ion-col>  
 
           </ion-row>
 
-          <ion-row class="box-vagas-big">
-
-            <ion-col>
-              <ion-row>
-                <h2>Vaga</h2>
-                <h2 style="margin-left: 250px;">00/00</h2> 
-              </ion-row>           
-                <h2>n° vagas</h2>
-                <h2>Salário</h2>
-                <h2>Clique aqui e cadastre seu currículo</h2>
-              </ion-col>  
-
-          </ion-row>
-
-          <ion-row class="box-vagas-big">
-
-            <ion-col>
-              <ion-row>
-                <h2>Vaga</h2>
-                <h2 style="margin-left: 250px;">00/00</h2> 
-              </ion-row>           
-                <h2>n° vagas</h2>
-                <h2>Salário</h2>
-                <h2>Clique aqui e cadastre seu currículo</h2>
-              </ion-col>  
-
-          </ion-row>
-
-          <ion-row class="box-vagas-big">
-
-            <ion-col>
-              <ion-row>
-                <h2>Vaga</h2>
-                <h2 style="margin-left: 250px;">00/00</h2> 
-              </ion-row>           
-                <h2>n° vagas</h2>
-                <h2>Salário</h2>
-                <h2>Clique aqui e cadastre seu currículo</h2>
-              </ion-col>  
-
-          </ion-row>
-
-          <ion-row class="box-vagas-big">
-
-            <ion-col>
-              <ion-row>
-                <h2>Vaga</h2>
-                <h2 style="margin-left: 250px;">00/00</h2> 
-              </ion-row>           
-                <h2>n° vagas</h2>
-                <h2>Salário</h2>
-                <h2>Clique aqui e cadastre seu currículo</h2>
-              </ion-col>  
-
-          </ion-row>
-
-          <ion-row class="box-vagas-big">
-
-            <ion-col>
-              <ion-row>
-                <h2>Vaga</h2>
-                <h2 style="margin-left: 250px;">00/00</h2> 
-              </ion-row>           
-                <h2>n° vagas</h2>
-                <h2>Salário</h2>
-                <h2>Clique aqui e cadastre seu currículo</h2>
-              </ion-col>  
-
-          </ion-row>
-
-          <ion-row class="box-vagas-big">
-
-            <ion-col>
-              <ion-row>
-                <h2>Vaga</h2>
-                <h2 style="margin-left: 250px;">00/00</h2> 
-              </ion-row>           
-                <h2>n° vagas</h2>
-                <h2>Salário</h2>
-                <h2>Clique aqui e cadastre seu currículo</h2>
-              </ion-col>  
-
-          </ion-row>
-          
-          <ion-row class="box-vagas-big">
-
-            <ion-col>
-              <ion-row>
-                <h2>Vaga</h2>
-                <h2 style="margin-left: 250px;">00/00</h2> 
-              </ion-row>           
-                <h2>n° vagas</h2>
-                <h2>Salário</h2>
-                <h2>Clique aqui e cadastre seu currículo</h2>
-              </ion-col>  
-
-          </ion-row>
+      
 
           
 
