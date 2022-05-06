@@ -29,9 +29,9 @@ export class UsuarioPage implements OnInit {
   public estadoCivil = [
     { id: "1", estadoCivil: "Solteiro(a)" },
     { id: "2", estadoCivil: "Casado(a)"},
-    { id: "", estadoCivil: "União Estável" },
-    { id: "3", estadoCivil: "Divorciado(a)" },
-    { id: "4", estadoCivil: "Viúvo(a)" }       
+    { id: "3", estadoCivil: "União Estável" },
+    { id: "4", estadoCivil: "Divorciado(a)" },
+    { id: "5", estadoCivil: "Viúvo(a)" }       
   ]
 
   public estaEmpregado = [
