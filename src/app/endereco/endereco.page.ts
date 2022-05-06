@@ -15,22 +15,28 @@ export class EnderecoPage {
   constructor(public mensagem: AlertController, public rota: Router) {
 
   }
+  
+  async confirmar() {
 
-  async cadastrarEndereco() {
+    if (this.endereco.endereco == '' || this.endereco.numero == '' || this.endereco.complemento == '' || this.endereco.bairro == ''
+    || this.endereco.cep == '' || this.endereco.cidade == '' || this.endereco.estado == '') {
 
     const alerta = await this.mensagem.create(
       {
         header: "ATENÇÃO",
         subHeader: "",
-        message: "Endereco armazenado com sucesso",
+        message: "Não é permitido cadastrar endereço com os campos vazios",
         buttons: ["OK"],
         cssClass: "cssAlerta"
       }
     );
-    await alerta.present();
-  }
-  confirmar() {
     console.log(this.endereco);
-    this.rota.navigate(['contato']);
+    await alerta.present();
+
+    return;
   }
+  this.rota.navigate(['contato']);
+
+}
+
 }
