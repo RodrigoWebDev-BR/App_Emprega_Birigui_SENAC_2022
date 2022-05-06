@@ -13,6 +13,16 @@ export class IdiomasPage {
   public idioma = {id_idioma: '', nivel: '', descricao: ''};
 
   public idiomas: any [] = [];
+  
+  tipoIdioma = [
+
+    {id: '1', nome: 'ingles'},
+    {id: '2', nome: 'espanhol'},
+    {id: '3', nome: 'frances'},
+    {id: '4', nome: 'italiano'},
+    {id: '5', nome: 'alemao'},
+
+  ]
 
   constructor(public mensagem: AlertController, public rota: Router) { }
 

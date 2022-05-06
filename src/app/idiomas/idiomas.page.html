@@ -17,11 +17,7 @@
       <ion-label position="floating" class="ion-margin-top">Idioma</ion-label>
       <ion-item class="roundedInput" lines="none">
         <ion-select [(ngModel)]="idioma.id_idioma" style="width: 100%;">
-          <ion-select-option value="ingles">Inglês</ion-select-option>
-          <ion-select-option value="espanhol">Espanhol</ion-select-option>
-          <ion-select-option value="frances">Francês</ion-select-option>
-          <ion-select-option value="italiano">Italiano</ion-select-option>
-          <ion-select-option value="alemao">Alemão</ion-select-option>
+          <ion-select-option *ngFor="let idm of tipoIdioma" value="{{idm.nome}}">{{idm.nome}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-col>
