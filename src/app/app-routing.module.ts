@@ -69,6 +69,10 @@ const routes: Routes = [
   {
     path: 'timeline-vaga',
     loadChildren: () => import('./timeline-vaga/timeline-vaga.module').then( m => m.TimelineVagaPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) 
   }
 
 
