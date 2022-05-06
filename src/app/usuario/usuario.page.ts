@@ -21,17 +21,17 @@ export class UsuarioPage implements OnInit {
   }
 
   public genero = [
-    { id: "", genero: "Masculino" },
-    { id: "", genero: "Feminino" },
-    { id: "", genero: "Outros" }  
+    { id: "1", genero: "Masculino" },
+    { id: "2", genero: "Feminino" },
+    { id: "3", genero: "Outros" }  
   ]
 
   public estadoCivil = [
-    { id: "", estadoCivil: "Solteiro(a)" },
-    { id: "", estadoCivil: "Casado(a)"},
+    { id: "1", estadoCivil: "Solteiro(a)" },
+    { id: "2", estadoCivil: "Casado(a)"},
     { id: "", estadoCivil: "União Estável" },
-    { id: "", estadoCivil: "Divorciado(a)" },
-    { id: "", estadoCivil: "Viúvo(a)" }       
+    { id: "3", estadoCivil: "Divorciado(a)" },
+    { id: "4", estadoCivil: "Viúvo(a)" }       
   ]
 
   public estaEmpregado = [
