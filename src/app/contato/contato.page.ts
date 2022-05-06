@@ -12,7 +12,16 @@ export class ContatoPage implements OnInit {
 
   public contatos: any[] = [];
 
-  contato = { id_tipo_contato: '', contato: '' }
+  contato = { id: '', contato: '' }
+
+  tipoContato = [
+    {id:'1', nome:'E-mail'},
+    {id:'2', nome:'Celular'},
+    {id:'3', nome:'Telefone'},
+    {id:'4', nome:'LinkedIn'},
+    {id:'5', nome:'teste'}
+
+  ]
 
   constructor(public rota: Router, public mensagem: AlertController) {
 
@@ -25,7 +34,7 @@ export class ContatoPage implements OnInit {
 
   async addContato() {
 
-    if (this.contato.id_tipo_contato == '' || this.contato.contato == '') {
+    if (this.contato.id == '' || this.contato.contato == '') {
       //abrir o alert avisando que exitem campos vazios
       const alerta = await this.mensagem.create(
         {
@@ -47,10 +56,10 @@ export class ContatoPage implements OnInit {
     console.log(this.contatos)
 
     this.contato.contato = '';
-    this.contato.id_tipo_contato = '';
+    this.contato.id = '';
 
     Storage.remove({ key: "contato" });
-    Storage.remove({ key: "id_tipo_contato" });
+    Storage.remove({ key: "id" });
 
   }
   async removerContato(contatosRemove) {
