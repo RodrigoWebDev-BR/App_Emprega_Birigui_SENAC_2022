@@ -19,15 +19,31 @@ export class UsuarioPage implements OnInit {
     ocultarIdade: "",
     estaEmpregado: ""
   }
-/*
-  public genero = {
-    Masculino: "",
-    Feminino: "",
-    Outros: ""    
-  }
 
-  public generos: any[] = []
-*/
+  public genero = [
+    { id: "1", genero: "Masculino" },
+    { id: "2", genero: "Feminino" },
+    { id: "3", genero: "Outros" }  
+  ]
+
+  public estadoCivil = [
+    { id: "1", estadoCivil: "Solteiro(a)" },
+    { id: "2", estadoCivil: "Casado(a)"},
+    { id: "3", estadoCivil: "União Estável" },
+    { id: "4", estadoCivil: "Divorciado(a)" },
+    { id: "5", estadoCivil: "Viúvo(a)" }       
+  ]
+
+  public estaEmpregado = [
+    { id: "1", estaEmpregado: "SIM" },
+    { id: "2", estaEmpregado: "NÃO"}
+  ]
+
+  public ocultarIdade = [
+    { id: "1", ocultarIdade: "SIM" },
+    { id: "2", ocultarIdade: "NÃO"}
+  ]
+
   constructor(public mensagem: AlertController) { }
 
   ngOnInit() {

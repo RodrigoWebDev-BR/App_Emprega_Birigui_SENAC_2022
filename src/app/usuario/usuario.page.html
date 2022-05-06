@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>usuario</ion-title>
+    <ion-title style="text-align: center;">usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -59,13 +59,10 @@
     <ion-row>
       <ion-col class="ion-margin-horizontal">
         <ion-label position="floating" class="ion-margin-top">Gênero</ion-label>
-        <ion-item class="roundedInput" line="none">
-        <!--  <ion-item *ngFor="let genero of generos" lines="none"></ion-item> -->
-          <ion-select [(ngModel)]="usuario.genero" interface="popover">
-            <ion-select-option value="Masculino">Masculino</ion-select-option>
-            <ion-select-option value="Feminino">Feminino</ion-select-option>
-            <ion-select-option value="Outros">Outros</ion-select-option>
-          </ion-select>
+        <ion-item class="roundedInput" line="none">       
+          <ion-select [(ngModel)]="usuario.genero" interface="popover">            
+          <ion-select-option *ngFor="let gen of genero" value="{{ gen.id }}">{{ gen.genero }}</ion-select-option> 
+          </ion-select>        
         </ion-item>
       </ion-col>
     </ion-row>
@@ -75,11 +72,7 @@
         <ion-label position="floating" class="ion-margin-top">Estado Civil</ion-label>
         <ion-item class="roundedInput" line="none">
           <ion-select [(ngModel)]="usuario.estadoCivil" interface="popover">
-            <ion-select-option value="Solteiro (a)">Solteiro (a)</ion-select-option>
-            <ion-select-option value="Casado (a)">Casado (a)</ion-select-option>
-            <ion-select-option value="União Estável">União Estável</ion-select-option>
-            <ion-select-option value="Divorciado (a)">Divorciado (a)</ion-select-option>
-            <ion-select-option value="Viúvo (a)">Viúvo (a)</ion-select-option>
+            <ion-select-option *ngFor="let etCvl of estadoCivil" value="{{ etCvl.id }}">{{ etCvl.estadoCivil }}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -90,8 +83,9 @@
         <ion-label position="floating" class="ion-margin-top">Ocultar Idade?</ion-label>
         <ion-item class="roundedInput" line="none">
           <ion-select [(ngModel)]="usuario.ocultarIdade" interface="popover">
-            <ion-select-option value="Sim">Sim</ion-select-option>
-            <ion-select-option value="Não">Não</ion-select-option>
+            <ion-select-option *ngFor="let octIdd of ocultarIdade" value="{{ octIdd.id }}">{{ octIdd.ocultarIdade }}</ion-select-option>
+            <!-- <ion-select-option value="Sim">Sim</ion-select-option>
+            <ion-select-option value="Não">Não</ion-select-option> -->
           </ion-select>
         </ion-item>
       </ion-col>
@@ -100,8 +94,9 @@
         <ion-label position="floating" class="ion-margin-top">Está Empregado?</ion-label>
         <ion-item class="roundedInput" line="none">
           <ion-select [(ngModel)]="usuario.estaEmpregado" interface="popover">
-            <ion-select-option value="Sim">Sim</ion-select-option>
-            <ion-select-option value="Não">Não</ion-select-option>
+            <ion-select-option *ngFor="let etEmp of estaEmpregado" value="{{ etEmp.id }}">{{ etEmp.estaEmpregado }}</ion-select-option>
+           <!-- <ion-select-option value="Sim">Sim</ion-select-option>
+            <ion-select-option value="Não">Não</ion-select-option> -->
           </ion-select>
         </ion-item>
       </ion-col>
