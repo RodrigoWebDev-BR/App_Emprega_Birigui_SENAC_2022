@@ -1,6 +1,6 @@
 <ion-header >
   <ion-toolbar color="primary">
-    <ion-title>Contato</ion-title>
+    <ion-title class="centertext">Contato</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -8,11 +8,8 @@
     <ion-col class="espacamento">
       <ion-label class="ion-margin-top">Tipo de contato</ion-label>
       <ion-item class="roundedInput ion-margin-top"  >
-      <ion-select style="width:100%" [(ngModel)]="contato.id_tipo_contato">
-        <ion-select-option value="email">E-mail</ion-select-option>
-        <ion-select-option value="celular">Celular</ion-select-option>
-        <ion-select-option value="telefone">Telefone residencial</ion-select-option>
-        <ion-select-option value="linkedin">Likedin</ion-select-option>
+      <ion-select style="width:100%" [(ngModel)]="contato.id">
+        <ion-select-option *ngFor="let tipo of tipoContato" value="{{tipo.nome}}">{{tipo.nome}}</ion-select-option>
       </ion-select>
     </ion-item>
     </ion-col>
@@ -31,7 +28,7 @@
         <ion-list style="width: 100%">
           <ion-item *ngFor="let cont of contatos" lines="none">
             <ion-label>
-              <p>{{cont.id_tipo_contato}}</p>
+              <p>{{cont.id}}</p>
               <h2>{{cont.contato}}</h2>
             </ion-label>
             <ion-icon name="trash-outline" slot="end" color="danger" (click)="removerContato(cont)"></ion-icon>
