@@ -73,8 +73,15 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) 
+  },
+  {
+    path: 'formacao-educacional',
+    loadChildren: () => import('./formacao-educacional/formacao-educacional.module').then( m => m.FormacaoEducacionalPageModule)
+  },
+  {
+    path: 'notificacao',
+    loadChildren: () => import('./notificacao/notificacao.module').then( m => m.NotificacaoPageModule)
   }
-
 
 ];
 
