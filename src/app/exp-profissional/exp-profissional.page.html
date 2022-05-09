@@ -46,7 +46,7 @@
             <ion-label>
               <h2>{{exp.cargo}}</h2>
               <p>{{exp.empresa}}</p>
-              <p>De {{exp.admissao}} até {{exp.demissao}}</p>
+              <p>De {{exp.admissao | date:'dd/MM/yyyy'}} até {{exp.demissao | date:'dd/MM/yyyy'}}</p>
               <p>{{exp.descricao}}</p>
             </ion-label>         
             <ion-icon name="trash-outline" slot="end" color="danger" (click)="delExperiencia(exp)"></ion-icon>
