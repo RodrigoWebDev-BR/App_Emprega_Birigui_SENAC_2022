@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.page.html',
   styleUrls: ['./usuario.page.scss'],
 })
+
+
 export class UsuarioPage implements OnInit {
+
 
   public usuario = {
     nome: "",
@@ -44,7 +48,12 @@ export class UsuarioPage implements OnInit {
     { id: "2", ocultarIdade: "NÃO"}
   ]
 
-  constructor(public mensagem: AlertController) { }
+  proximaPagina() {
+    console.log(this.proximaPagina)
+    this.rota.navigate(['endereco'])
+  }
+
+  constructor(public mensagem: AlertController, public rota: Router) { }
 
   ngOnInit() {
   }
@@ -112,6 +121,11 @@ export class UsuarioPage implements OnInit {
     Storage.remove({ key: "ocultarIdade" })
     Storage.remove({ key: "estaEmpregado" })   
 
+
+    
+      console.log(this.proximaPagina)
+      this.rota.navigate(['endereco'])
+    
   }
 /*
   async removerIdioma(idiomaRemove) {
