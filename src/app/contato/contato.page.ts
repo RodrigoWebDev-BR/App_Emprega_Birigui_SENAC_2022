@@ -40,7 +40,7 @@ export class ContatoPage implements OnInit {
         {
           header: "Atenção",
           subHeader: "Insira um Contato",
-          message: "Não é permitido adicionar um item vazio.",
+          message: "Não é permitido adicionar um contato vazio.",
           buttons: ["OK"],
         }
       );
@@ -82,8 +82,6 @@ export class ContatoPage implements OnInit {
             this.contatos.splice(index, 1);
           }
         }
-
-
 
       ]
     });
