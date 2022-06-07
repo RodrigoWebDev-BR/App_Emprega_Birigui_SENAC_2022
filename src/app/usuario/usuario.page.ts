@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.page.html',
@@ -44,7 +44,8 @@ export class UsuarioPage implements OnInit {
     { id: "2", ocultarIdade: "NÃO"}
   ]
 
-  constructor(public mensagem: AlertController) { }
+  constructor(public mensagem: AlertController,
+               private rota : Router) { }
 
   ngOnInit() {
   }
@@ -59,6 +60,8 @@ export class UsuarioPage implements OnInit {
           cssClass: "cssAlerta"
         } 
       )
+
+      
 
       await alerta.present()
 
@@ -111,7 +114,7 @@ export class UsuarioPage implements OnInit {
     Storage.remove({ key: "genero" })
     Storage.remove({ key: "ocultarIdade" })
     Storage.remove({ key: "estaEmpregado" })   
-
+    this.rota.navigate(['home']);
   }
 /*
   async removerIdioma(idiomaRemove) {

@@ -13,7 +13,7 @@ export class LoginPage implements OnInit {
 
   confirmarLogin(){
     console.log(this.candidato);
-    this.rota.navigate(['folder']);
+    this.rota.navigate(['home']);
   }
 
   constructor( public rota : Router )

@@ -10,7 +10,7 @@ export class VagaDetalhesPage implements OnInit {
   router: any;
 
   inscrever(){
-    this.rota.navigate(['folder']);
+    this.rota.navigate(['timeline-vaga']);
   }
 
   voltar(){
