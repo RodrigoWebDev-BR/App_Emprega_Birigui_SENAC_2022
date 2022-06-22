@@ -19,7 +19,7 @@
       <ion-col class="espacamento">
         <ion-item class="roundedInput" line="none">
           <ion-label position="floating">Nome</ion-label>
-          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="usuario.nome">
+          <ion-input type="text" [(ngModel)]="usuario.nome">
           </ion-input>
           <ion-icon name="person-outline" slot="end" class="iconPad"></ion-icon>
         </ion-item>
@@ -30,7 +30,7 @@
       <ion-col class="espacamento">
         <ion-item class="roundedInput" line="none">
           <ion-label position="floating">RG</ion-label>
-          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="usuario.rg">
+          <ion-input type="text"[(ngModel)]="usuario.rg">
           </ion-input>
           <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
         </ion-item>
@@ -41,7 +41,7 @@
       <ion-col class="espacamento">
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">CPF</ion-label>
-          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="usuario.cpf">
+          <ion-input type="text" [(ngModel)]="usuario.cpf">
           </ion-input>
           <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
         </ion-item>
@@ -52,7 +52,7 @@
       <ion-col class="espacamento">
         <ion-item class="roundedInput" line="none">
           <ion-label position="floating">Data de Nascimento</ion-label>
-          <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="usuario.dataNasc">
+          <ion-input type="text" [(ngModel)]="usuario.dataNasc">
           </ion-input>
           <ion-icon name="calendar-outline" slot="end" class="iconPad"></ion-icon>
         </ion-item>
