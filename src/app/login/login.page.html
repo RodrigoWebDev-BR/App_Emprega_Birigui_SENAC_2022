@@ -12,10 +12,9 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col class="espacamento">
-      <ion-label position="floating" class="ion-margin-top">Digite seu cpf</ion-label>
-    <ion-item class="roundedInput" lines="none"> 
-        <ion-input [(ngModel)]="candidato.cpf" class="black" expand="block" type="text" >
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-input [(ngModel)]="candidato.cpf" class="black" expand="block" type="text" placeholder="CPF ou E-mail" >
         </ion-input>
         <ion-icon name="id-card-outline" class="black" slot="end"></ion-icon>
       </ion-item>
@@ -23,10 +22,9 @@
   </ion-row>
 
   <ion-row>
-    <ion-col class="espacamento">
-      <ion-label position="floating" class="ion-margin-top">Digite seu senha</ion-label>
+    <ion-col>
       <ion-item class="roundedInput " lines="none">
-      <ion-input [(ngModel)]="candidato.senha" class="black" type="text" >
+      <ion-input [(ngModel)]="candidato.senha" class="black" type="text" placeholder="Senha">
       </ion-input>
       <ion-icon name="key-outline" class="black" slot="end"></ion-icon>
     </ion-item>
@@ -36,7 +34,7 @@
 
 
   <ion-row>
-    <ion-col class="espacamento">
+    <ion-col>
       <ion-button (click)="confirmarLogin()" shape="block">Acessar</ion-button>
     </ion-col>
   </ion-row>
