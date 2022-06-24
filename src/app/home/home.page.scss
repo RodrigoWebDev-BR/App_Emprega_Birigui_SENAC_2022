@@ -31,7 +31,7 @@
 
     --highlight-height: 0;
 
-    background: rgb(255, 255, 255);
+    --background: rgb(241, 241, 241);
 
     -webkit-box-shadow: 4px 4px 20px 5px rgba(0,0,0,0.5); 
 
@@ -46,10 +46,45 @@
 
     --highlight-height: 0;
 
-    background: rgb(255, 255, 255);
+    --background: rgb(241, 241, 241);
 
     -webkit-box-shadow: 4px 4px 20px 5px rgba(0,0,0,0.5); 
 
     box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.2);
     border-radius: 10px;
+}
+
+.roundedInputSearch{
+    --border-radius: 10px;
+
+    --highlight-height: 0;
+
+    --background: rgb(255, 255, 255);
+
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+
+.box-vagas{
+    display: inline-block;
+    width: 228px;
+    height: 120px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.box-vagas-big{
+    width: 90%;
+    height: 120px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.box-vagas-big h2{
+    font-size: 12px;
+    margin: 8px;
 }

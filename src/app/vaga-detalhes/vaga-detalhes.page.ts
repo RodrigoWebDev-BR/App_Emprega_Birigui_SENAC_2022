@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vaga-detalhes',
@@ -6,8 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vaga-detalhes.page.scss'],
 })
 export class VagaDetalhesPage implements OnInit {
+  router: any;
 
-  constructor() { }
+  inscrever(){
+    this.rota.navigate(['timeline-vaga']);
+  }
+
+  voltar(){
+    this.rota.navigate(['home']);
+  }
+
+  constructor(public rota : Router) { 
+
+
+  }
 
   ngOnInit() {
   }

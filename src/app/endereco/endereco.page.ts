@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { alertController } from '@ionic/core';
 
@@ -9,25 +10,33 @@ import { alertController } from '@ionic/core';
 })
 export class EnderecoPage {
 
-  endereco = {endereco: '', numero: '', complemento: '', bairro: '', cep: '', cidade: '', estado: '',};
+  endereco = { endereco: '', numero: '', complemento: '', bairro: '', cep: '', cidade: '', estado: '', };
 
-  constructor(public mensagem: AlertController) {
+  constructor(public mensagem: AlertController, public rota: Router) {
+
   }
+  
+  async confirmar() {
 
-  async cadastrarEndereco() {
+    if (this.endereco.endereco == '' || this.endereco.numero == '' || this.endereco.complemento == '' || this.endereco.bairro == ''
+    || this.endereco.cep == '' || this.endereco.cidade == '' || this.endereco.estado == '') {
 
     const alerta = await this.mensagem.create(
       {
         header: "ATENÇÃO",
         subHeader: "",
-        message: "Endereco armazenado com sucesso",
+        message: "Não é permitido cadastrar endereço com os campos vazios",
         buttons: ["OK"],
         cssClass: "cssAlerta"
       }
     );
+    console.log(this.endereco);
     await alerta.present();
+
+    return;
   }
-  confirmar() {
-    console.log(this.endereco)
-  }
+  this.rota.navigate(['contato']);
+
+}
+
 }

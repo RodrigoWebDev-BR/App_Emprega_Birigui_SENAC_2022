@@ -50,8 +50,7 @@ export class ExpProfissionalPage implements OnInit {
     Storage.remove({ key: "cargo" });
     Storage.remove({ key: "descricao" });
     Storage.remove({ key: "admissao" });
-    Storage.remove({ key: "demissao" });
-    
+    Storage.remove({ key: "demissao" }); 
   }
   async delExperiencia(experienciasRemove) {
     let confirmaRemover = await this.mensagem.create({
@@ -77,6 +76,10 @@ export class ExpProfissionalPage implements OnInit {
     });
     await confirmaRemover.present();
   };
+
+  cadastrar(){
+    this.rota.navigate(['home']);
+  }
 
   ngOnInit() {
   }

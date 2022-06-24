@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.page.html',
   styleUrls: ['./usuario.page.scss'],
 })
+
+
 export class UsuarioPage implements OnInit {
+
 
   public usuario = {
     nome: "",
@@ -20,8 +23,36 @@ export class UsuarioPage implements OnInit {
     estaEmpregado: ""
   }
 
+  public genero = [
+    { id: "1", genero: "Masculino" },
+    { id: "2", genero: "Feminino" },
+    { id: "3", genero: "Outros" }  
+  ]
 
-  constructor(public mensagem: AlertController) { }
+  public estadoCivil = [
+    { id: "1", estadoCivil: "Solteiro(a)" },
+    { id: "2", estadoCivil: "Casado(a)"},
+    { id: "3", estadoCivil: "União Estável" },
+    { id: "4", estadoCivil: "Divorciado(a)" },
+    { id: "5", estadoCivil: "Viúvo(a)" }       
+  ]
+
+  public estaEmpregado = [
+    { id: "1", estaEmpregado: "SIM" },
+    { id: "2", estaEmpregado: "NÃO"}
+  ]
+
+  public ocultarIdade = [
+    { id: "1", ocultarIdade: "SIM" },
+    { id: "2", ocultarIdade: "NÃO"}
+  ]
+
+  proximaPagina() {
+    console.log(this.proximaPagina)
+    this.rota.navigate(['endereco'])
+  }
+
+  constructor(public mensagem: AlertController, public rota: Router) { }
 
   ngOnInit() {
   }
@@ -36,6 +67,8 @@ export class UsuarioPage implements OnInit {
           cssClass: "cssAlerta"
         } 
       )
+
+      
 
       await alerta.present()
 
@@ -88,7 +121,7 @@ export class UsuarioPage implements OnInit {
     Storage.remove({ key: "genero" })
     Storage.remove({ key: "ocultarIdade" })
     Storage.remove({ key: "estaEmpregado" })   
-
+    this.rota.navigate(['home']);
   }
 /*
   async removerIdioma(idiomaRemove) {
