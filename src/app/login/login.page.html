@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>login</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="centertext bold">Bem vindo</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +15,7 @@
     </ion-col>
   </ion-row>
   <ion-row>
-    <ion-col>
+    <ion-col class="espacamentoLogin">
       <ion-item class="roundedInput" lines="none">
         <ion-input [(ngModel)]="candidato.cpf" class="black" expand="block" type="text" placeholder="CPF ou E-mail" >
         </ion-input>
@@ -22,7 +25,7 @@
   </ion-row>
 
   <ion-row>
-    <ion-col>
+    <ion-col class="espacamentoLogin">
       <ion-item class="roundedInput " lines="none">
       <ion-input [(ngModel)]="candidato.senha" class="black" type="text" placeholder="Senha">
       </ion-input>
@@ -34,12 +37,12 @@
 
 
   <ion-row>
-    <ion-col>
+    <ion-col class="espacamentoLogin">
       <ion-button (click)="confirmarLogin()" shape="block">Acessar</ion-button>
     </ion-col>
   </ion-row>
 
-  <ion-row>
+  <ion-row class="iconPad">
     <ion-col class="espacamento ">
       <ion-item lines="none">
         <h2 class="txtNewAccount black center">Não possui uma conta? Clique aqui e cadastre-se</h2>
@@ -47,7 +50,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-row>
+  <ion-row class="iconPad">
     <ion-col class="espacamento ">
       <ion-item lines="none">
         <h2 class="txtPassword black center">Esqueceu sua senha ?</h2>

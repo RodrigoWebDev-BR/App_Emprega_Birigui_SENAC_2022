@@ -3,34 +3,26 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title class="centertext">Cursos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div>
-    <ion-row>
-      <ion-col>
-        <h4 style="text-align: center;">Cadastro de Currículo</h4>
-        <h4 style="text-align: center;">Cursos</h4>
-      </ion-col>
-    </ion-row>
 
     <ion-row>
-      <ion-col class="espamanto">        
-          <ion-label position="floating">Curso</ion-label>
-          <ion-item class="roundedInput" line="none">
+      <ion-col>        
+        <ion-item class="roundedInput" line="none">
+            <ion-label position="floating">Curso</ion-label>
           <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="curso.nome">
           </ion-input>
-
         </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col class="espacamanto">        
-          <ion-label position="floating">Instituição de Ensino</ion-label>
-          <ion-item class="roundedInput" lines="none">
+      <ion-col>        
+        <ion-item class="roundedInput" lines="none">
+            <ion-label position="floating">Instituição de Ensino</ion-label>
           <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="curso.instituicaoEnsino">
           </ion-input>
 
@@ -39,31 +31,51 @@
     </ion-row>
 
     <ion-row>
-      <ion-col class="espacamento">        
-          <ion-label position="floating">Data de início</ion-label>
-          <ion-item class="roundedInput" line="none">
-          <ion-input type="date" class="ion-margin-horizontal" [(ngModel)]="curso.dataInicio">
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Data de início<span style="color: red;">*</span></ion-label>
+          <ion-input value="{{ date | date:'dd/MM/yyy'}}"
+          id="date"
+          class="ion-text-start">
           </ion-input>
-          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-icon name="calendar-outline" slot="end" class="iconPad"></ion-icon>
+          <ion-popover trigger="date" size="cover">
+            <ng-template>
+              <ion-datetime presentation="date"
+              [(ngModel)]="curso.dataInicio"
+              locale="pt-Br">
+              </ion-datetime>
+            </ng-template>
+          </ion-popover>
         </ion-item>
       </ion-col>
 
-      <ion-col class="espacamento">        
-          <ion-label position="floating">Data de conclusão</ion-label>
-          <ion-item class="roundedInput" line="none">
-          <ion-input type="date" class="ion-margin-horizontal" [(ngModel)]="curso.dataConclusao">
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Data de conclusão<span style="color: red;">*</span></ion-label>
+          <ion-input value="{{ date | date:'dd/MM/yyy'}}"
+          id="date2"
+          class="ion-text-start">
           </ion-input>
-          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-icon name="calendar-outline" slot="end" class="iconPad"></ion-icon>
+          <ion-popover trigger="date2" size="cover">
+            <ng-template>
+              <ion-datetime presentation="date2"
+              [(ngModel)]="curso.dataConclusao"
+              locale="pt-Br">
+              </ion-datetime>
+            </ng-template>
+          </ion-popover>
         </ion-item>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col class="espacamento">
+      <ion-col>
         <ion-button color="primary" shape="block" (click)="adicionarCurso(curso)">
           ADICIONAR CURSO
         </ion-button>
       </ion-col>
     </ion-row>
-  </div>
+    
 </ion-content>

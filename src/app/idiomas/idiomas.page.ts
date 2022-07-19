@@ -84,6 +84,6 @@ export class IdiomasPage {
   }
     proximo() {
     console.log(this.idioma);
-    this.rota.navigate(['exp-profissional']);
+    this.rota.navigate(['conclusao']);
   }
 }

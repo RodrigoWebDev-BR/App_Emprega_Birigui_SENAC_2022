@@ -1,3 +1,4 @@
+import { MenuController } from '@ionic/angular';
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -16,9 +17,9 @@ export class LoginPage implements OnInit {
     this.rota.navigate(['home']);
   }
 
-  constructor( public rota : Router )
+  constructor( public rota : Router, public leftMenu: MenuController  )
   { 
-
+    this.leftMenu.enable(false);
   }
 
   ngOnInit() {

@@ -1,13 +1,14 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+    <ion-buttons slot="start" style="padding-left: 15px;" (click)="formacao()">
+      <ion-icon name="arrow-back" class="light icone"></ion-icon>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title class="centertext bold">Experiência profissional</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-row>
     <ion-col>
       <ion-item class="roundedInput" lines="none">
@@ -16,6 +17,7 @@
       </ion-item>
     </ion-col>
   </ion-row>
+
   <ion-row>
     <ion-col>
       <ion-item class="roundedInput" lines="none">
@@ -26,6 +28,17 @@
   </ion-row>
 
   <ion-row>
+    <ion-col>
+        <ion-label position="floating">Data de início</ion-label>
+        <ion-input type="date" class="roundedInput" [(ngModel)]="experiencia.admissao"></ion-input>
+    </ion-col>
+    <ion-col>
+        <ion-label position="floating">Data de Término</ion-label>
+        <ion-input type="date" class="roundedInput" [(ngModel)]="experiencia.demissao"></ion-input>
+    </ion-col>
+  </ion-row>
+
+  <!-- <ion-row>
     <ion-col>
       <ion-item class="roundedInput" line="none">
         <ion-label position="floating">Data de admissão<span style="color: red;">*</span></ion-label>
@@ -47,15 +60,15 @@
 
     <ion-col>
       <ion-item class="roundedInput" line="none">
-        <ion-label position="floating">Data de saída</ion-label>
+        <ion-label position="floating">Data de demissão</ion-label>
         <ion-input value="{{ date | date:'dd/MM/yyy'}}"
-        id="date"
+        id="date2"
         class="ion-text-start">
         </ion-input>
         <ion-icon name="calendar-outline" slot="end" class="iconPad"></ion-icon>
-        <ion-popover trigger="date" size="cover">
+        <ion-popover trigger="date2" size="cover">
           <ng-template>
-            <ion-datetime presentation="date"
+            <ion-datetime presentation="date2"
             [(ngModel)]="experiencia.demissao"
             locale="pt-Br">
             </ion-datetime>
@@ -63,21 +76,23 @@
         </ion-popover>
       </ion-item>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
   
   <ion-row>
     <ion-col>
       <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">Descrição<span style="color: red;">*</span></ion-label>
-        <ion-textarea [(ngModel)]="experiencia.descricao" maxlength="200"></ion-textarea>
+        <ion-textarea [(ngModel)]="experiencia.descricao" maxlength="300"></ion-textarea>
       </ion-item>
     </ion-col>
   </ion-row>
+
   <ion-row>
     <ion-col class="center ion-margin-top">
       <ion-button color="primary" expand="block" (click)="addExperiencia()">Adicionar experiência</ion-button>
     </ion-col>
   </ion-row>
+
   <ion-row>
     <ion-col>
       <ion-item lines="none">
@@ -95,6 +110,7 @@
       </ion-item>
     </ion-col>
   </ion-row>
+  
 </ion-content>
 <ion-footer>
   <ion-row>

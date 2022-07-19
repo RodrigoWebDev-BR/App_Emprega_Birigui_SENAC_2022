@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
 
 @Component({
@@ -15,53 +15,67 @@ export class ContatoPage implements OnInit {
   contato = { id: '', contato: '' }
 
   tipoContato = [
-    {id:'1', nome:'E-mail'},
-    {id:'2', nome:'Celular'},
-    {id:'3', nome:'Telefone'},
-    {id:'4', nome:'LinkedIn'},
-    {id:'5', nome:'teste'}
+    {id:'1', nome:'Celular'},
+    {id:'2', nome:'Telefone'},
+    {id:'3', nome:'LinkedIn'},
+    {id:'4', nome:'Instagram'},
+    {id:'5', nome:'Facebook'}
 
   ]
 
-  constructor(public rota: Router, public mensagem: AlertController) {
-
+  constructor(public route: Router, public mensagem: AlertController, public menuLeft: MenuController) {
+    this.menuLeft.enable(false);
   }
 
-  /* async addContato(){
-      console.log(this.contato)
-      this.rota.navigate(['folder']);
-  } */
+  endereco(){
+    this.route.navigate[('endereco')]
+  }
 
   async addContato() {
 
-    if (this.contato.id == '' || this.contato.contato == '') {
+    if (this.contato.id === null || this.contato.id === ''|| this.contato.contato === null|| this.contato.contato === '') {
       //abrir o alert avisando que exitem campos vazios
       const alerta = await this.mensagem.create(
         {
           header: "Atenção",
           subHeader: "Insira um Contato",
-          message: "Não é permitido adicionar um contato vazio.",
+          message: "Necessário preeencher todos os campos",
           buttons: ["OK"],
         }
       );
       await alerta.present();
-
       //return para cancelar a execução do método
       return;
+
+    }else{
+      const contatoCopy = JSON.parse(JSON.stringify(this.contato))
+
+      this.contatos.push(contatoCopy);
+      
+      this.contato.contato = '';
+      this.contato.id = '';
+
+      Storage.remove({ key: "contato" });
+      Storage.remove({ key: "id" });
     }
-    var contatoCopy = JSON.parse(JSON.stringify(this.contato))
-
-    this.contatos.push(contatoCopy);
-
-    console.log(this.contatos)
-
-    this.contato.contato = '';
-    this.contato.id = '';
-
-    Storage.remove({ key: "contato" });
-    Storage.remove({ key: "id" });
-
+    
   }
+  async confirmar(){
+    if(this.contatos.length > 0){
+      this.route.navigate(['formacao-educacional'])
+    }else{
+      const alerta = await this.mensagem.create(
+        {
+          header: "Atenção",
+          subHeader: "Insira um Contato",
+          message: "É necessário pelo menos um contato",
+          buttons: ["OK"],
+        }
+      );
+      await alerta.present();
+    }
+  }
+
   async removerContato(contatosRemove) {
     let confirmaRemover = await this.mensagem.create({
       header: "ATENÇÃO",
