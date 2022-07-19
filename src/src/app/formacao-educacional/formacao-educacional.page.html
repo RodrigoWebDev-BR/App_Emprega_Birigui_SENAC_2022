@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="contato()" slot="start" style="padding-left: 15px;">
+      <ion-icon name="arrow-back" class="light icone"></ion-icon>
+    </ion-buttons>  
+    <ion-title class="centertext tituloPadding bold">Formação Educacional <ion-icon name="school"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Nome Instituição <span style="color:red">*</span></ion-label>
+          <ion-input type="text" [(ngModel)]="formacao.instituicao">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Nome Curso</ion-label>
+          <ion-input type="text" [(ngModel)]="formacao.nomeCurso">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Nível <span style="color:red">*</span></ion-label>
+          <ion-select style="width: 100%" [(ngModel)]="formacao.nivel">
+            <ion-select-option *ngFor="let form of formacoes" value="{{form.nivel}}">{{form.nivel}}</ion-select-option>  
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Situação <span style="color:red">*</span></ion-label>
+          <ion-select style="width: 100%" [(ngModel)]="formacao.conclusao">
+            <ion-select-option *ngFor="let con of conclusoes" value="{{con.resp}}">{{con.resp}}</ion-select-option>  
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="adicionar()" expand="block" color="primary">
+          Adicionar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <ion-list style="width: 100%">
+            <ion-item *ngFor="let formado of formEducacional" lines="none">
+              <ion-label>
+                <h2>{{formado.instituicao}}</h2>
+                <br>
+                <p>{{formado.nomeCurso}} - {{formado.conclusao}}</p>
+                <h3>{{formado.nivel}}</h3>
+              </ion-label>
+              <ion-icon name="trash-outline" slot="end" color="danger" (click)="removeForms(formado)" ></ion-icon>
+            </ion-item>
+          </ion-list>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-button shape="block" (click)="confimar()" expand="full" >
+    Próximo
+  </ion-button>
+</ion-footer>

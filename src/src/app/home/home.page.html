@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fundobg">
+
+  <div class="header">
+    <ion-row class="perfil">
+      <ion-col class="centertext">
+        <ion-icon style="font-size: 80px;" name="person-circle-outline" color="light"></ion-icon>
+      </ion-col>
+      <ion-col class="centertext" style="padding-top: 70px">
+        <h2 class="marv margin-h2-user white" style="font-size: 20px; margin-top: 5px;">PATRICK PALMEIRENSE</h2>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="corpo"> 
+    <div style="overflow-x: scroll; white-space: nowrap;">
+      <div class="box-vagas" *ngFor="let vaga of vagaDestaque" style="padding-bottom: 5px;">
+        <h2 class="ion-no-margin" style="font-size: 13px; text-align: center; padding-top: 25px;" >{{vaga.titulo}}</h2>
+        <h2 style="font-size: 13px; text-align: center;">Cadastre seu currículo</h2>
+        <p style="font-size: 13px; text-align: center;">{{vaga.cidade}}-{{vaga.estado}}</p>
+      </div>
+    </div> 
+
+    <ion-row>
+      <ion-col>
+        
+        <div *ngFor="let vaga of vagaDisponivel" (click)="abrirVaga()">
+
+          <ion-row class="box-vagas-big" >
+            <ion-col>
+              <ion-row>
+                <h2>{{vaga.titulo}}</h2>
+                <h2 style="position: absolute; right: 0px;">{{vaga.data_publicacao}}</h2> 
+              </ion-row>           
+                <h2>{{vaga.quantidade}}</h2>
+                <h2>{{vaga.salario}}</h2>
+                <h2>Clique aqui e cadastre seu currículo</h2>
+              </ion-col>  
+          </ion-row>
+         </div>
+
+      </ion-col>
+    </ion-row>
+
+  </div><!--corpo-->
+
+
+</ion-content>

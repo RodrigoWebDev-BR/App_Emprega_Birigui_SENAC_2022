@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="login()" slot="start" style="padding-left: 15px;">
+      <ion-icon name="arrow-back" class="light icone"></ion-icon>
+    </ion-buttons>
+    <ion-title class="centertext tituloPadding bold">Informações Pessoais <ion-icon name="reader"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fundobg" [fullscreen]="true">
+  <div>
+    <ion-row>
+      <ion-col>
+        <h5 style="text-align: start;">Campos com a flag <span style="color:red">*</span> necessário preencher</h5>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Nome <span style="color: red">*</span></ion-label>
+          <ion-input type="text" [(ngModel)]="usuario.nome"></ion-input>
+          <!-- <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="usuario.nome"></ion-input> -->
+          <ion-icon name="person-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">RG <span style="color: red">*</span></ion-label>
+          <ion-input type="text" [(ngModel)]="usuario.rg" placeholder="********-*">
+          </ion-input>
+          <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    
+      <ion-col>
+        <ion-item class="roundedInput" lines="none">
+          <ion-label position="floating">CPF <span style="color: red">*</span></ion-label>
+          <ion-input type="text" [(ngModel)]="usuario.cpf" placeholder="***.***.***-**">
+          </ion-input>
+          <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">E-mail <span style="color: red">*</span></ion-label>
+          <ion-input type="email" [(ngModel)]="usuario.email"></ion-input>
+          <!-- <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="usuario.nome"></ion-input> -->
+          <ion-icon name="mail-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-label position="floating">Data de nascimento</ion-label>
+        <ion-item class="roundedInput" line="none">
+          <ion-input type="date" [(ngModel)]="usuario.dataNasc">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating" class="ion-margin-top">Data de Nascimento <span style="color: red">*</span></ion-label>
+          <ion-input
+          value="{{ date | date: 'dd/MM/yyyy' }}"
+          id="date"
+          class="ion-text-start"
+          >
+          </ion-input>
+          <ion-icon name="calendar-outline" slot="end" class="iconPad"></ion-icon>
+          <ion-popover trigger="date" size="cover">
+            <ng-template>
+              <ion-datetime 
+              presentation="date"
+              [(ngModel)]="date"
+              locale="pt-Br"
+              ></ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">       
+          <ion-label position="floating">Gênero <span style="color: red">*</span></ion-label>
+          <ion-select [(ngModel)]="usuario.genero" interface="popover">            
+          <ion-select-option *ngFor="let gen of genero" value="{{ gen.id }}">{{ gen.genero }}</ion-select-option> 
+          </ion-select>        
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Estado Civil <span style="color: red">*</span></ion-label>
+          <ion-select [(ngModel)]="usuario.estadoCivil" interface="popover">
+            <ion-select-option *ngFor="let etCvl of estadoCivil" value="{{ etCvl.id }}">{{ etCvl.estadoCivil }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Ocultar Idade? <span style="color: red">*</span></ion-label>
+          <ion-select [(ngModel)]="usuario.ocultarIdade" interface="popover">
+            <ion-select-option *ngFor="let octIdd of ocultarIdade" value="{{ octIdd.id }}">{{ octIdd.ocultarIdade }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Está Empregado? <span style="color: red">*</span></ion-label>
+          <ion-select [(ngModel)]="usuario.estaEmpregado" interface="popover">
+            <ion-select-option *ngFor="let etEmp of estaEmpregado" value="{{ etEmp.id }}">{{ etEmp.estaEmpregado }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="middle">
+        <h2 class="bold">Senha</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Senha <span style="color: red">*</span></ion-label>
+          <ion-input type="password" [(ngModel)]="usuario.senha"></ion-input>
+          <ion-icon name="key-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Confirme sua senha <span style="color: red">*</span></ion-label>
+          <ion-input type="password" [(ngModel)]="usuario.confirmacao"></ion-input>
+          <ion-icon name="key-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col class="espacamento">
+      <ion-button shape="block" (click)="adicionarUsuario(endereco)">Próximo</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

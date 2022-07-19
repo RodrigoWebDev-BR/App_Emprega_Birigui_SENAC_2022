@@ -1,0 +1,124 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+.roundedInput {
+
+    --border-radius: 10px;
+      border-radius: 10px;
+    --highlight-height: 0;
+
+    --background: rgb(241, 241, 241);
+
+    -webkit-box-shadow: 4px 4px 20px 5px rgba(0,0,0,0.5); 
+
+    box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.2);
+    border-radius: 10px;
+
+   }
+
+   .center{
+       margin: 0 auto;
+   }
+
+   .black{
+       color: black;
+   }
+
+   .white{
+       color: white;
+   }
+
+   .espacamento{
+       margin-left: 15px;
+       margin-right: 15px;
+   }
+
+   .margin-left{
+       margin-left: 60%;
+   }
+
+   .txtPassword{
+    font-size: 12px;
+    
+   }
+
+   .txtNewAccount{
+       font-size: 12px;
+   }
+
+   .fundobg{
+       --background: rgb(232, 232, 232);
+   }
+
+   .centertext{
+       text-align: center;
+   }
+
+   .iconPad{
+    padding-top: 9px;
+   }
+
+   .espacamentoLogin{
+    margin: 0px 8%;
+   }
+
+   .icone{
+    width: 35px; 
+    height: 35px;
+    padding-left: 10px;
+   }
+
+   .tituloPadding{
+    padding-left: 0px
+   }
+
+   .bold{
+    font-weight: bold;
+   }
+
+   .middle{
+    display: flex;
+    justify-content: center;
+   }
+
+   .sublinhado{
+    text-decoration: underline #000000;
+   }
+
+   .perfil{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+   }
+
+   .icon{
+    width: 35px;
+    height: 35px;
+    padding-left: 10px;
+   }
+
