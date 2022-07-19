@@ -1,0 +1,133 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ folder }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fundobg" [fullscreen]="true">
+  <div>
+    <ion-row>
+      <ion-col>
+        <h4 style="text-align: center;">Cadastro de usuário</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h5>Campos obrigatórios<span style="color: red;">*</span></h5>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Nome <span style="color: red;">*</span></ion-label>
+          <ion-input type="text" [(ngModel)]="usuario.nome">
+          </ion-input>
+          <ion-icon name="person-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">RG<span style="color: red;">*</span></ion-label>
+          <ion-input type="text"[(ngModel)]="usuario.rg" placeholder="**.***.***-*">
+          </ion-input>
+          <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" lines="none">
+          <ion-label position="floating">CPF<span style="color: red;">*</span></ion-label>
+          <ion-input type="text" [(ngModel)]="usuario.cpf" placeholder="***.***.***-**">
+          </ion-input>
+          <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Data de Nascimento<span style="color: red;">*</span></ion-label>
+          <ion-input value="{{ date | date:'dd/MM/yyy'}}"
+          id="date"
+          class="ion-text-start">
+          </ion-input>
+          <ion-icon name="calendar-outline" slot="end" class="iconPad"></ion-icon>
+          <ion-popover trigger="date" size="cover">
+            <ng-template>
+              <ion-datetime presentation="date"
+              [(ngModel)]="date"
+              locale="pt-Br">
+              </ion-datetime>
+            </ng-template>
+          </ion-popover>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating" >Gênero<span style="color: red;">*</span></ion-label>
+          <ion-select [(ngModel)]="usuario.genero" interface="popover">
+            <ion-select-option value="Masculino">Masculino</ion-select-option>
+            <ion-select-option value="Feminino">Feminino</ion-select-option>
+            <ion-select-option value="Outros">Outros</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating" >Estado Civil<span style="color: red;">*</span></ion-label>
+          <ion-select [(ngModel)]="usuario.estadoCivil" interface="popover">
+            <ion-select-option value="Solteiro (a)">Solteiro (a)</ion-select-option>
+            <ion-select-option value="Casado (a)">Casado (a)</ion-select-option>
+            <ion-select-option value="União Estável">União Estável</ion-select-option>
+            <ion-select-option value="Divorciado (a)">Divorciado (a)</ion-select-option>
+            <ion-select-option value="Viúvo (a)">Viúvo (a)</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Ocultar Idade?<span style="color: red;">*</span></ion-label>
+          <ion-select [(ngModel)]="usuario.ocultarIdade" interface="popover">
+            <ion-select-option value="Sim">Sim</ion-select-option>
+            <ion-select-option value="Não">Não</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Está Empregado?<span style="color: red;">*</span></ion-label>
+          <ion-select [(ngModel)]="usuario.estaEmpregado" interface="popover">
+            <ion-select-option value="Sim">Sim</ion-select-option>
+            <ion-select-option value="Não">Não</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button shape="block" (click)="adicionarUsuario(usuario)">PRÓXIMO</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
