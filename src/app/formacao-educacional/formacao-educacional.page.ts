@@ -16,67 +16,77 @@ export class FormacaoEducacionalPage implements OnInit {
   formacao = {id: null, instituicao: null, nomeCurso: null, nivel: null, conclusao: null};
 
   formacoes = [
-    {id:'1', nivel: '2º grau Médio'},
-    {id:'2', nivel: 'Técnologo'},
-    {id:'3', nivel: 'Ensino Superior'},
-    {id:'4', nivel: 'Pós graduação'},
-    {id:'5', nivel: 'Mestrado'},
-    {id:'6', nivel: 'Doutorado'},
-    {id:'7', nivel: 'Outros'},
-    
+    {id: '1', nivel: '2º Grau Médio'},
+    {id: '2', nivel: 'Técnologo'},
+    {id: '3', nivel: 'Ensino Superior'},
+    {id: '4', nivel: 'Pós Graduação'},
+    {id: '5', nivel: 'Mestrado'},
+    {id: '6', nivel: 'Doutorado'},
+    {id: '7', nivel: 'Outros'},
   ];
 
   conclusoes = [
-    {id: 'I', resp:'Incompleto'},
-    {id: 'A', resp:'Em andamento'},
-    {id: 'C', resp:'Concluído'}
+    {id:'I', resp:'Incompleto'},
+    {id:'A', resp:'Em andamento'},
+    {id:'C', resp:'Concluído'}
   ];
 
-  constructor(public mensagem: AlertController, public route:Router, public leftMenu:MenuController) {
+  constructor(public mensagem: AlertController, public route: Router, public leftMenu: MenuController) {
     this.leftMenu.enable(false);
   }
 
-  ngOnInit(){
+  ngOnInit() {
   }
 
-  async adicionar(){
-    if(this.formacao.instituicao === null || this.formacao.instituicao === ''){
+  async adicionar() {
+
+    if(this.formacao.instituicao === null || this.formacao.instituicao === '')
+    {
       const alerta = await this.mensagem.create(
         {
-          header: "ATENÇÃO",
-          subHeader: "",
-          message: "Necessário informar a instituição",
-          buttons: ["OK"]
+          header: 'ATENÇÃO',
+          subHeader: '',
+          message: 'Necessário informar a instituição',
+          buttons: ['OK'],
+          cssClass: 'cssAlerta'
         }
       );
       await alerta.present();
-      return;
 
-    }else if(this.formacao.nivel === null || this.formacao.nivel === ''){
+      return;
+    }
+    else if(this.formacao.nivel === null || this.formacao.nivel === '')
+    {
       const alerta = await this.mensagem.create(
         {
-          header: "ATENÇÃO",
-          subHeader: "",
-          message: "Necessário informar sua formação",
-          buttons: ["OK"]
+          header: 'ATENÇÃO',
+          subHeader: '',
+          message: 'Necessário informar sua formação',
+          buttons: ['OK'],
+          cssClass: 'cssAlerta'
         }
       );
       await alerta.present();
-      return;
 
-    }else if(this.formacao.conclusao === null || this.formacao.conclusao === ''){
+      return;
+    }
+    else if(this.formacao.conclusao === null || this.formacao.conclusao === '')
+    {
       const alerta = await this.mensagem.create(
         {
-          header: "ATENÇÃO",
-          subHeader: "",
-          message: "Necessário informar a conclusão do curso",
-          buttons: ["OK"]
+          header: 'ATENÇÃO',
+          subHeader: '',
+          message: 'Necessário informar a conclusão do curso',
+          buttons: ['OK'],
+          cssClass: 'cssAlerta'
         }
       );
       await alerta.present();
-      return;
 
-    }else{
+      return;
+    }
+    else
+    {
       const formCopy = JSON.parse(JSON.stringify(this.formacao));
 
       this.formEducacional.push(formCopy);
@@ -96,33 +106,38 @@ export class FormacaoEducacionalPage implements OnInit {
     }
   }
 
-  async confirmar(){
-    if(this.formEducacional.length > 0){
+  async confimar(){
+    
+    if(this.formEducacional.length > 0)
+    {
       this.route.navigate(['exp-profissional']);
-    }else{
+    }
+    else
+    {
       const alerta = await this.mensagem.create(
         {
-          header: "ATENÇÃO",
-          subHeader: "",
-          message: "É necessário pelo menos uma formação educacional",
-          buttons: ["OK"]
+          header: 'ATENÇÃO',
+          subHeader: '',
+          message: 'É necessário pelo menos um contato',
+          buttons: ['OK']
         }
       );
       await alerta.present();
-      return
+
+      return;
     }
   }
-  
+
   async removeForms(instDelete){
     const confirmarRemocao = await this.mensagem.create({
       header: 'Atenção',
-      message: 'Deseja realmente remover a formação ' + instDelete.instituicao + ' ?',
+      message: 'Deseja realmente remover a formação em ' + instDelete.instituicao + '?',
       buttons: [
         {
-          text:'Não',
+          text: 'Não',
           role: 'cancel',
           handler: () => {
-            console.log('Cancelado');
+            console.log('CANCELADO');
           }
         },
         {
@@ -130,7 +145,7 @@ export class FormacaoEducacionalPage implements OnInit {
           handler: () => {
             const index = this.formEducacional.indexOf(instDelete);
             this.formEducacional.splice(index, 1);
-            console.log('Removido')
+            console.log('REMOVIDO');
           }
         }
       ]
@@ -142,4 +157,5 @@ export class FormacaoEducacionalPage implements OnInit {
   contato(){
     this.route.navigate(['contato']);
   }
+
 }

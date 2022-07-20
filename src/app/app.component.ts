@@ -7,11 +7,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public appPages = [
     { title: 'Perfil', url: '/home', icon: 'person' },
-    { title: 'Notificações', url: '/folder/notificacao', icon: 'notifications' },
-    { title: 'Currículo', url: '/folder/exp-profissional', icon: 'document' },
-    { title: 'Contato', url: '/folder/contato', icon: 'call' },
-    { title: 'Sair', url: '/login', icon: 'power' }
+    { title: 'Notificações', url: '/notificacao', icon: 'notifications'},
+    { title: 'Curriculo', url: '/curriculo', icon: 'folder'},
+    { title: 'Vagas', url: '/inscricao-vaga', icon: 'briefcase'},
+    { title: 'Sair', url: '/login', icon: 'power'}
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+
+  public labels = ['João do chocolate']; 
   constructor() {}
 }

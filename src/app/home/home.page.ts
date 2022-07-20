@@ -1,3 +1,4 @@
+import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -28,7 +29,10 @@ export class HomePage implements OnInit {
     this.route.navigate(['vaga-detalhes']);
   }
 
-  constructor(public route: Router) { }
+  constructor(public route: Router, public menuLeft: MenuController) 
+  { 
+    this.menuLeft.enable(true);
+  }
 
   ngOnInit() {
   }

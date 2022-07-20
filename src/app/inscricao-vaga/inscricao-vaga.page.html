@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button ></ion-menu-button>
     </ion-buttons>
-    <ion-title class="centertext tituloPadding ">Inscrição<ion-icon name="reader"></ion-icon></ion-title>
+    <ion-title>{{ folder }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,7 +18,7 @@
   </div>
 
   <div>
-    <ion-card style="border-radius: 20px; box-shadow: 2.5px 5px #026e1d; border-style: groove; border: 0.1%;" *ngFor="let vaga of vagas"> 
+    <ion-card style="border-radius: 20px; box-shadow: 2.5px 5px #49c96985; border-style: groove; border: 0.1%;" *ngFor="let vaga of vagas" (click)="proximaPagina(proximo)"> 
       <ion-card-header>
         <div style="display: flex; justify-content: center; align-items: flex-start;">
           <ion-row>

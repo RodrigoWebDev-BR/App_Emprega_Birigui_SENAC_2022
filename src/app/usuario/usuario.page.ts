@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController, NavController } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
 import { Router } from '@angular/router';
 @Component({
@@ -8,240 +8,336 @@ import { Router } from '@angular/router';
   styleUrls: ['./usuario.page.scss'],
 })
 
-
 export class UsuarioPage implements OnInit {
 
-  public usuarios: any[] = [];
-
-  public usuario = { nome: null,rg: null,cpf: null,dataNasc: null,genero: null, estadoCivil: null,ocultarIdade: null,estaEmpregado: null, senha: null, confirmar: null
+  public usuario = {
+    nome: null,
+    rg: null,
+    cpf: null,
+    email: null,
+    dataNasc: null,
+    genero: null,
+    estadoCivil: null,
+    ocultarIdade: null,
+    estaEmpregado: null,
+    senha: null,
+    confirmacao: null
   }
 
   public genero = [
-    { id: "1", genero: "Masculino" },
-    { id: "2", genero: "Feminino" },
-    { id: "3", genero: "Outros" }, 
-    { id: "4", genero: "Não informar" }  
+    { id: "1", generoV: "Masculino" },
+    { id: "2", generoV: "Feminino" },
+    { id: "3", generoV: "Outros" },
+    { id: "4", generoV: "Não informar" }
   ]
 
   public estadoCivil = [
-    { id: "1", estadoCivil: "Solteiro(a)" },
-    { id: "2", estadoCivil: "Casado(a)"},
-    { id: "3", estadoCivil: "União Estável" },
-    { id: "4", estadoCivil: "Divorciado(a)" },
-    { id: "5", estadoCivil: "Viúvo(a)" }       
-  ]
-
-  public estaEmpregado = [
-    { id: "1", estaEmpregado: "SIM" },
-    { id: "2", estaEmpregado: "NÃO"}
+    { id: "1", estadoAtual: "Solteiro(a)" },
+    { id: "2", estadoAtual: "Casado(a)" },
+    { id: "3", estadoAtual: "União Estável" },
+    { id: "4", estadoAtual: "Divorciado(a)" },
+    { id: "5", estadoAtual: "Viúvo(a)" }
   ]
 
   public ocultarIdade = [
-    { id: "1", ocultarIdade: "SIM" },
-    { id: "2", ocultarIdade: "NÃO"}
+    { id: "1", ocultarAge: "SIM" },
+    { id: "2", ocultarAge: "NÃO" }
   ]
 
-  proximaPagina() {
-    console.log(this.proximaPagina)
-    this.rota.navigate(['endereco'])
+  public estaEmpregado = [
+    { id: "1", estaEmp: "SIM" },
+    { id: "2", estaEmp: "NÃO" }
+  ]
+
+  constructor(public mensagem: AlertController, public nav: NavController, public menuLeft: MenuController) { this.menuLeft.enable(false) }
+
+  async login() {
+    const confirma = await this.mensagem.create({
+      header: 'Atenção',
+      message: 'Deseja cancelar o seu cadastro? todos os dados serão perdidos',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          handler() {
+
+          },
+        },
+        {
+          text: 'Sim',
+          handler() {
+            this.nav.navigateRoot('login');
+            localStorage.clear();
+          },
+        }
+      ]
+    });
+
+    await confirma.present();
+
   }
 
-  constructor(public mensagem: AlertController, public rota: Router) { }
-
-  ngOnInit() {
+  ngOnInit() { 
+    this.carregarDados();
   }
 
   async adicionarUsuario() {
-    if (this.usuario.nome == '' || this.usuario.nome == null) {
+
+    if (this.usuario.nome === '' || this.usuario.nome === null) {
+
       const alerta = await this.mensagem.create(
         {
-          header: "ATENÇÃO!",
-          message: "Não é permitido adicionar um candidato sem nome.",
-          buttons: ["ok"]
-        } 
+          header: 'ATENÇÃO!',
+          message: 'É necessário informar o nome.',
+          buttons: ['ok']
+        }
+      );
+      await alerta.present()
+
+      return;
+
+    } else if (this.usuario.rg === '' || this.usuario.rg === null) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'É necessário informar o RG.',
+          buttons: ['ok']
+        }
+      )
+
+      await alerta.present();
+
+      return;
+
+    } else if (this.usuario.cpf === '' || this.usuario.cpf === null) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'É necessário informar o CPF.',
+          buttons: ['ok']
+        }
       )
 
       await alerta.present()
 
       return
-    } else if (this.usuario.rg == "" || this.usuario.rg == null) {
+    } else if (this.usuario.email === '' || this.usuario.email === null) {
       const alerta = await this.mensagem.create(
         {
-          header: "ATENÇÃO!",
-          message: "Não é permitido adicionar um candidato sem RG.",
-          buttons: ["ok"]
-        } 
+          header: 'ATENÇÃO!',
+          message: 'É necessário informar o E-Mail.',
+          buttons: ['ok']
+        }
       )
 
       await alerta.present()
 
-      return
-      } else if(this.usuario.cpf == '' || this.usuario.cpf == null) {
-        const alerta = await this.mensagem.create(
-          {
-            header: "ATENÇÃO!",
-            message: "Não é permitido adicionar um candidato sem CPF.",
-            buttons: ["ok"]
-          } 
-        )
-  
-        await alerta.present()
-  
-        return
-      // }else if(this.usuario.dataNasc == '' || this.usuario.dataNasc == null) {
-      //   const alerta = await this.mensagem.create(
-      //     {
-      //       header: "ATENÇÃO!",
-      //       message: "É necessário inserir sua data de nascimento",
-      //       buttons: ["ok"]
-      //     } 
-      //   )
-  
-      //   await alerta.present()
-  
-      //   return
-      }else if(this.usuario.genero == '' || this.usuario.genero == null) {
-        const alerta = await this.mensagem.create(
-          {
-            header: "ATENÇÃO!",
-            message: "É necessário selecionar um genêro",
-            buttons: ["ok"]
-          } 
-        )
-  
-        await alerta.present()
-  
-        return
-      }else if(this.usuario.estadoCivil == '' || this.usuario.estadoCivil == null) {
-        const alerta = await this.mensagem.create(
-          {
-            header: "ATENÇÃO!",
-            message: "É necessário selecionar um estado civil",
-            buttons: ["ok"]
-          } 
-        )
-  
-        await alerta.present()
-  
-        return
-      }else if(this.usuario.ocultarIdade == '' || this.usuario.ocultarIdade == null) {
-        const alerta = await this.mensagem.create(
-          {
-            header: "ATENÇÃO!",
-            message: "É necessário selecionar uma opção no campo 'Ocultar idade'",
-            buttons: ["ok"]
-          } 
-        )
-  
-        await alerta.present()
-  
-        return
-      }else if(this.usuario.estaEmpregado == '' || this.usuario.estaEmpregado == null) {
-        const alerta = await this.mensagem.create(
-          {
-            header: "ATENÇÃO!",
-            message: "É necessário selecionar uma opção no campo 'Está empregado?'",
-            buttons: ["ok"]
-          } 
-        )
-  
-        await alerta.present()
-  
-        return
-      }else if(this.usuario.senha == '' || this.usuario.estaEmpregado == null) {
-        const alerta = await this.mensagem.create(
-          {
-            header: "ATENÇÃO!",
-            message: "É necessário inserir uma senha",
-            buttons: ["ok"]
-          } 
-        )
-  
-        await alerta.present()
-  
-        return
-      }else if(this.usuario.confirmar == '' || this.usuario.estaEmpregado == null) {
-        const alerta = await this.mensagem.create(
-          {
-            header: "ATENÇÃO!",
-            message: "Insira a senha igual no campo confirmar",
-            buttons: ["ok"]
-          } 
-        )
-  
-        await alerta.present()
-  
-        return
-      }else if(this.usuario.confirmar !== this.usuario.senha) {
-        const alerta = await this.mensagem.create(
-          {
-            header: "ATENÇÃO!",
-            message: "Senhas diferentes inseridas",
-            buttons: ["ok"]
-          } 
-        )
-  
-        await alerta.present()
-  
-        return
-      }else{
-          var usuarioCopy = JSON.parse(JSON.stringify(this.usuario))
-      
-          this.usuarios.push(usuarioCopy)   
-      
-          this.usuario.nome = ""
-          this.usuario.rg = ""
-          this.usuario.cpf = ""
-          this.usuario.dataNasc = ""
-          this.usuario.genero = ""
-          this.usuario.estadoCivil = ""
-          this.usuario.ocultarIdade = ""
-          this.usuario.estaEmpregado = ""
-          this.usuario.senha = ""
-          this.usuario.confirmar = ""
-      
-          Storage.remove({ key: "nome" })
-          Storage.remove({ key: "rg" })
-          Storage.remove({ key: "cpf" })
-          Storage.remove({ key: "dataNasc" })
-          Storage.remove({ key: "genero" })
-          Storage.remove({ key: "ocultarIdade" })
-          Storage.remove({ key: "estaEmpregado" })
-          Storage.remove({key:"senha"})
-          Storage.remove({key:"confirmar"}) 
-          this.rota.navigate(['endereco']);
-      }   
+      return;
+    } else if (this.usuario.dataNasc === '' || this.usuario.dataNasc === null) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'É necessário informar a data de nascimento.',
+          buttons: ['ok']
+        }
+      )
+
+      await alerta.present()
+
+      return;
+    } else if (this.usuario.genero === '' || this.usuario.genero === null) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'É necessário informar o gênero.',
+          buttons: ['ok']
+        }
+      )
+
+      await alerta.present();
+
+      return;
+    } else if (this.usuario.estadoCivil === '' || this.usuario.estadoCivil === null) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'É necessário informar o estado civil atual.',
+          buttons: ['ok']
+        }
+      )
+
+      await alerta.present();
+
+      return;
+    } else if (this.usuario.ocultarIdade === '' || this.usuario.ocultarIdade === null) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'É necessário informar se deseja ocultar a idade.',
+          buttons: ['ok']
+        }
+      );
+
+      await alerta.present();
+
+      return;
+    } else if (this.usuario.estaEmpregado === '' || this.usuario.estaEmpregado === null) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'É necessário informar se está empregado.',
+          buttons: ['ok']
+        }
+      );
+
+      await alerta.present();
+
+      return;
+    } else if (this.usuario.senha === '' || this.usuario.senha === null) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'É necessário informar uma senha.',
+          buttons: ['ok']
+        }
+      );
+
+      await alerta.present();
+
+      return;
+    } else if (this.usuario.confirmacao === '' || this.usuario.confirmacao === null) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'É necessário informar a confirmação de senha.',
+          buttons: ['ok']
+        }
+      );
+
+      await alerta.present();
+
+      return;
+    } else if (this.usuario.senha !== this.usuario.confirmacao) {
+
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'As senhas precisam coincidir uma com a outra.',
+          buttons: ['ok']
+        }
+      )
+
+      await alerta.present();
+
+      return;
+
+    } else if (!this.validaCPF(this.usuario.cpf)) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'CPF inválido',
+          buttons: ['ok']
+        })
+      await alerta.present();
+
+      return;
+
+    } else if (!this.validaEmail(this.usuario.email)) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'E-mail inválido',
+          buttons: ['ok']
+        })
+      await alerta.present();
+
+      return;
+
+    } else {
+      this.salvarTemporariamente();
+      this.nav.navigateForward('endereco');
+    }
+
   }
 
-  // async salvarTemporariamente() {
-  //   Storage.set({ key: "idioma", value: this.usuario.nome })
-  //   Storage.set({ key: "nivel", value: this.usuario.rg })
-  //   Storage.set({ key: "nivel", value: this.usuario.cpf })
-  //   Storage.set({ key: "nivel", value: this.usuario.dataNasc })
-  //   Storage.set({ key: "nivel", value: this.usuario.genero })
-  //   Storage.set({ key: "nivel", value: this.usuario.estadoCivil })
-  //   Storage.set({ key: "nivel", value: this.usuario.ocultarIdade })
-  //   Storage.set({ key: "nivel", value: this.usuario.estaEmpregado })
+  salvarTemporariamente() {
 
-  //   var alerta = await this.mensagem.create(
-  //     {
-  //       header: "ATENÇÃO!",
-  //       message: "Dados armazenados com sucesso!",
-  //       buttons: ["ok"],
-  //       cssClass: "cssAlerta"
-  //     })
-  //   await alerta.present()
-  // }
+    const [ano, mes, dia] = this.usuario.dataNasc.split('-');
 
-  // async carregarDados() {
-  //   this.usuario.nome = (await Storage.get({ key: "nome" })).value
-  //   this.usuario.rg = (await Storage.get({ key: "rg" })).value
-  //   this.usuario.cpf = (await Storage.get({ key: "cpf" })).value
-  //   this.usuario.dataNasc = (await Storage.get({ key: "dataNasc" })).value
-  //   this.usuario.genero = (await Storage.get({ key: "genero" })).value
-  //   this.usuario.estadoCivil = (await Storage.get({ key: "estadoCivil" })).value
-  //   this.usuario.ocultarIdade = (await Storage.get({ key: "ocultarIdade" })).value
-  //   this.usuario.estaEmpregado = (await Storage.get({ key: "estaEmpregado" })).value
-  // }
+    localStorage.setItem('nome', this.usuario.nome)
+    localStorage.setItem('rg', this.usuario.rg)
+    localStorage.setItem('cpf', this.usuario.cpf)
+    localStorage.setItem('email', this.usuario.email)
+    localStorage.setItem('dataNasc', dia + '/' + mes + '/' + ano)
+    localStorage.setItem('genero', this.usuario.genero)
+    localStorage.setItem('estadoCivil', this.usuario.estadoCivil)
+    localStorage.setItem('ocultarIdade', this.usuario.ocultarIdade)
+    localStorage.setItem('estaEmpregado', this.usuario.estaEmpregado)
+  }
+
+  carregarDados() {
+
+    this.usuario.nome = localStorage.getItem('nome');
+    this.usuario.rg = localStorage.getItem('rg');
+    this.usuario.cpf = localStorage.getItem('cpf');
+    this.usuario.email = localStorage.getItem('email');
+    if (localStorage.getItem('dataNasc') !== null) {
+      const [dia, mes, ano] = localStorage.getItem('dataNasc').split('/')
+      this.usuario.dataNasc = ano + '-' + mes + '-' + dia;
+    }
+    this.usuario.genero = localStorage.getItem('genero');
+    this.usuario.estadoCivil = localStorage.getItem('estadoCivil');
+    this.usuario.ocultarIdade = localStorage.getItem('ocultarIdade');
+    this.usuario.estaEmpregado = localStorage.getItem('estaEmpregado');
+  }
+
+  validaCPF(cpf): boolean {
+    /*eslint one-var: ["error", "always"]*/
+    let rest, sum;
+
+    if (cpf === undefined || cpf.trim().length === 0 || cpf === '00000000000') {
+      return;
+    }
+    cpf = cpf.replace('.', '').replace('.', '').replace('-', '');
+
+    sum = 0;
+
+    for (let i = 1; i <= 9; i++) {
+      sum = sum + parseInt(cpf.substring(i - 1, i), 10) * (11 - i);
+    }
+    rest = (sum * 10) % 11;
+
+    if (rest === 10 || rest === 11) {
+      rest = 0;
+    }
+    if (rest !== parseInt(cpf.substring(9, 10), 10)) {
+      return false;
+    }
+
+    sum = 0;
+    for (let i = 1; i <= 10; i++) {
+      sum = sum + parseInt(cpf.substring(i - 1, i), 10) * (12 - i);
+    }
+    rest = (sum * 10) % 11;
+
+    if (rest === 10 || rest === 11) {
+      rest = 0;
+    }
+    if (rest !== parseInt(cpf.substring(10, 11), 10)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  validaEmail(email): boolean {
+
+    // eslint-disable-next-line max-len
+    if (!email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+      return;
+    }
+    return true;
+
+  }
 
 }

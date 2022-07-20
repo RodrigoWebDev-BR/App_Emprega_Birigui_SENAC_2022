@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'usuario',
     pathMatch: 'full'
   },
   {
@@ -33,7 +33,7 @@ const routes: Routes = [
   },
   { path: 'inscricao-vaga',
     loadChildren: () => import('./inscricao-vaga/inscricao-vaga.module').then( m => m.InscricaoVagaPageModule)
-    } ,
+  } ,
   {
     path: 'vaga-detalhes',
     loadChildren: () => import('./vaga-detalhes/vaga-detalhes.module').then( m => m.VagaDetalhesPageModule)
@@ -47,23 +47,28 @@ const routes: Routes = [
     loadChildren: () => import('./timeline-vaga/timeline-vaga.module').then( m => m.TimelineVagaPageModule)
   },
   {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) 
+  },
+  {
+    path: 'formacao-educacional',
+    loadChildren: () => import('./formacao-educacional/formacao-educacional.module').then( m => m.FormacaoEducacionalPageModule)
+  },
+  {
+    path: 'notificacao',
+    loadChildren: () => import('./notificacao/notificacao.module').then( m => m.NotificacaoPageModule)
+  },
+  {
     path: 'recuperacao',
     loadChildren: () => import('./recuperacao/recuperacao.module').then( m => m.RecuperacaoPageModule)
   },
   {
-    path: 'formacao-educacional',
-    loadChildren: () => import('./formacao-educacional/formacao-educacional.module').then(m => m.FormacaoEducacionalPageModule)
-  },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
-  },
-  {
-    path: 'notificacao',
-    loadChildren: () => import('./notificacao/notificacao.module').then(m => m.NotificacaoPageModule)
-  },  {
     path: 'conclusao',
     loadChildren: () => import('./conclusao/conclusao.module').then( m => m.ConclusaoPageModule)
+  },
+  {
+    path: 'curriculo',
+    loadChildren: () => import('./curriculo/curriculo.module').then( m => m.CurriculoPageModule)
   }
 
 

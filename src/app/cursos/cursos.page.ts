@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { Component, ErrorHandler, OnInit } from '@angular/core';
+import { AlertController, MenuController } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
 import { Router } from '@angular/router';
 
@@ -20,7 +20,8 @@ export class CursosPage implements OnInit {
 
   public cursos: any[] = []
 
-  constructor(public mensagem: AlertController, public rota: Router) { 
+  constructor(public mensagem: AlertController, public route: Router, public menuLeft: MenuController) {
+    this.menuLeft.enable(false); 
     this.carregarDados()
   }
 
@@ -86,23 +87,42 @@ export class CursosPage implements OnInit {
 
   }
 
+  profissa(){
+    this.route.navigate(['exp-profissional']);
+  }
   
-  proximaPagina() {
-    console.log(this.proximaPagina)
-    this.rota.navigate(['idiomas'])
+  async proximaPagina() {
+    const nextPage = await this.mensagem.create({
+      header: 'Atenção',
+      message: 'Deseja ir para a próxima página sem adicionar nenhum curso?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel'
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.route.navigate(['idiomas'])
+          }
+        }
+      ]
+    });
+
+    await nextPage.present();
   }
 
   async removerCurso(cursoRemove) {
-    let confirmaRemover = await this.mensagem.create({
-      header: "ATENÇÃO!",
-      message: "Confima exclusão de " + cursoRemove.nome + "? Essa ação é irreverssível.",
+    const confirmaRemover = await this.mensagem.create({
+      header: 'ATENÇÃO!',
+      message: 'Confima exclusão de " + cursoRemove.nome + "? Essa ação é irreverssível.',
       buttons: [{
-        text: "Cancelar", role: "cancel", handler: () => {
+        text: 'Cancelar', role: 'cancel', handler: () => {
           console.log("CANCELADO")
         }
       },
       {
-        text: "Excluir", handler: () => {
+        text: 'Excluir', handler: () => {
           const index = this.cursos.indexOf(cursoRemove)
           this.cursos.splice(index, 1)
         }
@@ -114,18 +134,18 @@ export class CursosPage implements OnInit {
   }
 
   async salvarTemporariamente() {
-    Storage.set({ key: "nome", value: this.curso.nome })
-    Storage.set({ key: "instituicaoEnsiono", value: this.curso.instituicaoEnsino })
-    Storage.set({ key: "dataInicio", value: this.curso.dataInicio })
-    Storage.set({ key: "dataConclusao", value: this.curso.dataConclusao })
+    Storage.set({ key: 'nome', value: this.curso.nome })
+    Storage.set({ key: 'instituicaoEnsiono', value: this.curso.instituicaoEnsino })
+    Storage.set({ key: 'dataInicio', value: this.curso.dataInicio })
+    Storage.set({ key: 'dataConclusao', value: this.curso.dataConclusao })
     
 
     var alerta = await this.mensagem.create(
       {
-        header: "ATENÇÃO!",
-        message: "Dados armazenados com sucesso!",
-        buttons: ["ok"],
-        cssClass: "cssAlerta"
+        header: 'ATENÇÃO!',
+        message: 'Dados armazenados com sucesso!',
+        buttons: ['ok'],
+        cssClass: 'cssAlerta'
       })
     await alerta.present()
   }

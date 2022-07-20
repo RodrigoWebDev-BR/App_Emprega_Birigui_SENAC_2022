@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecuperacaoPage implements OnInit {
 
-  constructor() { }
+  email = {email : ''};
+
+  constructor(public route: Router ,public menuLeft: MenuController) 
+  { this.menuLeft.enable(false) }
+
+  login(){
+    this.route.navigate(['login']);
+  }
+
+  recuperacao(){
+    this.route.navigate(['login']);
+  }
 
   ngOnInit() {
   }

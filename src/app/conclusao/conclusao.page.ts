@@ -9,14 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConclusaoPage implements OnInit {
 
-  constructor(public leftMenu: MenuController, public route: Router) { 
+  constructor(public leftMenu: MenuController, public route: Router) 
+  {
     this.leftMenu.enable(false);
   }
 
   ngOnInit() {
-    setTimeout(()=> {
+
+    setTimeout(() => {
       this.route.navigate(['login']);
-    }, 5000);
+  }, 10567); 
+
   }
 
 }

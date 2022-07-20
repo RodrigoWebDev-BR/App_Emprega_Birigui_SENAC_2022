@@ -25,7 +25,7 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-    .roundedInput {
+.roundedInput {
 
     --border-radius: 10px;
       border-radius: 10px;
@@ -63,14 +63,15 @@
 
    .txtPassword{
     font-size: 12px;
+    
    }
 
    .txtNewAccount{
-    font-size: 12px;
+       font-size: 12px;
    }
 
    .fundobg{
-       background-color: rgb(182, 182, 182);
+       --background: rgb(232, 232, 232);
    }
 
    .centertext{
@@ -86,13 +87,13 @@
    }
 
    .icone{
-    width: 35px;
+    width: 35px; 
     height: 35px;
     padding-left: 10px;
    }
 
    .tituloPadding{
-    padding-left: 0px;
+    padding-left: 0px
    }
 
    .bold{
@@ -107,3 +108,17 @@
    .sublinhado{
     text-decoration: underline #000000;
    }
+
+   .perfil{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+   }
+
+   .icon{
+    width: 35px;
+    height: 35px;
+    padding-left: 10px;
+   }
+
