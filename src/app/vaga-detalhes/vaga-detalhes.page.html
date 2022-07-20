@@ -1,9 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Vaga detalhes</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="fundobg" [fullscreen]="true">
   <div class="header">
     <ion-row>
@@ -15,7 +9,6 @@
       
 
       <ion-col >
-        
         <ion-row>
           <ion-col class="ion-no-padding" >
           <ion-item color="#368E59" lines="none">
@@ -40,9 +33,9 @@
   <div class="conteudo">
     <ion-row>
       <ion-col>
-        <ion-item lines="none">
+        <ion-item lines="none" (click)="voltar()">
           <ion-icon style="margin-top: 3%;" name="chevron-back-outline"></ion-icon>
-          <h2 style="font-size: 20px;">Voltar e pesquisar nova vaga</h2>
+          <h2 style="font-size: 20px;" >Voltar e pesquisar nova vaga</h2>
         </ion-item>
       </ion-col>
     </ion-row>

@@ -4,12 +4,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'usuario',
     pathMatch: 'full'
-  },
-  {
-    path: 'folder',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
     path: 'usuario',
@@ -24,24 +20,8 @@ const routes: Routes = [
     loadChildren: () => import('./contato/contato.module').then( m => m.ContatoPageModule)
   },
   {
-    path: 'folder',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
-  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
-  {
-    path: 'folder',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
-  {
-    path: 'usuario',
-    loadChildren: () => import('./usuario/usuario.module').then( m => m.UsuarioPageModule)
-  },
-  {
-    path: 'cursos',
-    loadChildren: () => import('./cursos/cursos.module').then( m => m.CursosPageModule)
   },
   {
     path: 'endereco',
@@ -53,26 +33,44 @@ const routes: Routes = [
   },
   { path: 'inscricao-vaga',
     loadChildren: () => import('./inscricao-vaga/inscricao-vaga.module').then( m => m.InscricaoVagaPageModule)
-    } ,
- {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },
+  } ,
   {
     path: 'vaga-detalhes',
     loadChildren: () => import('./vaga-detalhes/vaga-detalhes.module').then( m => m.VagaDetalhesPageModule)
   },
- {
-       path: 'exp-profissional',
+  {
+    path: 'exp-profissional',
     loadChildren: () => import('./exp-profissional/exp-profissional.module').then( m => m.ExpProfissionalPageModule)
   },
- {
-    path: 'inscricao-vaga',
-    loadChildren: () => import('./inscricao-vaga/inscricao-vaga.module').then( m => m.InscricaoVagaPageModule)
-  },  {
+  {
+    path: 'timeline-vaga',
+    loadChildren: () => import('./timeline-vaga/timeline-vaga.module').then( m => m.TimelineVagaPageModule)
+  },
+  {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule) 
+  },
+  {
+    path: 'formacao-educacional',
+    loadChildren: () => import('./formacao-educacional/formacao-educacional.module').then( m => m.FormacaoEducacionalPageModule)
+  },
+  {
+    path: 'notificacao',
+    loadChildren: () => import('./notificacao/notificacao.module').then( m => m.NotificacaoPageModule)
+  },
+  {
+    path: 'recuperacao',
+    loadChildren: () => import('./recuperacao/recuperacao.module').then( m => m.RecuperacaoPageModule)
+  },
+  {
+    path: 'conclusao',
+    loadChildren: () => import('./conclusao/conclusao.module').then( m => m.ConclusaoPageModule)
+  },
+  {
+    path: 'curriculo',
+    loadChildren: () => import('./curriculo/curriculo.module').then( m => m.CurriculoPageModule)
   }
+
 
 
 

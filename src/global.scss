@@ -28,7 +28,7 @@
 .roundedInput {
 
     --border-radius: 10px;
-
+      border-radius: 10px;
     --highlight-height: 0;
 
     --background: rgb(241, 241, 241);
@@ -73,3 +73,52 @@
    .fundobg{
        --background: rgb(232, 232, 232);
    }
+
+   .centertext{
+       text-align: center;
+   }
+
+   .iconPad{
+    padding-top: 9px;
+   }
+
+   .espacamentoLogin{
+    margin: 0px 8%;
+   }
+
+   .icone{
+    width: 35px; 
+    height: 35px;
+    padding-left: 10px;
+   }
+
+   .tituloPadding{
+    padding-left: 0px
+   }
+
+   .bold{
+    font-weight: bold;
+   }
+
+   .middle{
+    display: flex;
+    justify-content: center;
+   }
+
+   .sublinhado{
+    text-decoration: underline #000000;
+   }
+
+   .perfil{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+   }
+
+   .icon{
+    width: 35px;
+    height: 35px;
+    padding-left: 10px;
+   }
+

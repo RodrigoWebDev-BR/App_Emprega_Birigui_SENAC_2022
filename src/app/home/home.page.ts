@@ -1,4 +1,6 @@
+import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +25,14 @@ export class HomePage implements OnInit {
     {titulo: 'Programador .net core', quantidade: '2 vagas', salario: 'a combinar', data_publicacao: '06/02' }
   ]
 
-  constructor() { }
+  abrirVaga(){
+    this.route.navigate(['vaga-detalhes']);
+  }
+
+  constructor(public route: Router, public menuLeft: MenuController) 
+  { 
+    this.menuLeft.enable(true);
+  }
 
   ngOnInit() {
   }
