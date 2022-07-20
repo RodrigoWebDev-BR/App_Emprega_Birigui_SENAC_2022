@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="usuario()" slot="start" style="padding-left: 15px;">
+      <ion-icon name="arrow-back" class="light icone"></ion-icon>
+    </ion-buttons>  
+    <ion-title class="centertext tituloPadding bold">Endereço <ion-icon name="home"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fundobg" [fullscreen]="true">
+
+  <ion-row style="padding-top: 70px;">
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">CEP <span style="color:red">*</span></ion-label>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.cep" placeholder="00000-000"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Endereço <span style="color:red">*</span></ion-label>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.endereco"></ion-input>
+        <ion-icon name="home" slot="end" class="iconPad"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Número <span style="color:red">*</span></ion-label>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.numero"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Complemento</ion-label>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.complemento"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Bairro <span style="color:red">*</span></ion-label>
+        <ion-input type="text" class="black" expand="block"[(ngModel)]="endereco.bairro"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Cidade <span style="color:red">*</span></ion-label>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.cidade"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col >
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Estado (UF) <span style="color:red">*</span></ion-label>
+        <ion-select [(ngModel)]="endereco.estado">
+          <ion-select-option *ngFor="let ufs of estados" value="{{ufs.uf}}">{{ufs.nome + ' - ' + ufs.uf}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col class="espacamento">
+      <ion-button shape="block" (click)="confirmar()">Próximo</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

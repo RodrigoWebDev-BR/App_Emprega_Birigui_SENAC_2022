@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ folder }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fundobg" [fullscreen]="true">
+  <div>
+    <ion-row>
+      <ion-col>
+        <h4 style="text-align: center;">{{ vaga.quantidade }}vagas de emprego encontradas em {{ vaga.cidade }}</h4>
+        <h4 style="text-align: center;">Clique e leia a descrição da vaga</h4>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div>
+    <ion-card style="border-radius: 20px; box-shadow: 2.5px 5px #49c96985; border-style: groove; border: 0.1%;" *ngFor="let vaga of vagas" (click)="proximaPagina(proximo)"> 
+      <ion-card-header>
+        <div style="display: flex; justify-content: center; align-items: flex-start;">
+          <ion-row>
+            <ion-col size="2">
+              <img
+                src="https://img1.gratispng.com/20180326/jaq/kisspng-google-logo-g-suite-google-guava-google-plus-5ab8b5b12e63f8.42394965152205457719.jpg"
+                width="100%;">
+            </ion-col>
+            <ion-col size="6">
+              <ion-card-title>{{ vaga.nome }}</ion-card-title>
+              <ion-card-subtitle>{{ vaga.quantidade }} vaga(s)</ion-card-subtitle>
+              <ion-card-subtitle style="padding: 2%; font-size: 10pt; font-weight: 700;">
+                {{ vaga.salario }}
+              </ion-card-subtitle>              
+            </ion-col> 
+            <ion-col size="4">              
+              <h4 style="color: #00bd2f; font-size: 12.5px;">{{ vaga.data }}</h4>
+            </ion-col>           
+          </ion-row>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>        
+        <h4 style="color: #292b29; font-weight: 450; font-size: 15.5px;">Clique aqui para mais informações e cadastre seu currículo.</h4>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>
