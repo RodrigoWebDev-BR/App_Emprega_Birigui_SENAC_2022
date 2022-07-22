@@ -1,11 +1,6 @@
-<<<<<<< Updated upstream
-import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-=======
 import { FormEducacionalService } from './../servicos/form-educacional.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, MenuController, NavController } from '@ionic/angular';
->>>>>>> Stashed changes
 import { alertController } from '@ionic/core';
 
 @Component({
@@ -15,32 +10,8 @@ import { alertController } from '@ionic/core';
 })
 export class FormacaoEducacionalPage implements OnInit {
 
-  formacao = {};
+  public formEducacional: any[] = [];
 
-<<<<<<< Updated upstream
-  constructor(public mensagem: AlertController) {
-  }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
-  async adicionarFormacao() {
-
-    const alerta = await this.mensagem.create(
-      {
-        header: "ATENÇÃO",
-        subHeader: "",
-        message: "Informações armazenadas com sucesso",
-        buttons: ["OK"],
-        cssClass: "cssAlerta"
-      }
-    );
-    await alerta.present();
-    console.log(this.formacao);
-  }
-  proximo() {
-    console.log(this.formacao)
-=======
   formacao = { instituicao: null, nomeCurso: null, nivel: null, conclusao: null};
 
   formacoes = [
@@ -192,6 +163,6 @@ export class FormacaoEducacionalPage implements OnInit {
     if(this.formEdu.listar() !== undefined){
       this.formEducacional = this.formEdu.listar();
     }
->>>>>>> Stashed changes
   }
+
 }

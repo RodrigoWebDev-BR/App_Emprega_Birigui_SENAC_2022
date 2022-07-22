@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="profissa()" slot="start" style="padding-left: 15px;">
+      <ion-icon name="arrow-back" class="light icone"></ion-icon>
+    </ion-buttons>  
+    <ion-title class="centertext tituloPadding bold">Cursos <ion-icon name="library"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" line="none">
+          <ion-label position="floating">Nome curso <span style="color:red">*</span></ion-label>
+          <ion-input type="text" [(ngModel)]="curso.nome">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" lines="none">
+          <ion-label position="floating">Nome Instituição <span style="color:red">*</span></ion-label>
+          <ion-input type="text" [(ngModel)]="curso.instituicaoEnsino">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="espacamento">
+        <ion-label position="floating">Data de início</ion-label>
+        <ion-item class="roundedInput" line="none">
+          <ion-input type="date" [(ngModel)]="curso.dataInicio">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col class="espacamento">
+        <ion-label position="floating">Data de conclusão</ion-label>
+        <ion-item class="roundedInput" line="none">
+          <ion-input type="date" [(ngModel)]="curso.dataConclusao">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="espacamento">
+        <ion-button color="primary" shape="block" (click)="adicionarCurso(curso)">
+          ADICIONAR CURSO
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+
+    <div *ngIf="cursos?.length > 0" class="espacamento">
+      <hr />
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-list style="width: 100%;">
+
+              <ion-item *ngFor="let curso of cursos" lines="none">
+                <ion-label>
+                  <h4>Curso: {{ curso.nome }}</h4>             
+                  <h4>Instituição de Ensino: {{ curso.instituicaoEnsino }}</h4>
+                  <h4>Data de Início: {{ curso.dataInicio }}</h4>    
+                  <h4>Data de Conclusão: {{ curso.dataConclusao }}</h4>                             
+                </ion-label>
+                <ion-icon name="trash-outline" slot="end" color="danger" (click)="removerCurso(curso)" style="width: 30px; height: 30px;"></ion-icon>
+              </ion-item>
+         
+            </ion-list>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <!-- <div *ngIf="cursos?.length <= 0">
+      <h4 style="text-align: center;">Cursos</h4>
+    </div> -->
+
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col class="espacamento">
+      <ion-button color="primary" shape="block" (click)="proximaPagina()">
+        PRÓXIMO
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

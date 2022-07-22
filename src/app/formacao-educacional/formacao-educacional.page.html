@@ -1,90 +1,66 @@
 <ion-header>
-  <ion-toolbar color="primary" >
-    <ion-title style="text-align: center;">Formação Educacional</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="contato()" slot="start" style="padding-left: 15px;">
+      <ion-icon name="arrow-back" class="light icone"></ion-icon>
+    </ion-buttons>  
+    <ion-title class="centertext tituloPadding bold">Formação Educacional <ion-icon name="school"></ion-icon></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-  <div>
-    <ion-row>
-      <ion-col>
-        <ion-item lines="none">
+<ion-content [fullscreen]="true">
 
-          <ion-icon name="chevron-back-outline"></ion-icon>
-          <h3 style="text-align: center;">
-            Voltar e Pesquisar nova vaga
-          </h3>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </div>
-
-  <div>
     <ion-row>
       <ion-col>
-        <h4 style="text-align: center;">
-          Cadastro de currículo
-        </h4>
-      </ion-col>
-    </ion-row>
-  </div>
-
-  <div>
-    <ion-row>
-      <ion-col>
-        <ion-item  lines="none">
-          <h4>
-            FORMAÇÃO EDUCACIONAL
-          </h4>
-          <ion-icon name="school-outline"></ion-icon>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </div>
-
-  <div>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">Nome da instituição de ensino</ion-label>
-          <ion-input type="text" class="ion-margin-horizontal">
-          </ion-input>
-          <ion-icon name="person-outline" slot="end"></ion-icon>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </div>
-  <div>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">
-            Data de inicío
-            <ion-icon name="calendar-outline"></ion-icon>
-          </ion-label>
-          <ion-input type="text" class="ion-margin-horizontal">
-          </ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label position="floating">
-            Data de término
-            <ion-icon name="calendar-outline"></ion-icon></ion-label>
-          <ion-input type="text" class="ion-margin-horizontal">
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Nome Instituição <span style="color:red">*</span></ion-label>
+          <ion-input type="text" [(ngModel)]="formacao.instituicao">
           </ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
-  </div>
-  <div>
+
     <ion-row>
       <ion-col>
-<<<<<<< Updated upstream
-        <ion-button shape="block" (click)="adicionarFormacao()" expand="full" color="primary"  >
-          Adicionar formação
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Nome Curso</ion-label>
+          <ion-input type="text" [(ngModel)]="formacao.nomeCurso">
+          </ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Nível <span style="color:red">*</span></ion-label>
+          <ion-select style="width: 100%" [(ngModel)]="formacao.nivel">
+            <ion-select-option *ngFor="let form of formacoes" value="{{form.nivel}}">{{form.nivel}}</ion-select-option>  
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput">
+          <ion-label position="floating">Situação <span style="color:red">*</span></ion-label>
+          <ion-select style="width: 100%" [(ngModel)]="formacao.conclusao">
+            <ion-select-option *ngFor="let con of conclusoes" value="{{con.resp}}">{{con.resp}}</ion-select-option>  
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="adicionar()" expand="block" color="primary">
+          Adicionar
         </ion-button>
-=======
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
         <ion-item lines="none">
           <ion-list style="width: 100%">
             <ion-item *ngFor="let formado of formEducacional" lines="none" class="border animate__animated animate__fadeInUp">
@@ -98,14 +74,13 @@
             </ion-item>
           </ion-list>
         </ion-item>
->>>>>>> Stashed changes
       </ion-col>
     </ion-row>
-  </div>
+  
 </ion-content>
+
 <ion-footer>
-        <ion-button shape="block" (click)="confimar" expand="full" >
-          Próximo
-          <ion-icon name="arrow-forward-circle-outline"></ion-icon>
-        </ion-button>
+  <ion-button shape="block" (click)="confimar()" expand="full" >
+    Próximo
+  </ion-button>
 </ion-footer>
