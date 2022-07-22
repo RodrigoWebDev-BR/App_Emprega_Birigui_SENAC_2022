@@ -74,3 +74,39 @@
    .fundobg{
        background-color: rgb(216, 214, 214);
    }
+<<<<<<< Updated upstream
+=======
+
+   .bold{
+    font-weight: bold;
+   }
+
+   .middle{
+    display: flex;
+    justify-content: center;
+   }
+
+   .sublinhado{
+    text-decoration: underline #000000;
+   }
+
+   .perfil{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+   }
+
+   .icon{
+    width: 35px;
+    height: 35px;
+    padding-left: 10px;
+   }
+
+   .border{
+        border-bottom-style: solid;
+        border-color: #69696958;
+        border-bottom-width: 0.5px;
+   }
+
+>>>>>>> Stashed changes
