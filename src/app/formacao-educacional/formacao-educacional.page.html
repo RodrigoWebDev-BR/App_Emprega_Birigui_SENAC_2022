@@ -63,9 +63,9 @@
       <ion-col>
         <ion-item lines="none">
           <ion-list style="width: 100%">
-            <ion-item *ngFor="let formado of formEducacional" lines="none">
+            <ion-item *ngFor="let formado of formEducacional" lines="none" class="border animate__animated animate__fadeInUp">
               <ion-label>
-                <h2>{{formado.instituicao}}</h2>
+                <h2 class="bold">{{formado.instituicao}}</h2>
                 <br>
                 <p>{{formado.nomeCurso}} - {{formado.conclusao}}</p>
                 <h3>{{formado.nivel}}</h3>

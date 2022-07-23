@@ -13,21 +13,12 @@
     <ion-col>
       <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">CEP <span style="color:red">*</span></ion-label>
-        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.cep" placeholder="00000-000"></ion-input>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.cep" placeholder="00000-000" 
+        (ionChange)="searchCEP($event)"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
-
-  <ion-row>
-    <ion-col>
-      <ion-item class="roundedInput" lines="none">
-        <ion-label position="floating">Endereço <span style="color:red">*</span></ion-label>
-        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.endereco"></ion-input>
-        <ion-icon name="home" slot="end" class="iconPad"></ion-icon>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-
+  
   <ion-row>
     <ion-col>
       <ion-item class="roundedInput" lines="none">
@@ -36,7 +27,7 @@
       </ion-item>
     </ion-col>
   </ion-row>
-
+  
   <ion-row>
     <ion-col>
       <ion-item class="roundedInput" lines="none">
@@ -49,8 +40,18 @@
   <ion-row>
     <ion-col>
       <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Endereço <span style="color:red">*</span></ion-label>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.endereco" value="{{enderecoApi}}"></ion-input>
+        <ion-icon name="home" slot="end" class="iconPad"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">Bairro <span style="color:red">*</span></ion-label>
-        <ion-input type="text" class="black" expand="block"[(ngModel)]="endereco.bairro"></ion-input>
+        <ion-input type="text" class="black" expand="block"[(ngModel)]="endereco.bairro" value="{{bairroApi}}"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -59,21 +60,20 @@
     <ion-col>
       <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">Cidade <span style="color:red">*</span></ion-label>
-        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.cidade"></ion-input>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.cidade" value="{{cidadeApi}}"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
 
   <ion-row>
-    <ion-col >
+    <ion-col>
       <ion-item class="roundedInput" lines="none">
-        <ion-label position="floating">Estado (UF) <span style="color:red">*</span></ion-label>
-        <ion-select [(ngModel)]="endereco.estado">
-          <ion-select-option *ngFor="let ufs of estados" value="{{ufs.uf}}">{{ufs.nome + ' - ' + ufs.uf}}</ion-select-option>
-        </ion-select>
+        <ion-label position="floating">Estado <span style="color:red">*</span></ion-label>
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.estado" value="{{estadoApi}}"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
+
 
 </ion-content>
 

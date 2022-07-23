@@ -58,16 +58,14 @@ export class UsuarioPage implements OnInit {
       buttons: [
         {
           text: 'Não',
-          role: 'cancel',
-          handler() {
-          },
+          role: 'cancel'
         },
         {
           text: 'Sim',
-          handler() {
-            this.nav.navigateRoot('login');
+          handler:() =>{
             localStorage.clear();
-          },
+            this.nav.navigateRoot('login');
+          }
         }
       ]
     });

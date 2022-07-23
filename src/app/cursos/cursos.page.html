@@ -55,24 +55,21 @@
       </ion-col>
     </ion-row>
 
-
     <div *ngIf="cursos?.length > 0" class="espacamento">
       <hr />
       <ion-row>
         <ion-col>
           <ion-item>
             <ion-list style="width: 100%;">
-
-              <ion-item *ngFor="let curso of cursos" lines="none">
+              <ion-item *ngFor="let curso of cursos" lines="none" class="animate__animated animate__fadeInUp">
                 <ion-label>
                   <h4>Curso: {{ curso.nome }}</h4>             
                   <h4>Instituição de Ensino: {{ curso.instituicaoEnsino }}</h4>
-                  <h4>Data de Início: {{ curso.dataInicio }}</h4>    
-                  <h4>Data de Conclusão: {{ curso.dataConclusao }}</h4>                             
+                  <h4>Data de Início: {{ curso.dataInicio | date:'dd/MM/yyyy' }}</h4>    
+                  <h4>Data de Conclusão: {{ curso.dataConclusao | date:'dd/MM/yyyy' }}</h4>                             
                 </ion-label>
                 <ion-icon name="trash-outline" slot="end" color="danger" (click)="removerCurso(curso)" style="width: 30px; height: 30px;"></ion-icon>
               </ion-item>
-         
             </ion-list>
           </ion-item>
         </ion-col>

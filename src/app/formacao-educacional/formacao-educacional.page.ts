@@ -1,8 +1,7 @@
-import { Router } from '@angular/router';
+import { FormEducacionalService } from './../servicos/form-educacional.service';
 import { Component, OnInit } from '@angular/core';
-import { AlertController, MenuController } from '@ionic/angular';
+import { AlertController, MenuController, NavController } from '@ionic/angular';
 import { alertController } from '@ionic/core';
-import { Storage } from '@capacitor/storage';
 
 @Component({
   selector: 'app-formacao-educacional',
@@ -13,7 +12,7 @@ export class FormacaoEducacionalPage implements OnInit {
 
   public formEducacional: any[] = [];
 
-  formacao = {id: null, instituicao: null, nomeCurso: null, nivel: null, conclusao: null};
+  formacao = { instituicao: null, nomeCurso: null, nivel: null, conclusao: null};
 
   formacoes = [
     {id: '1', nivel: '2º Grau Médio'},
@@ -31,11 +30,11 @@ export class FormacaoEducacionalPage implements OnInit {
     {id:'C', resp:'Concluído'}
   ];
 
-  constructor(public mensagem: AlertController, public route: Router, public leftMenu: MenuController) {
+  constructor(public mensagem: AlertController, 
+    public nav: NavController, 
+    public leftMenu: MenuController,
+    public formEdu: FormEducacionalService) {
     this.leftMenu.enable(false);
-  }
-
-  ngOnInit() {
   }
 
   async adicionar() {
@@ -88,21 +87,19 @@ export class FormacaoEducacionalPage implements OnInit {
     else
     {
       const formCopy = JSON.parse(JSON.stringify(this.formacao));
-
+      console.log(formCopy)
       this.formEducacional.push(formCopy);
 
-      this.formacao.id = null;
-      this.formacao.instituicao = null;
-      this.formacao.nomeCurso = null;
-      this.formacao.nivel = null;
-      this.formacao.conclusao = null;
+      this.formEdu.salvarFormacao(
+        this.formacao.instituicao, 
+        this.formacao.nomeCurso,
+        this.formacao.nivel ,
+        this.formacao.conclusao)
 
-      Storage.remove({key: 'id'});
-      Storage.remove({key: 'instituicao'});
-      Storage.remove({key: 'nomeCurso'});
-      Storage.remove({key: 'nivel'});
-      Storage.remove({key: 'conclusao'});
-
+      this.formacao.instituicao = '';
+      this.formacao.nomeCurso = '';
+      this.formacao.nivel = '';
+      this.formacao.conclusao = '';
     }
   }
 
@@ -110,7 +107,7 @@ export class FormacaoEducacionalPage implements OnInit {
     
     if(this.formEducacional.length > 0)
     {
-      this.route.navigate(['exp-profissional']);
+      this.nav.navigateForward('exp-profissional');
     }
     else
     {
@@ -143,9 +140,9 @@ export class FormacaoEducacionalPage implements OnInit {
         {
           text: 'Sim',
           handler: () => {
+            this.formEdu.deletar(instDelete.instituicao);
             const index = this.formEducacional.indexOf(instDelete);
             this.formEducacional.splice(index, 1);
-            console.log('REMOVIDO');
           }
         }
       ]
@@ -155,7 +152,17 @@ export class FormacaoEducacionalPage implements OnInit {
   }
 
   contato(){
-    this.route.navigate(['contato']);
+    this.nav.back();
+  }
+
+  ngOnInit() {
+    this.carregaDados();
+  }
+
+  carregaDados(){
+    if(this.formEdu.listar() !== undefined){
+      this.formEducacional = this.formEdu.listar();
+    }
   }
 
 }

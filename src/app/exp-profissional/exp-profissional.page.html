@@ -106,11 +106,12 @@
       <ion-button color="primary" expand="block" (click)="addExperiencia()">Adicionar experiência</ion-button>
     </ion-col>
   </ion-row>
+
   <ion-row>
     <ion-col>
-      <ion-item lines="none">
+      <ion-item lines="none" >
         <ion-list style="width: 100%">
-          <ion-item *ngFor="let exp of experiencias" lines="none">
+          <ion-item *ngFor="let exp of experiencias" lines="none" class="border animate__animated animate__fadeInUp">
             <ion-label>
               <h2>{{exp.cargo}}</h2>
               <p>{{exp.empresa}}</p>
@@ -123,6 +124,7 @@
       </ion-item>
     </ion-col>
   </ion-row>
+
 </ion-content>
 <ion-footer>
   <ion-row>

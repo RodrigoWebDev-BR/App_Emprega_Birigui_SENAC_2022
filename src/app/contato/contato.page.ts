@@ -1,6 +1,7 @@
+import { ContatosService } from './../servicos/contatos.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, MenuController } from '@ionic/angular';
+import { AlertController, MenuController, NavController } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
 
 @Component({
@@ -22,12 +23,15 @@ export class ContatoPage implements OnInit {
     {id:'5', nome:'Facebook'},
   ]
 
-  constructor(public route: Router, public mensagem: AlertController, public menuLeft: MenuController) {
+  constructor(public nav: NavController, 
+    public mensagem: AlertController, 
+    public menuLeft: MenuController, 
+    public contatoServ: ContatosService) {
     this.menuLeft.enable(false);
   }
 
   endereco(){
-    this.route.navigate(['endereco']);
+    this.nav.back();
   }
 
   async addContato() {
@@ -49,23 +53,22 @@ export class ContatoPage implements OnInit {
     }
     else
     {
-      const contatoCopy = JSON.parse(JSON.stringify(this.contato));
 
+      const contatoCopy = JSON.parse(JSON.stringify(this.contato));
+     
       this.contatos.push(contatoCopy);
+
+      this.contatoServ.salvarContato(this.contato.id, this.contato.contato);
 
       this.contato.contato = '';
       this.contato.id = '';
-
-      Storage.remove({ key: 'contato' });
-      Storage.remove({ key: 'id' });
     }
   }
 
   async confirmar(){
-
     if(this.contatos.length > 0)
     {
-      this.route.navigate(['formacao-educacional']);
+      this.nav.navigateForward('formacao-educacional');
     }
     else
     {
@@ -100,6 +103,8 @@ export class ContatoPage implements OnInit {
         {
           text: 'Sim',
           handler: () => {
+            this.contatoServ.deletar(contatosRemove.contato); 
+
             const index = this.contatos.indexOf(contatosRemove);
             this.contatos.splice(index, 1);
           }
@@ -111,6 +116,14 @@ export class ContatoPage implements OnInit {
   };
 
   ngOnInit() {
+    this.carregarDados();
   }
+  
+  carregarDados(){
+   if(this.contatoServ.listar() !== undefined){
+     this.contatos = this.contatoServ.listar();
+   }
+  }
+
 }
 
