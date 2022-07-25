@@ -59,16 +59,13 @@ export class UsuarioPage implements OnInit {
         {
           text: 'Não',
           role: 'cancel',
-          handler() {
-
-          },
         },
         {
           text: 'Sim',
-          handler() {
-            this.nav.navigateRoot('login');
+          handler:() => { 
             localStorage.clear();
-          },
+            this.nav.navigateRoot('login');
+          }
         }
       ]
     });
