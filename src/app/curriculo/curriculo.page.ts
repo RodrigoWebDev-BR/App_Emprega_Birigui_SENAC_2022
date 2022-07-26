@@ -1,3 +1,4 @@
+import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./curriculo.page.scss'],
 })
 export class CurriculoPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor(public leftMenu: MenuController) {
+    this.leftMenu.enable(true);
   }
 
+  ngOnInit() {}
 }
