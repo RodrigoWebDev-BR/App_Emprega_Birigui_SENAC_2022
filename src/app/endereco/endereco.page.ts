@@ -64,7 +64,12 @@ export class EnderecoPage {
 
     const cepDig = evento.detail.value;
 
-    if (cepDig.length === 8) {
+    if (cepDig.length > 8) {
+      
+      if(cepDig.includes('-')){
+       cepDig.replace('-', '');
+      }
+
       this.cep.localizaCEP(cepDig)
         .then(response => {
           this.enderecoCEP = response;

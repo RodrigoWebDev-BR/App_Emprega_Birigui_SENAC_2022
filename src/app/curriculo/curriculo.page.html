@@ -1,9 +1,92 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>curriculo</ion-title>
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light" class="centertext tituloPadding">Currículo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-row>
+    <ion-col>
+      <ion-item expand="block">
+        <ion-col size="3" style="padding-left: 0px;">
+          <ion-icon style="font-size: 80px" name="person-circle-outline" color="dark">
+          </ion-icon>
+        </ion-col>
+        <ion-col size="9">
+          <ion-row>
+            <h2 style="margin-bottom: 0;">Patrick</h2>
+          </ion-row>
+          <p style="margin-top: 5px;">(18) 9999-9999</p>
+        </ion-col>  
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-accordion-group>
+        <ion-accordion value="dadosP">
+          <ion-item slot="header" color="light">
+            <ion-label>Dados Pessoais</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end;">
+                    <ion-button>
+                      <ion-label style="margin-top: 3px;">Editar</ion-label>
+                      <ion-icon class="iconEditar" name="pencil" color="light"></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">E-Mail:</span> exemplo@exemplo.com</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">RG:</span> 55.555.55-5</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">CPF:</span> 555.555.555-55</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Nascimento:</span> 22/12/1990</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Gênero:</span> Masculino</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Estado Civil:</span> Solteiro(a)</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Senha:</span> **********</ion-label>
+                    </ion-row>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+      </ion-accordion-group>
+    </ion-col>
+  </ion-row>
+
 
 </ion-content>
