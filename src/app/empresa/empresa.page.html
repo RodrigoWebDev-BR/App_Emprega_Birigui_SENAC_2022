@@ -17,7 +17,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-item class="roundedInput" line="none">
+        <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Nome empresarial<span style="color: red">*</span></ion-label>
           <ion-input type="text" [(ngModel)]="empresa.nome"></ion-input>
           <ion-icon name="business-outline" slot="end" class="iconPad"></ion-icon>
@@ -27,7 +27,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-item class="roundedInput" line="none">
+        <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Nome fantasia</ion-label>
           <ion-input type="text" [(ngModel)]="empresa.fantasia"></ion-input>
         </ion-item>
@@ -47,7 +47,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-item class="roundedInput" line="none">
+        <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">E-mail <span style="color: red">*</span></ion-label>
           <ion-input type="email" [(ngModel)]="empresa.email"></ion-input>
           <!-- <ion-input type="text" class="ion-margin-horizontal" [(ngModel)]="usuario.nome"></ion-input> -->
@@ -59,7 +59,7 @@
     <ion-row>
       <ion-col>
         <ion-label position="floating">Data de abertura</ion-label>
-        <ion-item class="roundedInput" line="none">
+        <ion-item class="roundedInput" lines="none">
           <ion-input type="date" [(ngModel)]="empresa.dataAb">
           </ion-input>
         </ion-item>
@@ -78,7 +78,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-item class="roundedInput" line="none">
+        <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Situação cadastral <span style="color: red">*</span></ion-label>
           <ion-select [(ngModel)]="empresa.situacao" interface="popover">
             <ion-select-option *ngFor="let sit of situacoes" value="{{ sit.sitAtual }}">{{ sit.sitAtual }}
@@ -88,7 +88,7 @@
       </ion-col>
 
       <ion-col>
-        <ion-item class="roundedInput" line="none">
+        <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Natureza jurídica <span style="color: red">*</span></ion-label>
           <ion-select [(ngModel)]="empresa.natureza" interface="popover">
             <ion-select-option *ngFor="let juri of naturezas" value="{{ juri.naturezas }}">{{ juri.naturezas
@@ -100,7 +100,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-item class="roundedInput" line="none">
+        <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Senha <span style="color: red">*</span></ion-label>
           <ion-input type="password" [(ngModel)]="empresa.senha"></ion-input>
           <ion-icon name="key-outline" slot="end" class="iconPad"></ion-icon>
@@ -110,7 +110,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-item class="roundedInput" line="none">
+        <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Confirme sua senha <span style="color: red">*</span></ion-label>
           <ion-input type="password" [(ngModel)]="empresa.confirmacao"></ion-input>
           <ion-icon name="key-outline" slot="end" class="iconPad"></ion-icon>
