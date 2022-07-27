@@ -1,3 +1,4 @@
+import { MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -55,5 +56,4 @@ export class CurriculoPage implements OnInit {
 
   ngOnInit() {
   }
-
 }
