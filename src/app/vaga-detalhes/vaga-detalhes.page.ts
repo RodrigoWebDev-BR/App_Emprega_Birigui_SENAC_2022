@@ -1,5 +1,5 @@
+import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vaga-detalhes',
@@ -9,20 +9,19 @@ import { Router } from '@angular/router';
 export class VagaDetalhesPage implements OnInit {
   router: any;
 
-  inscrever(){
-    this.rota.navigate(['timeline-vaga']);
-  }
+  constructor(public nav: NavController) { }
+
 
   voltar(){
-    this.rota.navigate(['home']);
+    this.nav.navigateForward('inscricao-vaga');
   }
 
-  constructor(public rota : Router) { 
-
-
+  candidato(){
+    this.nav.navigateRoot('timeline-vaga');
   }
 
   ngOnInit() {
+
   }
 
 }

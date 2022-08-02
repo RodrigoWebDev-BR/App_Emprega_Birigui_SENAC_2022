@@ -1,148 +1,87 @@
-<ion-content class="fundobg" [fullscreen]="true">
-  <div class="header">
-    <ion-row>
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="voltar()" slot="start" style="padding-left: 15px">
+      <ion-icon name="arrow-back" color="light" class="icone"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-      <ion-col style="display: flex;">
-        <ion-icon style="font-size: 80px;" name="person-circle-outline"></ion-icon>
-        <h2 class="margin-h2-user white" style="font-size: 20px;">Olá @User</h2>
-      </ion-col>
+<ion-content [fullscreen]="true">
+  <ion-card class="cardVaga">
+    <ion-list>
+      <ion-item>
+        <ion-icon name="business" color="dark"></ion-icon>
+        <ion-label class="paddingLabel">
+          <h2>Nome Empresa</h2>
+          <p>Unimed</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="briefcase" color="dark"></ion-icon>
+        <ion-label class="paddingLabel">
+          <h2>Vaga</h2>
+          <p>Médico</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="time" color="dark"></ion-icon>
+        <ion-label class="paddingLabel">
+          <h2>Carga horária</h2>
+          <p>40 hora(s) semanais</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="cash" color="dark"></ion-icon>
+        <ion-label class="paddingLabel">
+          <h2>Salário</h2>
+          <p>R$ 15000.<small>00</small></p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="medal" color="dark"></ion-icon>
+        <ion-label class="paddingLabel">
+          <h2>Qualificações</h2>
+          <p>Ensino superior em Medicina</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="nutrition" color="dark"></ion-icon>
+        <ion-label class="paddingLabel">
+          <h2>Vale alimentação</h2>
+          <p>Incluso</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="medkit" color="dark"></ion-icon>
+        <ion-label class="paddingLabel">
+          <h2>Assistência médica</h2>
+          <p>Incluso</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item line="none">
+        <ion-icon name="accessibility" color="dark"></ion-icon>
+        <ion-label class="paddingLabel">
+          <h2>+ Benefícios</h2>
+          <p>Assistência odontológica</p>
+          <p>Insalubridade</p>
+          <p>Cesta básica</p>
+        </ion-label>
+      </ion-item>
       
-
-      <ion-col >
-        <ion-row>
-          <ion-col class="ion-no-padding" >
-          <ion-item color="#368E59" lines="none">
-            <ion-icon style="font-size: 35px;" name="menu-outline" class="removeMarginIcon" slot="end"></ion-icon>
-            <ion-icon style="font-size: 30px;" name="notifications-outline" class="white removeMarginIcon" slot="end"></ion-icon>
-          </ion-item>
-        </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col class="ion-no-padding">
-          
-            <h2 class="ion-no-margin" style="text-align: right; padding-right:10px">Sair</h2>
-         
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-
-  </div><!--header-->
-
-  <div class="conteudo">
-    <ion-row>
-      <ion-col>
-        <ion-item lines="none" (click)="voltar()">
-          <ion-icon style="margin-top: 3%;" name="chevron-back-outline"></ion-icon>
-          <h2 style="font-size: 20px;" >Voltar e pesquisar nova vaga</h2>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-<br>
-<br>
-    <ion-row>
-      <ion-col>
-        <ion-item lines="none">
-          <h2 style="font-size: 20px;" class="center">Detalhes sobre vaga x</h2>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-
-        <ion-item lines="none" color="transparent">
-          <h3 style="font-size: 10px; text-align: start;" >Descrição</h3> 
-        </ion-item>
-
-        <ion-row>
-          <div class="box1">
-            <h2 style="font-size: 15px; font-style: italic; margin-left: 5px;">Atividades: </h2>
-            <p style="font-size: 15px; margin-left: 5px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sodales tincidunt mauris.</p>
-          </div>
-        </ion-row>
-
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-
-        <ion-item lines="none" color="transparent">
-          <h3 style="font-size: 10px; text-align: start;" >Benefícios</h3>
-        </ion-item>
-
-        <ion-row>
-          <div class="box2">
-            <h2 style="font-size: 15px; text-align: center;">Assitencia médica, gympass, vale-alimentação</h2>
-          </div>
-        </ion-row>
-
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-
-        <ion-item lines="none" color="transparent">
-          <h3 style="font-size: 10px; text-align: start;" >Horário</h3>
-        </ion-item>
-
-        <ion-row>
-          <div class="box2">
-            <h2 style="font-size: 15px; text-align: center;">Segunda à sexta das 08:00hs às 17:00hs</h2>
-          </div>
-        </ion-row>
-
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-
-        <ion-item lines="none" color="transparent">
-          <h3 style="font-size: 10px; text-align: start;" >Regime de contratação</h3>
-        </ion-item>
-
-        <ion-row>
-          <div class="box2">
-            <h2 style="font-size: 15px; text-align: center;">CLT(efetivo)</h2>
-          </div>
-        </ion-row>
-
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-
-        <ion-item lines="none" color="transparent">
-          <h3 style="font-size: 10px; text-align: start;" >Dados da empresa</h3>
-        </ion-item>
-
-        <ion-row>
-          <div class="box2">
-            <h2 style="font-size: 15px; text-align: center;">Biripar Parafusos</h2>
-          </div>
-        </ion-row>
-
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col class="espacamento">
-        <ion-button color="tertiary" shape="block" (click)="inscrever()">Inscrever-se <ion-icon name="caret-forward-circle-outline" slot="end"></ion-icon></ion-button>
-        
-      </ion-col>
-    </ion-row>
-
-   
-  </div><!--conteudo-->
-<br>
-  <ion-footer>
-    <div class="footer"></div><!--header-->
-  </ion-footer>
-  
+    </ion-list>
+  </ion-card>
 </ion-content>
-
+<ion-footer>
+  <ion-row>
+    <ion-col class="espacamento">
+      <ion-button color="primary" shape="block" (click)="candidato()">Candidatar-se</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
