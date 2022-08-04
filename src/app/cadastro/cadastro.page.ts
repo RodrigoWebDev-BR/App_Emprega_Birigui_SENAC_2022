@@ -11,7 +11,7 @@ export class CadastroPage implements OnInit {
   constructor(
     public leftMenu: MenuController,
     public nav: NavController
-  ) { 
+  ) {
     this.leftMenu.enable(false);
   }
 
@@ -19,15 +19,15 @@ export class CadastroPage implements OnInit {
   }
 
   login(){
-    this.nav.navigateRoot('login')
+    this.nav.navigateRoot('login');
   }
 
   usuario(){
-    this.nav.navigateRoot('usuario')
+    this.nav.navigateRoot('usuario');
   }
 
   empresa(){
-    this.nav.navigateRoot('empresa')
+    this.nav.navigateRoot('empresa');
   }
 
 }

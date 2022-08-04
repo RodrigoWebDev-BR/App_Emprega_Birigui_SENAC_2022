@@ -3,24 +3,29 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title color="light" class="centertext tituloPadding">Currículo</ion-title>
+    <ion-title color="light" class="centertext tituloProject bold"
+      >Currículo</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <ion-row>
     <ion-col>
       <ion-item expand="block">
-        <ion-col size="3" style="padding-left: 0px;">
-          <ion-icon style="font-size: 80px" name="person-circle-outline" color="dark">
+        <ion-col size="3" style="padding-left: 0px">
+          <ion-icon
+            style="font-size: 80px"
+            name="person-circle-outline"
+            color="dark"
+          >
           </ion-icon>
         </ion-col>
         <ion-col size="9">
           <ion-row>
-            <h2 style="margin-bottom: 0;">Patrick</h2>
+            <h2 style="margin-bottom: 0">Patrick</h2>
           </ion-row>
-          <p style="margin-top: 5px;">(18) 9999-9999</p>
+          <p style="margin-top: 5px">(18) 9999-9999</p>
         </ion-col>
       </ion-item>
     </ion-col>
@@ -29,7 +34,6 @@
   <ion-row>
     <ion-col>
       <ion-accordion-group>
-
         <ion-accordion value="dadosP">
           <ion-item slot="header" color="light">
             <ion-label>Dados Pessoais</ion-label>
@@ -38,45 +42,67 @@
             <ion-row>
               <ion-col>
                 <ion-list>
-                  <ion-row style="display: flex; justify-content: flex-end;">
+                  <ion-row style="display: flex; justify-content: flex-end">
                     <ion-button id="modalDadosP">
-                      <ion-label style="margin-top: 3px;">Editar</ion-label>
-                      <ion-icon class="iconEditar" name="pencil" color="light"></ion-icon>
+                      <ion-label style="margin-top: 3px">Editar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="pencil"
+                        color="light"
+                      ></ion-icon>
                     </ion-button>
                   </ion-row>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">E-Mail:</span> exemplo@exemplo.com</ion-label>
+                      <ion-label
+                        ><span class="bold">E-Mail:</span>
+                        exemplo@exemplo.com</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">RG:</span> 55.555.55-5</ion-label>
+                      <ion-label
+                        ><span class="bold">RG:</span> 55.555.55-5</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">CPF:</span> 555.555.555-55</ion-label>
+                      <ion-label
+                        ><span class="bold">CPF:</span>
+                        555.555.555-55</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">Nascimento:</span> 22/12/1990</ion-label>
+                      <ion-label
+                        ><span class="bold">Nascimento:</span>
+                        22/12/1990</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">Gênero:</span> Masculino</ion-label>
+                      <ion-label
+                        ><span class="bold">Gênero:</span> Masculino</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">Estado Civil:</span> Solteiro(a)</ion-label>
+                      <ion-label
+                        ><span class="bold">Estado Civil:</span>
+                        Solteiro(a)</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">Senha:</span> **********</ion-label>
+                      <ion-label
+                        ><span class="bold">Senha:</span> **********</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                 </ion-list>
@@ -84,7 +110,7 @@
             </ion-row>
           </div>
         </ion-accordion>
-        
+
         <ion-accordion value="endereco">
           <ion-item slot="header" color="light">
             <ion-label>Endereço</ion-label>
@@ -93,40 +119,59 @@
             <ion-row>
               <ion-col>
                 <ion-list>
-                  <ion-row style="display: flex; justify-content: flex-end;">
+                  <ion-row style="display: flex; justify-content: flex-end">
                     <ion-button id="modalEnd">
-                      <ion-label style="margin-top: 3px;">Editar</ion-label>
-                      <ion-icon class="iconEditar" name="pencil" color="light"></ion-icon>
+                      <ion-label style="margin-top: 3px">Editar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="pencil"
+                        color="light"
+                      ></ion-icon>
                     </ion-button>
                   </ion-row>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">CEP:</span> 00000-000</ion-label>
+                      <ion-label
+                        ><span class="bold">CEP:</span> 00000-000</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">Endereço:</span> Rua exemplo</ion-label>
+                      <ion-label
+                        ><span class="bold">Endereço:</span> Rua
+                        exemplo</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">Número:</span> 250</ion-label>
+                      <ion-label
+                        ><span class="bold">Número:</span> 250</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">Bairro:</span> Bairro Exemplo</ion-label>
+                      <ion-label
+                        ><span class="bold">Bairro:</span> Bairro
+                        Exemplo</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">Cidade:</span> Araçatuba</ion-label>
+                      <ion-label
+                        ><span class="bold">Cidade:</span> Araçatuba</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
-                      <ion-label><span class="bold">Estado:</span> São Paulo - SP</ion-label>
+                      <ion-label
+                        ><span class="bold">Estado:</span> São Paulo -
+                        SP</ion-label
+                      >
                     </ion-row>
                   </ion-item>
                 </ion-list>
@@ -143,13 +188,17 @@
             <ion-row>
               <ion-col>
                 <ion-list>
-                  <ion-row style="display: flex; justify-content: flex-end;">
+                  <ion-row style="display: flex; justify-content: flex-end">
                     <ion-button id="modalContato">
-                      <ion-label style="margin-top: 3px;">Adicionar</ion-label>
-                      <ion-icon class="iconEditar" name="add-circle" color="light"></ion-icon>
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="add-circle"
+                        color="light"
+                      ></ion-icon>
                     </ion-button>
                   </ion-row>
-                  <ion-item style="margin-top: 10px;">
+                  <ion-item style="margin-top: 10px">
                     <ion-label>
                       <h2>CONTATO</h2>
                       <p>exemplo</p>
@@ -170,13 +219,17 @@
             <ion-row>
               <ion-col>
                 <ion-list>
-                  <ion-row style="display: flex; justify-content: flex-end;">
+                  <ion-row style="display: flex; justify-content: flex-end">
                     <ion-button id="modalForm">
-                      <ion-label style="margin-top: 3px;">Adicionar</ion-label>
-                      <ion-icon class="iconEditar" name="add-circle" color="light"></ion-icon>
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="add-circle"
+                        color="light"
+                      ></ion-icon>
                     </ion-button>
                   </ion-row>
-                  <ion-item style="margin-top: 10px;">
+                  <ion-item style="margin-top: 10px">
                     <ion-label>
                       <h2>Escola</h2>
                       <p>detalhes</p>
@@ -197,18 +250,27 @@
             <ion-row>
               <ion-col>
                 <ion-list>
-                  <ion-row style="display: flex; justify-content: flex-end;">
+                  <ion-row style="display: flex; justify-content: flex-end">
                     <ion-button id="modaExpNew">
-                      <ion-label style="margin-top: 3px;">Adicionar</ion-label>
-                      <ion-icon class="iconEditar" name="add-circle" color="light"></ion-icon>
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="add-circle"
+                        color="light"
+                      ></ion-icon>
                     </ion-button>
                   </ion-row>
-                  <ion-item style="margin-top: 10px;">
+                  <ion-item style="margin-top: 10px">
                     <ion-label>
                       <h2>Trabalho</h2>
                       <p>Descrição</p>
                     </ion-label>
-                    <ion-icon name="pencil" color="dark" style="padding-right: 15px;" id="modalExp"></ion-icon>
+                    <ion-icon
+                      name="pencil"
+                      color="dark"
+                      style="padding-right: 15px"
+                      id="modalExp"
+                    ></ion-icon>
                     <ion-icon name="trash-outline" color="danger"></ion-icon>
                   </ion-item>
                 </ion-list>
@@ -225,13 +287,17 @@
             <ion-row>
               <ion-col>
                 <ion-list>
-                  <ion-row style="display: flex; justify-content: flex-end;">
+                  <ion-row style="display: flex; justify-content: flex-end">
                     <ion-button id="modalCurso">
-                      <ion-label style="margin-top: 3px;">Adicionar</ion-label>
-                      <ion-icon class="iconEditar" name="add-circle" color="light"></ion-icon>
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="add-circle"
+                        color="light"
+                      ></ion-icon>
                     </ion-button>
                   </ion-row>
-                  <ion-item style="margin-top: 10px;">
+                  <ion-item style="margin-top: 10px">
                     <ion-label>
                       <h2>Excel avançado</h2>
                       <p>Completo</p>
@@ -252,13 +318,17 @@
             <ion-row>
               <ion-col>
                 <ion-list>
-                  <ion-row style="display: flex; justify-content: flex-end;">
+                  <ion-row style="display: flex; justify-content: flex-end">
                     <ion-button id="modalIdioma">
-                      <ion-label style="margin-top: 3px;">Adicionar</ion-label>
-                      <ion-icon class="iconEditar" name="add-circle" color="light"></ion-icon>
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="add-circle"
+                        color="light"
+                      ></ion-icon>
                     </ion-button>
                   </ion-row>
-                  <ion-item style="margin-top: 10px;">
+                  <ion-item style="margin-top: 10px">
                     <ion-label>
                       <h2>Inglês</h2>
                       <p>Avançado</p>
@@ -274,12 +344,18 @@
     </ion-col>
   </ion-row>
 
-  <ion-modal #modal trigger="modalDadosP" [presentingElement]="presentingElement">
+  <ion-modal
+    #modal
+    trigger="modalDadosP"
+    [presentingElement]="presentingElement"
+  >
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="modal.dismiss()" color="secondary">Fechar</ion-button>
+            <ion-button (click)="modal.dismiss()" color="secondary"
+              >Fechar</ion-button
+            >
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
@@ -318,8 +394,11 @@
           <ion-item lines="none">
             <ion-label position="floating">Estado Civil</ion-label>
             <ion-select interface="popover">
-              <ion-select-option *ngFor="let etCvl of estadoCivil" value="{{ etCvl.estadoAtual }}">{{ etCvl.estadoAtual
-                }}</ion-select-option>
+              <ion-select-option
+                *ngFor="let etCvl of estadoCivil"
+                value="{{ etCvl.estadoAtual }}"
+                >{{ etCvl.estadoAtual }}</ion-select-option
+              >
             </ion-select>
           </ion-item>
 
@@ -337,7 +416,9 @@
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="modal2.dismiss()" color="secondary">Fechar</ion-button>
+            <ion-button (click)="modal2.dismiss()" color="secondary"
+              >Fechar</ion-button
+            >
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
@@ -382,12 +463,18 @@
     </ng-template>
   </ion-modal>
 
-  <ion-modal #modal3 trigger="modalContato" [presentingElement]="presentingElement">
+  <ion-modal
+    #modal3
+    trigger="modalContato"
+    [presentingElement]="presentingElement"
+  >
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="modal3.dismiss()" color="secondary">Fechar</ion-button>
+            <ion-button (click)="modal3.dismiss()" color="secondary"
+              >Fechar</ion-button
+            >
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
@@ -400,8 +487,11 @@
         <ion-list>
           <ion-item>
             <ion-label position="floating">Tipo de contato</ion-label>
-            <ion-select style="width:100%">
-              <ion-select-option *ngFor="let tipo of tipoContato" value="{{tipo.nome}}">{{tipo.nome}}
+            <ion-select style="width: 100%">
+              <ion-select-option
+                *ngFor="let tipo of tipoContato"
+                value="{{tipo.nome}}"
+                >{{tipo.nome}}
               </ion-select-option>
             </ion-select>
           </ion-item>
@@ -415,12 +505,18 @@
     </ng-template>
   </ion-modal>
 
-  <ion-modal #modal4 trigger="modalForm" [presentingElement]="presentingElement">
+  <ion-modal
+    #modal4
+    trigger="modalForm"
+    [presentingElement]="presentingElement"
+  >
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="modal4.dismiss()" color="secondary">Fechar</ion-button>
+            <ion-button (click)="modal4.dismiss()" color="secondary"
+              >Fechar</ion-button
+            >
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
@@ -433,20 +529,21 @@
         <ion-list>
           <ion-item>
             <ion-label position="floating">Nome Instituição</ion-label>
-            <ion-input type="text">
-            </ion-input>
+            <ion-input type="text"> </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Nome Curso</ion-label>
-            <ion-input type="text">
-            </ion-input>
+            <ion-input type="text"> </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Nível</ion-label>
             <ion-select style="width: 100%">
-              <ion-select-option *ngFor="let form of formacoes" value="{{form.nivel}}">{{form.nivel}}
+              <ion-select-option
+                *ngFor="let form of formacoes"
+                value="{{form.nivel}}"
+                >{{form.nivel}}
               </ion-select-option>
             </ion-select>
           </ion-item>
@@ -454,7 +551,11 @@
           <ion-item>
             <ion-label position="floating">Situação</ion-label>
             <ion-select style="width: 100%">
-              <ion-select-option *ngFor="let con of conclusoes" value="{{con.resp}}">{{con.resp}}</ion-select-option>
+              <ion-select-option
+                *ngFor="let con of conclusoes"
+                value="{{con.resp}}"
+                >{{con.resp}}</ion-select-option
+              >
             </ion-select>
           </ion-item>
         </ion-list>
@@ -467,7 +568,9 @@
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="modal5.dismiss()" color="secondary">Fechar</ion-button>
+            <ion-button (click)="modal5.dismiss()" color="secondary"
+              >Fechar</ion-button
+            >
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
@@ -508,12 +611,17 @@
     </ng-template>
   </ion-modal>
 
-  <ion-modal #modal6 trigger="modaExpNew" [presentingElement]="presentingElement">
+  <ion-modal
+    #modal6
+    trigger="modaExpNew"
+    [presentingElement]="presentingElement">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="modal6.dismiss()" color="secondary">Fechar</ion-button>
+            <ion-button (click)="modal6.dismiss()" color="secondary"
+              >Fechar</ion-button
+            >
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
@@ -534,18 +642,16 @@
             <ion-input type="text"></ion-input>
           </ion-item>
 
-          <br>
+          <br />
           <ion-label class="inputData">Data de início</ion-label>
           <ion-item>
-            <ion-input type="date" >
-            </ion-input>
+            <ion-input type="date"> </ion-input>
           </ion-item>
 
-          <br>
+          <br />
           <ion-label class="inputData">Data de demissão</ion-label>
           <ion-item>
-            <ion-input type="date">
-            </ion-input>
+            <ion-input type="date"> </ion-input>
           </ion-item>
 
           <ion-item>
@@ -557,12 +663,18 @@
     </ng-template>
   </ion-modal>
 
-  <ion-modal #modal7 trigger="modalCurso" [presentingElement]="presentingElement">
+  <ion-modal
+    #modal7
+    trigger="modalCurso"
+    [presentingElement]="presentingElement"
+  >
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="modal7.dismiss()" color="secondary">Fechar</ion-button>
+            <ion-button (click)="modal7.dismiss()" color="secondary"
+              >Fechar</ion-button
+            >
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
@@ -583,30 +695,34 @@
             <ion-input type="text"></ion-input>
           </ion-item>
 
-          <br>
+          <br />
           <ion-label class="inputData">Data de início</ion-label>
           <ion-item>
-            <ion-input type="date" >
-            </ion-input>
+            <ion-input type="date"> </ion-input>
           </ion-item>
 
-          <br>
+          <br />
           <ion-label class="inputData">Data de conclusão</ion-label>
           <ion-item>
-            <ion-input type="date">
-            </ion-input>
+            <ion-input type="date"> </ion-input>
           </ion-item>
         </ion-list>
       </ion-content>
     </ng-template>
   </ion-modal>
 
-  <ion-modal #modal8 trigger="modalIdioma" [presentingElement]="presentingElement">
+  <ion-modal
+    #modal8
+    trigger="modalIdioma"
+    [presentingElement]="presentingElement"
+  >
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="modal8.dismiss()" color="secondary">Fechar</ion-button>
+            <ion-button (click)="modal8.dismiss()" color="secondary"
+              >Fechar</ion-button
+            >
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
@@ -619,16 +735,22 @@
         <ion-list>
           <ion-item>
             <ion-label position="floating">Idioma</ion-label>
-            <ion-select style="width: 100%;">
-              <ion-select-option *ngFor="let idm of tipoIdioma" value="{{idm.nome}}">{{idm.nome}}</ion-select-option>
+            <ion-select style="width: 100%">
+              <ion-select-option
+                *ngFor="let idm of tipoIdioma"
+                value="{{idm.nome}}"
+                >{{idm.nome}}</ion-select-option
+              >
             </ion-select>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Nível do idioma</ion-label>
-            <ion-select style="width: 100%;">
+            <ion-select style="width: 100%">
               <ion-select-option value="iniciante">Iniciante</ion-select-option>
-              <ion-select-option value="basico">Intermediário</ion-select-option>
+              <ion-select-option value="basico"
+                >Intermediário</ion-select-option
+              >
               <ion-select-option value="avancado">Avançado</ion-select-option>
               <ion-select-option value="fluente">Fluente</ion-select-option>
             </ion-select>
@@ -637,5 +759,4 @@
       </ion-content>
     </ng-template>
   </ion-modal>
-
 </ion-content>

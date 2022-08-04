@@ -21,51 +21,38 @@
           class="marv margin-h2-user white"
           style="font-size: 20px; margin-top: 5px"
         >
-          PATRICK PALMEIRENSE
+          PATRICK SÃO PAULINO
         </h2>
       </ion-col>
     </ion-row>
   </div>
 
   <div class="corpo">
-    <!-- <div style="overflow-x: scroll; white-space: nowrap">
-      <div
-        class="box-vagas"
-        style="padding-bottom: 5px"
-      >
-        <h2
-          class="ion-no-margin"
-          style="font-size: 13px; text-align: center; padding-top: 25px"
-        >
-          {{vaga.titulo}}
-        </h2>
-        <h2 style="font-size: 13px; text-align: center">
-          Cadastre seu currículo
-        </h2>
-        <p style="font-size: 13px; text-align: center">
-          {{vaga.cidade}}-{{vaga.estado}}
-        </p>
-      </div>
-    </div> -->
-
     <ion-row>
       <ion-col>
-        <div *ngFor="let vaga of vagaDisponivel" (click)="abrirVaga()">
-          <ion-row class="box-vagas-big">
-            <ion-col>
+        <div *ngFor="let vaga of vagaDisponivel"> 
+          <ion-card class="cardVagas">
+            <ion-card-header>
+              <ion-card-title>{{vaga.titulo}}</ion-card-title>
+              <ion-card-subtitle color="primary">{{vaga.status}} <img src="../../assets/check.png"></ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p style="font-weight: bold;">Salário: <span class="under">R${{vaga.salario}}.<small>00</small></span></p>
               <ion-row>
-                <h3>{{vaga.titulo}}</h3>
-                <p style="position: absolute; right: 20px">
-                  {{vaga.data_publicacao}}
-                </p>
+                <ion-col size="6">
+                  <p style="font-weight: bold;" class="under">{{vaga.dataPub}}</p>
+                </ion-col>
+                <ion-col size="6" style="text-align: end;">
+                  <ion-button size="small" (click)="abrirVaga()" fill="outline">
+                    <ion-icon name="analytics" color="primary"></ion-icon>
+                    <ion-label style="margin-top: 0px; margin-left: 6px;">Processos</ion-label>
+                  </ion-button>
+                </ion-col>
               </ion-row>
-              <p>{{vaga.quantidade}}</p>
-              <p>{{vaga.salario}}</p>
-            </ion-col>
-          </ion-row>
+            </ion-card-content>
+          </ion-card>
         </div>
       </ion-col>
     </ion-row>
   </div>
-  <!--corpo-->
 </ion-content>

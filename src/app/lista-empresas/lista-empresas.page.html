@@ -1,0 +1,167 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-searchbar placeholder="Nome empresa"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="6">
+      <ion-item>
+        <ion-checkbox color="secondary" checked="true"></ion-checkbox>
+        <ion-label class="bold labelChk">Pendentes</ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item>
+        <ion-checkbox color="secondary"></ion-checkbox>
+        <ion-label class="bold labelChk">Confirmadas</ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <br>
+  <div *ngFor="let empresa of empresas">
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{empresa.nomeEmpresa}}</ion-card-title>
+            <ion-card-subtitle>{{empresa.contato}}</ion-card-subtitle>
+            <ion-card-subtitle color="primary" *ngIf="empresa.aceita">Empresa autorizada <img src="../../assets/check.png"></ion-card-subtitle>
+            <ion-card-subtitle color="danger" *ngIf="empresa.recusada">Empresa recusada <img src="../../assets/delete.png"></ion-card-subtitle>
+            <ion-card-subtitle color="warning" *ngIf="!empresa.recusada && !empresa.aceita">Empresa pendente <img src="../../assets/pendente.png"></ion-card-subtitle>
+
+            <ion-button size="small" *ngIf="!empresa.recusada && !empresa.aceita">Aceitar</ion-button>
+            <ion-button size="small" *ngIf="!empresa.recusada && !empresa.aceita" color="danger">Rejeitar</ion-button>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-accordion-group>
+              <ion-accordion value="empresa.idAccordion">
+                <ion-item slot="header" color="light">
+                  <ion-label>Dados de {{empresa.nomeEmpresa}}</ion-label>
+                </ion-item>
+                <div slot="content">
+                  <ion-row>
+                    <ion-col>
+                      <ion-list>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>Nome Fantasia:</span> {{empresa.nomeFantasia}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+                        
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>CNPJ:</span> {{empresa.cnpj}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>E-Mail:</span> {{empresa.email}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>Data abertura:</span> {{empresa.dtAbertura}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>CNAE:</span> {{empresa.cnae}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>Situação:</span> {{empresa.situacao}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>Natureza:</span> {{empresa.natureza}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>CEP:</span> {{empresa.cep}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>Endereço:</span> {{empresa.end}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>Número:</span> {{empresa.nmr}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>Bairro:</span> {{empresa.bairro}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>Cidade:</span> {{empresa.cidade}} - {{empresa.estado}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span>Contato 2:</span> {{empresa.contato2}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+                      </ion-list>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

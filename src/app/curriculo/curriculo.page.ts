@@ -6,14 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./curriculo.page.scss'],
 })
 export class CurriculoPage implements OnInit {
-
-
   public estadoCivil = [
-    { id: "1", estadoAtual: "Solteiro(a)" },
-    { id: "2", estadoAtual: "Casado(a)" },
-    { id: "3", estadoAtual: "União Estável" },
-    { id: "4", estadoAtual: "Divorciado(a)" },
-    { id: "5", estadoAtual: "Viúvo(a)" }
+    { id: '1', estadoAtual: 'Solteiro(a)' },
+    { id: '2', estadoAtual: 'Casado(a)' },
+    { id: '3', estadoAtual: 'União Estável' },
+    { id: '4', estadoAtual: 'Divorciado(a)' },
+    { id: '5', estadoAtual: 'Viúvo(a)' },
   ];
 
   tipoContato = [
@@ -22,7 +20,7 @@ export class CurriculoPage implements OnInit {
     { id: '3', nome: 'LinkedIn' },
     { id: '4', nome: 'Instagram' },
     { id: '5', nome: 'Facebook' },
-  ]
+  ];
 
   formacoes = [
     { id: '1', nivel: '2º Grau Médio' },
@@ -37,23 +35,19 @@ export class CurriculoPage implements OnInit {
   conclusoes = [
     { id: 'I', resp: 'Incompleto' },
     { id: 'A', resp: 'Em andamento' },
-    { id: 'C', resp: 'Concluído' }
+    { id: 'C', resp: 'Concluído' },
   ];
 
   tipoIdioma = [
-
     { id: '1', nome: 'Inglês' },
     { id: '2', nome: 'Espanhol' },
     { id: '3', nome: 'Japonês' },
     { id: '4', nome: 'Frânces' },
     { id: '5', nome: 'Italiano' },
-    { id: '6', nome: 'Alemão' }
-
+    { id: '6', nome: 'Alemão' },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
