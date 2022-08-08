@@ -67,7 +67,7 @@ export class ContatoPage implements OnInit {
   async confirmar() {
     if (this.contatos.length > 0) {
       if(localStorage.getItem('nome') === null || localStorage.getItem('nome') === undefined){
-        this.nav.navigateForward('conclusao');
+        this.nav.navigateForward('detalhes-empresa');
       }else{
         this.nav.navigateForward('formacao-educacional');
       }

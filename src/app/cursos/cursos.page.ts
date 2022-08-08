@@ -8,69 +8,67 @@ import { Storage } from '@capacitor/storage';
   templateUrl: './cursos.page.html',
   styleUrls: ['./cursos.page.scss'],
 })
-
 export class CursosPage implements OnInit {
-
   public curso = {
-    nome: '', instituicaoEnsino: '', dataInicio: '', dataConclusao: ''
-  }
+    nome: '',
+    instituicaoEnsino: '',
+    dataInicio: '',
+    dataConclusao: '',
+  };
 
-  public cursos: any[] = []
+  public cursos: any[] = [];
 
   constructor(
     public mensagem: AlertController,
     public cursoSave: CursosService,
     public nav: NavController,
-    public menuLeft: MenuController) {
+    public menuLeft: MenuController
+  ) {
     this.menuLeft.enable(false);
-    this.carregarDados()
+    this.carregarDados();
   }
 
   async adicionarCurso() {
     if (this.curso.nome === '' || this.curso.nome === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: "ATENÇÃO!",
-          message: "Não é permitido adicionar um curso sem nome.",
-          buttons: ["ok"],
-          cssClass: "cssAlerta"
-        }
-      )
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'Não é permitido adicionar um curso sem nome.',
+        buttons: ['ok'],
+        cssClass: 'cssAlerta',
+      });
 
-      await alerta.present()
+      await alerta.present();
 
-      return
-    } else if (this.curso.instituicaoEnsino === '' || this.curso.instituicaoEnsino === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: "ATENÇÃO!",
-          message: "Não é permitido um curso sem  Instituição de Ensino.",
-          buttons: ["ok"],
-          cssClass: "cssAlerta"
-        }
-      )
+      return;
+    } else if (
+      this.curso.instituicaoEnsino === '' ||
+      this.curso.instituicaoEnsino === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'Não é permitido um curso sem  Instituição de Ensino.',
+        buttons: ['ok'],
+        cssClass: 'cssAlerta',
+      });
 
-      await alerta.present()
+      await alerta.present();
 
-      return
+      return;
     } else if (this.curso.dataInicio === '' || this.curso.dataInicio === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: "ATENÇÃO!",
-          message: "Não é permitido adicionar um curso sem data de início.",
-          buttons: ["ok"],
-          cssClass: "cssAlerta"
-        }
-      )
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'Não é permitido adicionar um curso sem data de início.',
+        buttons: ['ok'],
+        cssClass: 'cssAlerta',
+      });
 
-      await alerta.present()
+      await alerta.present();
 
-      return
+      return;
     } else {
+      var cursoCopy = JSON.parse(JSON.stringify(this.curso));
 
-      var cursoCopy = JSON.parse(JSON.stringify(this.curso))
-
-      this.cursos.push(cursoCopy)
+      this.cursos.push(cursoCopy);
 
       this.cursoSave.salvarCurso(
         this.curso.nome,
@@ -79,10 +77,10 @@ export class CursosPage implements OnInit {
         this.curso.dataConclusao
       );
 
-      this.curso.nome = ''
-      this.curso.instituicaoEnsino = ''
-      this.curso.dataInicio = ''
-      this.curso.dataConclusao = ''
+      this.curso.nome = '';
+      this.curso.instituicaoEnsino = '';
+      this.curso.dataInicio = '';
+      this.curso.dataConclusao = '';
     }
   }
 
@@ -98,44 +96,50 @@ export class CursosPage implements OnInit {
         buttons: [
           {
             text: 'Não',
-            role: 'cancel'
+            role: 'cancel',
           },
           {
             text: 'Sim',
             handler: () => {
-              this.nav.navigateForward('idiomas')
-            }
-          }
-        ]
+              this.nav.navigateForward('idiomas');
+            },
+          },
+        ],
       });
 
       await nextPage.present();
-
     } else {
-      this.nav.navigateForward('idiomas')
+      this.nav.navigateForward('idiomas');
     }
   }
 
   async removerCurso(cursoRemove) {
     const confirmaRemover = await this.mensagem.create({
       header: 'ATENÇÃO!',
-      message: 'Confima exclusão de ' + cursoRemove.nome + '? Essa ação é irreverssível.',
-      buttons: [{
-        text: 'Cancelar', role: 'cancel', handler: () => {
-          console.log("CANCELADO")
-        }
-      },
-      {
-        text: 'Excluir', handler: () => {
-          this.cursoSave.deletar(cursoRemove.nome);
-          const index = this.cursos.indexOf(cursoRemove)
-          this.cursos.splice(index, 1)
-        }
-      }
-      ]
-    })
+      message:
+        'Confima exclusão de ' +
+        cursoRemove.nome +
+        '? Essa ação é irreverssível.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('CANCELADO');
+          },
+        },
+        {
+          text: 'Excluir',
+          handler: () => {
+            this.cursoSave.deletar(cursoRemove.nome);
+            const index = this.cursos.indexOf(cursoRemove);
+            this.cursos.splice(index, 1);
+          },
+        },
+      ],
+    });
 
-    await confirmaRemover.present()
+    await confirmaRemover.present();
   }
 
   ngOnInit() {
@@ -143,9 +147,8 @@ export class CursosPage implements OnInit {
   }
 
   carregarDados() {
-    if(this.cursoSave.listar !== undefined){
+    if (this.cursoSave.listar !== undefined) {
       this.cursos = this.cursoSave.listar();
     }
   }
-
 }
