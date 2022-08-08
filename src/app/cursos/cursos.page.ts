@@ -73,7 +73,6 @@ export class CursosPage implements OnInit {
     } else {
 
       const cursoCopy = JSON.parse(JSON.stringify(this.curso))
-      console.log(cursoCopy)
       this.cursos.push(cursoCopy)
 
       this.cursoServ.salvarCurso(this.curso.nome, this.curso.instituicaoEnsino, this.curso.dataInicio, this.curso.dataConclusao)

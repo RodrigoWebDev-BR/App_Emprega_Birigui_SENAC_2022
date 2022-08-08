@@ -1,0 +1,46 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="contato()" slot="start" style="padding-left: 15px;">
+      <ion-icon name="arrow-back" class="light icone"></ion-icon>
+    </ion-buttons>
+    <ion-title class="centertext tituloPadding bold" >Detalhes Empresa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br>
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput">
+        <ion-label position="floating">Ramo Empresarial <span style="color:red">*</span></ion-label>
+        <ion-select style="width:100%" [(ngModel)]="detalhes.ramo">
+          <ion-select-option *ngFor="let ramo of ramos" value="{{ramo.nome}}">{{ramo.nome}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput">
+        <ion-label position="floating">Detalhes sobre sua empresa <span style="color:red">*</span></ion-label>
+        <ion-textarea placeholder="No máximo 100 caracteres ..." (ionChange)="contador($event)" [(ngModel)]="detalhes.descricao"></ion-textarea>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="contador">
+    <ion-col size="12">
+      <ion-label>{{caracter}}</ion-label>
+    </ion-col>
+  </ion-row>
+  
+</ion-content>
+
+<ion-footer>
+  <ion-row >
+    <ion-col class="espacamento">
+      <ion-button color="primary" shape="block" (click)="conclusao()">Finalizar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="md">
   <ion-toolbar color="primary">
     <ion-buttons (click)="profissa()" slot="start" style="padding-left: 15px;">
       <ion-icon name="arrow-back" class="light icone"></ion-icon>
@@ -11,7 +11,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-item class="roundedInput" line="none">
+        <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Nome curso <span style="color:red">*</span></ion-label>
           <ion-input type="text" [(ngModel)]="curso.nome">
           </ion-input>
@@ -32,7 +32,7 @@
     <ion-row>
       <ion-col class="espacamento">
         <ion-label position="floating">Data de início</ion-label>
-        <ion-item class="roundedInput" line="none">
+        <ion-item class="roundedInput" lines="none">
           <ion-input type="date" [(ngModel)]="curso.dataInicio">
           </ion-input>
         </ion-item>
@@ -40,7 +40,7 @@
 
       <ion-col class="espacamento">
         <ion-label position="floating">Data de conclusão</ion-label>
-        <ion-item class="roundedInput" line="none">
+        <ion-item class="roundedInput" lines="none">
           <ion-input type="date" [(ngModel)]="curso.dataConclusao">
           </ion-input>
         </ion-item>
@@ -78,10 +78,6 @@
         </ion-col>
       </ion-row>
     </div>
-
-    <!-- <div *ngIf="cursos?.length <= 0">
-      <h4 style="text-align: center;">Cursos</h4>
-    </div> -->
 
 </ion-content>
 <ion-footer>

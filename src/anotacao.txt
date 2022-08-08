@@ -1,0 +1,21 @@
+[19:54] GUSTAVO FUSCO SPERANDIO
+Nome empresarial
+
+[19:55] GUSTAVO FUSCO SPERANDIO
+Nome Fantasia (opcional)
+
+[19:55] GUSTAVO FUSCO SPERANDIO
+CNPJ
+
+[19:55] GUSTAVO FUSCO SPERANDIO
+Data abertura
+
+[19:55] GUSTAVO FUSCO SPERANDIO
+Situação cadastral (ativa, inativa)
+
+[19:56] GUSTAVO FUSCO SPERANDIO
+Atividades Econômicas(CNAE)
+
+[19:58] GUSTAVO FUSCO SPERANDIO
+Natureza Jurídica (Perfil Subjetivo, Perfil Funcional, Perfil Objetivo ou Patrimonial, Perfil Corporativo)
+

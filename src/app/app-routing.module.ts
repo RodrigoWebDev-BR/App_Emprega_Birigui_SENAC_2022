@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'usuario',
+    redirectTo: 'lista-usuarios',
     pathMatch: 'full'
   },
   {
@@ -69,7 +69,33 @@ const routes: Routes = [
   {
     path: 'curriculo',
     loadChildren: () => import('./curriculo/curriculo.module').then( m => m.CurriculoPageModule)
+  },
+  {
+    path: 'empresa',
+    loadChildren: () => import('./empresa/empresa.module').then( m => m.EmpresaPageModule)
+  },
+  {
+    path: 'cadastro',
+    loadChildren: () => import('./cadastro/cadastro.module').then( m => m.CadastroPageModule)
+  },
+  {
+    path: 'lista-empresas',
+    loadChildren: () => import('./lista-empresas/lista-empresas.module').then( m => m.ListaEmpresasPageModule)
+  },
+  {
+    path: 'lista-usuarios',
+    loadChildren: () => import('./lista-usuarios/lista-usuarios.module').then( m => m.ListaUsuariosPageModule)
+  },  {
+    path: 'detalhes-empresa',
+    loadChildren: () => import('./detalhes-empresa/detalhes-empresa.module').then( m => m.DetalhesEmpresaPageModule)
+  },
+  {
+    path: 'lancamento-vaga',
+    loadChildren: () => import('./lancamento-vaga/lancamento-vaga.module').then( m => m.LancamentoVagaPageModule)
   }
+
+
+
 
 
 

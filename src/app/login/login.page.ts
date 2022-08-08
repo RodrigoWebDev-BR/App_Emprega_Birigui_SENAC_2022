@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
   }
 
   cadastro(){
-    this.nav.navigateForward('usuario');
+    this.nav.navigateForward('cadastro');
   }
 
   recuperacao(){

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="md">
   <ion-toolbar color="primary">
     <ion-buttons (click)="formEdu()" slot="start" style="padding-left: 15px;">
       <ion-icon name="arrow-back" class="light icone"></ion-icon>
@@ -11,7 +11,7 @@
   
   <ion-row>
     <ion-col>
-      <ion-item class="roundedInput" line="none">
+      <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">Empresa <span style="color: red">*</span></ion-label>
         <ion-input type="text" [(ngModel)]="experiencia.empresa"></ion-input>
       </ion-item>
@@ -20,7 +20,7 @@
 
   <ion-row>
     <ion-col>
-      <ion-item class="roundedInput" line="none">
+      <ion-item class="roundedInput" lines="none">
       <ion-label position="floating">Cargo <span style="color: red">*</span></ion-label>     
         <ion-input [(ngModel)]="experiencia.cargo"></ion-input>
       </ion-item>
@@ -49,7 +49,7 @@
 
   <!-- <ion-row>
     <ion-col>
-      <ion-item class="roundedInput" line="none">
+      <ion-item class="roundedInput" lines="none">
         <ion-label position="floating" class="ion-margin-top">Data de Admissão <span style="color: red">*</span></ion-label>
         <ion-input
         value="{{ date | date: 'dd/MM/yyyy' }}"
@@ -71,7 +71,7 @@
     </ion-col>
 
     <ion-col>
-      <ion-item class="roundedInput" line="none">
+      <ion-item class="roundedInput" lines="none">
         <ion-label position="floating" class="ion-margin-top">Data de Saída</ion-label>
         <ion-input
         value="{{ date | date: 'dd/MM/yyyy' }}"
@@ -94,7 +94,7 @@
 
   <ion-row>
     <ion-col>
-      <ion-item class="roundedInput" line="none">
+      <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">Descrição <span style="color: red">*</span></ion-label>
         <ion-textarea [(ngModel)]="experiencia.descricao" maxlength="300"></ion-textarea>
       </ion-item>
