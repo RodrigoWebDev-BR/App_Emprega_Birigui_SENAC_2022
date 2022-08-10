@@ -3,7 +3,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title class="centertext tituloProject bold">Lançar vaga</ion-title>
+    <ion-button
+      slot="end"
+      color="light"
+      fill="outline"
+      size="small"
+      style="margin-right: 10px"
+      (click)="abreModal(true)"
+    >Disponibilizar</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -95,9 +102,9 @@
   <ion-row>
     <ion-col>
       <ion-item class="roundedInput" lines="none">
-        <ion-checkbox checked="{{vaga.combinado}}"></ion-checkbox>
+        <ion-checkbox checked="false" (ionChange)="combinar($event)"></ion-checkbox>
         <ion-label class="labelChk"
-          >Á combinar? <span style="color: red">*</span></ion-label
+          >A combinar? </ion-label
         >
       </ion-item>
     </ion-col>
@@ -113,6 +120,7 @@
           type="number"
           [(ngModel)]="vaga.salario"
           placeholder="Ex: 2000"
+          disabled="{{vaga.combinado}}"
         ></ion-input>
       </ion-item>
     </ion-col>
@@ -169,42 +177,84 @@
     <ion-col>
       <ion-item class="roundedInput">
         <ion-label position="floating"
-          >Detalhes sobre adicionais
-          <span style="color: red">*</span></ion-label
+          >Descrição <span style="color: red">*</span></ion-label
         >
         <ion-textarea
-          placeholder="Descreva a vaga"
+          placeholder="Detalhes sobre a vaga"
           [(ngModel)]="vaga.descricao"
         ></ion-textarea>
       </ion-item>
     </ion-col>
   </ion-row>
 
+  <ion-row>
+    <ion-col class="centertext" size="12">
+      <h2>Benefícios +</h2>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" line="none">
+        <ion-label position="floating"></ion-label>
+        <ion-input type="text" placeholder="Ex: Cesta básica" [(ngModel)]="beneficio.nome"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-button color="primary" shape="block" (click)="addBeneficio()">
+        ADICIONAR BENEFÍCIO
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <div *ngIf="beneficios?.length > 0" class="espacamento">
+    <hr>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-list style="width: 100%">
+            <div *ngFor="let benef of beneficios" lines="none" class="animate__animated animate__fadeInUp">
+              <ion-item>
+                <ion-label>
+                  <h4>{{benef.nome}}</h4>
+                </ion-label>
+                <ion-icon name="trash-outline" color="danger" (click)="removerBenef(benef)" style="width: 30px; height: 30px;"></ion-icon>
+              </ion-item>
+            </div>
+          </ion-list>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <br />
+  <br />
+  <br />
   <br />
   <br />
   <ion-row>
     <ion-col class="espacamento">
-      <ion-button color="primary" shape="block" id="modalConfirma"
-        >Finalizar</ion-button
+      <ion-button color="primary" shape="block" (click)="abreModal(true)"
+        >Disponibilizar Vaga</ion-button
       >
     </ion-col>
   </ion-row>
 
-  <ion-modal
-    #modal
-    trigger="modalConfirma"
-    [presentingElement]="presentingElement"
-  >
+  <ion-modal [isOpen]="isModalOpen">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="modal.dismiss()" color="secondary"
+            <ion-button (click)="abreModal(false)" color="secondary"
               >Fechar</ion-button
             >
           </ion-buttons>
+          <ion-title class="centertext">REVISAR VAGA</ion-title>
           <ion-buttons slot="end">
-            <ion-button color="secondary">Salvar</ion-button>
+            <ion-button color="secondary">Lançar</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
@@ -215,7 +265,7 @@
             <ion-icon name="business" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>Nome Empresa</h2>
-              <p>Unimed</p>
+              <p>{{vaga.nomeEmpresa}}</p>
             </ion-label>
           </ion-item>
 
@@ -223,7 +273,7 @@
             <ion-icon name="location" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>Cidade</h2>
-              <p>Birigui</p>
+              <p>{{vaga.cidade}}</p>
             </ion-label>
           </ion-item>
 
@@ -231,7 +281,7 @@
             <ion-icon name="briefcase" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>Vaga</h2>
-              <p>Médico</p>
+              <p>{{vaga.tituloVaga}}</p>
             </ion-label>
           </ion-item>
 
@@ -239,7 +289,7 @@
             <ion-icon name="reader" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>Tipo de contrato</h2>
-              <p>CLT</p>
+              <p>{{vaga.contrato}}</p>
             </ion-label>
           </ion-item>
 
@@ -247,7 +297,7 @@
             <ion-icon name="hourglass" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>Prazo do contrato</h2>
-              <p>Indeterminado ou temporário</p>
+              <p>{{vaga.prazo}}</p>
             </ion-label>
           </ion-item>
 
@@ -255,7 +305,7 @@
             <ion-icon name="time" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>Carga horária</h2>
-              <p>40 hora(s) semanais</p>
+              <p>{{vaga.horario}} hora(s) semanais</p>
             </ion-label>
           </ion-item>
 
@@ -263,7 +313,8 @@
             <ion-icon name="cash" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>Salário</h2>
-              <p>R$ 15000.<small>00</small></p>
+              <p *ngIf="vaga.combinado">A combinar</p>
+              <p *ngIf="!vaga.combinado">R$ {{vaga.salario}}.<small>00</small></p>
             </ion-label>
           </ion-item>
 
@@ -271,7 +322,7 @@
             <ion-icon name="medal" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>Qualificações</h2>
-              <p>Ensino superior em Medicina</p>
+              <p>{{vaga.qualificacao}}</p>
             </ion-label>
           </ion-item>
 
@@ -279,7 +330,7 @@
             <ion-icon name="nutrition" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>Vale alimentação</h2>
-              <p>Incluso</p>
+              <p>{{vaga.alimentacao}}</p>
             </ion-label>
           </ion-item>
 
@@ -287,7 +338,7 @@
             <ion-icon name="medkit" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>Assistência médica</h2>
-              <p>Incluso</p>
+              <p>{{vaga.medica}}</p>
             </ion-label>
           </ion-item>
 
@@ -295,19 +346,20 @@
             <ion-icon name="accessibility" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>+ Benefícios</h2>
-              <p>Assistência odontológica</p>
-              <p>Insalubridade</p>
-              <p>Cesta básica</p>
+              <div *ngFor="let benef of beneficios">
+                <ion-label>
+                  <p>{{benef.nome}}</p>
+                </ion-label>
+              </div>
             </ion-label>
           </ion-item>
 
           <ion-item>
-            <ion-icon name="medkit" color="dark"></ion-icon>
+            <ion-icon name="receipt" color="dark"></ion-icon>
             <ion-label class="paddingLabel">
               <h2>Descrição</h2>
               <ion-label
-                >This paragraph contains a lot of lines in the source code, but
-                the browser ignores it.</ion-label
+                >{{vaga.descricao}}</ion-label
               >
             </ion-label>
           </ion-item>

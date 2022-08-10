@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'lancamento-vaga',
+    redirectTo: 'candidaturas',
     pathMatch: 'full'
   },
   {
@@ -93,7 +93,16 @@ const routes: Routes = [
   {
     path: 'lancamento-vaga',
     loadChildren: () => import('./lancamento-vaga/lancamento-vaga.module').then( m => m.LancamentoVagaPageModule)
+  },
+  {
+    path: 'detalhes-usuario',
+    loadChildren: () => import('./detalhes-usuario/detalhes-usuario.module').then( m => m.DetalhesUsuarioPageModule)
+  },
+  {
+    path: 'candidaturas',
+    loadChildren: () => import('./candidaturas/candidaturas.module').then( m => m.CandidaturasPageModule)
   }
+
 
 
 

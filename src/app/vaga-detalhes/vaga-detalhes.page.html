@@ -3,6 +3,7 @@
     <ion-buttons (click)="voltar()" slot="start" style="padding-left: 15px">
       <ion-icon name="arrow-back" color="light" class="icone"></ion-icon>
     </ion-buttons>
+    <ion-button slot="end" color="light" fill="outline" (click)="candidato()" size="small" style="margin-right: 10px;">Candidatar-se</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -100,7 +101,7 @@
       </ion-item>
 
       <ion-item>
-        <ion-icon name="medkit" color="dark"></ion-icon>
+        <ion-icon name="receipt" color="dark"></ion-icon>
         <ion-label class="paddingLabel">
           <h2>Descrição</h2>
           <ion-label>This paragraph
@@ -112,11 +113,10 @@
       </ion-item>
     </ion-list>
   </ion-card>
-</ion-content>
-<ion-footer>
+
   <ion-row>
     <ion-col class="espacamento">
       <ion-button color="primary" shape="block" (click)="candidato()">Candidatar-se</ion-button>
     </ion-col>
   </ion-row>
-</ion-footer>
+</ion-content>

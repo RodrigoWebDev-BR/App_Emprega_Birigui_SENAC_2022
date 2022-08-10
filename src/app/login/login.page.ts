@@ -8,26 +8,33 @@ import { MenuController, NavController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  candidato = { cpf: '', senha: '' };
 
-  candidato = {cpf : '' , senha : ''};
-
-  constructor( public nav: NavController, public menuLeft: MenuController )
-  { 
+  constructor(public nav: NavController, public menuLeft: MenuController) {
     this.menuLeft.enable(false);
   }
 
-  confirmarLogin(){
-    this.nav.navigateRoot('home')
+  confirmarLogin() {
+    this.nav.navigateRoot('home');
   }
 
-  cadastro(){
-    this.nav.navigateForward('cadastro')
+  cadastro() {
+    this.nav.navigateForward('cadastro');
   }
 
-  recuperacao(){
-    this.nav.navigateForward('recuperacao')
+  recuperacao() {
+    this.nav.navigateForward('recuperacao');
   }
-  
-  ngOnInit() {
+
+  automatico($event){
+    if($event.currentTarget.checked){
+      localStorage.setItem('loginAuto', 'true');
+    }else{
+      if(localStorage.getItem('loginAuto') !== null){
+        localStorage.removeItem('loginAuto');
+      }
+    }
   }
+
+  ngOnInit() {}
 }

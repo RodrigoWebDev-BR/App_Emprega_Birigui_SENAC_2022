@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-lista-usuarios',
-  templateUrl: './lista-usuarios.page.html',
-  styleUrls: ['./lista-usuarios.page.scss'],
+  selector: 'app-candidaturas',
+  templateUrl: './candidaturas.page.html',
+  styleUrls: ['./candidaturas.page.scss'],
 })
-export class ListaUsuariosPage implements OnInit {
-
+export class CandidaturasPage implements OnInit {
+  isModalOpen = true;
   public usuarios = [
     {
       nome: 'Diego',
@@ -23,7 +23,9 @@ export class ListaUsuariosPage implements OnInit {
       bairro: 'santana',
       cidade: 'Araçatuba',
       estado: 'SP',
-      idAccordion: '1_id'
+      descricao: 'Moro ao lado do asilo',
+      aceita: true,
+      recusada: false
     },
     {
       nome: 'João do chocolate',
@@ -39,7 +41,10 @@ export class ListaUsuariosPage implements OnInit {
       nmr: '120',
       bairro: 'Sumaré',
       cidade: 'birigui',
-      estado: 'SP'
+      estado: 'SP',
+      descricao: 'Moro la no aguas claras e sou da correria',
+      aceita: false,
+      recusada: true
     },
     {
       nome: 'Rodrigo',
@@ -56,7 +61,9 @@ export class ListaUsuariosPage implements OnInit {
       bairro: 'jardim birigui',
       cidade: 'birigui',
       estado: 'SP',
-      idAccordion: '3_id'
+      descricao: 'Sou de birigui, menti que sou de araçatuba',
+      aceita: false,
+      recusada: false
     },
     {
       nome: 'Eminem',
@@ -73,7 +80,9 @@ export class ListaUsuariosPage implements OnInit {
       bairro: 'jardim birigui',
       cidade: 'nova york',
       estado: 'NY',
-      idAccordion: '4_id'
+      descricao: 'Mommy spaghet',
+      aceita: true,
+      recusada: false
     }
   ];
 
