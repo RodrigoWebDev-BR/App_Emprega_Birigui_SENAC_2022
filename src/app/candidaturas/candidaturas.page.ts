@@ -1,3 +1,4 @@
+import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./candidaturas.page.scss'],
 })
 export class CandidaturasPage implements OnInit {
-  isModalOpen = true;
+  isModalOpen = false;
   public usuarios = [
     {
       nome: 'Diego',
@@ -86,7 +87,55 @@ export class CandidaturasPage implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(public mensagem: AlertController) { }
+
+  abreModal(open: boolean){
+    this.isModalOpen = open;
+  }
+
+  async convidar(nomeAtual: string){
+    const alerta = await this.mensagem.create({
+      header: 'ATENÇÃO!',
+      message: 'Deseja convidar ' + nomeAtual + ' para a vaga?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {},
+        },
+        {
+          text: 'Convidar',
+          handler: () => {
+            window.location.reload();
+          },
+        },
+      ],
+    });
+
+    await alerta.present();
+  }
+
+  async rejeitar(nomeAtual: string){
+    const alerta = await this.mensagem.create({
+      header: 'ATENÇÃO!',
+      message: 'Deseja rejeitar ' + nomeAtual + ' para a vaga? Este processo é irreversível',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {},
+        },
+        {
+          text: 'Rejeitar',
+          handler: () => {
+            window.location.reload();
+          },
+        },
+      ],
+    });
+
+    await alerta.present();
+  }
 
   ngOnInit() {
   }

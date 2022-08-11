@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
+  // this.activatedRoute.snapshot.paramMap.get('id');
   vagaDisponivel = [
     {
       titulo: 'Programador web',

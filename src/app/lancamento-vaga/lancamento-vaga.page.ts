@@ -11,6 +11,7 @@ export class LancamentoVagaPage implements OnInit {
     nomeEmpresa: 'Amigão',
     cidade: 'Birigui-SP',
     tituloVaga: '',
+    categoria: '',
     contrato: '',
     prazo: '',
     horario: '',
@@ -42,6 +43,23 @@ export class LancamentoVagaPage implements OnInit {
     { nivel: 'Mestrado - Completo' },
     { nivel: 'Doutorado - Cursando' },
     { nivel: 'Doutorado - Completo' },
+  ];
+
+  categorias = [
+    { nome: 'Administrativo' },
+    { nome: 'Comércio' },
+    { nome: 'Contabilidade' },
+    { nome: 'Educação' },
+    { nome: 'Escritório' },
+    { nome: 'Farmácia' },
+    { nome: 'Financeiro' },
+    { nome: 'Jurídico' },
+    { nome: 'Limpeza' },
+    { nome: 'Linha de produção' },
+    { nome: 'Saúde' },
+    { nome: 'Serviços gerais' },
+    { nome: 'Supermercado' },
+    { nome: ' Tecnologia' },
   ];
 
   contratos = [{ nome: 'CLT' }, { nome: 'PJ' }, { nome: 'Estágio' }];
@@ -109,7 +127,17 @@ export class LancamentoVagaPage implements OnInit {
     if (this.vaga.tituloVaga === null || this.vaga.tituloVaga === '') {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
-        message: 'Necessário informar o título da vaga',
+        message: 'Necessário informar o título da vaga.',
+        buttons: ['ok'],
+      });
+
+      await alerta.present();
+
+      return;
+    }else if (this.vaga.categoria === null || this.vaga.categoria === '') {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'Necessário informar uma categoria.',
         buttons: ['ok'],
       });
 
@@ -119,7 +147,7 @@ export class LancamentoVagaPage implements OnInit {
     } else if (this.vaga.contrato === null || this.vaga.contrato === '') {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
-        message: 'Necessário informar o tipo de contrato',
+        message: 'Necessário informar o tipo de contrato.',
         buttons: ['ok'],
       });
 
@@ -214,7 +242,7 @@ export class LancamentoVagaPage implements OnInit {
     const alerta = await this.mensagem.create({
       header: 'REVISÃO!',
       message:
-      // eslint-disable-next-line max-len
+        // eslint-disable-next-line max-len
         'Por favor revise todos os dados inseridos antes de lançar a vaga!!! \nSe houver alguma alteração necessária, clique em cancelar no botão superior esquerdo',
       buttons: ['ok'],
     });
