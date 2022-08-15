@@ -9,6 +9,41 @@ import { Router } from '@angular/router';
 })
 export class HomePage implements OnInit {
   // this.activatedRoute.snapshot.paramMap.get('id');
+
+  empresa = true;
+  empregado = false;
+
+  empregosDisponivel = [
+    {
+      titulo: 'Programador web',
+      tipo: 'CLT',
+      contrato: 'Prazo indeterminado',
+      online: true,
+      dataPub: '01/01/2022'
+    },
+    {
+      titulo: 'Docente em Administração',
+      tipo: 'CLT',
+      contrato: 'Prazo indeterminado',
+      online: true,
+      dataPub: '01/01/2022'
+    },
+    {
+      titulo: 'Auxiliar de limpeza',
+      tipo: 'CLT',
+      contrato: 'Prazo indeterminado',
+      online: false,
+      dataPub: '01/01/2022'
+    },
+    {
+      titulo: 'Auxiliar de RH',
+      tipo: 'PJ',
+      contrato: 'Temporário',
+      online: false,
+      dataPub: '01/01/2022'
+    }
+  ];
+
   vagaDisponivel = [
     {
       titulo: 'Programador web',
@@ -27,7 +62,7 @@ export class HomePage implements OnInit {
       status: 'Currículo cadastrado',
       salario: '6000',
       dataPub: '12/03/2022',
-    }
+    },
   ];
 
   constructor(public nav: NavController, public menuLeft: MenuController) {
