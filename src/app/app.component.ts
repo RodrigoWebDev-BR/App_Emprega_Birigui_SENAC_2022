@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
@@ -9,10 +10,15 @@ export class AppComponent {
     { title: 'Perfil', url: '/home', icon: 'person' },
     { title: 'Notificações', url: '/notificacao', icon: 'notifications'},
     { title: 'Curriculo', url: '/curriculo', icon: 'folder'},
-    { title: 'Vagas', url: '/inscricao-vaga', icon: 'briefcase'},
-    { title: 'Sair', url: '/login', icon: 'power'}
+    { title: 'Vagas', url: '/inscricao-vaga', icon: 'briefcase'}
+   // { title: 'Sair', url: '/login', icon: 'power'}
   ];
 
-  public labels = ['João do chocolate']; 
-  constructor() {}
+  public labels = ['João do chocolate'];
+  constructor(public nav: NavController) {}
+
+  logout(){
+    localStorage.clear();
+    this.nav.navigateRoot('login');
+  }
 }

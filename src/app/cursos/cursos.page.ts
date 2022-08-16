@@ -66,7 +66,7 @@ export class CursosPage implements OnInit {
 
       return;
     } else {
-      var cursoCopy = JSON.parse(JSON.stringify(this.curso));
+      const cursoCopy = JSON.parse(JSON.stringify(this.curso));
 
       this.cursos.push(cursoCopy);
 
@@ -124,9 +124,7 @@ export class CursosPage implements OnInit {
         {
           text: 'Cancelar',
           role: 'cancel',
-          handler: () => {
-            console.log('CANCELADO');
-          },
+          handler: () => {},
         },
         {
           text: 'Excluir',
@@ -147,7 +145,7 @@ export class CursosPage implements OnInit {
   }
 
   carregarDados() {
-    if (this.cursoSave.listar !== undefined) {
+    if (this.cursoSave.listar() !== undefined) {
       this.cursos = this.cursoSave.listar();
     }
   }

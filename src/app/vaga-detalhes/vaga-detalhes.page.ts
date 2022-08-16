@@ -8,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VagaDetalhesPage implements OnInit {
   router: any;
+
   constructor(public nav: NavController) { }
+
 
   voltar(){
     this.nav.navigateForward('inscricao-vaga');

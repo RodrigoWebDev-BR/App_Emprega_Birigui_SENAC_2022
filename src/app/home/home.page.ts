@@ -1,4 +1,4 @@
-import { MenuController, NavController, AlertController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit {
   // this.activatedRoute.snapshot.paramMap.get('id');
 
-  empresa = true;
-  empregado = false;
+  empresa = false;
+  empregado = true;
 
   empregosDisponivel = [
     {
@@ -19,29 +19,29 @@ export class HomePage implements OnInit {
       tipo: 'CLT',
       contrato: 'Prazo indeterminado',
       online: true,
-      dataPub: '01/01/2022',
+      dataPub: '01/01/2022'
     },
     {
       titulo: 'Docente em Administração',
       tipo: 'CLT',
       contrato: 'Prazo indeterminado',
       online: true,
-      dataPub: '01/01/2022',
+      dataPub: '01/01/2022'
     },
     {
       titulo: 'Auxiliar de limpeza',
       tipo: 'CLT',
       contrato: 'Prazo indeterminado',
       online: false,
-      dataPub: '01/01/2022',
+      dataPub: '01/01/2022'
     },
     {
       titulo: 'Auxiliar de RH',
       tipo: 'PJ',
       contrato: 'Temporário',
       online: false,
-      dataPub: '01/01/2022',
-    },
+      dataPub: '01/01/2022'
+    }
   ];
 
   vagaDisponivel = [
@@ -65,36 +65,12 @@ export class HomePage implements OnInit {
     },
   ];
 
-  constructor(
-    public nav: NavController,
-    public menuLeft: MenuController,
-    public mensagem: AlertController
-  ) {
+  constructor(public nav: NavController, public menuLeft: MenuController) {
     this.menuLeft.enable(true);
   }
 
-  async fecharVaga(emprego) {
-    const finalizar = await this.mensagem.create({
-      header: 'ATENÇÃO!',
-      message: 'Deseja finalizar as vagas de ' + emprego.titulo + '?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {},
-        },
-        {
-          text: 'Finalizar',
-          handler: () => {
-            emprego.online = false;
-            this.empregosDisponivel[this.empregosDisponivel.indexOf(emprego)] =
-              emprego;
-          },
-        },
-      ],
-    });
-
-    await finalizar.present();
+  abrirVaga() {
+    this.nav.navigateForward('timeline-vaga');
   }
 
   ngOnInit() {}

@@ -7,9 +7,7 @@ import { Storage } from '@capacitor/storage';
   templateUrl: './usuario.page.html',
   styleUrls: ['./usuario.page.scss'],
 })
-
 export class UsuarioPage implements OnInit {
-
   public usuario = {
     nome: null,
     rg: null,
@@ -21,35 +19,41 @@ export class UsuarioPage implements OnInit {
     ocultarIdade: null,
     estaEmpregado: null,
     senha: null,
-    confirmacao: null
-  }
+    confirmacao: null,
+  };
 
   public genero = [
-    { id: "1", generoV: "Masculino" },
-    { id: "2", generoV: "Feminino" },
-    { id: "3", generoV: "Outros" },
-    { id: "4", generoV: "Não informar" }
-  ]
+    { id: '1', generoV: 'Masculino' },
+    { id: '2', generoV: 'Feminino' },
+    { id: '3', generoV: 'Outros' },
+    { id: '4', generoV: 'Não informar' },
+  ];
 
   public estadoCivil = [
-    { id: "1", estadoAtual: "Solteiro(a)" },
-    { id: "2", estadoAtual: "Casado(a)" },
-    { id: "3", estadoAtual: "União Estável" },
-    { id: "4", estadoAtual: "Divorciado(a)" },
-    { id: "5", estadoAtual: "Viúvo(a)" }
-  ]
+    { id: '1', estadoAtual: 'Solteiro(a)' },
+    { id: '2', estadoAtual: 'Casado(a)' },
+    { id: '3', estadoAtual: 'União Estável' },
+    { id: '4', estadoAtual: 'Divorciado(a)' },
+    { id: '5', estadoAtual: 'Viúvo(a)' },
+  ];
 
   public ocultarIdade = [
-    { id: "1", ocultarAge: "SIM" },
-    { id: "2", ocultarAge: "NÃO" }
-  ]
+    { id: '1', ocultarAge: 'SIM' },
+    { id: '2', ocultarAge: 'NÃO' },
+  ];
 
   public estaEmpregado = [
-    { id: "1", estaEmp: "SIM" },
-    { id: "2", estaEmp: "NÃO" }
-  ]
+    { id: '1', estaEmp: 'SIM' },
+    { id: '2', estaEmp: 'NÃO' },
+  ];
 
-  constructor(public mensagem: AlertController, public nav: NavController, public menuLeft: MenuController) { this.menuLeft.enable(false) }
+  constructor(
+    public mensagem: AlertController,
+    public nav: NavController,
+    public menuLeft: MenuController
+  ) {
+    this.menuLeft.enable(false);
+  }
 
   async login() {
     const confirma = await this.mensagem.create({
@@ -58,18 +62,17 @@ export class UsuarioPage implements OnInit {
       buttons: [
         {
           text: 'Não',
-          role: 'cancel'
+          role: 'cancel',
         },
         {
           text: 'Sim',
-          handler:() =>{
+          handler: () => {
             localStorage.clear();
             this.nav.navigateRoot('login');
-          }
-        }
-      ]
+          },
+        },
+      ],
     });
-
 
     await confirma.present();
   }
@@ -79,180 +82,157 @@ export class UsuarioPage implements OnInit {
   }
 
   async adicionarUsuario() {
-
     if (this.usuario.nome === '' || this.usuario.nome === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'É necessário informar o nome.',
-          buttons: ['ok']
-        }
-      );
-      await alerta.present()
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar o nome.',
+        buttons: ['ok'],
+      });
+      await alerta.present();
 
       return;
-
     } else if (this.usuario.rg === '' || this.usuario.rg === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'É necessário informar o RG.',
-          buttons: ['ok']
-        }
-      )
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar o RG.',
+        buttons: ['ok'],
+      });
 
       await alerta.present();
 
       return;
-
     } else if (this.usuario.cpf === '' || this.usuario.cpf === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'É necessário informar o CPF.',
-          buttons: ['ok']
-        }
-      )
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar o CPF.',
+        buttons: ['ok'],
+      });
 
-      await alerta.present()
+      await alerta.present();
 
-      return
+      return;
     } else if (this.usuario.email === '' || this.usuario.email === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'É necessário informar o E-Mail.',
-          buttons: ['ok']
-        }
-      )
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar o E-Mail.',
+        buttons: ['ok'],
+      });
 
-      await alerta.present()
+      await alerta.present();
 
       return;
     } else if (this.usuario.dataNasc === '' || this.usuario.dataNasc === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'É necessário informar a data de nascimento.',
-          buttons: ['ok']
-        }
-      )
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar a data de nascimento.',
+        buttons: ['ok'],
+      });
 
-      await alerta.present()
+      await alerta.present();
 
       return;
     } else if (this.usuario.genero === '' || this.usuario.genero === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'É necessário informar o gênero.',
-          buttons: ['ok']
-        }
-      )
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar o gênero.',
+        buttons: ['ok'],
+      });
 
       await alerta.present();
 
       return;
-    } else if (this.usuario.estadoCivil === '' || this.usuario.estadoCivil === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'É necessário informar o estado civil atual.',
-          buttons: ['ok']
-        }
-      )
+    } else if (
+      this.usuario.estadoCivil === '' ||
+      this.usuario.estadoCivil === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar o estado civil atual.',
+        buttons: ['ok'],
+      });
 
       await alerta.present();
 
       return;
-    } else if (this.usuario.ocultarIdade === '' || this.usuario.ocultarIdade === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'É necessário informar se deseja ocultar a idade.',
-          buttons: ['ok']
-        }
-      );
+    } else if (
+      this.usuario.ocultarIdade === '' ||
+      this.usuario.ocultarIdade === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar se deseja ocultar a idade.',
+        buttons: ['ok'],
+      });
 
       await alerta.present();
 
       return;
-    } else if (this.usuario.estaEmpregado === '' || this.usuario.estaEmpregado === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'É necessário informar se está empregado.',
-          buttons: ['ok']
-        }
-      );
+    } else if (
+      this.usuario.estaEmpregado === '' ||
+      this.usuario.estaEmpregado === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar se está empregado.',
+        buttons: ['ok'],
+      });
 
       await alerta.present();
 
       return;
     } else if (this.usuario.senha === '' || this.usuario.senha === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'É necessário informar uma senha.',
-          buttons: ['ok']
-        }
-      );
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar uma senha.',
+        buttons: ['ok'],
+      });
 
       await alerta.present();
 
       return;
-    } else if (this.usuario.confirmacao === '' || this.usuario.confirmacao === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'É necessário informar a confirmação de senha.',
-          buttons: ['ok']
-        }
-      );
+    } else if (
+      this.usuario.confirmacao === '' ||
+      this.usuario.confirmacao === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar a confirmação de senha.',
+        buttons: ['ok'],
+      });
 
       await alerta.present();
 
       return;
     } else if (this.usuario.senha !== this.usuario.confirmacao) {
-
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'As senhas precisam coincidir uma com a outra.',
-          buttons: ['ok']
-        }
-      );
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'As senhas precisam coincidir uma com a outra.',
+        buttons: ['ok'],
+      });
 
       await alerta.present();
 
       return;
-
     } else if (!this.validaCPF(this.usuario.cpf)) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'CPF inválido.',
-          buttons: ['ok']
-        }
-      );
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'CPF inválido.',
+        buttons: ['ok'],
+      });
 
       await alerta.present();
 
       return;
-
     } else if (!this.validaEmail(this.usuario.email)) {
-      const alerta = await this.mensagem.create(
-        {
-          header: 'ATENÇÃO!',
-          message: 'E-Mail inválido.',
-          buttons: ['ok']
-        }
-      );
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'E-Mail inválido.',
+        buttons: ['ok'],
+      });
 
       await alerta.present();
 
       return;
-
     } else {
       this.salvarTemporariamente();
       this.nav.navigateForward('endereco');
@@ -262,19 +242,18 @@ export class UsuarioPage implements OnInit {
   salvarTemporariamente() {
     const [ano, mes, dia] = this.usuario.dataNasc.split('-');
 
-    localStorage.setItem('nome', this.usuario.nome)
-    localStorage.setItem('rg', this.usuario.rg)
-    localStorage.setItem('cpf', this.usuario.cpf)
-    localStorage.setItem('email', this.usuario.email)
-    localStorage.setItem('dataNasc', dia + '/' + mes + '/' + ano)
-    localStorage.setItem('genero', this.usuario.genero)
-    localStorage.setItem('estadoCivil', this.usuario.estadoCivil)
-    localStorage.setItem('ocultarIdade', this.usuario.ocultarIdade)
-    localStorage.setItem('estaEmpregado', this.usuario.estaEmpregado)
+    localStorage.setItem('nome', this.usuario.nome);
+    localStorage.setItem('rg', this.usuario.rg);
+    localStorage.setItem('cpf', this.usuario.cpf);
+    localStorage.setItem('email', this.usuario.email);
+    localStorage.setItem('dataNasc', dia + '/' + mes + '/' + ano);
+    localStorage.setItem('genero', this.usuario.genero);
+    localStorage.setItem('estadoCivil', this.usuario.estadoCivil);
+    localStorage.setItem('ocultarIdade', this.usuario.ocultarIdade);
+    localStorage.setItem('estaEmpregado', this.usuario.estaEmpregado);
   }
 
   carregarDados() {
-
     this.usuario.nome = localStorage.getItem('nome');
     this.usuario.rg = localStorage.getItem('rg');
     this.usuario.cpf = localStorage.getItem('cpf');
@@ -331,11 +310,23 @@ export class UsuarioPage implements OnInit {
   }
 
   validaEmail(email): boolean {
-    // eslint-disable-next-line max-len
-    if (!email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+    if (
+      !email.match(
+        // eslint-disable-next-line max-len
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+    ) {
       return;
     }
     return true;
   }
 
+  formatarCpf() {
+    let aocpf = this.usuario.cpf;
+    const cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}))$/;
+    aocpf = aocpf.replace(/(\d{3})(\d)/, '$1.$2');
+    aocpf = aocpf.replace(/(\d{3})(\d)/, '$1.$2');
+    aocpf = aocpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    this.usuario.cpf = aocpf;
+  }
 }

@@ -15,7 +15,7 @@
   <ion-row>
     <ion-col class="espacamentoLogin">
       <ion-item class="roundedInput" lines="none"> 
-        <ion-input [(ngModel)]="candidato.cpf" class="black" expand="block" type="text" placeholder="CPF ou E-Mail">
+        <ion-input [(ngModel)]="user.cpf" class="black" expand="block" type="text" placeholder="CPF ou E-Mail" (ionBlur)="formatarCpf()">
         </ion-input>
         <ion-icon name="id-card-outline" class="black" slot="end"></ion-icon>
       </ion-item>
@@ -25,7 +25,7 @@
   <ion-row>
     <ion-col class="espacamentoLogin">
       <ion-item class="roundedInput " lines="none">
-      <ion-input [(ngModel)]="candidato.senha" class="black" type="password" placeholder="Senha">
+      <ion-input [(ngModel)]="user.password" class="black" type="password" placeholder="Senha" (keyup)="loginInput($event)"> 
       </ion-input>
       <ion-icon name="key-outline" class="black" slot="end"></ion-icon>
     </ion-item>
@@ -36,7 +36,7 @@
     <ion-col class="espacamentoLogin">
       <ion-item style="--background: #00000000" lines="none">
         <ion-checkbox checked="false" (ionChange)="automatico($event)"></ion-checkbox>
-        <ion-label style="margin-left: 10px; text-decoration: underline;">Acessar automaticamente</ion-label>
+        <ion-label style="margin-left: 10px; text-decoration: underline;">Lembrar-me</ion-label>
       </ion-item>
     </ion-col>
   </ion-row>

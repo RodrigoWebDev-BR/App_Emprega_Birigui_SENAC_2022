@@ -95,7 +95,6 @@ export class ContatoPage implements OnInit {
           text: 'Não',
           role: 'cancel',
           handler: () => {
-            console.log('CANCELADO');
           },
         },
         {

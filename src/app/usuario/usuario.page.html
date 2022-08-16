@@ -39,7 +39,7 @@
       <ion-col>
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">CPF <span style="color: red">*</span></ion-label>
-          <ion-input type="text" [(ngModel)]="usuario.cpf" placeholder="***.***.***-**">
+          <ion-input type="text" [(ngModel)]="usuario.cpf" placeholder="***.***.***-**" (ionBlur)="formatarCpf()">
           </ion-input>
           <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
         </ion-item>

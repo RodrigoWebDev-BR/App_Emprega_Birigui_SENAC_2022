@@ -7,22 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./timeline-vaga.page.scss'],
 })
 export class TimelineVagaPage implements OnInit {
+  contato = { contato: '', id: '' };
 
-  contato = { contato: '', id:''}; 
+  constructor(private rota: Router) {}
 
-  constructor( private rota : Router ) { }
+  nomeContato() {}
 
-  nomeContato(){
-
-    console.log(this.contato)
-
-  }
-
-  mostrarVaga(){
+  mostrarVaga() {
     this.rota.navigate['home'];
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

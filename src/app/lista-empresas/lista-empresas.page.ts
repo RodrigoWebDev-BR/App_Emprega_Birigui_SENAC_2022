@@ -1,4 +1,3 @@
-import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -94,56 +93,7 @@ export class ListaEmpresasPage implements OnInit {
     },
   ];
 
-  constructor(public mensagem: AlertController) {}
-
-  async aceitar(empresa){
-    const aceitar = await this.mensagem.create({
-      header: 'ATENÇÃO!',
-      message: 'Deseja aceitar a empresa ' + empresa.nomeEmpresa + '? \nEsta decisão é irreversível!',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {},
-        },
-        {
-          text: 'Finalizar',
-          handler: () => {
-            empresa.aceita = true;
-            empresa.recusada = false;
-            this.empresas[this.empresas.indexOf(empresa)] = empresa;
-          },
-        },
-      ],
-    });
-
-    await aceitar.present();
-  }
-
-  async rejeitar(empresa){
-    const rejeitar = await this.mensagem.create({
-      header: 'ATENÇÃO!',
-      message: 'Deseja rejeitar a empresa ' + empresa.nomeEmpresa + '? \nEsta decisão é irreversível!',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {},
-        },
-        {
-          text: 'Finalizar',
-          handler: () => {
-            empresa.aceita = false;
-            empresa.recusada = true;
-            this.empresas[this.empresas.indexOf(empresa)] =
-              empresa;
-          },
-        },
-      ],
-    });
-
-    await rejeitar.present();
-  }
+  constructor() {}
 
   ngOnInit() {}
 }
