@@ -3,20 +3,19 @@
     <ion-buttons (click)="voltar()" slot="start" style="padding-left: 15px">
       <ion-icon name="arrow-back" color="light" class="icone"></ion-icon>
     </ion-buttons>
-    <ion-button
-      slot="end"
-      color="light"
-      fill="outline"
-      (click)="candidato()"
-      size="small"
-      style="margin-right: 10px"
-      >Candidatar-se</ion-button
-    >
+    <ion-button slot="end" color="light" fill="outline" [disabled]="!mostrarConteudo" (click)="candidatar()" size="small" style="margin-right: 10px">Candidatar-se</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card class="cardVaga">
+
+  <div *ngIf="esconderConteudo" class="loadingBar" style="margin-top: 400px;">
+    <h2 class="bold centertext">Aguarde...</h2>
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </div>
+
+
+  <ion-card *ngIf="mostrarConteudo" class="cardVaga">
     <ion-list>
       <ion-item>
         <ion-icon name="business" color="dark"></ion-icon>
@@ -53,7 +52,7 @@
       <ion-item>
         <ion-icon name="hourglass" color="dark"></ion-icon>
         <ion-label class="paddingLabel">
-          <h2>Prazo do contrato</h2>
+          <h2>Prazo de contrato</h2>
           <p>Indeterminado ou temporário</p>
         </ion-label>
       </ion-item>
@@ -105,28 +104,31 @@
           <p>Assistência odontológica</p>
           <p>Insalubridade</p>
           <p>Cesta básica</p>
-        </ion-label>
+        </ion-label> 
       </ion-item>
-
+      
       <ion-row>
         <ion-col>
           <ion-label>
             <h2 class="under">Descrição</h2>
-            <p class="bold">
-              Descrição completa sobre o candidato teste de espacamento para
-              pular linha
-            </p>
+            <p class="bold">Descrição completa do usuario</p>
           </ion-label>
         </ion-col>
       </ion-row>
+
+     
+
     </ion-list>
   </ion-card>
 
+
+
+</ion-content>
+
+<ion-footer>
   <ion-row>
     <ion-col class="espacamento">
-      <ion-button color="primary" shape="block" (click)="candidato()"
-        >Candidatar-se</ion-button
-      >
+      <ion-button color="primary" [disabled]="!mostrarConteudo" shape="block" (click)="candidatar()">Candidatar-se</ion-button>
     </ion-col>
   </ion-row>
-</ion-content>
+</ion-footer>

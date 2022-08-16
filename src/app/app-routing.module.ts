@@ -50,7 +50,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    canActivate: [LoginAuthGuard],
+    // canActivate: [LoginAuthGuard],
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
@@ -85,7 +85,7 @@ const routes: Routes = [
   },
   {
     path: 'lista-empresas',
-    canActivate: [LoginAuthGuard],
+    // canActivate: [LoginAuthGuard],
     loadChildren: () => import('./lista-empresas/lista-empresas.module').then( m => m.ListaEmpresasPageModule)
   },
   {

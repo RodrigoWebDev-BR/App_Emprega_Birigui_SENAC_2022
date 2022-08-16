@@ -1,4 +1,4 @@
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,20 +8,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VagaDetalhesPage implements OnInit {
   router: any;
+  esconderConteudo = false;
+  mostrarConteudo = true;
 
-  constructor(public nav: NavController) { }
+  constructor(public nav: NavController, public mensagem: AlertController) {}
 
+  async candidatar() {
+    const alerta = await this.mensagem.create({
+      header: 'Atenção',
+      message: 'Deseja candidatar-se a vaga 1 ?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {},
+        },
+        {
+          text: 'Candidatar-se',
+          handler: () => {
+            this.mostrarConteudo = false;
+            this.esconderConteudo = true;
 
-  voltar(){
+            setTimeout(() => {
+              this.nav.navigateForward('timeline-vaga');
+            }, 5000);
+          },
+        },
+      ],
+    });
+    await alerta.present();
+
+    //return para cancelar a execução do método
+    return;
+  }
+
+  voltar() {
     this.nav.navigateForward('inscricao-vaga');
   }
 
-  candidato(){
-    this.nav.navigateRoot('timeline-vaga');
-  }
-
-  ngOnInit() {
-
-  }
-
+  ngOnInit() {}
 }

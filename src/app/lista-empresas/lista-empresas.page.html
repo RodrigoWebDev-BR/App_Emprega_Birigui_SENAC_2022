@@ -35,8 +35,8 @@
             <ion-card-subtitle color="danger" *ngIf="empresa.recusada">Empresa recusada <img src="../../assets/delete.png"></ion-card-subtitle>
             <ion-card-subtitle color="warning" *ngIf="!empresa.recusada && !empresa.aceita">Empresa pendente <img src="../../assets/pendente.png"></ion-card-subtitle>
 
-            <ion-button size="small" *ngIf="!empresa.recusada && !empresa.aceita">Aceitar</ion-button>
-            <ion-button size="small" *ngIf="!empresa.recusada && !empresa.aceita" color="danger">Rejeitar</ion-button>
+            <ion-button size="small" *ngIf="!empresa.recusada && !empresa.aceita" (click)="aceitar(empresa)">Aceitar</ion-button>
+            <ion-button size="small" *ngIf="!empresa.recusada && !empresa.aceita" color="danger" (click)="rejeitar(empresa)">Rejeitar</ion-button>
           </ion-card-header>
 
           <ion-card-content>
