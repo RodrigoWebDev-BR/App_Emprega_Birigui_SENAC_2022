@@ -48,18 +48,22 @@
             <ion-button
               size="small"
               *ngIf="!usuario.recusada && !usuario.aceita"
-              (click)="convidar(usuario.nome)"
+              (click)="convidar(usuario)"
               >Convidar</ion-button
             >
-            
+
             <ion-button
               size="small"
               *ngIf="!usuario.recusada && !usuario.aceita"
               color="danger"
-              (click)="rejeitar(usuario.nome)"
+              (click)="rejeitar(usuario)"
               >Rejeitar</ion-button
             >
-            <ion-button size="small" color="secondary" (click)="abreModal(true)">
+            <ion-button
+              size="small"
+              color="secondary"
+              (click)="abreModal(true)"
+            >
               <ion-icon name="eye" color="light"></ion-icon>
               <ion-label class="labelChk">Visualizar</ion-label>
             </ion-button>
@@ -82,7 +86,11 @@
           </ion-buttons>
           <ion-title class="centertext" mode="ios">Candidato N#450</ion-title>
           <ion-buttons slot="end">
-            <ion-button color="secondary" (click)="convidar('João do chocolate')">Aceitar</ion-button>
+            <ion-button
+              color="secondary"
+              (click)="convidar('João do chocolate')"
+              >Aceitar</ion-button
+            >
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
@@ -287,9 +295,7 @@
             <br />
             <ion-row>
               <ion-col size="12">
-                <ion-title class="bold centertext under"
-                  >Cursos</ion-title
-                >
+                <ion-title class="bold centertext under">Cursos</ion-title>
               </ion-col>
             </ion-row>
 
@@ -309,7 +315,8 @@
               <ion-row>
                 <ion-col>
                   <ion-label
-                    ><span class="bold">Nome Instituição:</span> Medicina</ion-label
+                    ><span class="bold">Nome Instituição:</span>
+                    Medicina</ion-label
                   >
                 </ion-col>
               </ion-row>
@@ -317,7 +324,8 @@
               <ion-row>
                 <ion-col>
                   <ion-label
-                    ><span class="bold">Data início:</span> 03/10/2020</ion-label
+                    ><span class="bold">Data início:</span>
+                    03/10/2020</ion-label
                   >
                 </ion-col>
               </ion-row>
@@ -325,7 +333,8 @@
               <ion-row>
                 <ion-col>
                   <ion-label
-                    ><span class="bold">Data término:</span> 01/12/2020</ion-label
+                    ><span class="bold">Data término:</span>
+                    01/12/2020</ion-label
                   >
                 </ion-col>
               </ion-row>
@@ -337,9 +346,7 @@
             <br />
             <ion-row>
               <ion-col size="12">
-                <ion-title class="bold centertext under"
-                  >Idiomas</ion-title
-                >
+                <ion-title class="bold centertext under">Idiomas</ion-title>
               </ion-col>
             </ion-row>
 
@@ -359,7 +366,7 @@
                     ><span class="bold">Nível:</span> Avançado</ion-label
                   >
                 </ion-col>
-              </ion-row>              
+              </ion-row>
             </div>
           </div>
         </ion-list>

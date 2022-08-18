@@ -11,9 +11,7 @@ import { Storage } from '@capacitor/storage';
 export class CursosPage implements OnInit {
   public curso = {
     nome: '',
-    instituicaoEnsino: '',
-    dataInicio: '',
-    dataConclusao: '',
+    instituicaoEnsino: ''
   };
 
   public cursos: any[] = [];
@@ -54,17 +52,6 @@ export class CursosPage implements OnInit {
       await alerta.present();
 
       return;
-    } else if (this.curso.dataInicio === '' || this.curso.dataInicio === null) {
-      const alerta = await this.mensagem.create({
-        header: 'ATENÇÃO!',
-        message: 'Não é permitido adicionar um curso sem data de início.',
-        buttons: ['ok'],
-        cssClass: 'cssAlerta',
-      });
-
-      await alerta.present();
-
-      return;
     } else {
       const cursoCopy = JSON.parse(JSON.stringify(this.curso));
 
@@ -72,15 +59,11 @@ export class CursosPage implements OnInit {
 
       this.cursoSave.salvarCurso(
         this.curso.nome,
-        this.curso.instituicaoEnsino,
-        this.curso.dataInicio,
-        this.curso.dataConclusao
+        this.curso.instituicaoEnsino
       );
 
       this.curso.nome = '';
       this.curso.instituicaoEnsino = '';
-      this.curso.dataInicio = '';
-      this.curso.dataConclusao = '';
     }
   }
 

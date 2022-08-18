@@ -8,16 +8,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public appPages = [
     { title: 'Perfil', url: '/home', icon: 'person' },
-    { title: 'Notificações', url: '/notificacao', icon: 'notifications'},
-    { title: 'Curriculo', url: '/curriculo', icon: 'folder'},
-    { title: 'Vagas', url: '/inscricao-vaga', icon: 'briefcase'}
-   // { title: 'Sair', url: '/login', icon: 'power'}
+    { title: 'Notificações', url: '/notificacao', icon: 'notifications' },
+    { title: 'Curriculo', url: '/curriculo', icon: 'folder' },
+    { title: 'Vagas', url: '/inscricao-vaga', icon: 'briefcase' },
+    // { title: 'Sair', url: '/login', icon: 'power'}
   ];
 
-  public labels = ['João do chocolate'];
   constructor(public nav: NavController) {}
 
-  logout(){
+  logout() {
     localStorage.clear();
     this.nav.navigateRoot('login');
   }

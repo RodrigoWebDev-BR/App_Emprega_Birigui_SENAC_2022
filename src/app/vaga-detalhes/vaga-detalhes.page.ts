@@ -1,4 +1,4 @@
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,12 +11,12 @@ export class VagaDetalhesPage implements OnInit {
   esconderConteudo = false;
   mostrarConteudo = true;
 
-  constructor(public nav: NavController, public mensagem: AlertController) {}
+  constructor(public nav: NavController, public mensagem: AlertController, public toast: ToastController ) {}
 
   async candidatar() {
     const alerta = await this.mensagem.create({
       header: 'Atenção',
-      message: 'Deseja candidatar-se a vaga 1 ?',
+      message: 'Deseja candidatar-se a vaga ? Necessário informar o CPF.',
       buttons: [
         {
           text: 'Cancelar',
@@ -25,21 +25,44 @@ export class VagaDetalhesPage implements OnInit {
         },
         {
           text: 'Candidatar-se',
-          handler: () => {
-            this.mostrarConteudo = false;
-            this.esconderConteudo = true;
+          handler: (cpf) => {
+            if (cpf[0] !== '') {
+              this.mostrarConteudo = false;
+              this.esconderConteudo = true;
 
-            setTimeout(() => {
-              this.nav.navigateForward('timeline-vaga');
-            }, 5000);
+              setTimeout(() => {
+                this.nav.navigateForward('timeline-vaga');
+              }, 5000);
+            }else{
+              this.exibeToast('CPF inválido');
+            }
+          },
+        },
+      ],
+      inputs: [
+        {
+          placeholder: 'CPF',
+          attributes: {
+            maxlength: 15,
           },
         },
       ],
     });
     await alerta.present();
 
-    //return para cancelar a execução do método
     return;
+  }
+
+  async exibeToast(msg) {
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 1000,
+      position: 'top',
+      animated: true,
+      color: 'warning',
+    });
+
+    toast.present();
   }
 
   voltar() {

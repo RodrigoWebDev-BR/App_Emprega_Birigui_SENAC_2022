@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IdiomasService {
   colecaoIdioma: any[] = [];
   key = 'idiomas';
-  constructor() { }
+  constructor() {}
 
   salvarIdiomas(id: string, niveis: string, bandeiras: string) {
-
-    const recebido = { id_idioma: id, nivel: niveis, bandeira: bandeiras }
+    const recebido = { id_idioma: id, nivel: niveis, bandeira: bandeiras };
     const value = localStorage.getItem(this.key);
 
     if (value === undefined || value === null) {
@@ -27,21 +26,21 @@ export class IdiomasService {
     const value = localStorage.getItem(this.key);
 
     if (value === undefined || value === null) {
-      return
+      return;
     }
 
-    const colecao: any[] = JSON.parse(value)
+    const colecao: any[] = JSON.parse(value);
     return colecao;
   }
 
-  reduntante(param: any): boolean{
-    const value = this.listar()
-    if(value !== undefined){
-      const result = value.filter(idiomas => idiomas.id_idioma === param)
+  reduntante(param: any): boolean {
+    const value = this.listar();
+    if (value !== undefined) {
+      const result = value.filter((idiomas) => idiomas.id_idioma === param);
 
-      if(result.length === 0){
+      if (result.length === 0) {
         return true;
-      }else{
+      } else {
         return false;
       }
     }
@@ -50,9 +49,9 @@ export class IdiomasService {
   }
 
   deletar(param: any) {
-    const value = this.listar()
-    const result = value.filter(idiomas => idiomas.id_idioma !== param)
+    const value = this.listar();
+    const result = value.filter((idiomas) => idiomas.id_idioma !== param);
 
-    localStorage.setItem(this.key, JSON.stringify(result))
+    localStorage.setItem(this.key, JSON.stringify(result));
   }
 }

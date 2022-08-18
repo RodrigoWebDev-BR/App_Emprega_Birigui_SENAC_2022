@@ -1,4 +1,4 @@
-import { MenuController, NavController, AlertController } from '@ionic/angular';
+import { MenuController, NavController, AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -68,7 +68,8 @@ export class HomePage implements OnInit {
   constructor(
     public nav: NavController,
     public menuLeft: MenuController,
-    public mensagem: AlertController
+    public mensagem: AlertController,
+    public toast: ToastController
   ) {
     this.menuLeft.enable(true);
   }
@@ -76,7 +77,8 @@ export class HomePage implements OnInit {
   async fecharVaga(emprego) {
     const finalizar = await this.mensagem.create({
       header: 'ATENÇÃO!',
-      message: 'Deseja finalizar as vagas de ' + emprego.titulo + '?',
+      message:
+        'Para finalizar as vagas de ' + emprego.titulo + ' insira seu CNPJ',
       buttons: [
         {
           text: 'Cancelar',
@@ -85,16 +87,39 @@ export class HomePage implements OnInit {
         },
         {
           text: 'Finalizar',
-          handler: () => {
-            emprego.online = false;
-            this.empregosDisponivel[this.empregosDisponivel.indexOf(emprego)] =
-              emprego;
+          handler: (cnpj) => {
+            if (cnpj[0] !== '') {
+              emprego.online = false;
+              this.empregosDisponivel[this.empregosDisponivel.indexOf(emprego)] = emprego;
+            }else{
+              this.exibeToast('CNPJ inválido.');
+            }
+          },
+        },
+      ],
+      inputs: [
+        {
+          placeholder: 'CNPJ',
+          attributes: {
+            maxlength: 18,
           },
         },
       ],
     });
 
     await finalizar.present();
+  }
+
+  async exibeToast(msg) {
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 1000,
+      position: 'top',
+      animated: true,
+      color: 'warning',
+    });
+
+    toast.present();
   }
 
   ngOnInit() {}

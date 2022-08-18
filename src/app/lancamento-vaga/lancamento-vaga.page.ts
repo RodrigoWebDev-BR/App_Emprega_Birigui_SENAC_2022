@@ -1,4 +1,4 @@
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -68,7 +68,7 @@ export class LancamentoVagaPage implements OnInit {
 
   inclusos = [{ nome: 'Incluso' }, { nome: 'Não incluso' }];
 
-  constructor(public nav: NavController, public mensagem: AlertController) {}
+  constructor(public nav: NavController, public mensagem: AlertController, public toast: ToastController) {}
 
   async addBeneficio() {
     if (this.beneficio.nome === null || this.beneficio.nome === '') {
@@ -128,17 +128,17 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário informar o título da vaga.',
-        buttons: ['ok'],
+        buttons: ['ok']
       });
 
       await alerta.present();
 
       return;
-    }else if (this.vaga.categoria === null || this.vaga.categoria === '') {
+    } else if (this.vaga.categoria === null || this.vaga.categoria === '') {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário informar uma categoria.',
-        buttons: ['ok'],
+        buttons: ['ok']
       });
 
       await alerta.present();
@@ -148,7 +148,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário informar o tipo de contrato.',
-        buttons: ['ok'],
+        buttons: ['ok']
       });
 
       await alerta.present();
@@ -158,7 +158,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário informar o prazo de contrato',
-        buttons: ['ok'],
+        buttons: ['ok']
       });
 
       await alerta.present();
@@ -168,7 +168,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário informar a carga horária.',
-        buttons: ['ok'],
+        buttons: ['ok']
       });
 
       await alerta.present();
@@ -178,7 +178,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Se o salário não está a combinar, favor informar o salário',
-        buttons: ['ok'],
+        buttons: ['ok']
       });
 
       await alerta.present();
@@ -191,7 +191,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Informe uma qualificação.',
-        buttons: ['ok'],
+        buttons: ['ok']
       });
 
       await alerta.present();
@@ -201,7 +201,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário informar sobre o vale alimentação/refeição.',
-        buttons: ['ok'],
+        buttons: ['ok']
       });
 
       await alerta.present();
@@ -211,7 +211,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário informar sobre a assistência médica.',
-        buttons: ['ok'],
+        buttons: ['ok']
       });
 
       await alerta.present();
@@ -221,7 +221,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Por favor informe uma descrição sobre a vaga',
-        buttons: ['ok'],
+        buttons: ['ok']
       });
 
       await alerta.present();
@@ -250,6 +250,53 @@ export class LancamentoVagaPage implements OnInit {
     await alerta.present();
 
     return;
+  }
+
+  async lancarVaga(vaga) {
+    const vagas = await this.mensagem.create({
+      header: 'ATENÇÃO!',
+      message:
+        'Para lançar a vaga de ' + vaga.tituloVaga + ' insira seu CNPJ',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {},
+        },
+        {
+          text: 'Finalizar',
+          handler: (cnpj) => {
+            if (cnpj[0] !== '') {
+              this.exibeToast('Vaga inserida com sucesso!', 'success');
+            }else{
+              this.exibeToast('CNPJ inválido!', 'warning');
+            }
+          },
+        },
+      ],
+      inputs: [
+        {
+          placeholder: 'CNPJ',
+          attributes: {
+            maxlength: 18,
+          },
+        },
+      ],
+    });
+
+    await vagas.present();
+  }
+
+  async exibeToast(msg, cor: string) {
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 1000,
+      position: 'top',
+      animated: true,
+      color: cor,
+    });
+
+    toast.present();
   }
 
   ngOnInit() {}

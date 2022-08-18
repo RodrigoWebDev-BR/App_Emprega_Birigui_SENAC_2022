@@ -93,32 +93,34 @@ export class CandidaturasPage implements OnInit {
     this.isModalOpen = open;
   }
 
-  async convidar(nomeAtual: string){
+  async convidar(usuario){
     const alerta = await this.mensagem.create({
       header: 'ATENÇÃO!',
-      message: 'Deseja convidar ' + nomeAtual + ' para a vaga?',
+      message: 'Deseja convidar ' + usuario.nome + ' para a vaga?',
       buttons: [
         {
           text: 'Cancelar',
           role: 'cancel',
-          handler: () => {},
+          handler: () => {}
         },
         {
           text: 'Convidar',
           handler: () => {
-            window.location.reload();
+            usuario.aceita = true;
+            usuario.recusada = false;
+            this.usuarios[this.usuarios.indexOf(usuario)] = usuario;
           },
-        },
+        }
       ],
     });
 
     await alerta.present();
   }
 
-  async rejeitar(nomeAtual: string){
+  async rejeitar(usuario){
     const alerta = await this.mensagem.create({
       header: 'ATENÇÃO!',
-      message: 'Deseja rejeitar ' + nomeAtual + ' para a vaga? Este processo é irreversível',
+      message: 'Deseja rejeitar ' + usuario.nome + ' para a vaga? Este processo é irreversível',
       buttons: [
         {
           text: 'Cancelar',
@@ -128,7 +130,9 @@ export class CandidaturasPage implements OnInit {
         {
           text: 'Rejeitar',
           handler: () => {
-            window.location.reload();
+            usuario.aceita = false;
+            usuario.recusada = true;
+            this.usuarios[this.usuarios.indexOf(usuario)] = usuario;
           },
         },
       ],

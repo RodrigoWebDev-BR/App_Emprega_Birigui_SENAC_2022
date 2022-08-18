@@ -5,20 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class CursosService {
   colecaoCurso: any[] = [];
-  key = 'curso';
+  key = 'cursos';
   constructor() {}
 
-  salvarCurso(
-    nomes: string,
-    instituicoes: string,
-    dtinicio: string,
-    dtfinal: string
-  ) {
+  salvarCurso(nomes: string, instituicoes: string) {
     const recebido = {
       nome: nomes,
-      instituicaoEnsino: instituicoes,
-      dataInicio: dtinicio,
-      dataConclusao: dtfinal,
+      instituicaoEnsino: instituicoes
     };
 
     const value = localStorage.getItem(this.key);

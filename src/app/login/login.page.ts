@@ -113,7 +113,6 @@ export class LoginPage implements OnInit {
 
   formatarCpf() {
     let aocpf = this.user.cpf;
-    const cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}))$/;
     aocpf = aocpf.replace(/(\d{3})(\d)/, '$1.$2');
     aocpf = aocpf.replace(/(\d{3})(\d)/, '$1.$2');
     aocpf = aocpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');

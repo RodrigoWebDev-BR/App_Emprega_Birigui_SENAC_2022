@@ -275,15 +275,15 @@
 
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
-      <ion-header>
+      <ion-header mode="ios">
         <ion-toolbar>
           <ion-buttons slot="start">
             <ion-button (click)="abreModal(false)" color="secondary"
-              >Fechar</ion-button
+              >Cancelar</ion-button
             >
           </ion-buttons>
           <ion-title class="centertext">REVISAR VAGA</ion-title>
-          <ion-buttons slot="end">
+          <ion-buttons slot="end" (click)="lancarVaga(vaga)">
             <ion-button color="secondary">Lançar</ion-button>
           </ion-buttons>
         </ion-toolbar>

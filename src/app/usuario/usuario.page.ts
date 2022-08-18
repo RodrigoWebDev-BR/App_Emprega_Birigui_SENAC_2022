@@ -16,8 +16,6 @@ export class UsuarioPage implements OnInit {
     dataNasc: null,
     genero: null,
     estadoCivil: null,
-    ocultarIdade: null,
-    estaEmpregado: null,
     senha: null,
     confirmacao: null,
   };
@@ -35,16 +33,6 @@ export class UsuarioPage implements OnInit {
     { id: '3', estadoAtual: 'União Estável' },
     { id: '4', estadoAtual: 'Divorciado(a)' },
     { id: '5', estadoAtual: 'Viúvo(a)' },
-  ];
-
-  public ocultarIdade = [
-    { id: '1', ocultarAge: 'SIM' },
-    { id: '2', ocultarAge: 'NÃO' },
-  ];
-
-  public estaEmpregado = [
-    { id: '1', estaEmp: 'SIM' },
-    { id: '2', estaEmp: 'NÃO' },
   ];
 
   constructor(
@@ -154,32 +142,6 @@ export class UsuarioPage implements OnInit {
       await alerta.present();
 
       return;
-    } else if (
-      this.usuario.ocultarIdade === '' ||
-      this.usuario.ocultarIdade === null
-    ) {
-      const alerta = await this.mensagem.create({
-        header: 'ATENÇÃO!',
-        message: 'É necessário informar se deseja ocultar a idade.',
-        buttons: ['ok'],
-      });
-
-      await alerta.present();
-
-      return;
-    } else if (
-      this.usuario.estaEmpregado === '' ||
-      this.usuario.estaEmpregado === null
-    ) {
-      const alerta = await this.mensagem.create({
-        header: 'ATENÇÃO!',
-        message: 'É necessário informar se está empregado.',
-        buttons: ['ok'],
-      });
-
-      await alerta.present();
-
-      return;
     } else if (this.usuario.senha === '' || this.usuario.senha === null) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
@@ -249,8 +211,6 @@ export class UsuarioPage implements OnInit {
     localStorage.setItem('dataNasc', dia + '/' + mes + '/' + ano);
     localStorage.setItem('genero', this.usuario.genero);
     localStorage.setItem('estadoCivil', this.usuario.estadoCivil);
-    localStorage.setItem('ocultarIdade', this.usuario.ocultarIdade);
-    localStorage.setItem('estaEmpregado', this.usuario.estaEmpregado);
   }
 
   carregarDados() {
@@ -266,8 +226,6 @@ export class UsuarioPage implements OnInit {
 
     this.usuario.genero = localStorage.getItem('genero');
     this.usuario.estadoCivil = localStorage.getItem('estadoCivil');
-    this.usuario.ocultarIdade = localStorage.getItem('ocultarIdade');
-    this.usuario.estaEmpregado = localStorage.getItem('estaEmpregado');
   }
 
   validaCPF(cpf): boolean {
@@ -323,10 +281,17 @@ export class UsuarioPage implements OnInit {
 
   formatarCpf() {
     let aocpf = this.usuario.cpf;
-    const cpfValido = /^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}))$/;
     aocpf = aocpf.replace(/(\d{3})(\d)/, '$1.$2');
     aocpf = aocpf.replace(/(\d{3})(\d)/, '$1.$2');
     aocpf = aocpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
     this.usuario.cpf = aocpf;
+  }
+
+  formatarRG() {
+    let aorg = this.usuario.rg;
+    aorg = aorg.replace(/(\d{2})(\d)/, '$1.$2');
+    aorg = aorg.replace(/(\d{3})(\d)/, '$1.$2');
+    aorg = aorg.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    this.usuario.rg = aorg;
   }
 }
