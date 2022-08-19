@@ -1,3 +1,4 @@
+import { validarCNPJ } from './../../environments/functions';
 import { NavController, AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
@@ -266,7 +267,7 @@ export class LancamentoVagaPage implements OnInit {
         {
           text: 'Finalizar',
           handler: (cnpj) => {
-            if (cnpj[0] !== '') {
+            if (validarCNPJ(cnpj[0])) {
               this.exibeToast('Vaga inserida com sucesso!', 'success');
             }else{
               this.exibeToast('CNPJ inválido!', 'warning');

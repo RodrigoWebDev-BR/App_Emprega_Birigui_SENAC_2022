@@ -1,5 +1,7 @@
+import { validarCNPJ } from './../../environments/functions';
 import { MenuController, NavController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { validaEmail } from 'src/environments/functions';
 
 @Component({
   selector: 'app-empresa',
@@ -136,7 +138,7 @@ export class EmpresaPage implements OnInit {
         buttons: ['ok'],
       });
       await alerta.present();
-    } else if (!this.validaEmail(this.empresa.email)) {
+    } else if (!validaEmail(this.empresa.email)) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'E-Mail inválido.',
@@ -146,7 +148,7 @@ export class EmpresaPage implements OnInit {
       await alerta.present();
 
       return;
-    } else if(!this.validarCNPJ(this.empresa.cnpj)){
+    } else if(!validarCNPJ(this.empresa.cnpj)){
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'CNPJ inválido.',
@@ -214,77 +216,4 @@ export class EmpresaPage implements OnInit {
     this.empresa.natureza = localStorage.getItem('ocultarIdade');
   }
 
-  validaEmail(email): boolean {
-    if (
-      !email.match(
-        // eslint-disable-next-line max-len
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
-    ) {
-      return;
-    }
-    return true;
-  }
-
-  validarCNPJ(cnpj) {
-    cnpj = cnpj.replace(/[^\d]+/g, '');
-
-    if (cnpj === '') {
-      return false;
-    }
-
-    if (cnpj.length !== 14) {
-      return false;
-    }
-
-    // Elimina CNPJs invalidos conhecidos
-    if (
-      cnpj === '00000000000000' ||
-      cnpj === '11111111111111' ||
-      cnpj === '22222222222222' ||
-      cnpj === '33333333333333' ||
-      cnpj === '44444444444444' ||
-      cnpj === '55555555555555' ||
-      cnpj === '66666666666666' ||
-      cnpj === '77777777777777' ||
-      cnpj === '88888888888888' ||
-      cnpj === '99999999999999'
-    ) {
-      return false;
-    }
-    // Valida DVs
-    let tamanho = cnpj.length - 2;
-    let numeros = cnpj.substring(0, tamanho);
-    const digitos = cnpj.substring(tamanho);
-    let soma = 0;
-    let pos = tamanho - 7;
-
-    for (let i = tamanho; i >= 1; i--) {
-      soma += numeros.charAt(tamanho - i) * pos--;
-      if (pos < 2) {
-        pos = 9;
-      }
-    }
-    let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-    if (resultado !== digitos.charAt(0)) {
-      return false;
-    }
-
-    tamanho = tamanho + 1;
-    numeros = cnpj.substring(0, tamanho);
-    soma = 0;
-    pos = tamanho - 7;
-    for (let i = tamanho; i >= 1; i--) {
-      soma += numeros.charAt(tamanho - i) * pos--;
-      if (pos < 2) {
-        pos = 9;
-      }
-    }
-    resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-    if (resultado !== digitos.charAt(1)) {
-      return false;
-    }
-
-    return true;
-  }
 }

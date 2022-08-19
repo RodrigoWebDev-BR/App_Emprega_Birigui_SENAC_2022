@@ -1,4 +1,4 @@
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -94,7 +94,7 @@ export class ListaEmpresasPage implements OnInit {
     },
   ];
 
-  constructor(public mensagem: AlertController) {}
+  constructor(public mensagem: AlertController, public toast: ToastController) {}
 
   async aceitar(empresa){
     const aceitar = await this.mensagem.create({
@@ -108,10 +108,25 @@ export class ListaEmpresasPage implements OnInit {
         },
         {
           text: 'Aceitar',
-          handler: () => {
-            empresa.aceita = true;
-            empresa.recusada = false;
-            this.empresas[this.empresas.indexOf(empresa)] = empresa;
+          handler: (senha) => {
+            if(senha[0] === ''){
+              this.exibeToast('Necessário informar a senha.', 'warning');
+            }else if(senha[0] !== '123456'){
+              this.exibeToast('Senha incorreta', 'danger');
+            }else{
+              empresa.aceita = true;
+              empresa.recusada = false;
+              this.empresas[this.empresas.indexOf(empresa)] = empresa;
+              this.exibeToast('Empresa aceita!', 'success');
+            }
+          },
+        },
+      ],
+      inputs: [
+        {
+          placeholder: 'Senha',
+          attributes: {
+            maxlength: 50,
           },
         },
       ],
@@ -132,17 +147,43 @@ export class ListaEmpresasPage implements OnInit {
         },
         {
           text: 'Rejeitar',
-          handler: () => {
-            empresa.aceita = false;
-            empresa.recusada = true;
-            this.empresas[this.empresas.indexOf(empresa)] =
-              empresa;
+          handler: (senha) => {
+            if(senha[0] === ''){
+              this.exibeToast('Necessário informar a senha.', 'warning');
+            }else if(senha[0] !== '123456'){
+              this.exibeToast('Senha incorreta', 'danger');
+            }else{
+              empresa.aceita = false;
+              empresa.recusada = true;
+              this.empresas[this.empresas.indexOf(empresa)] = empresa;
+              this.exibeToast('Empresa recusada!', 'success');
+            }
           },
         },
       ],
+      inputs: [
+        {
+          placeholder: 'Senha',
+          attributes: {
+            maxlength: 50,
+          },
+        },
+      ]
     });
 
     await rejeitar.present();
+  }
+
+  async exibeToast(msg, cor: string) {
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 1000,
+      position: 'top',
+      animated: true,
+      color: cor,
+    });
+
+    toast.present();
   }
 
   ngOnInit() {}

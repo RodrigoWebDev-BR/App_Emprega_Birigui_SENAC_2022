@@ -1,3 +1,4 @@
+import { validarCNPJ } from './../../environments/functions';
 import { MenuController, NavController, AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -88,7 +89,7 @@ export class HomePage implements OnInit {
         {
           text: 'Finalizar',
           handler: (cnpj) => {
-            if (cnpj[0] !== '') {
+            if (validarCNPJ(cnpj[0])) {
               emprego.online = false;
               this.empregosDisponivel[this.empregosDisponivel.indexOf(emprego)] = emprego;
             }else{

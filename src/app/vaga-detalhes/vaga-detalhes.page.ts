@@ -1,3 +1,4 @@
+import { validaCPF } from './../../environments/functions';
 import { NavController, AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
@@ -26,7 +27,7 @@ export class VagaDetalhesPage implements OnInit {
         {
           text: 'Candidatar-se',
           handler: (cpf) => {
-            if (cpf[0] !== '') {
+            if (validaCPF(cpf[0])) {
               this.mostrarConteudo = false;
               this.esconderConteudo = true;
 

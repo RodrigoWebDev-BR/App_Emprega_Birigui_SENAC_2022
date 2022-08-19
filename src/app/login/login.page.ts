@@ -1,3 +1,4 @@
+import { formatarCPF } from './../../environments/functions';
 import { LoginService } from './../servicos/login.service';
 import { ToastController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
@@ -111,11 +112,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-  formatarCpf() {
-    let aocpf = this.user.cpf;
-    aocpf = aocpf.replace(/(\d{3})(\d)/, '$1.$2');
-    aocpf = aocpf.replace(/(\d{3})(\d)/, '$1.$2');
-    aocpf = aocpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    this.user.cpf = aocpf;
+  formataCpf() {
+    this.user.cpf = formatarCPF(this.user.cpf);
   }
 }

@@ -1,3 +1,4 @@
+import { formatarCPF, formatarRG, validaCPF, validaEmail } from './../../environments/functions';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, MenuController, NavController } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
@@ -175,7 +176,7 @@ export class UsuarioPage implements OnInit {
       await alerta.present();
 
       return;
-    } else if (!this.validaCPF(this.usuario.cpf)) {
+    } else if (!validaCPF(this.usuario.cpf)) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'CPF inválido.',
@@ -185,7 +186,7 @@ export class UsuarioPage implements OnInit {
       await alerta.present();
 
       return;
-    } else if (!this.validaEmail(this.usuario.email)) {
+    } else if (!validaEmail(this.usuario.email)) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'E-Mail inválido.',
@@ -228,70 +229,11 @@ export class UsuarioPage implements OnInit {
     this.usuario.estadoCivil = localStorage.getItem('estadoCivil');
   }
 
-  validaCPF(cpf): boolean {
-    /*eslint one-var: ["error", "always"]*/
-    let rest, sum;
-
-    if (cpf === undefined || cpf.trim().length === 0 || cpf === '00000000000') {
-      return;
-    }
-    cpf = cpf.replace('.', '').replace('.', '').replace('-', '');
-
-    sum = 0;
-
-    for (let i = 1; i <= 9; i++) {
-      sum = sum + parseInt(cpf.substring(i - 1, i), 10) * (11 - i);
-    }
-    rest = (sum * 10) % 11;
-
-    if (rest === 10 || rest === 11) {
-      rest = 0;
-    }
-    if (rest !== parseInt(cpf.substring(9, 10), 10)) {
-      return false;
-    }
-
-    sum = 0;
-    for (let i = 1; i <= 10; i++) {
-      sum = sum + parseInt(cpf.substring(i - 1, i), 10) * (12 - i);
-    }
-    rest = (sum * 10) % 11;
-
-    if (rest === 10 || rest === 11) {
-      rest = 0;
-    }
-    if (rest !== parseInt(cpf.substring(10, 11), 10)) {
-      return false;
-    }
-
-    return true;
+  formataCpf() {
+    this.usuario.cpf = formatarCPF(this.usuario.cpf);
   }
 
-  validaEmail(email): boolean {
-    if (
-      !email.match(
-        // eslint-disable-next-line max-len
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )
-    ) {
-      return;
-    }
-    return true;
-  }
-
-  formatarCpf() {
-    let aocpf = this.usuario.cpf;
-    aocpf = aocpf.replace(/(\d{3})(\d)/, '$1.$2');
-    aocpf = aocpf.replace(/(\d{3})(\d)/, '$1.$2');
-    aocpf = aocpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    this.usuario.cpf = aocpf;
-  }
-
-  formatarRG() {
-    let aorg = this.usuario.rg;
-    aorg = aorg.replace(/(\d{2})(\d)/, '$1.$2');
-    aorg = aorg.replace(/(\d{3})(\d)/, '$1.$2');
-    aorg = aorg.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    this.usuario.rg = aorg;
+  formataRG() {
+    this.usuario.rg = formatarRG(this.usuario.rg);
   }
 }
