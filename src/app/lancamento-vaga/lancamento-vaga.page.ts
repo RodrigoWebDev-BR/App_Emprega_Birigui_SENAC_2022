@@ -57,10 +57,12 @@ export class LancamentoVagaPage implements OnInit {
     { nome: 'Jurídico' },
     { nome: 'Limpeza' },
     { nome: 'Linha de produção' },
+    { nome: 'Restaurantes' },
+    { nome: 'Recursos Humanos' },
     { nome: 'Saúde' },
     { nome: 'Serviços gerais' },
     { nome: 'Supermercado' },
-    { nome: ' Tecnologia' },
+    { nome: 'Tecnologia' }
   ];
 
   contratos = [{ nome: 'CLT' }, { nome: 'PJ' }, { nome: 'Estágio' }];

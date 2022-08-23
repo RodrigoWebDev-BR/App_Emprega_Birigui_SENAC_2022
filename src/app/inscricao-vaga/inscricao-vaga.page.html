@@ -21,7 +21,37 @@
       <ion-card-header>
         <ion-row>
           <ion-col size="3">
-            <ion-icon name="medkit" style="font-size: 55px;" color="dark"></ion-icon>
+            <ion-icon *ngIf="vaga.categoria === 'Administrativo'" name="briefcase" style="font-size: 32px;" color="dark"></ion-icon>
+
+            <ion-icon *ngIf="vaga.categoria === 'Comércio'" name="storefront" style="font-size: 32px;" color="dark"></ion-icon>
+
+            <ion-icon *ngIf="vaga.categoria === 'Contabilidade'" name="calculator" style="font-size: 32px;" color="dark"></ion-icon>
+            
+            <ion-icon *ngIf="vaga.categoria === 'Educação'" name="school" style="font-size: 32px;" color="dark"></ion-icon>
+
+            <img *ngIf="vaga.categoria === 'Escritório'" src="../../assets/icon/working-at-home.png">
+            
+            <img *ngIf="vaga.categoria === 'Farmácia'" src="../../assets/icon/pill.png">
+            
+            <ion-icon *ngIf="vaga.categoria === 'Financeiro'" name="cash" style="font-size: 32px;" color="dark"></ion-icon>
+
+            <img *ngIf="vaga.categoria === 'Jurídico'" src="../../assets/icon/justice-scale.png">
+
+            <img *ngIf="vaga.categoria === 'Limpeza'" src="../../assets/icon/housekeeping.png">
+
+            <img *ngIf="vaga.categoria === 'Linha de produção'" src="../../assets/icon/production.png">
+
+            <ion-icon *ngIf="vaga.categoria === 'Restaurantes'" name="restaurant" style="font-size: 32px;" color="dark"></ion-icon>
+
+            <ion-icon *ngIf="vaga.categoria === 'Recursos Humanos'" name="people" style="font-size: 32px;" color="dark"></ion-icon>
+            
+            <ion-icon *ngIf="vaga.categoria === 'Saúde'" name="medkit" style="font-size: 32px;" color="dark"></ion-icon>
+
+            <ion-icon *ngIf="vaga.categoria === 'Serviços gerais'" name="build" style="font-size: 32px;" color="dark"></ion-icon>
+
+            <img *ngIf="vaga.categoria === 'Supermercado'" src="../../assets/icon/shopping-cart.png" >
+            
+            <ion-icon *ngIf="vaga.categoria === 'Tecnologia'" name="desktop" style="font-size: 32px;" color="dark"></ion-icon>
           </ion-col>
           <ion-col size="9">
             <ion-card-title style="text-decoration: underline;"> {{vaga.nome}} </ion-card-title>

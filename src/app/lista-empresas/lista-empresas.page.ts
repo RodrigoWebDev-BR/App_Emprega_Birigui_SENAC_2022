@@ -128,6 +128,7 @@ export class ListaEmpresasPage implements OnInit {
           attributes: {
             maxlength: 50,
           },
+          type: 'password'
         },
       ],
     });
@@ -167,6 +168,7 @@ export class ListaEmpresasPage implements OnInit {
           attributes: {
             maxlength: 50,
           },
+          type: 'password'
         },
       ]
     });
