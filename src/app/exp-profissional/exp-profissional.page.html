@@ -29,12 +29,16 @@
 
   <ion-row>
     <ion-col>
-        <ion-label>Data de início</ion-label>
-        <ion-input type="date" class="roundedInput ion-margin-top" [(ngModel)]="experiencia.admissao"></ion-input>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Data de início</ion-label>
+        <ion-input type="date" [(ngModel)]="experiencia.admissao" placeholder=" "></ion-input>
+      </ion-item>
     </ion-col>
     <ion-col>
-        <ion-label position="floating" class="ion-margin-top">Data de Término</ion-label>
-        <ion-input type="date" class="roundedInput ion-margin-top" [(ngModel)]="experiencia.demissao" disabled="{{checado}}"></ion-input>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Data de Término</ion-label>
+        <ion-input type="date" [(ngModel)]="experiencia.demissao" disabled="{{checado}}" placeholder=" "></ion-input>
+      </ion-item>
     </ion-col>
   </ion-row> 
 

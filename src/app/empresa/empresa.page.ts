@@ -168,7 +168,7 @@ export class EmpresaPage implements OnInit {
   async login() {
     const confirma = await this.mensagem.create({
       header: 'Atenção',
-      message: 'Deseja cancelar o seu cadastro? Todos os dados serão peridos.',
+      message: 'Deseja cancelar o seu cadastro? Todos os dados serão perdidos.',
       buttons: [
         {
           text: 'Não',
@@ -178,7 +178,7 @@ export class EmpresaPage implements OnInit {
           text: 'Sim',
           handler: () => {
             localStorage.clear();
-            this.nav.navigateRoot('login');
+            this.nav.navigateRoot('login/login');
           },
         },
       ],

@@ -47,7 +47,7 @@ export class UsuarioPage implements OnInit {
   async login() {
     const confirma = await this.mensagem.create({
       header: 'Atenção',
-      message: 'Deseja cancelar o seu cadastro? Todos os dados serão peridos.',
+      message: 'Deseja cancelar o seu cadastro? Todos os dados serão perdidos.',
       buttons: [
         {
           text: 'Não',
@@ -57,7 +57,7 @@ export class UsuarioPage implements OnInit {
           text: 'Sim',
           handler: () => {
             localStorage.clear();
-            this.nav.navigateRoot('login');
+            this.nav.navigateRoot('login/login');
           },
         },
       ],
@@ -230,10 +230,15 @@ export class UsuarioPage implements OnInit {
   }
 
   formataCpf() {
-    this.usuario.cpf = formatarCPF(this.usuario.cpf);
+    if(this.usuario.cpf !== '' && this.usuario.cpf !== null){
+      this.usuario.cpf = formatarCPF(this.usuario.cpf);
+    }
   }
 
+
   formataRG() {
+    if(this.usuario.rg !== '' && this.usuario.rg !== null){
     this.usuario.rg = formatarRG(this.usuario.rg);
+    }
   }
 }

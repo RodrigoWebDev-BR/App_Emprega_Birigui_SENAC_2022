@@ -16,7 +16,7 @@ export class DetalhesEmpresaPage implements OnInit {
 
   ramos = [
     { id: '1', nome: 'Alimentos' },
-    { id: '2', nome: 'Cinema' },
+    { id: '2', nome: 'Entretenimento' },
     { id: '3', nome: 'Contabilidade' },
     { id: '4', nome: 'Escritório' },
     { id: '5', nome: 'Instituto educacional' },

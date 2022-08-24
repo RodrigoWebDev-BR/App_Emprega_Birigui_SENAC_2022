@@ -51,6 +51,7 @@ export class LancamentoVagaPage implements OnInit {
     { nome: 'Comércio' },
     { nome: 'Contabilidade' },
     { nome: 'Educação' },
+    { nome: 'Entretenimento' },
     { nome: 'Escritório' },
     { nome: 'Farmácia' },
     { nome: 'Financeiro' },

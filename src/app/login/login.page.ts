@@ -3,6 +3,7 @@ import { LoginService } from './../servicos/login.service';
 import { ToastController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -16,7 +17,8 @@ export class LoginPage implements OnInit {
     public menuLeft: MenuController,
     public toast: ToastController,
     private authorize: LoginService,
-    public mensagem: AlertController
+    public mensagem: AlertController,
+    private activated: ActivatedRoute
   ) {
     this.menuLeft.enable(false);
   }
@@ -100,9 +102,32 @@ export class LoginPage implements OnInit {
     }
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (localStorage.getItem('loginAuto') === 'true') {
       this.user.cpf = localStorage.getItem('CPF/CNPJ');
+    }
+
+    if(this.activated.snapshot.paramMap.get('id') === 'empregado'){
+      const alerta = await this.mensagem.create({
+        header: 'PRONTO!!!',
+        message: 'Seu cadastro foi realizado com sucesso, faça seu login.',
+        buttons: ['OK'],
+      });
+
+      await alerta.present();
+
+      return;
+    }else if(this.activated.snapshot.paramMap.get('id') === 'empresa'){
+      const alerta = await this.mensagem.create({
+        header: 'PRONTO!!!',
+        // eslint-disable-next-line max-len
+        message: 'Seu cadastro foi realizado com sucesso. Aguarde a prefeitura de Birigui autorizar seu acesso e tente o login novamente dentro de 48 horas',
+        buttons: ['OK'],
+      });
+
+      await alerta.present();
+
+      return;
     }
   }
 
@@ -113,6 +138,8 @@ export class LoginPage implements OnInit {
   }
 
   formataCpf() {
-    this.user.cpf = formatarCPF(this.user.cpf);
+    if (this.user.cpf !== '' && this.user.cpf !== null) {
+      this.user.cpf = formatarCPF(this.user.cpf);
+    }
   }
 }

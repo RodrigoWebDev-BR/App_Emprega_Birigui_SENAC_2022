@@ -13,7 +13,7 @@ export class InscricaoVagaPage implements OnInit {
 
   public vagas: any[] = [
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Administrador',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -21,7 +21,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Administrativo'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Vendedor',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -29,7 +29,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Comércio'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Contador',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -37,7 +37,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Contabilidade'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Docente Senac',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -45,7 +45,15 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Educação'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Cinema',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Entretenimento'
+    },
+    {
+      nome: 'Analista de suporte',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -53,7 +61,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Escritório'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Auxiliar de farmácia',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -61,7 +69,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Farmácia'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Tesoureiro',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -69,7 +77,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Financeiro'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Advogado',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -77,7 +85,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Jurídico'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Auxiliar de limpeza',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -85,7 +93,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Limpeza'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Produtor',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -93,7 +101,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Linha de produção'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Garçom',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -101,7 +109,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Restaurantes'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Administrador',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -109,7 +117,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Recursos Humanos'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Aux. de Enfermagem',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -117,7 +125,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Saúde'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Servente',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -125,7 +133,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Serviços gerais'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Empacotador',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,
@@ -133,7 +141,7 @@ export class InscricaoVagaPage implements OnInit {
       categoria: 'Supermercado'
     },
     {
-      nome: 'Auxiliar de Enfermagem',
+      nome: 'Desenvolvedor Angular',
       nomeEmpresa: 'Santa Casa',
       cidade: 'Araçatuba',
       quantidade: 5,

@@ -23,7 +23,7 @@
     </ion-col>
   </ion-row>
 
-  <br>
+  <br />
   <div *ngFor="let empresa of empresas">
     <ion-row>
       <ion-col>
@@ -31,12 +31,31 @@
           <ion-card-header>
             <ion-card-title>{{empresa.nomeEmpresa}}</ion-card-title>
             <ion-card-subtitle>{{empresa.contato}}</ion-card-subtitle>
-            <ion-card-subtitle color="primary" *ngIf="empresa.aceita">Empresa autorizada <img src="../../assets/check.png"></ion-card-subtitle>
-            <ion-card-subtitle color="danger" *ngIf="empresa.recusada">Empresa recusada <img src="../../assets/delete.png"></ion-card-subtitle>
-            <ion-card-subtitle color="warning" *ngIf="!empresa.recusada && !empresa.aceita">Empresa pendente <img src="../../assets/pendente.png"></ion-card-subtitle>
+            <ion-card-subtitle color="primary" *ngIf="empresa.aceita"
+              >Empresa autorizada <img src="../../assets/check.png"
+            /></ion-card-subtitle>
+            <ion-card-subtitle color="danger" *ngIf="empresa.recusada"
+              >Empresa recusada <img src="../../assets/delete.png"
+            /></ion-card-subtitle>
+            <ion-card-subtitle
+              color="warning"
+              *ngIf="!empresa.recusada && !empresa.aceita"
+              >Empresa pendente <img src="../../assets/pendente.png"
+            /></ion-card-subtitle>
 
-            <ion-button size="small" *ngIf="!empresa.recusada && !empresa.aceita" (click)="aceitar(empresa)">Aceitar</ion-button>
-            <ion-button size="small" *ngIf="!empresa.recusada && !empresa.aceita" color="danger" (click)="rejeitar(empresa)">Rejeitar</ion-button>
+            <ion-button
+              size="small"
+              *ngIf="!empresa.recusada && !empresa.aceita"
+              (click)="aceitar(empresa)"
+              >Aceitar</ion-button
+            >
+            <ion-button
+              size="small"
+              *ngIf="!empresa.recusada && !empresa.aceita"
+              color="danger"
+              (click)="rejeitar(empresa)"
+              >Rejeitar</ion-button
+            >
           </ion-card-header>
 
           <ion-card-content>
@@ -49,15 +68,15 @@
                   <ion-row>
                     <ion-col>
                       <ion-list>
-
                         <ion-item>
                           <ion-row>
                             <ion-label>
-                              <span class="bold">Nome Fantasia:</span> {{empresa.nomeFantasia}}
+                              <span class="bold">Nome Fantasia:</span>
+                              {{empresa.nomeFantasia}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
-                        
+
                         <ion-item>
                           <ion-row>
                             <ion-label>
@@ -69,7 +88,8 @@
                         <ion-item>
                           <ion-row>
                             <ion-label>
-                              <span class="bold">E-Mail:</span> {{empresa.email}}
+                              <span class="bold">E-Mail:</span>
+                              {{empresa.email}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
@@ -77,7 +97,8 @@
                         <ion-item>
                           <ion-row>
                             <ion-label>
-                              <span class="bold">Data abertura:</span> {{empresa.dtAbertura}}
+                              <span class="bold">Data abertura:</span>
+                              {{empresa.dtAbertura}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
@@ -93,7 +114,8 @@
                         <ion-item>
                           <ion-row>
                             <ion-label>
-                              <span class="bold"> Situação:</span> {{empresa.situacao}}
+                              <span class="bold"> Situação:</span>
+                              {{empresa.situacao}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
@@ -101,7 +123,8 @@
                         <ion-item>
                           <ion-row>
                             <ion-label>
-                              <span class="bold">Natureza:</span> {{empresa.natureza}}
+                              <span class="bold">Natureza:</span>
+                              {{empresa.natureza}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
@@ -117,7 +140,8 @@
                         <ion-item>
                           <ion-row>
                             <ion-label>
-                              <span class="bold">Endereço:</span> {{empresa.end}}
+                              <span class="bold">Endereço:</span>
+                              {{empresa.end}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
@@ -133,7 +157,8 @@
                         <ion-item>
                           <ion-row>
                             <ion-label>
-                              <span class="bold">Bairro:</span> {{empresa.bairro}}
+                              <span class="bold">Bairro:</span>
+                              {{empresa.bairro}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
@@ -141,7 +166,8 @@
                         <ion-item>
                           <ion-row>
                             <ion-label>
-                              <span class="bold">Cidade:</span> {{empresa.cidade}} - {{empresa.estado}}
+                              <span class="bold">Cidade:</span>
+                              {{empresa.cidade}} - {{empresa.estado}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
@@ -149,10 +175,28 @@
                         <ion-item>
                           <ion-row>
                             <ion-label>
-                              <span class="bold">Contato 2:</span> {{empresa.contato2}}
+                              <span class="bold">Contato 2:</span>
+                              {{empresa.contato2}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label>
+                              <span class="bold">Ramo empresarial:</span>
+                              {{empresa.ramo}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <br />
+                        <ion-row>
+                          <ion-label>
+                            <h2 class="under" style="font-weight: bold;">Descrição completa:</h2>
+                            <p>{{empresa.descricao}}</p>
+                          </ion-label>
+                        </ion-row>
                       </ion-list>
                     </ion-col>
                   </ion-row>

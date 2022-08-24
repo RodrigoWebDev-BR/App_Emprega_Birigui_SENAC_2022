@@ -8,21 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recuperacao.page.scss'],
 })
 export class RecuperacaoPage implements OnInit {
+  email = { email: '' };
 
-  email = {email : ''};
+  constructor(public route: Router, public menuLeft: MenuController) {
+    this.menuLeft.enable(false);
+  }
 
-  constructor(public route: Router ,public menuLeft: MenuController) 
-  { this.menuLeft.enable(false) }
-
-  login(){
+  login() {
     this.route.navigate(['login']);
   }
 
-  recuperacao(){
+  recuperacao() {
     this.route.navigate(['login']);
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

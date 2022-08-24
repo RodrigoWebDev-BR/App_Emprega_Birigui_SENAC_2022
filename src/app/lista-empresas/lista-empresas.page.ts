@@ -27,7 +27,9 @@ export class ListaEmpresasPage implements OnInit {
       contato2: '(18)487168119',
       aceita: true,
       recusada: false,
-      idAccordion: '1_id'
+      idAccordion: '1_id',
+      ramo: 'Moda',
+      descricao: 'Provavelmente você vai precisar de algum texto no seu vlog para complementar as imagens.'
     },
     {
       nomeEmpresa: 'Amigão',
@@ -48,7 +50,9 @@ export class ListaEmpresasPage implements OnInit {
       contato2: '(18) 98123132',
       aceita: false,
       recusada: false,
-      idAccordion: '2_id'
+      idAccordion: '2_id',
+      ramo: 'Moda',
+      descricao: 'Provavelmente você vai precisar de algum texto no seu vlog para complementar as imagens.'
     },
     {
       nomeEmpresa: 'Açai',
@@ -69,7 +73,9 @@ export class ListaEmpresasPage implements OnInit {
       contato2: '(18) 98123132',
       aceita: false,
       recusada: true,
-      idAccordion: '3_id'
+      idAccordion: '3_id',
+      ramo: 'Moda',
+      descricao: 'Provavelmente você vai precisar de algum texto no seu vlog para complementar as imagens.'
     },
     {
       nomeEmpresa: 'Klin',
@@ -90,7 +96,9 @@ export class ListaEmpresasPage implements OnInit {
       contato2: '(18) 98123132',
       aceita: false,
       recusada: false,
-      idAccordion: '4_id'
+      idAccordion: '4_id',
+      ramo: 'Moda',
+      descricao: 'Provavelmente você vai precisar de algum texto no seu vlog para complementar as imagens.'
     },
   ];
 

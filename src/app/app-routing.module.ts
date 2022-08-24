@@ -5,7 +5,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'lista-empresas',
+    redirectTo: 'login/login',
     pathMatch: 'full'
   },
   {
@@ -21,7 +21,7 @@ const routes: Routes = [
     loadChildren: () => import('./contato/contato.module').then( m => m.ContatoPageModule)
   },
   {
-    path: 'login',
+    path: 'login/:id',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
