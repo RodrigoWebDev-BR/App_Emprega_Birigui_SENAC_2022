@@ -26,7 +26,7 @@ export class CandidaturasPage implements OnInit {
       estado: 'SP',
       descricao: 'Moro ao lado do asilo',
       aceita: true,
-      recusada: false
+      recusada: false,
     },
     {
       nome: 'João do chocolate',
@@ -45,7 +45,7 @@ export class CandidaturasPage implements OnInit {
       estado: 'SP',
       descricao: 'Moro la no aguas claras e sou da correria',
       aceita: false,
-      recusada: true
+      recusada: true,
     },
     {
       nome: 'Rodrigo',
@@ -64,7 +64,7 @@ export class CandidaturasPage implements OnInit {
       estado: 'SP',
       descricao: 'Sou de birigui, menti que sou de araçatuba',
       aceita: false,
-      recusada: false
+      recusada: false,
     },
     {
       nome: 'Eminem',
@@ -83,17 +83,17 @@ export class CandidaturasPage implements OnInit {
       estado: 'NY',
       descricao: 'Mommy spaghet',
       aceita: true,
-      recusada: false
-    }
+      recusada: false,
+    },
   ];
 
-  constructor(public mensagem: AlertController) { }
+  constructor(public mensagem: AlertController) {}
 
-  abreModal(open: boolean){
+  abreModal(open: boolean) {
     this.isModalOpen = open;
   }
 
-  async convidar(usuario){
+  async convidar(usuario) {
     const alerta = await this.mensagem.create({
       header: 'ATENÇÃO!',
       message: 'Deseja convidar ' + usuario.nome + ' para a vaga?',
@@ -117,10 +117,13 @@ export class CandidaturasPage implements OnInit {
     await alerta.present();
   }
 
-  async rejeitar(usuario){
+  async rejeitar(usuario) {
     const alerta = await this.mensagem.create({
       header: 'ATENÇÃO!',
-      message: 'Deseja rejeitar ' + usuario.nome + ' para a vaga? Este processo é irreversível',
+      message:
+        'Deseja rejeitar ' +
+        usuario.nome +
+        ' para a vaga? Este processo é irreversível',
       buttons: [
         {
           text: 'Cancelar',
@@ -141,7 +144,5 @@ export class CandidaturasPage implements OnInit {
     await alerta.present();
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -1,5 +1,10 @@
 import { validarCNPJ } from './../../environments/functions';
-import { MenuController, NavController, AlertController, ToastController } from '@ionic/angular';
+import {
+  MenuController,
+  NavController,
+  AlertController,
+  ToastController,
+} from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,8 +14,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  // this.activatedRoute.snapshot.paramMap.get('id');
-
   empresa = true;
   empregado = false;
 
@@ -91,8 +94,10 @@ export class HomePage implements OnInit {
           handler: (cnpj) => {
             if (validarCNPJ(cnpj[0])) {
               emprego.online = false;
-              this.empregosDisponivel[this.empregosDisponivel.indexOf(emprego)] = emprego;
-            }else{
+              this.empregosDisponivel[
+                this.empregosDisponivel.indexOf(emprego)
+              ] = emprego;
+            } else {
               this.exibeToast('CNPJ inválido.');
             }
           },

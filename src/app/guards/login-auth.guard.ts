@@ -16,7 +16,7 @@ export class LoginAuthGuard implements CanActivate {
     const login = localStorage.getItem('accessToken');
 
     if(login === null || login === undefined){
-      this.nav.navigateRoot('login');
+      this.nav.navigateRoot('login/login');
       return;
     }
 
