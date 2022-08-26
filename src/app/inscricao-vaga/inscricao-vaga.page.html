@@ -16,21 +16,59 @@
     </ion-row>
   </div>
   <div *ngFor="let vaga of vagas" class="animate__animated animate_fadeInUp">
-    <ion-card>
-      <ion-card-header>
+    <ion-card class="cardVaga">
+      <ion-card-header style="padding-left: 0px;">
         <ion-row>
-          <ion-col size="3">
-            <ion-icon name="medkit" style="font-size: 55px;" color="dark"></ion-icon>
-          </ion-col>
-          <ion-col size="9">
-            <ion-card-title style="text-decoration: underline;">{{vaga.nome}}</ion-card-title>
-           <br>
-            <ion-card-subtitle>{{vaga.nomeEmpresa}} - {{vaga.cidade}}</ion-card-subtitle>
-            <ion-card-subtitle>Qtde. de vagas: {{vaga.quantidade}}</ion-card-subtitle>
-            <ion-card-subtitle style="font-weight: 700;">Salário: {{vaga.salario}}</ion-card-subtitle>
+          <ion-col>
+            <ion-item>
+              <ion-thumbnail slot="start">
+                <ion-icon *ngIf="vaga.categoria === 'Administrativo'" name="briefcase" style="font-size: 64px;" color="dark"></ion-icon>
+
+                <ion-icon *ngIf="vaga.categoria === 'Comércio'" name="storefront" style="font-size: 64px;" color="dark"></ion-icon>
+
+                <ion-icon *ngIf="vaga.categoria === 'Contabilidade'" name="calculator" style="font-size: 64px;" color="dark"></ion-icon>
+
+                <ion-icon *ngIf="vaga.categoria === 'Educação'" name="school" style="font-size: 64px;" color="dark"></ion-icon>
+
+                <ion-icon *ngIf="vaga.categoria === 'Entretenimento'" name="dice" style="font-size: 64px;" color="dark"></ion-icon>
+
+                <img *ngIf="vaga.categoria === 'Escritório'" src="../../assets/icon/working-at-home.png">
+
+                <img *ngIf="vaga.categoria === 'Farmácia'" src="../../assets/icon/pill.png">
+
+                <ion-icon *ngIf="vaga.categoria === 'Financeiro'" name="cash" style="font-size: 64px;" color="dark"></ion-icon>
+
+                <img *ngIf="vaga.categoria === 'Jurídico'" src="../../assets/icon/justice-scale.png">
+
+                <img *ngIf="vaga.categoria === 'Limpeza'" src="../../assets/icon/housekeeping.png">
+
+                <img *ngIf="vaga.categoria === 'Linha de produção'" src="../../assets/icon/production.png">
+
+                <ion-icon *ngIf="vaga.categoria === 'Restaurantes'" name="restaurant" style="font-size: 64px;" color="dark"></ion-icon>
+
+                <ion-icon *ngIf="vaga.categoria === 'Recursos Humanos'" name="people" style="font-size: 64px;" color="dark"></ion-icon>
+
+                <ion-icon *ngIf="vaga.categoria === 'Saúde'" name="medkit" style="font-size: 64px;" color="dark"></ion-icon>
+
+                <ion-icon *ngIf="vaga.categoria === 'Serviços gerais'" name="construct" style="font-size: 64px;" color="dark"></ion-icon>
+                
+                <ion-icon *ngIf="vaga.categoria === 'Supermercado'" name="cart" style="font-size: 64px;" color="dark"></ion-icon>
+
+                <ion-icon *ngIf="vaga.categoria === 'Tecnologia'" name="desktop" style="font-size: 64px;" color="dark"></ion-icon>
+              </ion-thumbnail>
+              <ion-label style="margin-left: 10px;">
+                <ion-card-title style="text-decoration: underline;">{{vaga.nome}}</ion-card-title>
+               <br>
+                <ion-card-subtitle>{{vaga.nomeEmpresa}} - {{vaga.cidade}}</ion-card-subtitle>
+                <ion-card-subtitle>Qtde. de vagas: {{vaga.quantidade}}</ion-card-subtitle>
+                <ion-card-subtitle style="font-weight: 700;">Salário: {{vaga.salario}}</ion-card-subtitle>
+                <ion-card-subtitle style="font-weight: 700;">Categoria: {{vaga.categoria}}</ion-card-subtitle>
+              </ion-label>
+            </ion-item>    
           </ion-col>
         </ion-row>
       </ion-card-header>
+
       <ion-card-content>
         <ion-row class="displays">
           <ion-button (click)="detalhes()">
@@ -39,6 +77,7 @@
           </ion-button>
         </ion-row>
       </ion-card-content>
+
     </ion-card>
   </div>
 </ion-content>

@@ -1,3 +1,4 @@
+import { validarCNPJ, validaEmail } from './../../environments/functions';
 import { AlertController, NavController, MenuController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
@@ -50,7 +51,7 @@ export class EmpresaPage implements OnInit {
           text: 'Sim',
           handler:() => { 
             localStorage.clear();
-            this.nav.navigateRoot('login');
+            this.nav.navigateRoot('login/login');
           }
         }
       ]
@@ -148,7 +149,7 @@ export class EmpresaPage implements OnInit {
       await alerta.present();
 
       return;
-    } else if (this.empresa.email === '' || this.empresa.email === null) {
+    } else if (!validaEmail(this.empresa.email)) {
       const alerta = await this.mensagem.create(
         {
           header: 'ATENÇÃO!',
@@ -198,7 +199,19 @@ export class EmpresaPage implements OnInit {
 
       return;
 
-    }else {
+    }else if(!validarCNPJ(this.empresa.cnpj)) {
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO!',
+          message: 'CNPJ inválido',
+          buttons: ['ok']
+        }
+      )
+
+      await alerta.present();
+
+      return;
+    }else{
       this.salvarTemporariamente();
       this.nav.navigateForward('endereco');
     }
@@ -233,8 +246,7 @@ export class EmpresaPage implements OnInit {
     this.empresa.atividades = localStorage.getItem('atividades');
     this.empresa.natureza = localStorage.getItem('natureza');
   }
-
-
+  
   ngOnInit() {
     this.carregarDados();
   }

@@ -2,34 +2,19 @@ import { NavController, MenuController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-detalhes-empresa',
-  templateUrl: './detalhes-empresa.page.html',
-  styleUrls: ['./detalhes-empresa.page.scss'],
+  selector: 'app-detalhes-usuario',
+  templateUrl: './detalhes-usuario.page.html',
+  styleUrls: ['./detalhes-usuario.page.scss'],
 })
-export class DetalhesEmpresaPage implements OnInit {
+export class DetalhesUsuarioPage implements OnInit {
+
   detalhes = 
     {
-      ramo:'',
-      descricao:''
+     descricao:''
     } ;
 
-  caracter = 0
+  caracter = 0;
 
-  ramos=[
-    {id:'1', nome:'Alimentos'},
-    {id:'2', nome:'Entretenimento'},
-    {id:'3', nome:'Contabilidade'},
-    {id:'4', nome:'Escritório'},
-    {id:'5', nome:'Instituto educacional'},
-    {id:'6', nome:'Linha de produção'},
-    {id:'7', nome:'Moda'},
-    {id:'8', nome:'Postos de combutíveis'},
-    {id:'9', nome:'Recursos humanos'},
-    {id:'10', nome:'Supermercados'},
-    {id:'11', nome:'Tecnologia'},
-    {id:'12', nome:'Varejo'},
-    {id:'13', nome:'Outros'}
-  ]
 
   constructor(
     public nav: NavController,
@@ -39,7 +24,7 @@ export class DetalhesEmpresaPage implements OnInit {
     this.leftMenu.enable(false);
   }
 
-  contato(){
+  idioma(){
     this.nav.back();
   };
 
@@ -60,18 +45,7 @@ export class DetalhesEmpresaPage implements OnInit {
   };
 
   async conclusao(){
-    if(this.detalhes.ramo === '' || this.detalhes.ramo === null){
-      const alerta = await this.mensagem.create({
-        header: 'Atenção',
-        subHeader: 'Insira um Ramo',
-        message: 'É necessário inserir um ramo',
-        buttons: ['OK'],
-      });
-
-      await alerta.present();
-
-      return;
-    }else if(this.detalhes.descricao === '' || this.detalhes.descricao === null){
+    if(this.detalhes.descricao === '' || this.detalhes.descricao === null){
 
       const alerta = await this.mensagem.create({
         header: 'Atenção',
@@ -101,19 +75,16 @@ export class DetalhesEmpresaPage implements OnInit {
   };
 
   salvarTemporariamente(){
-    localStorage.setItem('ramo', this.detalhes.ramo);
-    localStorage.setItem('ramo-descricao', this.detalhes.descricao);
+    localStorage.setItem('descricao-usuario', this.detalhes.descricao);
   }
 
   carregarDados(){
-    this.detalhes.ramo = localStorage.getItem('ramo');
-    this.detalhes.descricao = localStorage.getItem('ramo-descricao');
+    this.detalhes.descricao = localStorage.getItem('descricao-usuario');
 
   }
 
   ngOnInit() {
     this.carregarDados();
-    console.log(this.detalhes.descricao);
     
     if(this.detalhes.descricao !== null){
 
@@ -121,4 +92,5 @@ export class DetalhesEmpresaPage implements OnInit {
 
     }
   }
+
 }

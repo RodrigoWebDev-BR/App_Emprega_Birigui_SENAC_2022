@@ -3,7 +3,8 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title color="light" class="centertext tituloProject">Currículo</ion-title>
+    <ion-title *ngIf="empregado" color="light" class="centertext tituloProject">Currículo</ion-title>
+    <ion-title *ngIf="empresa" color="light" class="centertext tituloProject">Dados Empresariais</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,23 +12,22 @@
 
   <ion-row>
     <ion-col>
-      <ion-item expand="block">
-        <ion-col size="3" style="padding-left:0px">
-          <ion-icon style="font-size: 80px;" name="person-circle-outline" color="dark"></ion-icon>
-        </ion-col>
-        <ion-col size="9">
-          <ion-row>
-            <h2 sytle="margin-bottom: 0.">Patrick</h2>
-          </ion-row>
-          <p style="margin-top: 5px;">(99) 99999-9999</p>
-        </ion-col>
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img *ngIf="empregado" src="../../assets/icon/user.png" alt="">
+          <img *ngIf="empresa" src="../../assets/icon/buildings.png" alt="">
+        </ion-thumbnail>
+        <ion-label class="bold">
+          <h1 style="margin-bottom: 0px; font-weight: bold;">Patrick</h1>
+          <p style="margin-top: 5px;">(12) 34567-8910</p>
+        </ion-label>
       </ion-item>
     </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col>
-      <ion-accordion-group>
+      <ion-accordion-group *ngIf="empregado">
 
         <ion-accordion value="dadosP">
           <ion-item slot="header" color="light">
@@ -261,6 +261,156 @@
                     <ion-label>
                       <h2>Inglês</h2>
                       <p>avançado</p>
+                    </ion-label>
+                    <ion-icon name="trash-outline" color="danger"></ion-icon>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+      </ion-accordion-group>
+
+      <ion-accordion-group *ngIf="empresa">
+
+        <ion-accordion value="dadosP">
+          <ion-item slot="header" color="light">
+            <ion-label>Dados Empresa</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end;">
+                    <ion-button id="modalDadosP">
+                      <ion-label style="margin-top: 3px">Editar</ion-label>
+                      <ion-icon class="iconEditar" name="pencil" color="light"></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Nome Fantasia: </span>fantasia</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">E-mail: </span>teste@teste</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">CNPJ: </span>123.456/7891-01</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Data de abertura: </span>99/99/9999</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">CNAE: </span>123456789</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Situação: </span>Ativa</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Natureza Juridica: </span>funcional</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Ramo empresarial: </span>Moda</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <br/>
+                  <ion-row style="margin-left: 16px;">
+                    <ion-label>
+                      <span class="bold">
+                        Descrição:
+                      </span>
+                      Descrição de teste
+                    </ion-label>
+                  </ion-row>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion value="endereco">
+          <ion-item slot="header" color="light">
+            <ion-label>Endereço</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end;">
+                    <ion-button id="modalEndereco">
+                      <ion-label style="margin-top: 3px">Editar</ion-label>
+                      <ion-icon class="iconEditar" name="pencil" color="light"></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">CEP: </span>99999-999</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Endereço: </span>exemplo</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Bairro: </span>exemplo</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Número: </span>9999</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Cidade: </span>exemplo</ion-label>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label><span class="bold">Estado: </span>XX</ion-label>
+                    </ion-row>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion value="contato">
+          <ion-item slot="header" color="light">
+            <ion-label>Contatos</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end;">
+                    <ion-button id="modalContato">
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon class="iconEditar" name="add-circle" color="light"></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <ion-item style="margin-top: 10px;">
+                    <ion-label>
+                      <h2>Contato</h2>
+                      <p>exemplo</p>
                     </ion-label>
                     <ion-icon name="trash-outline" color="danger"></ion-icon>
                   </ion-item>

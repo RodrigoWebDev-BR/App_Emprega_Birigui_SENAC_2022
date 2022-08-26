@@ -31,24 +31,6 @@
 
     <ion-row>
       <ion-col class="espacamento">
-        <ion-label position="floating">Data de início</ion-label>
-        <ion-item class="roundedInput" lines="none">
-          <ion-input type="date" [(ngModel)]="curso.dataInicio">
-          </ion-input>
-        </ion-item>
-      </ion-col>
-
-      <ion-col class="espacamento">
-        <ion-label position="floating">Data de conclusão</ion-label>
-        <ion-item class="roundedInput" lines="none">
-          <ion-input type="date" [(ngModel)]="curso.dataConclusao">
-          </ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col class="espacamento">
         <ion-button color="primary" shape="block" (click)="adicionarCurso(curso)">
           ADICIONAR CURSO
         </ion-button>
@@ -65,10 +47,8 @@
 
               <ion-item *ngFor="let curso of cursos" lines="none">
                 <ion-label>
-                  <h4>Curso: {{ curso.nome }}</h4>             
-                  <h4>Instituição de Ensino: {{ curso.instituicaoEnsino }}</h4>
-                  <h4>Data de Início: {{ curso.dataInicio | date:'dd/MM/yyyy' }}</h4>    
-                  <h4>Data de Conclusão: {{ curso.dataConclusao | date:'dd/MM/yyyy' }}</h4>                             
+                  <p>Curso: {{ curso.nome }}</p>             
+                  <h2>Instituição de Ensino: {{ curso.instituicaoEnsino }}</h2>                            
                 </ion-label>
                 <ion-icon name="trash-outline" slot="end" color="danger" (click)="removerCurso(curso)" style="width: 30px; height: 30px;"></ion-icon>
               </ion-item>

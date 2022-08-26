@@ -14,9 +14,7 @@ export class CursosPage implements OnInit {
 
   public curso = {
     nome: "",
-    instituicaoEnsino: "",
-    dataInicio: "",
-    dataConclusao: ""
+    instituicaoEnsino: ""
   }
 
   public cursos: any[] = []
@@ -24,10 +22,6 @@ export class CursosPage implements OnInit {
   constructor(public mensagem: AlertController, public nav: NavController, public menuLeft: MenuController, public cursoServ: CursosService) {
     this.menuLeft.enable(false);
     this.carregarDados()
-  }
-
-  ngOnInit() {
-    this.carregarDados();
   }
 
   async adicionarCurso() {
@@ -57,30 +51,15 @@ export class CursosPage implements OnInit {
       await alerta.present()
 
       return
-    } else if (this.curso.dataInicio === '' || this.curso.dataInicio === null) {
-      const alerta = await this.mensagem.create(
-        {
-          header: "ATENÇÃO!",
-          message: "Não é permitido adicionar um curso sem data de início.",
-          buttons: ["ok"],
-          cssClass: "cssAlerta"
-        }
-      )
-
-      await alerta.present()
-
-      return
-    } else {
+    }else {
 
       const cursoCopy = JSON.parse(JSON.stringify(this.curso))
       this.cursos.push(cursoCopy)
 
-      this.cursoServ.salvarCurso(this.curso.nome, this.curso.instituicaoEnsino, this.curso.dataInicio, this.curso.dataConclusao)
+      this.cursoServ.salvarCurso(this.curso.nome, this.curso.instituicaoEnsino)
 
       this.curso.nome = ''
       this.curso.instituicaoEnsino = ''
-      this.curso.dataInicio = ''
-      this.curso.dataConclusao = ''
     }
   }
 
@@ -136,8 +115,12 @@ export class CursosPage implements OnInit {
     await confirmaRemover.present()
   }
 
+  ngOnInit() {
+    this.carregarDados();
+  }
+
   carregarDados() {
-    if (this.cursoServ.listar !== undefined) {
+    if (this.cursoServ.listar() !== undefined) {
       this.cursos = this.cursoServ.listar();
     }
   }

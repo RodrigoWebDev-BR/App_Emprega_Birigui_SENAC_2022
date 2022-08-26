@@ -119,7 +119,7 @@ export class IdiomasPage {
   }
 
   async removerIdioma(idiomaRemove) {
-    let confirmaRemover = await this.mensagem.create(
+    const confirmaRemover = await this.mensagem.create(
       {
         header: 'ATENÇÃO',
         message: 'Confirma a exclusão do ' + idiomaRemove.id_idioma + '?',
@@ -145,7 +145,7 @@ export class IdiomasPage {
   }
 
   proximo() {
-    this.nav.navigateRoot('conclusao');
+    this.nav.navigateRoot('detalhes-usuario');
   }
 
   ngOnInit() {

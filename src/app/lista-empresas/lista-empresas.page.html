@@ -36,8 +36,8 @@
             <ion-card-subtitle color="danger" *ngIf="empresa.recusada">Empresa recusada <img src="../../assets/delete.png"></ion-card-subtitle>
             <ion-card-subtitle color="warning" *ngIf="!empresa.recusada && !empresa.aceita">Empresa pendente <img src="../../assets/pendente.png"></ion-card-subtitle>
             <br>
-            <ion-button size="small" *ngIf="!empresa.recusada && !empresa.aceita">Aceitar</ion-button>
-            <ion-button size="small" color="danger" *ngIf="!empresa.recusada && !empresa.aceita">Rejeitar</ion-button>
+            <ion-button size="small" *ngIf="!empresa.recusada && !empresa.aceita" (click)="aceitar(empresa)">Aceitar</ion-button>
+            <ion-button size="small" color="danger" *ngIf="!empresa.recusada && !empresa.aceita" (click)="rejeitar(empresa)">Rejeitar</ion-button>
           </ion-card-header>
           <ion-card-content>
             <ion-accordion-group>
@@ -52,7 +52,7 @@
                         
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>Nome Fantasia: </span> {{empresa.nomeFantasia}}
                             </ion-label>
                           </ion-row>
@@ -60,7 +60,7 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>CNPJ: </span> {{empresa.cnpj}}
                             </ion-label>
                           </ion-row>
@@ -68,7 +68,7 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>E-mail: </span> {{empresa.email}}
                             </ion-label>
                           </ion-row>
@@ -76,7 +76,7 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>Data abertura: </span> {{empresa.dtAbertura}}
                             </ion-label>
                           </ion-row>
@@ -84,7 +84,7 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>CNAE: </span> {{empresa.cnae}}
                             </ion-label>
                           </ion-row>
@@ -92,7 +92,7 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>Situação: </span> {{empresa.situacao}}
                             </ion-label>
                           </ion-row>
@@ -100,7 +100,7 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>Natureza: </span> {{empresa.natureza}}
                             </ion-label>
                           </ion-row>
@@ -108,7 +108,7 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>CEP: </span> {{empresa.cep}}
                             </ion-label>
                           </ion-row>
@@ -116,7 +116,7 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>Endereço: </span> {{empresa.end}}
                             </ion-label>
                           </ion-row>
@@ -124,7 +124,7 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>Número: </span> {{empresa.nmr}}
                             </ion-label>
                           </ion-row>
@@ -132,7 +132,7 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>Bairro: </span> {{empresa.bairro}}
                             </ion-label>
                           </ion-row>
@@ -140,7 +140,7 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>Cidade: </span> {{empresa.cidade}} - {{empresa.estado}}
                             </ion-label>
                           </ion-row>
@@ -148,11 +148,27 @@
 
                         <ion-item>
                           <ion-row>
-                            <ion-label>
+                            <ion-label class="bold">
                               <span>Contato 2: </span> {{empresa.contato2}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="bold">
+                              <span>Ramo empresarial: </span> {{empresa.ramo}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <br/>
+                        <ion-row>
+                          <ion-label>
+                            <h2 class="bold under" style="font-weight:bold">Descrição completa</h2>
+                            <p>{{empresa.descricao}}</p>
+                          </ion-label>
+                        </ion-row>
 
                       </ion-list>
                     </ion-col>

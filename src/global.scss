@@ -28,115 +28,112 @@
 .roundedInput {
 
     --border-radius: 10px;
-      border-radius: 10px;
+    border-radius: 10px;
     --highlight-height: 0;
 
     --background: rgb(241, 241, 241);
 
-    -webkit-box-shadow: 4px 4px 20px 5px rgba(0,0,0,0.5); 
+    -webkit-box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.5);
 
-    box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.2);
+    box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 
-   }
+}
 
-   .center{
-       margin: 0 auto;
-   }
+.center {
+    margin: 0 auto;
+}
 
-   .black{
-       color: black;
-   }
+.black {
+    color: black;
+}
 
-   .white{
-       color: white;
-   }
+.white {
+    color: white;
+}
 
-   .espacamento{
-       margin-left: 15px;
-       margin-right: 15px;
-   }
+.espacamento {
+    margin-left: 15px;
+    margin-right: 15px;
+}
 
-   .margin-left{
-       margin-left: 60%;
-   }
+.margin-left {
+    margin-left: 60%;
+}
 
-   .txtPassword{
+.txtPassword {
     font-size: 12px;
-    
-   }
 
-   .txtNewAccount{
-       font-size: 12px;
-   }
+}
 
-   .fundobg{
-       --background: rgb(232, 232, 232);
-   }
+.txtNewAccount {
+    font-size: 12px;
+}
 
-   .centertext{
-       text-align: center;
-   }
+.fundobg {
+    --background: rgb(232, 232, 232);
+}
 
-   .iconPad{
+.centertext {
+    text-align: center;
+}
+
+.iconPad {
     padding-top: 9px;
-   }
+}
 
-   .espacamentoLogin{
+.espacamentoLogin {
     margin: 0px 8%;
-   }
+}
 
-   .icone{
-    width: 35px; 
+.icone {
+    width: 35px;
     height: 35px;
-    padding-left: 10px;
-   }
+}
 
-   .tituloPadding{
+.tituloPadding {
     padding-left: 0px
-   }
+}
 
-   .tituloProject{
+.tituloProject {
     padding-left: 0px;
     padding-right: 52px;
-   }
+}
 
-   .bold{
+.bold {
     font-weight: bold;
-   }
+}
 
-   .middle{
+.middle {
     display: flex;
     justify-content: center;
-   }
+}
 
-   .sublinhado{
+.sublinhado {
     text-decoration: underline #000000;
-   }
+}
 
-   .perfil{
+.perfil {
     display: flex;
     justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
-   }
+}
 
-   .icon{
-    width: 35px;
-    height: 35px;
-    padding-left: 10px;
-   }
-
-   .border{
+.border {
     border-bottom-style: solid;
     border-color: #69696958;
-    border-bottom-width: 0.5px ;
-   }
+    border-bottom-width: 0.5px;
+}
 
-   .under{
+.under {
     text-decoration: underline;
-   }
+}
 
-   .paddingLabel{
+.paddingLabel {
     padding-left: 30px;
+}
+
+.labelChk {
+    margin-left: 8px;
 }

@@ -29,7 +29,7 @@
       <ion-col>
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">RG <span style="color: red">*</span></ion-label>
-          <ion-input type="text" [(ngModel)]="usuario.rg" placeholder="********-*">
+          <ion-input type="text" [(ngModel)]="usuario.rg" placeholder="00.000.000-0" (ionBlur)="formataRG()">
           </ion-input>
           <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
         </ion-item>
@@ -38,7 +38,7 @@
       <ion-col>
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">CPF <span style="color: red">*</span></ion-label>
-          <ion-input type="text" [(ngModel)]="usuario.cpf" placeholder="***.***.***-**">
+          <ion-input type="text" [(ngModel)]="usuario.cpf" placeholder="000.000.000-00" (ionBlur)="formataCpf()">
           </ion-input>
           <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
         </ion-item>
@@ -57,9 +57,9 @@
 
     <ion-row>
       <ion-col>
-        <ion-label position="floating">Data de nascimento</ion-label>
         <ion-item class="roundedInput" lines="none">
-          <ion-input type="date" [(ngModel)]="usuario.dataNasc">
+          <ion-label position="floating">Data de nascimento</ion-label>
+          <ion-input type="date" [(ngModel)]="usuario.dataNasc" placeholder="">
           </ion-input>
         </ion-item>
       </ion-col>
@@ -106,26 +106,6 @@
           <ion-label position="floating">Estado Civil <span style="color: red">*</span></ion-label>
           <ion-select [(ngModel)]="usuario.estadoCivil" interface="popover">
             <ion-select-option *ngFor="let etCvl of estadoCivil" value="{{ etCvl.estadoAtual }}">{{ etCvl.estadoAtual }}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-item class="roundedInput" lines="none">
-          <ion-label position="floating">Ocultar Idade? <span style="color: red">*</span></ion-label>
-          <ion-select [(ngModel)]="usuario.ocultarIdade" interface="popover">
-            <ion-select-option *ngFor="let octIdd of ocultarIdade" value="{{ octIdd.ocultarAge}}">{{ octIdd.ocultarAge }}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col>
-        <ion-item class="roundedInput" lines="none">
-          <ion-label position="floating">Está Empregado? <span style="color: red">*</span></ion-label>
-          <ion-select [(ngModel)]="usuario.estaEmpregado" interface="popover">
-            <ion-select-option *ngFor="let etEmp of estaEmpregado" value="{{ etEmp.estaEmp }}">{{ etEmp.estaEmp }}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>

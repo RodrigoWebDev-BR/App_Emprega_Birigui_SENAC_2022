@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'lista-usuarios',
+    redirectTo: 'login/login',
     pathMatch: 'full'
   },
   {
@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./contato/contato.module').then( m => m.ContatoPageModule)
   },
   {
-    path: 'login',
+    path: 'login/:id',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
@@ -85,13 +85,22 @@ const routes: Routes = [
   {
     path: 'lista-usuarios',
     loadChildren: () => import('./lista-usuarios/lista-usuarios.module').then( m => m.ListaUsuariosPageModule)
-  },  {
+  },
+  {
     path: 'detalhes-empresa',
     loadChildren: () => import('./detalhes-empresa/detalhes-empresa.module').then( m => m.DetalhesEmpresaPageModule)
   },
   {
     path: 'lancamento-vaga',
     loadChildren: () => import('./lancamento-vaga/lancamento-vaga.module').then( m => m.LancamentoVagaPageModule)
+  },
+  {
+    path: 'detalhes-usuario',
+    loadChildren: () => import('./detalhes-usuario/detalhes-usuario.module').then( m => m.DetalhesUsuarioPageModule)
+  },
+  {
+    path: 'candidaturas',
+    loadChildren: () => import('./candidaturas/candidaturas.module').then( m => m.CandidaturasPageModule)
   }
 
 
