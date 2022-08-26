@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { formatarCPF } from './../../environments/functions';
 import { LoginService } from './../servicos/login.service';
 import { ToastController, AlertController } from '@ionic/angular';

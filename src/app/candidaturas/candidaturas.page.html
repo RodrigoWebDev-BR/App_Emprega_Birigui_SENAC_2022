@@ -75,7 +75,7 @@
     </ion-row>
   </div>
 
-  <ion-modal [isOpen]="isModalOpen">
+  <ion-modal [isOpen]="isModalOpen" mode="md">
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -105,11 +105,13 @@
               >
             </ion-col>
           </ion-row>
-
+          
           <br />
-          <ion-title class="bold">Mario de souza</ion-title>
-
-          <div style="margin-left: 20px">
+          <ion-row>
+            <ion-title class="bold">Mario de souza</ion-title>
+          </ion-row>
+          
+          <div style="margin-left: 15px">
             <ion-row>
               <ion-col>
                 <ion-label>

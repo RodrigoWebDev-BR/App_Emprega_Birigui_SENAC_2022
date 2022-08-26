@@ -1,4 +1,9 @@
-import { formatarCPF, formatarRG, validaCPF, validaEmail } from './../../environments/functions';
+import {
+  validaCPF,
+  validaEmail,
+  formatarCPF,
+  formatarRG,
+} from './../../environments/functions';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, MenuController, NavController } from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
@@ -9,6 +14,7 @@ import { Storage } from '@capacitor/storage';
   styleUrls: ['./usuario.page.scss'],
 })
 export class UsuarioPage implements OnInit {
+
   public usuario = {
     nome: null,
     rg: null,
@@ -230,15 +236,15 @@ export class UsuarioPage implements OnInit {
   }
 
   formataCpf() {
-    if(this.usuario.cpf !== '' && this.usuario.cpf !== null){
+    if (this.usuario.cpf !== '' && this.usuario.cpf !== null) {
       this.usuario.cpf = formatarCPF(this.usuario.cpf);
     }
   }
 
 
   formataRG() {
-    if(this.usuario.rg !== '' && this.usuario.rg !== null){
-    this.usuario.rg = formatarRG(this.usuario.rg);
+    if (this.usuario.rg !== '' && this.usuario.rg !== null) {
+      this.usuario.rg = formatarRG(this.usuario.rg);
     }
   }
 }
