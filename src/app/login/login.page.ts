@@ -45,30 +45,40 @@ export class LoginPage implements OnInit {
 
       return;
     } else {
-      this.authorize
-        .login(this.user.cpf, this.user.password)
-        .then((response) => {
-          this.resp = response;
-          if (this.resp === undefined) {
-            this.exibeToast('Erro de resposta com o servidor.');
-          } else {
-            if (localStorage.getItem('loginAuto') === 'true') {
-              localStorage.setItem('CPF/CNPJ', this.user.cpf);
-            }
-            this.user.cpf = '';
-            this.user.password = '';
+      // this.authorize
+      // .login(this.user.cpf, this.user.password)
+      // .then((response) => {
+      //   this.resp = response;
+      //   if (this.resp === undefined) {
+      //     this.exibeToast('Erro de resposta com o servidor.');
+      //   } else {
+      //     if (localStorage.getItem('loginAuto') === 'true') {
+      //       localStorage.setItem('CPF/CNPJ', this.user.cpf);
+      //     }
+      //     this.user.cpf = '';
+      //     this.user.password = '';
 
-            localStorage.setItem('accessToken', this.resp.accessToken);
-            this.nav.navigateRoot('home');
-          }
-        })
-        .catch((e) => {
-          if (this.user.cpf.includes('/')) {
-            this.exibeToast('CNPJ ou senha inválidos');
-          } else {
-            this.exibeToast('CPF ou senha inválidos');
-          }
-        });
+      //     localStorage.setItem('accessToken', this.resp.accessToken);
+      //     this.nav.navigateRoot('home');
+      //   }
+      // })
+      // .catch((e) => {
+      //   if (this.user.cpf.includes('/')) {
+      //     this.exibeToast('CNPJ ou senha inválidos');
+      //   } else {
+      //     this.exibeToast('CPF ou senha inválidos');
+      //   }
+      // });
+
+      if (this.user.cpf === 'a') {
+        localStorage.setItem('menu', 'empregado');
+      } else if (this.user.cpf === 'b') {
+        localStorage.setItem('menu', 'empresa');
+      } else if (this.user.cpf === 'c') {
+        localStorage.setItem('menu', 'master');
+      }
+
+      this.nav.navigateRoot('home');
     }
   }
 
@@ -107,7 +117,7 @@ export class LoginPage implements OnInit {
       this.user.cpf = localStorage.getItem('CPF/CNPJ');
     }
 
-    if(this.activated.snapshot.paramMap.get('id') === 'empregado'){
+    if (this.activated.snapshot.paramMap.get('id') === 'empregado') {
       const alerta = await this.mensagem.create({
         header: 'PRONTO!!!',
         message: 'Seu cadastro foi realizado com sucesso, faça seu login.',
@@ -117,11 +127,12 @@ export class LoginPage implements OnInit {
       await alerta.present();
 
       return;
-    }else if(this.activated.snapshot.paramMap.get('id') === 'empresa'){
+    } else if (this.activated.snapshot.paramMap.get('id') === 'empresa') {
       const alerta = await this.mensagem.create({
         header: 'PRONTO!!!',
-        // eslint-disable-next-line max-len
-        message: 'Seu cadastro foi realizado com sucesso. Aguarde a prefeitura de Birigui autorizar seu acesso e tente o login novamente dentro de 48 horas',
+        message:
+          // eslint-disable-next-line max-len
+          'Seu cadastro foi realizado com sucesso. Aguarde a prefeitura de Birigui autorizar seu acesso e tente o login novamente dentro de 48 horas',
         buttons: ['OK'],
       });
 

@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./curriculo.page.scss'],
 })
 export class CurriculoPage implements OnInit {
+  empresa = false;
+  empregado = false;
+
   public estadoCivil = [
     { id: '1', estadoAtual: 'Solteiro(a)' },
     { id: '2', estadoAtual: 'Casado(a)' },
@@ -49,5 +52,11 @@ export class CurriculoPage implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (localStorage.getItem('menu') === 'empresa') {
+      this.empresa = true;
+    } else if (localStorage.getItem('menu') === 'empregado') {
+      this.empregado = true;
+    }
+  }
 }

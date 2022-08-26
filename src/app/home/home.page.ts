@@ -1,7 +1,11 @@
 import { validarCNPJ } from './../../environments/functions';
-import { MenuController, NavController, AlertController, ToastController } from '@ionic/angular';
+import {
+  MenuController,
+  NavController,
+  AlertController,
+  ToastController,
+} from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +15,9 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit {
   // this.activatedRoute.snapshot.paramMap.get('id');
 
-  empresa = true;
+  empresa = false;
   empregado = false;
-
+  none = false;
   empregosDisponivel = [
     {
       titulo: 'Programador web',
@@ -91,8 +95,10 @@ export class HomePage implements OnInit {
           handler: (cnpj) => {
             if (validarCNPJ(cnpj[0])) {
               emprego.online = false;
-              this.empregosDisponivel[this.empregosDisponivel.indexOf(emprego)] = emprego;
-            }else{
+              this.empregosDisponivel[
+                this.empregosDisponivel.indexOf(emprego)
+              ] = emprego;
+            } else {
               this.exibeToast('CNPJ inválido.');
             }
           },
@@ -123,5 +129,23 @@ export class HomePage implements OnInit {
     toast.present();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (localStorage.getItem('reload') === null || localStorage.getItem('reload') === undefined) {
+      if (localStorage.getItem('menu') !== null || localStorage.getItem('menu') !== undefined) {
+        if (!this.none) {
+          localStorage.setItem('reload', 'true');
+          window.location.reload();
+        }
+      }
+    }else{
+      this.none = true;
+      localStorage.removeItem('reload');
+
+      if(localStorage.getItem('menu') === 'empresa'){
+        this.empresa = true;
+      }else if(localStorage.getItem('menu') === 'empregado'){
+        this.empregado = true;
+      }
+    }
+  }
 }
