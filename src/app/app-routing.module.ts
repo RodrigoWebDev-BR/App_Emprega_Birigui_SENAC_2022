@@ -32,11 +32,14 @@ const routes: Routes = [
     path: 'idiomas',
     loadChildren: () => import('./idiomas/idiomas.module').then( m => m.IdiomasPageModule)
   },
-  { path: 'inscricao-vaga',
+  {
+    path: 'inscricao-vaga',
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./inscricao-vaga/inscricao-vaga.module').then( m => m.InscricaoVagaPageModule)
   } ,
   {
     path: 'vaga-detalhes',
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./vaga-detalhes/vaga-detalhes.module').then( m => m.VagaDetalhesPageModule)
   },
   {
@@ -45,12 +48,12 @@ const routes: Routes = [
   },
   {
     path: 'timeline-vaga',
-    // canActivate: [LoginAuthGuard],
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./timeline-vaga/timeline-vaga.module').then( m => m.TimelineVagaPageModule)
   },
   {
     path: 'home',
-    // canActivate: [LoginAuthGuard],
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
@@ -59,7 +62,7 @@ const routes: Routes = [
   },
   {
     path: 'notificacao',
-    // canActivate: [LoginAuthGuard],
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./notificacao/notificacao.module').then( m => m.NotificacaoPageModule)
   },
   {
@@ -72,7 +75,7 @@ const routes: Routes = [
   },
   {
     path: 'curriculo',
-    // canActivate: [LoginAuthGuard],
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./curriculo/curriculo.module').then( m => m.CurriculoPageModule)
   },
   {
@@ -85,32 +88,32 @@ const routes: Routes = [
   },
   {
     path: 'lista-empresas',
-    // canActivate: [LoginAuthGuard],
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./lista-empresas/lista-empresas.module').then( m => m.ListaEmpresasPageModule)
   },
   {
     path: 'lista-usuarios',
-    // canActivate: [LoginAuthGuard],
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./lista-usuarios/lista-usuarios.module').then( m => m.ListaUsuariosPageModule)
   },
   {
     path: 'detalhes-empresa',
-    // canActivate: [LoginAuthGuard],
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./detalhes-empresa/detalhes-empresa.module').then( m => m.DetalhesEmpresaPageModule)
   },
   {
     path: 'lancamento-vaga',
-    // canActivate: [LoginAuthGuard],
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./lancamento-vaga/lancamento-vaga.module').then( m => m.LancamentoVagaPageModule)
   },
   {
     path: 'detalhes-usuario',
-    // canActivate: [LoginAuthGuard],
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./detalhes-usuario/detalhes-usuario.module').then( m => m.DetalhesUsuarioPageModule)
   },
   {
     path: 'candidaturas',
-    // canActivate: [LoginAuthGuard],
+    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./candidaturas/candidaturas.module').then( m => m.CandidaturasPageModule)
   }
 ];

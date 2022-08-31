@@ -13,13 +13,13 @@ export class LoginAuthGuard implements CanActivate {
   }
 
   canActivate(): boolean{
-    const login = localStorage.getItem('accessToken');
-
-    if(login === null || login === undefined){
+    const login = localStorage.getItem('accessToken') !== null ? localStorage.getItem('accessToken') : '';
+    if(login.includes('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9')){
+      return true;
+    }else{
       this.nav.navigateRoot('login/login');
       return;
     }
-
-    return true;
   }
+
 }

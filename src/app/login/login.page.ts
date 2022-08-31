@@ -4,7 +4,6 @@ import { LoginService } from './../servicos/login.service';
 import { ToastController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -17,9 +16,9 @@ export class LoginPage implements OnInit {
     public nav: NavController,
     public menuLeft: MenuController,
     public toast: ToastController,
-    private authorize: LoginService,
     public mensagem: AlertController,
-    private activated: ActivatedRoute
+    public activated: ActivatedRoute,
+    private authorize: LoginService
   ) {
     this.menuLeft.enable(false);
   }
@@ -46,40 +45,34 @@ export class LoginPage implements OnInit {
 
       return;
     } else {
-      // this.authorize
-      // .login(this.user.cpf, this.user.password)
-      // .then((response) => {
-      //   this.resp = response;
-      //   if (this.resp === undefined) {
-      //     this.exibeToast('Erro de resposta com o servidor.');
-      //   } else {
-      //     if (localStorage.getItem('loginAuto') === 'true') {
-      //       localStorage.setItem('CPF/CNPJ', this.user.cpf);
-      //     }
-      //     this.user.cpf = '';
-      //     this.user.password = '';
+      const type = this.user.cpf.includes('/') ? 'empresa' : 'empregado';
 
-      //     localStorage.setItem('accessToken', this.resp.accessToken);
-      //     this.nav.navigateRoot('home');
-      //   }
-      // })
-      // .catch((e) => {
-      //   if (this.user.cpf.includes('/')) {
-      //     this.exibeToast('CNPJ ou senha inválidos');
-      //   } else {
-      //     this.exibeToast('CPF ou senha inválidos');
-      //   }
-      // });
+      this.authorize
+      .login(this.user.cpf, this.user.password, type)
+      .then((response) => {
+        this.resp = response;
+        if (this.resp === undefined) {
+          this.exibeToast('Erro de resposta com o servidor.');
+        } else {
+          if (localStorage.getItem('loginAuto') === 'true') {
+            localStorage.setItem('CPF/CNPJ', this.user.cpf);
+          }
+          this.user.cpf = '';
+          this.user.password = '';
+          localStorage.setItem('accessToken', this.resp.accessToken);
+          localStorage.setItem('idUser', this.resp.id);
+          localStorage.setItem('profile', this.resp.profile);
 
-      if (this.user.cpf === 'a') {
-        localStorage.setItem('menu', 'empregado');
-      } else if (this.user.cpf === 'b') {
-        localStorage.setItem('menu', 'empresa');
-      } else if (this.user.cpf === 'c') {
-        localStorage.setItem('menu', 'master');
-      }
-
-      this.nav.navigateRoot('home');
+          this.nav.navigateRoot('home');
+        }
+      })
+      .catch((e) => {
+        if (this.user.cpf.includes('/')) {
+          this.exibeToast('CNPJ ou senha inválidos');
+        } else {
+          this.exibeToast('CPF ou senha inválidos');
+        }
+      });
     }
   }
 
@@ -151,7 +144,10 @@ export class LoginPage implements OnInit {
 
   formataCpf() {
     if (this.user.cpf !== '' && this.user.cpf !== null) {
-      this.user.cpf = formatarCPF(this.user.cpf);
+      if(this.user.cpf.length <= 11){
+        this.user.cpf = formatarCPF(this.user.cpf);
+      }
     }
   }
 }
+

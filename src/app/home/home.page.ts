@@ -131,7 +131,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('reload') === null || localStorage.getItem('reload') === undefined) {
-      if (localStorage.getItem('menu') !== null || localStorage.getItem('menu') !== undefined) {
+      if (localStorage.getItem('profile') !== null || localStorage.getItem('profile') !== undefined) {
         if (!this.none) {
           localStorage.setItem('reload', 'true');
           window.location.reload();
@@ -141,9 +141,9 @@ export class HomePage implements OnInit {
       this.none = true;
       localStorage.removeItem('reload');
 
-      if(localStorage.getItem('menu') === 'empresa'){
+      if(localStorage.getItem('profile') === 'empresa'){
         this.empresa = true;
-      }else if(localStorage.getItem('menu') === 'empregado'){
+      }else if(localStorage.getItem('profile') === 'empregado'){
         this.empregado = true;
       }
     }

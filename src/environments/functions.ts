@@ -17,7 +17,6 @@ export const formatarRG = (rg) => {
 
 export const validaCPF = (cpf): boolean => {
   /*eslint one-var: ["error", "always"]*/
-  console.log(cpf);
   let rest, sum;
 
   if (cpf === undefined || cpf.trim().length === 0 || cpf === '00000000000') {

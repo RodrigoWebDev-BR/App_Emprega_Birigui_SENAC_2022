@@ -2,23 +2,36 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-
-  login(cpf: string, password: string) {
-    const candidato = { cpf: cpf, password: password};
-
-    const url = 'http://localhost:3000/users/authenticate';
+  login(documento: string, senha: string, userType: string) {
     const headers = new HttpHeaders().set('Content-Type', `application/json`);
+    const url = 'http://localhost:3000/';
 
-    // this.http.post(url, candidato, {headers})
-    // .subscribe(review=>{
-    //   return review
-    // });
+    switch (userType) {
+      case 'empregado':
+        const empregado = { cpf: documento, password: senha };
+        return this.http
+          .post(url + 'users/authenticate', empregado, { headers })
+          .toPromise();
+        break;
 
-    return this.http.post(url, candidato, {headers}).toPromise();
+      case 'empresa':
+        const empresa = { cnpj: documento, password: senha };
+        return this.http
+          .post(url + 'empresas/authenticate', empresa, { headers })
+          .toPromise();
+        break;
+
+      default:
+        const master = { cnpj: documento, password: senha };
+        return this.http
+          .post(url + 'master/authenticate', master, { headers })
+          .toPromise();
+        break;
+    }
   }
 }

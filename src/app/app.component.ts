@@ -31,7 +31,7 @@ export class AppComponent {
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit(){
-    this.menus = localStorage.getItem('menu');
+    this.menus = localStorage.getItem('profile');
   }
 
 
