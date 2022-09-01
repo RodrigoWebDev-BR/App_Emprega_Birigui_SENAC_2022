@@ -93,8 +93,6 @@ export class ExpProfissionalPage implements OnInit {
         this.experiencia.demissao = 'até ' + dia + '/' + mes + '/' + ano;
       }
 
-      this.checado = false;
-
       const experienciaCopy = JSON.parse(JSON.stringify(this.experiencia));
       this.experiencias.push(experienciaCopy);
 
@@ -107,8 +105,11 @@ export class ExpProfissionalPage implements OnInit {
         this.experiencia.cargo,
         this.experiencia.admissao,
         this.experiencia.demissao,
+        this.checado,
         this.experiencia.descricao
       );
+
+      this.checado = false;
 
       this.experiencia.empresa = '';
       this.experiencia.cargo = '';

@@ -218,6 +218,7 @@ export class UsuarioPage implements OnInit {
     localStorage.setItem('dataNasc', dia + '/' + mes + '/' + ano);
     localStorage.setItem('genero', this.usuario.genero);
     localStorage.setItem('estadoCivil', this.usuario.estadoCivil);
+    localStorage.setItem('password', this.usuario.senha);
   }
 
   carregarDados() {

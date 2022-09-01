@@ -9,7 +9,7 @@ export class IdiomasService {
   constructor() {}
 
   salvarIdiomas(id: string, niveis: string, bandeiras: string) {
-    const recebido = { id_idioma: id, nivel: niveis, bandeira: bandeiras };
+    const recebido = { idioma: id, nivel: niveis, bandeira: bandeiras };
     const value = localStorage.getItem(this.key);
 
     if (value === undefined || value === null) {

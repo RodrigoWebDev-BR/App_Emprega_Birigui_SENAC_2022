@@ -11,7 +11,7 @@ export class CursosService {
   salvarCurso(nomes: string, instituicoes: string) {
     const recebido = {
       nome: nomes,
-      instituicaoEnsino: instituicoes
+      instituicao: instituicoes
     };
 
     const value = localStorage.getItem(this.key);

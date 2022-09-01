@@ -1,43 +1,42 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ContatosService {
-  colecaoContato: any[]=[];
+  colecaoContato: any[] = [];
   key = 'contatos';
-  constructor() { }
+  constructor() {}
 
-  salvarContato(tipos: string, contatos: string){
-    const recebido = { id: tipos, contato: contatos}
+  salvarContato(tipos: string, contatos: string) {
+    const recebido = { tipo: tipos, contato: contatos };
     const value = localStorage.getItem(this.key);
 
-    if(value === undefined || value === null){
+    if (value === undefined || value === null) {
       this.colecaoContato.push(recebido);
       localStorage.setItem(this.key, JSON.stringify(this.colecaoContato));
-    }else{
+    } else {
       const colecao: any[] = this.listar();
       colecao.push(recebido);
       localStorage.setItem(this.key, JSON.stringify(colecao));
     }
   }
 
-  listar(){
+  listar() {
     const value = localStorage.getItem(this.key);
 
-    if(value === undefined || value === null){
-      return
+    if (value === undefined || value === null) {
+      return;
     }
 
-    const colecao: any[] = JSON.parse(value)
+    const colecao: any[] = JSON.parse(value);
     return colecao;
   }
 
-  deletar(param: any){
-    const value = this.listar()
-    const result = value.filter(contatos => contatos.contato !== param)
+  deletar(param: any) {
+    const value = this.listar();
+    const result = value.filter((contatos) => contatos.contato !== param);
 
-    localStorage.setItem(this.key, JSON.stringify(result))
+    localStorage.setItem(this.key, JSON.stringify(result));
   }
-
 }

@@ -10,7 +10,7 @@ import { alertController } from '@ionic/core';
   styleUrls: ['./idiomas.page.scss'],
 })
 export class IdiomasPage {
-  public idioma = { id_idioma: '', nivel: '', bandeira: '' };
+  public idioma = { idioma: '', nivel: '', bandeira: '' };
   public idiomas: any[] = [];
 
   tipoIdioma = [
@@ -36,7 +36,7 @@ export class IdiomasPage {
   }
 
   async adicionarIdioma() {
-    if (this.idioma.id_idioma === '' || this.idioma.id_idioma === null) {
+    if (this.idioma.idioma === '' || this.idioma.idioma === null) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO',
         subHeader: '',
@@ -58,10 +58,10 @@ export class IdiomasPage {
       await alerta.present();
 
       return;
-    } else if (this.idiomaSave.reduntante(this.idioma.id_idioma)) {
+    } else if (this.idiomaSave.reduntante(this.idioma.idioma)) {
       this.idioma.bandeira = '/assets/bandeiras/';
 
-      switch (this.idioma.id_idioma) {
+      switch (this.idioma.idioma) {
         case 'Inglês':
           this.idioma.bandeira += 'ingles.jpg';
           break;
@@ -91,12 +91,12 @@ export class IdiomasPage {
       this.idiomas.push(idiomaCopy);
 
       this.idiomaSave.salvarIdiomas(
-        this.idioma.id_idioma,
+        this.idioma.idioma,
         this.idioma.nivel,
         this.idioma.bandeira
       );
 
-      this.idioma.id_idioma = '';
+      this.idioma.idioma = '';
       this.idioma.nivel = '';
     } else {
       const alerta = await this.mensagem.create({
@@ -115,7 +115,7 @@ export class IdiomasPage {
   async removerIdioma(idiomaRemove) {
     const confirmaRemover = await this.mensagem.create({
       header: 'ATENÇÃO',
-      message: 'Confirma a exclusão do ' + idiomaRemove.id_idioma + '?',
+      message: 'Confirma a exclusão do ' + idiomaRemove.idioma + '?',
       buttons: [
         {
           text: 'Não',
@@ -125,7 +125,7 @@ export class IdiomasPage {
         {
           text: 'Sim',
           handler: () => {
-            this.idiomaSave.deletar(idiomaRemove.id_idioma);
+            this.idiomaSave.deletar(idiomaRemove.idioma);
             const index = this.idiomas.indexOf(idiomaRemove);
             this.idiomas.splice(index, 1);
           },

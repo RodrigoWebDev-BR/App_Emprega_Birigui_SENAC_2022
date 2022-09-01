@@ -198,6 +198,8 @@ export class EmpresaPage implements OnInit {
     localStorage.setItem('cnae', this.empresa.cnae);
     localStorage.setItem('situacao', this.empresa.situacao);
     localStorage.setItem('natureza', this.empresa.natureza);
+    localStorage.setItem('password', this.empresa.senha);
+
   }
 
   carregarDados() {

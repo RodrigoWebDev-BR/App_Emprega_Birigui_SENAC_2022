@@ -100,12 +100,12 @@ export class DetalhesEmpresaPage implements OnInit {
 
   salvarTemporariamente(){
     localStorage.setItem('ramo', this.detalhes.ramo);
-    localStorage.setItem('ramo-descricao', this.detalhes.descricao);
+    localStorage.setItem('descricaoEmpresa', this.detalhes.descricao);
   }
 
   carregarDados(){
     this.detalhes.ramo = localStorage.getItem('ramo');
-    this.detalhes.descricao = localStorage.getItem('ramo-descricao');
+    this.detalhes.descricao = localStorage.getItem('descricaoEmpresa');
   }
 
   ngOnInit() {
