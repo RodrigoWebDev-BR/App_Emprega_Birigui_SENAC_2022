@@ -14,8 +14,8 @@ export class ExpProfissionalPage implements OnInit {
     empresa: '',
     cargo: '',
     descricao: '',
-    admissao: '',
-    demissao: '',
+    dtInicio: '',
+    dtFinal: '',
   };
 
   constructor(
@@ -31,13 +31,11 @@ export class ExpProfissionalPage implements OnInit {
     if (this.experiencia.empresa === '' || this.experiencia.empresa === null) {
       const alerta = await this.mensagem.create({
         header: 'Atenção',
-        subHeader: 'Insira uma experiencia',
         message: 'Necessário preencher o nome da empresa.',
         buttons: ['OK'],
       });
       await alerta.present();
 
-      //return para cancelar a execução do método
       return;
     } else if (
       this.experiencia.cargo === '' ||
@@ -45,13 +43,11 @@ export class ExpProfissionalPage implements OnInit {
     ) {
       const alerta = await this.mensagem.create({
         header: 'Atenção',
-        subHeader: 'Insira uma experiencia',
         message: 'Necessário preencher o cargo da empresa.',
         buttons: ['OK'],
       });
       await alerta.present();
 
-      //return para cancelar a execução do método
       return;
     } else if (
       this.experiencia.descricao === '' ||
@@ -59,21 +55,18 @@ export class ExpProfissionalPage implements OnInit {
     ) {
       const alerta = await this.mensagem.create({
         header: 'Atenção',
-        subHeader: 'Insira uma experiencia',
-        message: 'Necessário preencher a descrição com pelo 70 palavras.',
+        message: 'Necessário preencher a descrição.',
         buttons: ['OK'],
       });
       await alerta.present();
 
-      //return para cancelar a execução do método
       return;
     } else if (
-      this.experiencia.admissao === '' ||
-      this.experiencia.admissao === null
+      this.experiencia.dtInicio === '' ||
+      this.experiencia.dtInicio === null
     ) {
       const alerta = await this.mensagem.create({
         header: 'Atenção',
-        subHeader: 'Insira uma experiencia',
         message: 'Necessário preencher a data de admissão.',
         buttons: ['OK'],
       });
@@ -82,29 +75,26 @@ export class ExpProfissionalPage implements OnInit {
       //return para cancelar a execução do método
       return;
     } else {
-      if (
-        this.experiencia.demissao === '' ||
-        this.experiencia.demissao === null
-      ) {
-        this.experiencia.demissao = 'até Atualmente';
-      } else {
-        const [ano, mes, dia] = this.experiencia.demissao.split('-');
 
-        this.experiencia.demissao = 'até ' + dia + '/' + mes + '/' + ano;
+      if (
+        this.experiencia.dtFinal === '' ||
+        this.experiencia.dtFinal === null
+      ) {
+        this.experiencia.dtFinal = 'até Atualmente';
+      } else {
+        const [ano, mes, dia] = this.experiencia.dtFinal.split('-');
+
+        this.experiencia.dtFinal = 'até ' + dia + '/' + mes + '/' + ano;
       }
 
       const experienciaCopy = JSON.parse(JSON.stringify(this.experiencia));
       this.experiencias.push(experienciaCopy);
 
-      // const [ano, mes, dia] = this.experiencia.admissao.split('-');
-
-      // this.experiencia.admissao = dia + '/' + mes + '/' + ano;
-
       this.exp.salvarExp(
         this.experiencia.empresa,
         this.experiencia.cargo,
-        this.experiencia.admissao,
-        this.experiencia.demissao,
+        this.experiencia.dtInicio,
+        this.experiencia.dtFinal,
         this.checado,
         this.experiencia.descricao
       );
@@ -114,8 +104,8 @@ export class ExpProfissionalPage implements OnInit {
       this.experiencia.empresa = '';
       this.experiencia.cargo = '';
       this.experiencia.descricao = '';
-      this.experiencia.admissao = '';
-      this.experiencia.demissao = '';
+      this.experiencia.dtInicio = '';
+      this.experiencia.dtFinal = '';
     }
   }
 
@@ -177,7 +167,7 @@ export class ExpProfissionalPage implements OnInit {
       : (this.checado = false);
 
     if (this.checado) {
-      this.experiencia.demissao = '';
+      this.experiencia.dtFinal = '';
     }
   }
 

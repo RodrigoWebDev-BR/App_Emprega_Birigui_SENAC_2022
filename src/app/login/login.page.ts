@@ -111,23 +111,34 @@ export class LoginPage implements OnInit {
       this.user.cpf = localStorage.getItem('CPF/CNPJ');
     }
 
-    if (this.activated.snapshot.paramMap.get('id') === 'empregado') {
+    if (this.activated.snapshot.paramMap.get('id').includes('empregado_')) {
       const alerta = await this.mensagem.create({
-        header: 'PRONTO!!!',
-        message: 'Seu cadastro foi realizado com sucesso, faça seu login.',
+        header: 'Seja Bem-Vindo!',
+        message: this.activated.snapshot.paramMap.get('id').split('_')[1] + ' seu cadastro foi realizado com sucesso, faça seu login.',
         buttons: ['OK'],
       });
 
       await alerta.present();
 
       return;
-    } else if (this.activated.snapshot.paramMap.get('id') === 'empresa') {
+    } else if (this.activated.snapshot.paramMap.get('id').includes('empresa_')) {
       const alerta = await this.mensagem.create({
         header: 'PRONTO!!!',
         message:
           // eslint-disable-next-line max-len
-          'Seu cadastro foi realizado com sucesso. Aguarde a prefeitura de Birigui autorizar seu acesso e tente o login novamente dentro de 48 horas',
+          'Olá ' + this.activated.snapshot.paramMap.get('id').split('_')[1] + ' seu cadastro foi realizado com sucesso. Aguarde a prefeitura de Birigui autorizar seu acesso e tente o login novamente dentro de 48 horas.',
         buttons: ['OK'],
+      });
+
+      await alerta.present();
+
+      return;
+    }else if(this.activated.snapshot.paramMap.get('id').includes('erro')){
+      const alerta = await this.mensagem.create({
+        header: 'Ops...',
+        // eslint-disable-next-line max-len
+        message: 'Não foi possível completar seu cadastro por erros internos, tente o cadastro novamente, se o erro persistir, entre em contato com a prefeitura de Birigui.',
+        buttons: ['OK']
       });
 
       await alerta.present();

@@ -34,90 +34,9 @@ export class ConclusaoPage implements OnInit {
   async ngOnInit() {
 
     if(localStorage.getItem('nome') === null){
-      const empresa = {
-        nomeEmpresa: localStorage.getItem('nomeEmpresa'),
-        fantasia: localStorage.getItem('fantasia'),
-        cnpj: localStorage.getItem('cnpj'),
-        email: localStorage.getItem('email'),
-        dataAb: localStorage.getItem('dataAb'),
-        cnae: localStorage.getItem('cnae'),
-        situacao: localStorage.getItem('situacao'),
-        natureza: localStorage.getItem('natureza'),
-        password: localStorage.getItem('password'),
-        profiles: ['empresa'],
-        cep: localStorage.getItem('cep'),
-        numero: localStorage.getItem('numero'),
-        complemento: localStorage.getItem('complemento'),
-        endereco: localStorage.getItem('endereco'),
-        bairro: localStorage.getItem('bairro'),
-        cidade: localStorage.getItem('cidade'),
-        estado: localStorage.getItem('estado'),
-        contatos: this.servicosContato.listar(),
-        ramo: localStorage.getItem('ramo'),
-        descricaoEmpresa: localStorage.getItem('descricaoEmpresa'),
-        autorizado: false
-      };
-
-      this.cadastro.cadastrar(empresa, 'empresa')
-      .then((response)=>{
-        this.resp = response;
-        console.log(this.resp);
-        if(this.resp !== undefined){
-          this.nome = this.resp.nomeEmpresa;
-        }else{
-          this.exibeToast('Erro ao cadastrar!');
-          this.nome = 'erro';
-        }
-      })
-      .catch((e)=>{
-        this.exibeToast('Erro com o servidor!');
-        this.nome = 'erro';
-      });
-
-
+      this.cadastroEmpresa();
     }else{
-
-      const empregado = {
-        nome: localStorage.getItem('nome'),
-        rg: localStorage.getItem('rg'),
-        cpf: localStorage.getItem('cpf'),
-        email: localStorage.getItem('email'),
-        dataNasc: localStorage.getItem('dataNasc'),
-        genero: localStorage.getItem('genero'),
-        estadoCivil: localStorage.getItem('estadoCivil'),
-        password: localStorage.getItem('password'),
-        profiles: ['empregado'],
-        cep: localStorage.getItem('cep'),
-        numero: localStorage.getItem('numero'),
-        complemento: localStorage.getItem('complemento'),
-        endereco: localStorage.getItem('endereco'),
-        bairro: localStorage.getItem('bairro'),
-        cidade: localStorage.getItem('cidade'),
-        estado: localStorage.getItem('estado'),
-        contatos: this.servicosContato.listar(),
-        formacaoEdu: this.servicosFormacao.listar(),
-        expProfissional: this.servicosExp.listar(),
-        cursos: this.servicosCursos.listar(),
-        idiomas: this.servicosIdiomas.listar(),
-        descricaoUser: localStorage.getItem('descricao-usuario')
-      };
-
-
-      this.cadastro.cadastrar(empregado, 'empregado')
-      .then((response)=>{
-        this.resp = response;
-        console.log(this.resp);
-        if(this.resp !== undefined){
-          this.nome = this.resp.nome;
-        }else{
-          this.exibeToast('Erro ao cadastrar!');
-          this.nome = 'erro';
-        }
-      })
-      .catch((e)=>{
-        this.exibeToast('Erro com o servidor!');
-        this.nome = 'erro';
-      });
+      this.cadastroEmpregado();
     }
 
     setTimeout(() => {
@@ -146,5 +65,92 @@ export class ConclusaoPage implements OnInit {
     });
 
     toast.present();
+  }
+
+
+  cadastroEmpregado(){
+    const empregado = {
+      nome: localStorage.getItem('nome'),
+      rg: localStorage.getItem('rg'),
+      cpf: localStorage.getItem('cpf'),
+      email: localStorage.getItem('email'),
+      dataNasc: localStorage.getItem('dataNasc'),
+      genero: localStorage.getItem('genero'),
+      estadoCivil: localStorage.getItem('estadoCivil'),
+      password: localStorage.getItem('password'),
+      profiles: ['empregado'],
+      cep: localStorage.getItem('cep'),
+      numero: localStorage.getItem('numero'),
+      complemento: localStorage.getItem('complemento'),
+      endereco: localStorage.getItem('endereco'),
+      bairro: localStorage.getItem('bairro'),
+      cidade: localStorage.getItem('cidade'),
+      estado: localStorage.getItem('estado'),
+      contatos: this.servicosContato.listar(),
+      formacaoEdu: this.servicosFormacao.listar(),
+      expProfissional: this.servicosExp.listar(),
+      cursos: this.servicosCursos.listar(),
+      idiomas: this.servicosIdiomas.listar(),
+      descricaoUser: localStorage.getItem('descricao-usuario')
+    };
+
+    this.cadastro.cadastrar(empregado, 'empregado')
+    .then((response)=>{
+      this.resp = response;
+      console.log(this.resp);
+      if(this.resp !== undefined){
+        this.nome = this.resp.nome;
+      }else{
+        this.exibeToast('Erro ao cadastrar!');
+        this.nome = 'erro';
+      }
+    })
+    .catch((e)=>{
+      this.exibeToast('Erro com o servidor!');
+      this.nome = 'erro';
+    });
+  }
+
+  cadastroEmpresa(){
+    const empresa = {
+      nomeEmpresa: localStorage.getItem('nomeEmpresa'),
+      fantasia: localStorage.getItem('fantasia'),
+      cnpj: localStorage.getItem('cnpj'),
+      email: localStorage.getItem('email'),
+      dataAb: localStorage.getItem('dataAb'),
+      cnae: localStorage.getItem('cnae'),
+      situacao: localStorage.getItem('situacao'),
+      natureza: localStorage.getItem('natureza'),
+      password: localStorage.getItem('password'),
+      profiles: ['empresa'],
+      cep: localStorage.getItem('cep'),
+      numero: localStorage.getItem('numero'),
+      complemento: localStorage.getItem('complemento'),
+      endereco: localStorage.getItem('endereco'),
+      bairro: localStorage.getItem('bairro'),
+      cidade: localStorage.getItem('cidade'),
+      estado: localStorage.getItem('estado'),
+      contatos: this.servicosContato.listar(),
+      ramo: localStorage.getItem('ramo'),
+      descricaoEmpresa: localStorage.getItem('descricaoEmpresa'),
+      autorizado: false
+    };
+
+    this.cadastro.cadastrar(empresa, 'empresa')
+    .then((response)=>{
+      this.resp = response;
+      console.log(this.resp);
+      if(this.resp !== undefined){
+        this.nome = this.resp.nomeEmpresa;
+      }else{
+        this.exibeToast('Erro ao cadastrar!');
+        this.nome = 'erro';
+      }
+    })
+    .catch((e)=>{
+      console.log(e);
+      this.exibeToast('Erro com o servidor!');
+      this.nome = 'erro';
+    });
   }
 }

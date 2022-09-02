@@ -98,7 +98,6 @@ const routes: Routes = [
   },
   {
     path: 'detalhes-empresa',
-    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./detalhes-empresa/detalhes-empresa.module').then( m => m.DetalhesEmpresaPageModule)
   },
   {
@@ -108,7 +107,6 @@ const routes: Routes = [
   },
   {
     path: 'detalhes-usuario',
-    canActivate: [LoginAuthGuard],
     loadChildren: () => import('./detalhes-usuario/detalhes-usuario.module').then( m => m.DetalhesUsuarioPageModule)
   },
   {
