@@ -21,7 +21,7 @@
           <img *ngIf="empresa" src="../../assets/icon/buildings.png" />
         </ion-thumbnail>
         <ion-label class="bold">
-          <h1 style="margin-bottom: 0px; font-weight: bold">Patrick</h1>
+          <h1 style="margin-bottom: 0px; font-weight: bold">{{perfil.nome}}</h1>
           <p style="margin-top: 5px">(99) 9999-9999</p>
         </ion-label>
       </ion-item>
@@ -53,14 +53,14 @@
                     <ion-row>
                       <ion-label
                         ><span class="bold">E-Mail:</span>
-                        exemplo@exemplo.com</ion-label
+                        {{perfil.email}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">RG:</span> 55.555.55-5</ion-label
+                        ><span class="bold">RG:</span> {{perfil.rg}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
@@ -68,7 +68,7 @@
                     <ion-row>
                       <ion-label
                         ><span class="bold">CPF:</span>
-                        555.555.555-55</ion-label
+                        {{perfil.cpf}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
@@ -76,14 +76,14 @@
                     <ion-row>
                       <ion-label
                         ><span class="bold">Nascimento:</span>
-                        22/12/1990</ion-label
+                        {{perfil.dataNasc}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">Gênero:</span> Masculino</ion-label
+                        ><span class="bold">Gênero:</span> {{perfil.genero}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
@@ -91,7 +91,7 @@
                     <ion-row>
                       <ion-label
                         ><span class="bold">Estado Civil:</span>
-                        Solteiro(a)</ion-label
+                        {{perfil.estadoCivil}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
@@ -129,45 +129,35 @@
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">CEP:</span> 00000-000</ion-label
+                        ><span class="bold">CEP:</span> {{perfil.cep}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">Endereço:</span> Rua
-                        exemplo</ion-label
+                        ><span class="bold">Endereço:</span> {{perfil.endereco}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">Número:</span> 250</ion-label
+                        ><span class="bold">Número:</span> {{perfil.numero}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">Bairro:</span> Bairro
-                        Exemplo</ion-label
+                        ><span class="bold">Bairro:</span> {{perfil.bairro}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">Cidade:</span> Araçatuba</ion-label
-                      >
-                    </ion-row>
-                  </ion-item>
-                  <ion-item>
-                    <ion-row>
-                      <ion-label
-                        ><span class="bold">Estado:</span> São Paulo -
-                        SP</ion-label
+                        ><span class="bold">Cidade:</span> {{perfil.cidade}} - {{perfil.estado}}</ion-label
                       >
                     </ion-row>
                   </ion-item>

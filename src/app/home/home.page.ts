@@ -1,3 +1,5 @@
+import { EmpresaService } from './../servicos/empresa.service';
+import { EmpregadoService } from './../servicos/empregado.service';
 import { validarCNPJ } from './../../environments/functions';
 import {
   MenuController,
@@ -13,8 +15,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  // this.activatedRoute.snapshot.paramMap.get('id');
-
+  perfil: any = {};
   empresa = false;
   empregado = false;
   none = false;
@@ -74,7 +75,9 @@ export class HomePage implements OnInit {
     public nav: NavController,
     public menuLeft: MenuController,
     public mensagem: AlertController,
-    public toast: ToastController
+    public toast: ToastController,
+    public servicoEmpregado: EmpregadoService,
+    public servicoEmpresa: EmpresaService
   ) {
     this.menuLeft.enable(true);
   }
@@ -130,22 +133,57 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem('reload') === null || localStorage.getItem('reload') === undefined) {
-      if (localStorage.getItem('profile') !== null || localStorage.getItem('profile') !== undefined) {
+    if (
+      localStorage.getItem('reload') === null ||
+      localStorage.getItem('reload') === undefined
+    ) {
+      if (
+        localStorage.getItem('profile') !== null ||
+        localStorage.getItem('profile') !== undefined
+      ) {
         if (!this.none) {
           localStorage.setItem('reload', 'true');
           window.location.reload();
         }
       }
-    }else{
+    } else {
       this.none = true;
       localStorage.removeItem('reload');
 
-      if(localStorage.getItem('profile') === 'empresa'){
-        this.empresa = true;
-      }else if(localStorage.getItem('profile') === 'empregado'){
-        this.empregado = true;
+      if (localStorage.getItem('profile') === 'empresa') {
+        this.perfilEmpresa();
+      } else if (localStorage.getItem('profile') === 'empregado') {
+        this.perfilEmpregado();
       }
     }
+  }
+
+  perfilEmpregado() {
+    this.empregado = true;
+
+    this.servicoEmpregado
+      .perfil()
+      .then((response) => {
+        this.perfil = response;
+        console.log(this.perfil);
+        if (this.perfil === undefined) {
+          this.exibeToast('Perfil com erro!');
+        }
+      })
+      .catch();
+  }
+
+  perfilEmpresa() {
+    this.empresa = true;
+    this.servicoEmpresa
+      .perfil()
+      .then((response) => {
+        this.perfil = response;
+        console.log(this.perfil);
+        if (this.perfil === undefined) {
+          this.exibeToast('Perfil com erro!');
+        }
+      })
+      .catch();
   }
 }

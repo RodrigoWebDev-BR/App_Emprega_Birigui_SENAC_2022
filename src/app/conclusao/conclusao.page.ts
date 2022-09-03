@@ -39,6 +39,8 @@ export class ConclusaoPage implements OnInit {
       this.cadastroEmpregado();
     }
 
+    localStorage.clear();
+
     setTimeout(() => {
       if (this.nome !== 'erro') {
         if (

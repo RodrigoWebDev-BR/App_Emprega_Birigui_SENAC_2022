@@ -23,7 +23,7 @@
       <ion-col>
         <ion-item class="roundedInput">
           <ion-label position="floating">Nome Curso</ion-label>
-          <ion-input type="text" [(ngModel)]="formacao.nomeCurso">
+          <ion-input type="text" [(ngModel)]="formacao.curso">
           </ion-input>
         </ion-item>
       </ion-col>
@@ -44,7 +44,7 @@
       <ion-col>
         <ion-item class="roundedInput">
           <ion-label position="floating">Situação <span style="color:red">*</span></ion-label>
-          <ion-select style="width: 100%" [(ngModel)]="formacao.conclusao">
+          <ion-select style="width: 100%" [(ngModel)]="formacao.situacao">
             <ion-select-option *ngFor="let con of conclusoes" value="{{con.resp}}">{{con.resp}}</ion-select-option>  
           </ion-select>
         </ion-item>
@@ -67,7 +67,7 @@
               <ion-label>
                 <h2 class="bold">{{formado.instituicao}}</h2>
                 <br>
-                <p>{{formado.nomeCurso}} - {{formado.conclusao}}</p>
+                <p>{{formado.curso}} - {{formado.situacao}}</p>
                 <h3>{{formado.nivel}}</h3>
               </ion-label>
               <ion-icon name="trash-outline" slot="end" color="danger" (click)="removeForms(formado)" ></ion-icon>

@@ -1,3 +1,5 @@
+import { EmpresaService } from './../servicos/empresa.service';
+import { EmpregadoService } from './../servicos/empregado.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class CurriculoPage implements OnInit {
   empresa = false;
   empregado = false;
+  perfil: any = {};
 
   public estadoCivil = [
     { id: '1', estadoAtual: 'Solteiro(a)' },
@@ -50,13 +53,39 @@ export class CurriculoPage implements OnInit {
     { id: '6', nome: 'Alemão' },
   ];
 
-  constructor() {}
+  constructor(public servicoEmpregado: EmpregadoService, public servicoEmpresa: EmpresaService) {}
 
   ngOnInit() {
-    if (localStorage.getItem('menu') === 'empresa') {
-      this.empresa = true;
-    } else if (localStorage.getItem('menu') === 'empregado') {
-      this.empregado = true;
+    if (localStorage.getItem('profile') === 'empresa') {
+      this.perfilEmpresa();
+    } else if (localStorage.getItem('profile') === 'empregado') {
+      this.perfilEmpregado();
     }
+  }
+
+  perfilEmpregado(){
+    this.empregado = true;
+    this.servicoEmpregado
+      .perfil()
+      .then((response) => {
+        this.perfil = response;
+        if (this.perfil === undefined) {
+          return;
+        }
+      })
+      .catch();
+  }
+
+  perfilEmpresa(){
+    this.empresa = true;
+    this.servicoEmpresa
+      .perfil()
+      .then((response) => {
+        this.perfil = response;
+        if (this.perfil === undefined) {
+          return;
+        }
+      })
+      .catch();
   }
 }

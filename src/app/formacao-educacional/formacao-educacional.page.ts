@@ -13,9 +13,9 @@ export class FormacaoEducacionalPage implements OnInit {
 
   formacao = {
     instituicao: null,
-    nomeCurso: null,
+    curso: null,
     nivel: null,
-    conclusao: null,
+    situacao: null,
   };
 
   formacoes = [
@@ -70,13 +70,13 @@ export class FormacaoEducacionalPage implements OnInit {
 
       return;
     } else if (
-      this.formacao.conclusao === null ||
-      this.formacao.conclusao === ''
+      this.formacao.situacao === null ||
+      this.formacao.situacao === ''
     ) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO',
         subHeader: '',
-        message: 'Necessário informar a conclusão do curso',
+        message: 'Necessário informar a situação do curso',
         buttons: ['OK'],
         cssClass: 'cssAlerta',
       });
@@ -90,15 +90,15 @@ export class FormacaoEducacionalPage implements OnInit {
 
       this.formEdu.salvarFormacao(
         this.formacao.instituicao,
-        this.formacao.nomeCurso,
+        this.formacao.curso,
         this.formacao.nivel,
-        this.formacao.conclusao
+        this.formacao.situacao
       );
 
       this.formacao.instituicao = '';
-      this.formacao.nomeCurso = '';
+      this.formacao.curso = '';
       this.formacao.nivel = '';
-      this.formacao.conclusao = '';
+      this.formacao.situacao = '';
     }
   }
 
