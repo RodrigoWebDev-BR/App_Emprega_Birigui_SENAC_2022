@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-
+  nomeMenu: string;
   menus: string;
   public appPages = [
     { title: 'Perfil', url: '/home', icon: 'person' },
@@ -31,6 +31,10 @@ export class AppComponent {
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit(){
+    if(localStorage.getItem('nomeMenu') !== null){
+      this.nomeMenu = localStorage.getItem('nomeMenu').split(' ')[0];
+    }
+
     this.menus = localStorage.getItem('profile');
   }
 

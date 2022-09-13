@@ -21,8 +21,9 @@
           <img *ngIf="empresa" src="../../assets/icon/buildings.png" />
         </ion-thumbnail>
         <ion-label class="bold">
-          <h1 style="margin-bottom: 0px; font-weight: bold">{{perfil.nome}}</h1>
-          <p style="margin-top: 5px">(99) 9999-9999</p>
+          <h1 *ngIf="empregado" style="margin-bottom: 0px; font-weight: bold">{{perfil.nome}}</h1>
+          <h1 *ngIf="empresa" style="margin-bottom: 0px; font-weight: bold">{{perfil.nomeEmpresa}}</h1>
+          <p style="margin-top: 5px">{{contatoPrincipal}}</p>
         </ion-label>
       </ion-item>
     </ion-col>
@@ -185,13 +186,15 @@
                       ></ion-icon>
                     </ion-button>
                   </ion-row>
-                  <ion-item style="margin-top: 10px">
-                    <ion-label>
-                      <h2>CONTATO</h2>
-                      <p>exemplo</p>
-                    </ion-label>
-                    <ion-icon name="trash-outline" color="danger"></ion-icon>
-                  </ion-item>
+                  <div *ngFor="let contact of perfil.contatos">
+                    <ion-item style="margin-top: 10px">
+                      <ion-label>
+                        <h2>{{contact.contato}}</h2>
+                        <p>{{contact.tipo}}</p>
+                      </ion-label>
+                      <ion-icon name="trash-outline" color="danger" (click)="removerDados(contact, 'contatos', 'empregado')"></ion-icon>
+                    </ion-item>
+                  </div>
                 </ion-list>
               </ion-col>
             </ion-row>
@@ -216,13 +219,18 @@
                       ></ion-icon>
                     </ion-button>
                   </ion-row>
-                  <ion-item style="margin-top: 10px">
-                    <ion-label>
-                      <h2>Escola</h2>
-                      <p>detalhes</p>
-                    </ion-label>
-                    <ion-icon name="trash-outline" color="danger"></ion-icon>
-                  </ion-item>
+                  <div *ngFor="let forms of perfil.formacaoEdu">
+                    <ion-item style="margin-top: 10px">
+                      <ion-label>
+                        <h2>{{forms.institucao}}</h2>
+                        <h2>{{forms.curso}}</h2>
+                        <p *ngIf="forms.situacao ==='Concluído'">{{forms.nivel}} - <span style="color: #00bd2f; text-decoration: underline;"> {{forms.situacao}}</span></p>
+                        <p *ngIf="forms.situacao ==='Em andamento'">{{forms.nivel}} - <span style="color: #ffc409; text-decoration: underline;"> {{forms.situacao}}</span></p>
+                        <p *ngIf="forms.situacao ==='Incompleto'">{{forms.nivel}} - <span style="color: #eb445a; text-decoration: underline;"> {{forms.situacao}}</span></p>
+                      </ion-label>
+                      <ion-icon name="trash-outline" color="danger" (click)="removerDados(forms, 'formacaoEdu', 'empregado')"></ion-icon>
+                    </ion-item>
+                  </div>
                 </ion-list>
               </ion-col>
             </ion-row>
@@ -247,19 +255,24 @@
                       ></ion-icon>
                     </ion-button>
                   </ion-row>
-                  <ion-item style="margin-top: 10px">
-                    <ion-label>
-                      <h2>Trabalho</h2>
-                      <p>Descrição</p>
-                    </ion-label>
-                    <ion-icon
-                      name="pencil"
-                      color="dark"
-                      style="padding-right: 15px"
-                      id="modalExp"
-                    ></ion-icon>
-                    <ion-icon name="trash-outline" color="danger"></ion-icon>
-                  </ion-item>
+
+                  <div *ngFor="let exp of perfil.expProfissional">
+                    <ion-item style="margin-top: 10px">
+                      <ion-label>
+                        <h2>{{exp.empresa}} - {{exp.cargo}}</h2>
+                        <h3 *ngIf="exp.atual">{{exp.dtInicio | date:'dd/MM/yyyy'}} - {{exp.dtFinal}}</h3>
+                        <h3 *ngIf="!exp.atual">{{exp.dtInicio | date:'dd/MM/yyyy'}} - {{exp.dtFinal | date:'dd/MM/yyyy'}}</h3>
+                        <p>{{exp.descricao}}</p>
+                      </ion-label>
+                      <ion-icon
+                        name="pencil"
+                        color="dark"
+                        style="padding-right: 15px"
+                        id="modalExp"
+                      ></ion-icon>
+                      <ion-icon name="trash-outline" color="danger" (click)="removerDados(exp, 'expProfissional', 'empregado')"></ion-icon>
+                    </ion-item>
+                  </div>
                 </ion-list>
               </ion-col>
             </ion-row>
@@ -284,13 +297,15 @@
                       ></ion-icon>
                     </ion-button>
                   </ion-row>
-                  <ion-item style="margin-top: 10px">
-                    <ion-label>
-                      <h2>Excel avançado</h2>
-                      <p>Completo</p>
-                    </ion-label>
-                    <ion-icon name="trash-outline" color="danger"></ion-icon>
-                  </ion-item>
+                  <div *ngFor="let curso of perfil.cursos">
+                    <ion-item style="margin-top: 10px">
+                      <ion-label>
+                        <h2>{{curso.nome}}</h2>
+                        <p>{{curso.instituicao}}</p>
+                      </ion-label>
+                      <ion-icon name="trash-outline" color="danger" (click)="removerDados(curso, 'cursos', 'empregado')"></ion-icon>
+                    </ion-item>
+                  </div>
                 </ion-list>
               </ion-col>
             </ion-row>
@@ -315,13 +330,19 @@
                       ></ion-icon>
                     </ion-button>
                   </ion-row>
-                  <ion-item style="margin-top: 10px">
-                    <ion-label>
-                      <h2>Inglês</h2>
-                      <p>Avançado</p>
-                    </ion-label>
-                    <ion-icon name="trash-outline" color="danger"></ion-icon>
-                  </ion-item>
+
+                  <div *ngFor="let idioma of perfil.idiomas">
+                    <ion-item style="margin-top: 10px">
+                      <ion-label>
+                        <h2>{{idioma.idioma}}</h2>
+                        <p *ngIf="idioma.nivel === 'iniciante'">Iniciante</p>
+                        <p *ngIf="idioma.nivel === 'basico'">Intermediário</p>
+                        <p *ngIf="idioma.nivel === 'avancado'">Avançado</p>
+                        <p *ngIf="idioma.nivel === 'fluente'">Fluente</p>
+                      </ion-label>
+                      <ion-icon name="trash-outline" color="danger" (click)="removerDados(idioma, 'idiomas', 'empregado')"></ion-icon>
+                    </ion-item>
+                  </div>
                 </ion-list>
               </ion-col>
             </ion-row>
@@ -353,7 +374,7 @@
                     <ion-row>
                       <ion-label
                         ><span class="bold">Nome Fantasia:</span>
-                        fantasia</ion-label
+                        {{perfil.fantasia}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
@@ -361,7 +382,7 @@
                     <ion-row>
                       <ion-label
                         ><span class="bold">E-Mail:</span>
-                        exemplo@exemplo.com</ion-label
+                        {{perfil.email}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
@@ -369,7 +390,7 @@
                     <ion-row>
                       <ion-label
                         ><span class="bold">CNPJ:</span>
-                        555.555/0001-55</ion-label
+                        {{perfil.cnpj}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
@@ -377,29 +398,28 @@
                     <ion-row>
                       <ion-label
                         ><span class="bold">Data abertura:</span>
-                        22/12/1990</ion-label
+                        {{perfil.dataAb}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">CNAE:</span> 8943184515</ion-label
+                        ><span class="bold">CNAE:</span> {{perfil.cnae}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">Situação:</span> Ativo(a)</ion-label
+                        ><span class="bold">Situação:</span> {{perfil.situacao}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">Natureza Jurídica:</span> Perfil
-                        funcional</ion-label
+                        ><span class="bold">Natureza Jurídica:</span> {{perfil.natureza}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
@@ -407,14 +427,14 @@
                     <ion-row>
                       <ion-label
                         ><span class="bold">Ramo empresarial:</span>
-                        Moda</ion-label
+                        {{perfil.ramo}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <br />
                   <ion-row style="margin-left: 16px;">
                     <ion-label
-                      ><span class="bold">Descrição:</span> Descrição de teste para a empresa visualizar os seus dados completos e bla bla bla</ion-label
+                      ><span class="bold">Descrição:</span> {{perfil.descricaoEmpresa}}</ion-label
                     >
                   </ion-row>
                 </ion-list>
@@ -444,45 +464,35 @@
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">CEP:</span> 00000-000</ion-label
+                        ><span class="bold">CEP:</span> {{perfil.cep}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">Endereço:</span> Rua
-                        exemplo</ion-label
+                        ><span class="bold">Endereço:</span> {{perfil.endereco}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">Número:</span> 250</ion-label
+                        ><span class="bold">Número:</span> {{perfil.numero}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">Bairro:</span> Bairro
-                        Exemplo</ion-label
+                        ><span class="bold">Bairro:</span> {{perfil.bairro}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
                   <ion-item>
                     <ion-row>
                       <ion-label
-                        ><span class="bold">Cidade:</span> Araçatuba</ion-label
-                      >
-                    </ion-row>
-                  </ion-item>
-                  <ion-item>
-                    <ion-row>
-                      <ion-label
-                        ><span class="bold">Estado:</span> São Paulo -
-                        SP</ion-label
+                        ><span class="bold">Cidade:</span> {{perfil.cidade}} - {{perfil.estado}}</ion-label
                       >
                     </ion-row>
                   </ion-item>
@@ -510,13 +520,15 @@
                       ></ion-icon>
                     </ion-button>
                   </ion-row>
-                  <ion-item style="margin-top: 10px">
-                    <ion-label>
-                      <h2>CONTATO</h2>
-                      <p>exemplo</p>
-                    </ion-label>
-                    <ion-icon name="trash-outline" color="danger"></ion-icon>
-                  </ion-item>
+                  <div *ngFor="let contact of perfil.contatos">
+                    <ion-item style="margin-top: 10px">
+                      <ion-label>
+                        <h2>{{contact.contato}}</h2>
+                        <p>{{contact.tipo}}</p>
+                      </ion-label>
+                      <ion-icon name="trash-outline" color="danger" (click)="removerDados(contact, 'contatos', 'empresa')"></ion-icon>
+                    </ion-item>
+                  </div>
                 </ion-list>
               </ion-col>
             </ion-row>

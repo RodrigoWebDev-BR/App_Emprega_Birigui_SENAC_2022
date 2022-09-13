@@ -143,6 +143,11 @@ export class HomePage implements OnInit {
       ) {
         if (!this.none) {
           localStorage.setItem('reload', 'true');
+          if (localStorage.getItem('profile') === 'empresa') {
+            this.perfilEmpresa();
+          } else if (localStorage.getItem('profile') === 'empregado') {
+            this.perfilEmpregado();
+          }
           window.location.reload();
         }
       }
@@ -165,7 +170,8 @@ export class HomePage implements OnInit {
       .perfil()
       .then((response) => {
         this.perfil = response;
-        console.log(this.perfil);
+        localStorage.setItem('nomeMenu', this.perfil.nome);
+
         if (this.perfil === undefined) {
           this.exibeToast('Perfil com erro!');
         }
@@ -179,7 +185,7 @@ export class HomePage implements OnInit {
       .perfil()
       .then((response) => {
         this.perfil = response;
-        console.log(this.perfil);
+        localStorage.setItem('nomeMenu', this.perfil.nomeEmpresa);
         if (this.perfil === undefined) {
           this.exibeToast('Perfil com erro!');
         }

@@ -39,16 +39,16 @@ export class ConclusaoPage implements OnInit {
       this.cadastroEmpregado();
     }
 
-    localStorage.clear();
-
     setTimeout(() => {
       if (this.nome !== 'erro') {
         if (
           localStorage.getItem('nome') === null ||
           localStorage.getItem('nome') === undefined
         ) {
+          localStorage.clear();
           this.nav.navigateRoot('login/empresa_' + this.nome);
         } else {
+          localStorage.clear();
           this.nav.navigateRoot('login/empregado_' + this.nome);
         }
       } else {
@@ -108,6 +108,7 @@ export class ConclusaoPage implements OnInit {
       }
     })
     .catch((e)=>{
+      console.log(e);
       this.exibeToast('Erro com o servidor!');
       this.nome = 'erro';
     });
