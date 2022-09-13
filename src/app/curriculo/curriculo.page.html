@@ -756,6 +756,28 @@
             </ion-select>
           </ion-item>
 
+  <ion-modal [isOpen]="modal.modalPessoalEmpresa">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button
+              (click)="abreModal(false, 'pessoalEmpresa')"
+              color="secondary"
+              >Fechar</ion-button
+            >
+          </ion-buttons>
+          <ion-title class="centertext">EDITAR</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="secondary" (click)="updateDadosEmpresa()"
+              >Salvar</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
           <ion-item lines="none">
             <ion-label position="floating">Ramo</ion-label>
             <ion-select interface="popover" [(ngModel)]="dadosEmpresa.ramo">

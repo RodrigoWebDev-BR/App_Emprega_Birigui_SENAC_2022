@@ -158,6 +158,8 @@ export class CurriculoPage implements OnInit {
       .perfil()
       .then((response) => {
         this.perfil = response;
+
+        this.loadContato(this.perfil);
         if (this.perfil === undefined) {
           return;
         } else {
@@ -188,6 +190,8 @@ export class CurriculoPage implements OnInit {
       .perfil()
       .then((response) => {
         this.perfil = response;
+
+        this.loadContato(this.perfil);
         if (this.perfil === undefined) {
           return;
         } else {

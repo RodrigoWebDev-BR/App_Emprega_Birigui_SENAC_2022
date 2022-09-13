@@ -106,6 +106,7 @@ export class ConclusaoPage implements OnInit {
       }
     })
     .catch((e)=>{
+      console.log(e);
       this.exibeToast('Erro com o servidor!');
       this.nome = 'erro';
     });

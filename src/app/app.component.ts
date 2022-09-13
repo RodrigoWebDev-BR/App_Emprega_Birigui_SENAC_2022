@@ -30,10 +30,11 @@ export class AppComponent {
   constructor(public nav: NavController) {}
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
-  ngOnInit() {
-    if (localStorage.getItem('nomeMenu') !== null) {
+  ngOnInit(){
+    if(localStorage.getItem('nomeMenu') !== null){
       this.nomeMenu = localStorage.getItem('nomeMenu').split(' ')[0];
     }
+
     this.menus = localStorage.getItem('profile');
   }
 
