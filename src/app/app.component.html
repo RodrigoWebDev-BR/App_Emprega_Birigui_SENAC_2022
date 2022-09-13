@@ -3,7 +3,7 @@
     <ion-menu contentId="main-content" type="overlay" class="menuEdit" style="width: 280px;">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>PATRICK</ion-list-header>
+          <ion-list-header>{{nomeMenu}}</ion-list-header>
           <ion-note>03 candidatura(s)</ion-note>
 
           <div *ngIf="menus === 'empregado'"> 
@@ -49,7 +49,7 @@
           <ion-list-header style="font-size: 25px; color: black;" class="bold">Emprega +</ion-list-header>
           <ion-note>Birigui</ion-note>
           <ion-col>
-            <img src="/assets/logo.png">
+            <img src="/assets/logo.png" style="width: 250px;">
           </ion-col>
         </ion-list>
       </ion-content>

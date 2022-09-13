@@ -1,0 +1,53 @@
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title
+      color="light"
+      class="centertext tituloProject bold"
+      >Vagas ONLINE</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let emprego of empregosDisponivel">
+    <ion-row>
+      <ion-col>
+        <ion-card class="cardVagas">
+          <ion-card-header>
+            <ion-card-title>{{emprego.titulo}}</ion-card-title>
+            <ion-card-subtitle color="primary" class="under" *ngIf="emprego.online">Vaga Online <img src="../../assets/check.png"/></ion-card-subtitle>
+
+            <ion-card-subtitle color="danger" class="under" *ngIf="!emprego.online">Vaga Fechada <img src="../../assets/delete.png"/></ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <p style="font-weight: bold">
+              Contrato:
+              <span class="under"
+                > {{emprego.tipo}} - {{emprego.contrato}}</span
+              >
+            </p>
+            <p style="font-weight: bold">
+              Data publicação:
+              <span class="under">
+               {{emprego.dataPub}}
+            </span>
+            </p>
+            <ion-row>
+              <ion-col size="12" style=" display: flex; flex-direction: row;">
+                <ion-button size="small" color="secondary" *ngIf="emprego.online">
+                  <ion-icon name="person-add" color="light"></ion-icon>
+                  <ion-label style="margin-top: 0px; margin-left: 6px"
+                    >Candidatos</ion-label
+                  >
+                </ion-button> 
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

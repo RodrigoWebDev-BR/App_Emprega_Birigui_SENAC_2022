@@ -18,7 +18,7 @@ export class ContatoPage implements OnInit {
     { id: '2', nome: 'Telefone' },
     { id: '3', nome: 'LinkedIn' },
     { id: '4', nome: 'Instagram' },
-    { id: '5', nome: 'Facebook' },
+    { id: '5', nome: 'Facebook' }
   ];
 
   constructor(

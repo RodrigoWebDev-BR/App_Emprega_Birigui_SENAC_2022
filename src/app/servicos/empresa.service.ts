@@ -15,4 +15,33 @@ export class EmpresaService {
     url += '/' + localStorage.getItem('idUser');
     return this.http.get(url, { headers }).toPromise();
   }
+
+  searchSubDoc(sessao: string) {
+    const url =
+      'http://localhost:3000/empresas/' +
+      localStorage.getItem('idUser') +
+      '/' +
+      sessao;
+
+    const headers = new HttpHeaders().set('Content-Type', `application/json`);
+    return this.http.get(url, { headers }).toPromise();
+  }
+
+  patchEmpresa(documento: any, sessao: string) {
+    let subDoc: any = {};
+
+    switch (sessao) {
+      case 'contatos':
+        subDoc = { contatos: documento };
+        break;
+
+        default:
+          subDoc = documento;
+        break;
+    }
+
+    const url = 'http://localhost:3000/empresas/' + localStorage.getItem('idUser');
+    const headers = new HttpHeaders().set('Content-Type', `application/json`);
+    return this.http.patch(url, subDoc, { headers }).toPromise();
+  }
 }

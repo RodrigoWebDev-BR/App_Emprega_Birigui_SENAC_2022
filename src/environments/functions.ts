@@ -1,3 +1,4 @@
+import { ToastController } from '@ionic/angular';
 /* eslint-disable one-var */
 export const formatarCPF = (cpf) => {
   let aocpf = cpf;

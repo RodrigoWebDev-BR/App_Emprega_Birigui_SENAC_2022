@@ -36,7 +36,7 @@ export class IdiomasService {
   reduntante(param: any): boolean {
     const value = this.listar();
     if (value !== undefined) {
-      const result = value.filter((idiomas) => idiomas.id_idioma === param);
+      const result = value.filter((idiomas) => idiomas.idioma === param);
 
       if (result.length === 0) {
         return true;
@@ -50,7 +50,7 @@ export class IdiomasService {
 
   deletar(param: any) {
     const value = this.listar();
-    const result = value.filter((idiomas) => idiomas.id_idioma !== param);
+    const result = value.filter((idiomas) => idiomas.idioma !== param);
 
     localStorage.setItem(this.key, JSON.stringify(result));
   }

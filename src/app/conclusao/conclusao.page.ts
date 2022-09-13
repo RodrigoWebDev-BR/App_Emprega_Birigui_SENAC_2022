@@ -39,21 +39,20 @@ export class ConclusaoPage implements OnInit {
       this.cadastroEmpregado();
     }
 
-    localStorage.clear();
-
     setTimeout(() => {
       if (this.nome !== 'erro') {
         if (
-          localStorage.getItem('nome') === null ||
-          localStorage.getItem('nome') === undefined
-        ) {
-          this.nav.navigateRoot('login/empresa_' + this.nome);
+          localStorage.getItem('nome') === null
+          ) {
+            localStorage.clear();
+            this.nav.navigateRoot('login/empresa_' + this.nome);
+          } else {
+            localStorage.clear();
+            this.nav.navigateRoot('login/empregado_' + this.nome);
+          }
         } else {
-          this.nav.navigateRoot('login/empregado_' + this.nome);
+          this.nav.navigateRoot('login/erro');
         }
-      } else {
-        this.nav.navigateRoot('login/erro');
-      }
     }, 4000);
   }
 
@@ -99,7 +98,6 @@ export class ConclusaoPage implements OnInit {
     this.cadastro.cadastrar(empregado, 'empregado')
     .then((response)=>{
       this.resp = response;
-      console.log(this.resp);
       if(this.resp !== undefined){
         this.nome = this.resp.nome;
       }else{

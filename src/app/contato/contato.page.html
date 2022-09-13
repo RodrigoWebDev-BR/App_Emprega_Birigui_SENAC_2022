@@ -41,7 +41,7 @@
         <ion-list style="width: 100%">
           <ion-item *ngFor="let cont of contatos" lines="none" class="border animate__animated animate__fadeInUp">
             <ion-label>
-              <p>{{cont.id}}</p>
+              <p>{{cont.tipo}}</p>
               <h2>{{cont.contato}}</h2>
             </ion-label>
             <ion-icon name="trash-outline" slot="end" color="danger" (click)="removerContato(cont)"></ion-icon>

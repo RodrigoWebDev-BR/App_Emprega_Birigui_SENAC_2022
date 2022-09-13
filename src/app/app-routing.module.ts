@@ -5,7 +5,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login/login',
+    redirectTo: 'curriculo',
     pathMatch: 'full'
   },
   {
@@ -113,7 +113,12 @@ const routes: Routes = [
     path: 'candidaturas',
     canActivate: [LoginAuthGuard],
     loadChildren: () => import('./candidaturas/candidaturas.module').then( m => m.CandidaturasPageModule)
+  },
+  {
+    path: 'vagas',
+    loadChildren: () => import('./vagas/vagas.module').then( m => m.VagasPageModule)
   }
+
 ];
 
 @NgModule({

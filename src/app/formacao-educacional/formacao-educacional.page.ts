@@ -109,7 +109,7 @@ export class FormacaoEducacionalPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO',
         subHeader: '',
-        message: 'É necessário pelo menos um contato',
+        message: 'É necessário pelo menos uma formação.',
         buttons: ['OK'],
       });
       await alerta.present();
