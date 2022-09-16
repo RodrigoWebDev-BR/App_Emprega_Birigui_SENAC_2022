@@ -13,7 +13,16 @@ export class FormacaoEducacionalPage implements OnInit {
 
   public formEducacional: any[] = [];
 
+<<<<<<< Updated upstream
   formacao = {id: null, instituicao: null, nomeCurso: null, nivel: null, conclusao: null};
+=======
+  formacao = {
+    instituicao: null,
+    curso: null,
+    nivel: null,
+    situacao: null,
+  };
+>>>>>>> Stashed changes
 
   formacoes = [
     {id: '1', nivel: '2º Grau Médio'},
@@ -69,6 +78,7 @@ export class FormacaoEducacionalPage implements OnInit {
       await alerta.present();
 
       return;
+<<<<<<< Updated upstream
     }
     else if(this.formacao.conclusao === null || this.formacao.conclusao === '')
     {
@@ -81,6 +91,19 @@ export class FormacaoEducacionalPage implements OnInit {
           cssClass: 'cssAlerta'
         }
       );
+=======
+    } else if (
+      this.formacao.situacao === null ||
+      this.formacao.situacao === ''
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        subHeader: '',
+        message: 'Necessário informar a situação do curso',
+        buttons: ['OK'],
+        cssClass: 'cssAlerta',
+      });
+>>>>>>> Stashed changes
       await alerta.present();
 
       return;
@@ -91,6 +114,7 @@ export class FormacaoEducacionalPage implements OnInit {
 
       this.formEducacional.push(formCopy);
 
+<<<<<<< Updated upstream
       this.formacao.id = null;
       this.formacao.instituicao = null;
       this.formacao.nomeCurso = null;
@@ -103,6 +127,19 @@ export class FormacaoEducacionalPage implements OnInit {
       Storage.remove({key: 'nivel'});
       Storage.remove({key: 'conclusao'});
 
+=======
+      this.formEdu.salvarFormacao(
+        this.formacao.instituicao,
+        this.formacao.curso,
+        this.formacao.nivel,
+        this.formacao.situacao
+      );
+
+      this.formacao.instituicao = '';
+      this.formacao.curso = '';
+      this.formacao.nivel = '';
+      this.formacao.situacao = '';
+>>>>>>> Stashed changes
     }
   }
 

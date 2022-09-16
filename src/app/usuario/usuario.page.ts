@@ -264,6 +264,7 @@ export class UsuarioPage implements OnInit {
   salvarTemporariamente() {
     const [ano, mes, dia] = this.usuario.dataNasc.split('-');
 
+<<<<<<< Updated upstream
     localStorage.setItem('nome', this.usuario.nome)
     localStorage.setItem('rg', this.usuario.rg)
     localStorage.setItem('cpf', this.usuario.cpf)
@@ -273,6 +274,16 @@ export class UsuarioPage implements OnInit {
     localStorage.setItem('estadoCivil', this.usuario.estadoCivil)
     localStorage.setItem('ocultarIdade', this.usuario.ocultarIdade)
     localStorage.setItem('estaEmpregado', this.usuario.estaEmpregado)
+=======
+    localStorage.setItem('nome', this.usuario.nome);
+    localStorage.setItem('rg', this.usuario.rg);
+    localStorage.setItem('cpf', this.usuario.cpf);
+    localStorage.setItem('email', this.usuario.email);
+    localStorage.setItem('dataNasc', dia + '/' + mes + '/' + ano);
+    localStorage.setItem('genero', this.usuario.genero);
+    localStorage.setItem('estadoCivil', this.usuario.estadoCivil);
+    localStorage.setItem('password', this.usuario.senha);
+>>>>>>> Stashed changes
   }
 
   carregarDados() {

@@ -13,7 +13,7 @@
     <ion-col>
       <ion-item class="roundedInput" lines="none">
         <ion-label position="floating" class="ion-margin-top">Idioma</ion-label>
-        <ion-select [(ngModel)]="idioma.id_idioma" style="width: 100%;">
+        <ion-select [(ngModel)]="idioma.idioma" style="width: 100%;">
           <ion-select-option *ngFor="let idm of tipoIdioma" value="{{idm.nome}}">{{idm.nome}}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -50,7 +50,7 @@
             <ion-item *ngFor="let idm of idiomas">
               <img class="bandeira" src="{{idm.bandeira}}">
               <ion-label class="labelIdioma">
-                <h2>Idioma: {{idm.id_idioma}}</h2>
+                <h2>Idioma: {{idm.idioma}}</h2>
                 <h2>Nivel: {{idm.nivel}}</h2>
               </ion-label>
               <ion-icon name="trash-outline" slot="end" color="danger" (click)="removerIdioma(idm)" 

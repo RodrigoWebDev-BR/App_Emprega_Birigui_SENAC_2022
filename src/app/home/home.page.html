@@ -6,6 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
+<<<<<<< Updated upstream
 <ion-content class="fundobg">
 
   <div class="header">
@@ -17,6 +18,41 @@
         <h2 class="marv margin-h2-user white" style="font-size: 20px; margin-top: 5px;">PATRICK PALMEIRENSE</h2>
       </ion-col>
     </ion-row>
+=======
+<ion-content class="fundobg" *ngIf="none">
+  <div class="header">
+    <div *ngIf="empregado">
+      <ion-row class="perfil">
+        <ion-col class="centertext" style="margin-top: 10px">
+          <img src="../../assets/icon/user.png" />
+        </ion-col>
+        <ion-col class="centertext" style="padding-top: 60px">
+          <h2
+            class="marv margin-h2-user white"
+            style="font-size: 20px; margin-top: 5px"
+          >
+            {{perfil.nome}}
+          </h2>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="empresa">
+      <ion-row class="perfil">
+        <ion-col class="centertext" style="margin-top: 10px">
+          <img src="../../assets/icon/buildings.png" />
+        </ion-col>
+        <ion-col class="centertext" style="padding-top: 60px">
+          <h2
+            class="marv margin-h2-user white"
+            style="font-size: 20px; margin-top: 5px"
+          >
+            {{perfil.nomeEmpresa}}
+          </h2>
+        </ion-col>
+      </ion-row>
+    </div>
+>>>>>>> Stashed changes
   </div>
 
   <div class="corpo"> 

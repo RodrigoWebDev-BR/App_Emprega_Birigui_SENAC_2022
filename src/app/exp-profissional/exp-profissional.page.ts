@@ -13,13 +13,24 @@ export class ExpProfissionalPage implements OnInit {
   public experiencias: any[] = [];
   public checado = false;
 
+<<<<<<< Updated upstream
   experiencia = {empresa:'', cargo:'', descricao:'', admissao:'', demissao:'' }
+=======
+  experiencia = {
+    empresa: '',
+    cargo: '',
+    descricao: '',
+    dtInicio: '',
+    dtFinal: '',
+  };
+>>>>>>> Stashed changes
 
   constructor(public route: Router, public mensagem: AlertController, public leftMenu: MenuController) { 
     this.leftMenu.enable(false);
   }
 
   async addExperiencia() {
+<<<<<<< Updated upstream
 
     if(this.experiencia.empresa === '' || this.experiencia.empresa === null){
       const alerta = await this.mensagem.create(
@@ -30,10 +41,19 @@ export class ExpProfissionalPage implements OnInit {
           buttons: ['OK'],
         }
       );
+=======
+    if (this.experiencia.empresa === '' || this.experiencia.empresa === null) {
+      const alerta = await this.mensagem.create({
+        header: 'Atenção',
+        message: 'Necessário preencher o nome da empresa.',
+        buttons: ['OK'],
+      });
+>>>>>>> Stashed changes
       await alerta.present();
 
       //return para cancelar a execução do método
       return;
+<<<<<<< Updated upstream
 
     }else if(this.experiencia.cargo === '' || this.experiencia.cargo === null){
       const alerta = await this.mensagem.create(
@@ -44,10 +64,22 @@ export class ExpProfissionalPage implements OnInit {
           buttons: ['OK'],
         }
       );
+=======
+    } else if (
+      this.experiencia.cargo === '' ||
+      this.experiencia.cargo === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'Atenção',
+        message: 'Necessário preencher o cargo da empresa.',
+        buttons: ['OK'],
+      });
+>>>>>>> Stashed changes
       await alerta.present();
 
       //return para cancelar a execução do método
       return;
+<<<<<<< Updated upstream
     }else if(this.experiencia.descricao === '' || this.experiencia.descricao === null){
       const alerta = await this.mensagem.create(
         {
@@ -57,10 +89,22 @@ export class ExpProfissionalPage implements OnInit {
           buttons: ['OK'],
         }
       );
+=======
+    } else if (
+      this.experiencia.descricao === '' ||
+      this.experiencia.descricao === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'Atenção',
+        message: 'Necessário preencher a descrição com pelo 70 palavras.',
+        buttons: ['OK'],
+      });
+>>>>>>> Stashed changes
       await alerta.present();
 
       //return para cancelar a execução do método
       return;
+<<<<<<< Updated upstream
     }else if(this.experiencia.admissao === '' || this.experiencia.admissao === null){
       const alerta = await this.mensagem.create(
         {
@@ -70,10 +114,22 @@ export class ExpProfissionalPage implements OnInit {
           buttons: ['OK'],
         }
       );
+=======
+    } else if (
+      this.experiencia.dtInicio === '' ||
+      this.experiencia.dtInicio === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'Atenção',
+        message: 'Necessário preencher a data de admissão.',
+        buttons: ['OK'],
+      });
+>>>>>>> Stashed changes
       await alerta.present();
 
       //return para cancelar a execução do método
       return;
+<<<<<<< Updated upstream
 
     }else{
       
@@ -106,6 +162,40 @@ export class ExpProfissionalPage implements OnInit {
       Storage.remove({ key: "admissao" });
       Storage.remove({ key: "demissao" }); 
 
+=======
+    } else {
+      if (
+        this.experiencia.dtFinal === '' ||
+        this.experiencia.dtFinal === null
+      ) {
+        this.experiencia.dtFinal = 'até Atualmente';
+      } else {
+        const [ano, mes, dia] = this.experiencia.dtFinal.split('-');
+
+        this.experiencia.dtFinal = 'até ' + dia + '/' + mes + '/' + ano;
+      }
+
+      const experienciaCopy = JSON.parse(JSON.stringify(this.experiencia));
+      this.experiencias.push(experienciaCopy);
+
+
+      this.exp.salvarExp(
+        this.experiencia.empresa,
+        this.experiencia.cargo,
+        this.experiencia.dtInicio,
+        this.experiencia.dtFinal,
+        this.checado,
+        this.experiencia.descricao
+      );
+
+      this.checado = false;
+
+      this.experiencia.empresa = '';
+      this.experiencia.cargo = '';
+      this.experiencia.descricao = '';
+      this.experiencia.dtInicio = '';
+      this.experiencia.dtFinal = '';
+>>>>>>> Stashed changes
     }
   }
 
@@ -158,9 +248,15 @@ export class ExpProfissionalPage implements OnInit {
   empregado($event){
     $event.currentTarget.checked ? this.checado = true : this.checado = false; 
 
+<<<<<<< Updated upstream
     if(this.checado){
       this.experiencia.demissao = '';
     } 
+=======
+    if (this.checado) {
+      this.experiencia.dtFinal = '';
+    }
+>>>>>>> Stashed changes
   }
 
   formEdu(){

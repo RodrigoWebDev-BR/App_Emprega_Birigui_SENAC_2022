@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, MenuController } from '@ionic/angular';
-import { Storage } from '@capacitor/storage';
+import { AlertController, MenuController, NavController } from '@ionic/angular';
+import { ConclusaoPage } from '../conclusao/conclusao.page';
 
 @Component({
   selector: 'app-contato',
@@ -12,7 +12,8 @@ export class ContatoPage implements OnInit {
 
   public contatos: any[] = [];
 
-  contato = { id: '', contato: '' }
+  contato = { tipo: '', contato: '', validado: false };
+  
 
   tipoContato = [
     {id:'1', nome:'Celular'},
@@ -30,9 +31,13 @@ export class ContatoPage implements OnInit {
     this.route.navigate(['endereco']);
   }
 
-  async addContato() {
-
-    if (this.contato.id === null ||  this.contato.id === '' || this.contato.contato === '' || this.contato.contato === null) {
+  async addContato(validado: boolean) {
+    if (
+      this.contato.tipo === null ||
+      this.contato.tipo === '' ||
+      this.contato.contato === '' ||
+      this.contato.contato === null
+    ) {
       //abrir o alert avisando que exitem campos vazios
       const alerta = await this.mensagem.create(
         {
@@ -46,19 +51,60 @@ export class ContatoPage implements OnInit {
 
       //return para cancelar a execução do método
       return;
-    }
-    else
-    {
+    } else {
+      this.contato.validado = validado
       const contatoCopy = JSON.parse(JSON.stringify(this.contato));
 
       this.contatos.push(contatoCopy);
+      console.log(this.contatos)
+      this.contatoServ.salvarContato(this.contato.tipo, this.contato.contato, this.contato.validado);
 
       this.contato.contato = '';
-      this.contato.id = '';
-
-      Storage.remove({ key: 'contato' });
-      Storage.remove({ key: 'id' });
+      this.contato.tipo = '';
+      this.contato.validado = false;
     }
+
+
+  }
+
+  async mensagemPrincipal(){
+    const principal = await this.mensagem.create({
+      header: 'ATENÇÃO',
+      message:
+        'Deseja definir este contato como principal ?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          handler: () => {
+           this.addContato(false);
+          },
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.addContato(true);
+          },
+        },
+      ],
+    });
+    await principal.present();
+    return;
+  }
+
+   definirPrincipal(){
+    if(this.contatoServ.listar() !== undefined){
+      const conclusao = this.contatoServ.listar().filter((contatos) => contatos.validado === true);
+      
+      if(conclusao.length === 0){
+        this.mensagemPrincipal();
+      }else{
+        this.addContato(false);
+      }
+    }else{
+      this.mensagemPrincipal();
+    }
+
   }
 
   async confirmar(){
@@ -82,7 +128,9 @@ export class ContatoPage implements OnInit {
 
       return;
     }
-  }  
+
+    
+  }
 
   async removerContato(contatosRemove) {
     let confirmaRemover = await this.mensagem.create({

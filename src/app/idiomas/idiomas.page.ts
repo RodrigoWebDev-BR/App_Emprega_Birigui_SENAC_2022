@@ -9,6 +9,11 @@ import { alertController } from '@ionic/core';
   styleUrls: ['./idiomas.page.scss'],
 })
 export class IdiomasPage {
+<<<<<<< Updated upstream
+=======
+  public idioma = { idioma: '', nivel: '', bandeira: '' };
+  public idiomas: any[] = [];
+>>>>>>> Stashed changes
 
   public idioma = {id_idioma: '', nivel: '', descricao: '', bandeira: ''};
   public idiomas: any [] = [];
@@ -33,6 +38,17 @@ export class IdiomasPage {
   }
 
   async adicionarIdioma() {
+<<<<<<< Updated upstream
+=======
+    if (this.idioma.idioma === '' || this.idioma.idioma === null) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        subHeader: '',
+        message: 'Não é permitido inserir um idioma sem a linguagem.',
+        buttons: ['OK'],
+      });
+      await alerta.present();
+>>>>>>> Stashed changes
 
     console.log(this.idioma.nivel);
 
@@ -49,6 +65,24 @@ export class IdiomasPage {
       await alerta.present();
 
       return;
+<<<<<<< Updated upstream
+=======
+    } else if (this.idiomaSave.reduntante(this.idioma.idioma)) {
+      this.idioma.bandeira = '/assets/bandeiras/';
+
+      switch (this.idioma.idioma) {
+        case 'Inglês':
+          this.idioma.bandeira += 'ingles.jpg';
+          break;
+
+        case 'Espanhol':
+          this.idioma.bandeira += 'espanhol.png';
+          break;
+
+        case 'Japonês':
+          this.idioma.bandeira += 'japones.png';
+          break;
+>>>>>>> Stashed changes
 
     }
     else if(this.idioma.nivel === '' || this.idioma.nivel === null)
@@ -100,7 +134,17 @@ export class IdiomasPage {
       const idiomaCopy = JSON.parse(JSON.stringify(this.idioma))
       this.idiomas.push(idiomaCopy);
 
+<<<<<<< Updated upstream
       this.idioma.id_idioma = '';
+=======
+      this.idiomaSave.salvarIdiomas(
+        this.idioma.idioma,
+        this.idioma.nivel,
+        this.idioma.bandeira
+      );
+
+      this.idioma.idioma = '';
+>>>>>>> Stashed changes
       this.idioma.nivel = '';
     }
 
@@ -112,9 +156,14 @@ export class IdiomasPage {
     let confirmaRemover = await this.mensagem.create(
     {
       header: 'ATENÇÃO',
+<<<<<<< Updated upstream
       message: 'Confirma a exclusão do ' + idiomaRemove.id_idioma + '?',
       buttons: 
       [
+=======
+      message: 'Confirma a exclusão do ' + idiomaRemove.idioma + '?',
+      buttons: [
+>>>>>>> Stashed changes
         {
           text: 'Não',
           role: 'cancel',
@@ -125,8 +174,13 @@ export class IdiomasPage {
         },
         {
           text: 'Sim',
+<<<<<<< Updated upstream
           handler: () => 
           {
+=======
+          handler: () => {
+            this.idiomaSave.deletar(idiomaRemove.idioma);
+>>>>>>> Stashed changes
             const index = this.idiomas.indexOf(idiomaRemove);
             this.idiomas.splice(index, 1);
           }
