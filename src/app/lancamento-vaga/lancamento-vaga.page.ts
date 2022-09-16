@@ -31,7 +31,7 @@ export class LancamentoVagaPage implements OnInit {
     beneficios: this.beneficios,
     congelada: false,
     finalizada: false,
-    empresaId: localStorage.getItem('idUser')
+    empresaId: localStorage.getItem('idUser'),
   };
 
   isModalOpen = false;
@@ -73,14 +73,17 @@ export class LancamentoVagaPage implements OnInit {
     { nome: 'Saúde' },
     { nome: 'Serviços gerais' },
     { nome: 'Supermercado' },
-    { nome: 'Tecnologia' }
+    { nome: 'Tecnologia' },
   ];
 
   contratos = [{ nome: 'CLT' }, { nome: 'PJ' }, { nome: 'Estágio' }];
 
   prazos = [{ nome: 'Indeterminado' }, { nome: 'Temporário' }];
 
-  inclusos = [{ nome: 'Incluso', validado: true }, { nome: 'Não incluso', validado: false }];
+  inclusos = [
+    { nome: 'Incluso', validado: true },
+    { nome: 'Não incluso', validado: false },
+  ];
 
   // eslint-disable-next-line max-len
   constructor(
@@ -286,7 +289,7 @@ export class LancamentoVagaPage implements OnInit {
                             this.nav.navigateRoot('conclusao-vaga');
                           }
                         })
-                        .catch((e)=>{
+                        .catch((e) => {
                           console.log(e);
                         });
                     } else {
