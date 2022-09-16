@@ -1,0 +1,106 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-searchbar placeholder="Nome ou CPF"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-row>
+    <ion-col>
+      <div *ngFor="let user of usuarios">
+        <ion-card class="cardUser">
+          <ion-card-header>
+            <ion-card-title>{{user.nome}}</ion-card-title>
+            <ion-card-subtitle class="bold">{{user.cpf}}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+
+                <ion-accordion-group>
+
+                  <ion-accordion value="{{user.idAccordion}}">
+                    <ion-item slot="header" color="light">
+                      <ion-label>Ficha de {{user.nome}}</ion-label>
+                    </ion-item>
+                    <div slot="content">
+                      <ion-row>
+                        <ion-col>
+                          <ion-list>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">E-mail: </span>{{user.email}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">CPF: </span>{{user.cpf}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">Nascimento: </span>{{user.dtNascimento}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">Gênero: </span>{{user.genero}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">Estado civil: </span>{{user.eCivil}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">CEP: </span>{{user.cep}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">Endereço: </span>{{user.end}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">Número: </span>{{user.nmr}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">Bairro: </span>{{user.bairro}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">Cidade: </span>{{user.cidade}} - {{user.estado}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">Contato: </span>{{user.contato}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                            <ion-item>
+                              <ion-row>
+                                <ion-label><span class="bold">Contato 2: </span>{{user.contado2}}</ion-label>
+                              </ion-row>
+                            </ion-item>
+                          </ion-list>
+                        </ion-col>
+                      </ion-row>
+                    </div>
+                  </ion-accordion>
+                           
+                </ion-accordion-group>
+
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

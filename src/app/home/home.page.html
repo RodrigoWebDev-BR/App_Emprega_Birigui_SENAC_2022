@@ -1,0 +1,126 @@
+<ion-header [translucent]="true" *ngIf="none">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fundobg" *ngIf="none">
+  <div class="header">
+    <div *ngIf="empregado">
+      <ion-row class="perfil">
+        <ion-col class="centertext" style="margin-top: 10px">
+          <img src="../../assets/user.png" alt="" />
+        </ion-col>
+        <ion-col class="centertext" style="padding-top: 60px">
+          <h2
+            class="marv margin-h2-user white"
+            style="font-size: 20px; margin-top: 5px"
+          >
+            {{perfil.nome}}
+          </h2>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="empresa">
+      <ion-row class="perfil">
+        <ion-col class="centertext" style="margin-top: 10px">
+          <img src="../../assets/empresa.png" alt="" />
+        </ion-col>
+        <ion-col class="centertext" style="padding-top: 60px">
+          <h2
+            class="marv margin-h2-user white"
+            style="font-size: 20px; margin-top: 5px"
+          >
+            {{perfil.nomeEmpresa}}
+          </h2>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <div *ngIf="empregado">
+    <div *ngFor="let vaga of vagaDisponivel">
+      <ion-row>
+        <ion-col>
+          <ion-card class="cardVagas">
+            <ion-card-header>
+              <ion-card-title>{{vaga.titulo}}</ion-card-title>
+              <ion-card-subtitle color="primary"
+                >{{vaga.status}} <img src="../../assets/check.png" />
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p style="font-weight: bold">
+                Salário:
+                <span class="under">R$ {{vaga.salario}}.<small>00</small></span>
+              </p>
+              <ion-row>
+                <ion-col size="6">
+                  <p style="font-weight: bold">{{vaga.dataPub}}</p>
+                </ion-col>
+                <ion-col size="6" style="text-align: end">
+                  <ion-button size="small" (click)="abrirVaga()" fill="outline">
+                    <ion-icon name="analytics" color="primary"></ion-icon>
+                    <ion-label style="margin-top: 0px; margin-left: 6px"
+                      >Processos</ion-label
+                    >
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <div *ngIf="empresa">
+    <div *ngFor="let emprego of empregosDisponivel">
+      <ion-row>
+        <ion-col>
+          <ion-card class="cardVagas">
+            <ion-card-header>
+              <ion-card-title>{{emprego.titulo}}</ion-card-title>
+              <ion-card-subtitle color="primary" *ngIf="emprego.online"
+                >Vaga online<img src="../../assets/check.png" />
+              </ion-card-subtitle>
+
+              <ion-card-subtitle color="danger" *ngIf="!emprego.online"
+                >Vaga offline<img src="../../assets/delete.png" />
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p style="font-weight: bold">
+                Contrato:
+                <span class="under"
+                  >{{emprego.tipo}} - {{emprego.contrato}}</span
+                >
+              </p>
+              <ion-row>
+                <ion-col size="6">
+                  <p style="font-weight: bold">{{emprego.dataPub}}</p>
+                </ion-col>
+                <ion-col size="6" style="text-align: end">
+                  <ion-button
+                    size="small"
+                    (click)="finalizar(emprego)"
+                    color="danger"
+                    *ngIf="emprego.online"
+                  >
+                    <ion-icon name="close-circle" color="light"></ion-icon>
+                    <ion-label style="margin-top: 0px; margin-left: 6px"
+                      >Finalizar</ion-label
+                    >
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

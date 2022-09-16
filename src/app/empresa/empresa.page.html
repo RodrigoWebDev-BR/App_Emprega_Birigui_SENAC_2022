@@ -1,0 +1,127 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="login()" slot="start" style="padding-left: 15px;">
+      <ion-icon name="arrow-back" class="light icone"></ion-icon>
+    </ion-buttons>
+    <ion-title class="centertext tituloPadding bold">Informações Pessoais <ion-icon name="reader"></ion-icon></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fundobg" [fullscreen]="true">
+
+  <ion-row>
+    <ion-col>
+      <h5 style="text-align: start;">Campos com a flag <span style="color:red">*</span> necessário preencher</h5>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Nome Empresarial <span style="color: red">*</span></ion-label>
+        <ion-input type="text" [(ngModel)]="empresa.nomeEmpresa"></ion-input>
+        <ion-icon name="business-outline" slot="end" class="iconPad"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Nome Fantasia</ion-label>
+        <ion-input type="text" [(ngModel)]="empresa.fantasia"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">CNPJ <span style="color: red">*</span></ion-label>
+        <ion-input type="text" [(ngModel)]="empresa.cnpj" placeholder="**.***.***/****-**">
+        </ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">E-mail <span style="color: red">*</span></ion-label>
+        <ion-input type="email" [(ngModel)]="empresa.email" ></ion-input>
+        <ion-icon name="mail-outline" slot="end" class="iconPad"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Data de Abertura</ion-label>
+        <ion-input [(ngModel)]="empresa.dtAb" type="date" placeholder="">
+        </ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Situação cadastral<span style="color: red">*</span></ion-label>
+        <ion-select interface="popover" [(ngModel)]="empresa.situacao">
+          <ion-select-option *ngFor="let sit of situacao" value="{{ sit.situa}}">{{ sit.situa }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Atividades Economicas (CNAE)<span style="color: red">*</span></ion-label>
+        <ion-input type="text" [(ngModel)]="empresa.cnae" placeholder="**.**-*-**">
+        </ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Natureza Jurídica<span style="color: red">*</span></ion-label>
+        <ion-select interface="popover" [(ngModel)]="empresa.natureza">
+          <ion-select-option *ngFor="let nat of natureza" value="{{ nat.natJuridica}}">{{ nat.natJuridica}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Senha <span style="color: red">*</span></ion-label>
+        <ion-input type="password" [(ngModel)]="empresa.senha"></ion-input>
+        <ion-icon name="key-outline" slot="end" class="iconPad"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Confirme sua senha <span style="color: red">*</span></ion-label>
+        <ion-input type="password" [(ngModel)]="empresa.confirmacao"></ion-input>
+        <ion-icon name="key-outline" slot="end" class="iconPad"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col class="espacamento">
+      <ion-button shape="block" (click)="adicionarEmpresa(endereco)">Próximo</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
