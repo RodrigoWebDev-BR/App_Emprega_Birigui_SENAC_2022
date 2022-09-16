@@ -19,7 +19,7 @@
     <ion-col>
       <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">Nome Empresarial <span style="color: red">*</span></ion-label>
-        <ion-input type="text" [(ngModel)]="empresa.nomeEmp"></ion-input>
+        <ion-input type="text" [(ngModel)]="empresa.nomeEmpresa"></ion-input>
         <ion-icon name="business-outline" slot="end" class="iconPad"></ion-icon>
       </ion-item>
     </ion-col>
@@ -29,7 +29,7 @@
     <ion-col>
       <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">Nome Fantasia</ion-label>
-        <ion-input type="text" [(ngModel)]="empresa.nomeFant"></ion-input>
+        <ion-input type="text" [(ngModel)]="empresa.fantasia"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -58,7 +58,7 @@
     <ion-col>
       <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">Data de Abertura</ion-label>
-        <ion-input [(ngModel)]="empresa.dtAbertura" type="date" placeholder="">
+        <ion-input [(ngModel)]="empresa.dtAb" type="date" placeholder="">
         </ion-input>
       </ion-item>
     </ion-col>
@@ -79,7 +79,7 @@
     <ion-col>
       <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">Atividades Economicas (CNAE)<span style="color: red">*</span></ion-label>
-        <ion-input type="text" [(ngModel)]="empresa.atividades" placeholder="**.**-*-**">
+        <ion-input type="text" [(ngModel)]="empresa.cnae" placeholder="**.**-*-**">
         </ion-input>
       </ion-item>
     </ion-col>

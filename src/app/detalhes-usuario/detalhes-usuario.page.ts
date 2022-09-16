@@ -70,7 +70,7 @@ export class DetalhesUsuarioPage implements OnInit {
       return;
     }else{
       this.salvarTemporariamente();
-      this.nav.navigateRoot('conclusao')
+      this.nav.navigateRoot('revisao')
     }
   };
 

@@ -12,7 +12,7 @@ export class ExpProfissionalPage implements OnInit {
   public experiencias: any[] = [];
   public checado = false;
 
-  experiencia = { empresa: '', cargo: '', descricao: '', admissao: '', demissao: '' }
+  experiencia = { empresa: '', cargo: '', descricao: '', dtInicio: '', dtFinal: '' }
 
   constructor(public nav: NavController, public mensagem: AlertController, public leftMenu: MenuController, public exp: ExpProfissionalService) {
     this.leftMenu.enable(false);
@@ -24,7 +24,6 @@ export class ExpProfissionalPage implements OnInit {
       const alerta = await this.mensagem.create(
         {
           header: 'Atenção',
-          subHeader: 'Insira uma experiencia',
           message: 'Necessário preencher o nome da empresa.',
           buttons: ['OK'],
         }
@@ -38,7 +37,6 @@ export class ExpProfissionalPage implements OnInit {
       const alerta = await this.mensagem.create(
         {
           header: 'Atenção',
-          subHeader: 'Insira uma experiencia',
           message: 'Necessário preencher o cargo da empresa.',
           buttons: ['OK'],
         }
@@ -51,8 +49,7 @@ export class ExpProfissionalPage implements OnInit {
       const alerta = await this.mensagem.create(
         {
           header: 'Atenção',
-          subHeader: 'Insira uma experiencia',
-          message: 'Necessário preencher a descrição com pelo 70 palavras.',
+          message: 'Necessário preencher a descrição.',
           buttons: ['OK'],
         }
       );
@@ -60,11 +57,10 @@ export class ExpProfissionalPage implements OnInit {
 
       //return para cancelar a execução do método
       return;
-    } else if (this.experiencia.admissao === '' || this.experiencia.admissao === null) {
+    } else if (this.experiencia.dtInicio === '' || this.experiencia.dtInicio === null) {
       const alerta = await this.mensagem.create(
         {
           header: 'Atenção',
-          subHeader: 'Insira uma experiencia',
           message: 'Necessário preencher a data de admissão.',
           buttons: ['OK'],
         }
@@ -76,39 +72,40 @@ export class ExpProfissionalPage implements OnInit {
 
     } else {
 
-      if (this.experiencia.demissao === '' || this.experiencia.demissao === null) {
-        this.experiencia.demissao = 'até Atualmente';
+      if (this.experiencia.dtFinal === '' || this.experiencia.dtFinal === null) {
+        this.experiencia.dtFinal = 'até Atualmente';
       }
       else {
-        const [ano, mes, dia] = this.experiencia.demissao.split('-');
+        const [ano, mes, dia] = this.experiencia.dtFinal.split('-');
 
-        this.experiencia.demissao = 'até ' + dia + '/' + mes + '/' + ano;
+        this.experiencia.dtFinal = 'até ' + dia + '/' + mes + '/' + ano;
       }
 
-      this.checado = false;
-
+      
       //const [ano, mes, dia] = this.experiencia.admissao.split('-');
-
+      
       //this.experiencia.admissao = dia + '/' + mes + '/' + ano;
-
+      
       const experienciaCopy = JSON.parse(JSON.stringify(this.experiencia))
       this.experiencias.push(experienciaCopy);
-
-
+      
+      
       this.exp.salvarExp(
         this.experiencia.empresa,
         this.experiencia.cargo,
-        this.experiencia.admissao,
-        this.experiencia.demissao,
-        this.experiencia.descricao,
-      )
-
+        this.experiencia.dtInicio,
+        this.experiencia.dtFinal,
+        this.checado,
+        this.experiencia.descricao
+        )
+        
+        this.checado = false;
 
       this.experiencia.empresa = '';
       this.experiencia.cargo = '';
       this.experiencia.descricao = '';
-      this.experiencia.admissao = '';
-      this.experiencia.demissao = '';
+      this.experiencia.dtInicio = '';
+      this.experiencia.dtFinal = '';
 
     }
   }
@@ -137,7 +134,36 @@ export class ExpProfissionalPage implements OnInit {
   };
 
   async confirmar() {
-    if (this.experiencias.length === 0) {
+    if(this.experiencias.length === 0 && localStorage.getItem('editar') === 'true') {
+      localStorage.setItem('editar', '')
+      const confirma = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        message: 'Deseja retornar a revisao sem acrescentar nenhuma experiência profissional?',
+        buttons: [
+          {
+            text: 'Não',
+            role: 'cancel',
+            handler: () => {
+            }
+          },
+          {
+            text: 'Sim',
+            handler: () => {
+              this.nav.navigateForward('revisao')
+            }
+          }
+        ]
+      });
+
+      await confirma.present();
+      
+    }
+    else if(localStorage.getItem('editar') === 'true') {
+      localStorage.setItem('editar', '')
+      this.nav.navigateForward('revisao')
+      
+    }
+    else if (this.experiencias.length === 0) {
       const confirma = await this.mensagem.create({
         header: 'ATENÇÃO',
         message: 'Deseja continuar sem acrescentar nenhuma experiência profissional?',
@@ -146,7 +172,6 @@ export class ExpProfissionalPage implements OnInit {
             text: 'Não',
             role: 'cancel',
             handler: () => {
-              // console.log("CANCELADO")
             }
           },
           {
@@ -168,7 +193,7 @@ export class ExpProfissionalPage implements OnInit {
     $event.currentTarget.checked ? this.checado = true : this.checado = false;
 
     if (this.checado) {
-      this.experiencia.demissao = '';
+      this.experiencia.dtFinal = '';
     }
   }
 
@@ -182,7 +207,6 @@ export class ExpProfissionalPage implements OnInit {
 
   carregarDados() {
     if (this.exp.listar() !== undefined) {
-      console.log(this.exp.listar())
       this.experiencias = this.exp.listar();
     }
   }

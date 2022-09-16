@@ -3,7 +3,7 @@
     <ion-menu contentId="main-content" type="overlay" class="menuEdit" style="width: 280px;">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>PATRICK</ion-list-header>
+          <ion-list-header>{{nomeMenu}}</ion-list-header>
           <ion-note>03 candidatura(s)</ion-note>
 
           <div *ngIf="menus === 'empregado'">
@@ -34,7 +34,7 @@
           </div>
 
           <ion-menu-toggle auto-hide="false">
-            <ion-item routerDirection="root" lines="none" detail="false" routerLinkActive="selected">
+            <ion-item routerDirection="root" lines="none" detail="false" routerLinkActive="selected" (click)="logout()">
               <ion-icon slot="start" name="power"></ion-icon>
               <ion-label>Sair</ion-label>
             </ion-item>

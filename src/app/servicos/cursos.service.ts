@@ -9,7 +9,7 @@ export class CursosService {
   constructor() {}
 
   salvarCurso(nome: string, instEnsino: string) {
-    const recebido = { nome: nome, instituicaoEnsino: instEnsino };
+    const recebido = { nome: nome, instituicao: instEnsino };
 
     const value = localStorage.getItem(this.key);
 

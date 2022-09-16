@@ -7,7 +7,9 @@ import { NavController } from '@ionic/angular';
 })
 export class AppComponent {
 
+  
   menus:string
+  nomeMenu:string
 
   public appPages = [
     { title: 'Perfil', url: '/home', icon: 'person' },
@@ -31,7 +33,12 @@ export class AppComponent {
   constructor(public nav: NavController) {}
 
   ngOnInit(){
-    this.menus = localStorage.getItem('menu')
+
+    if(localStorage.getItem('nomeMenu') !== null){
+      this.nomeMenu = localStorage.getItem('nomeMenu').split(' ')[0];
+    }
+    
+    this.menus = localStorage.getItem('profile')
   }
 
   logout(){

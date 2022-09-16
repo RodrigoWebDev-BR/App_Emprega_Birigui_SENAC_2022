@@ -25,7 +25,7 @@
   <ion-row>
     <ion-col class="espacamentoLogin">
       <ion-item class="roundedInput " lines="none">
-      <ion-input [(ngModel)]="candidato.senha" class="black" type="password" placeholder="Senha" (keyup)="loginInput($event)">
+      <ion-input [(ngModel)]="candidato.password" class="black" type="password" placeholder="Senha" (keyup)="loginInput($event)">
       </ion-input>
       <ion-icon name="key-outline" class="black" slot="end"></ion-icon>
     </ion-item>
@@ -51,7 +51,7 @@
 
   <ion-row class="iconPad">
     <ion-col class="espacamento">
-      <ion-item lines="none" (click)="cadastro()">
+      <ion-item lines="none" (click)="cadastro()" style="--background: rgba(255, 255, 255, 0);">
         <h2 class="txtNewAccount black center">Não possui uma conta? <span style="color:blue">Clique aqui e cadastre-se</span></h2>
       </ion-item>
     </ion-col>
@@ -59,7 +59,7 @@
 
   <ion-row>
     <ion-col class="espacamento ">
-      <ion-item lines="none" (click)="recuperacao()">
+      <ion-item lines="none" (click)="recuperacao()" style="--background: rgba(255, 255, 255, 0);">
         <h2 class="txtPassword black center">Esqueceu sua senha?</h2>
       </ion-item>
     </ion-col>

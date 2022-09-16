@@ -50,10 +50,16 @@ export class EnderecoPage {
       await alerta.present();
 
       return;
-    }
+      
+    }else if(localStorage.getItem('editar') === 'true') {
+      localStorage.setItem('editar', '')
+      this.salvarTemporariamente();
+      this.nav.navigateForward('revisao')
+
+    }else{
     this.salvarTemporariamente();
     this.nav.navigateForward('contato');
-
+    }
   }
 
   searchCEP(evento){

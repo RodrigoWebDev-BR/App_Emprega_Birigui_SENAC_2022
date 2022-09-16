@@ -10,7 +10,7 @@ import { IdiomasService } from '../servicos/idiomas.service';
 })
 export class IdiomasPage {
 
-  public idioma = { id_idioma: '', nivel: '', bandeira: '' };
+  public idioma = { idioma: '', nivel: '', bandeira: '' };
   public idiomas: any[] = [];
 
   tipoIdioma = [
@@ -34,9 +34,7 @@ export class IdiomasPage {
 
   async adicionarIdioma() {
 
-    console.log(this.idioma.nivel);
-
-    if (this.idioma.id_idioma === '' || this.idioma.id_idioma === null) {
+    if (this.idioma.idioma === '' || this.idioma.idioma === null) {
       const alerta = await this.mensagem.create(
         {
           header: 'ATENÇÃO',
@@ -64,10 +62,10 @@ export class IdiomasPage {
 
       return;
     }
-    else if (this.idiomaServ.redundante(this.idioma.id_idioma)) {
+    else if (this.idiomaServ.redundante(this.idioma.idioma)) {
       this.idioma.bandeira = '/assets/bandeiras/';
 
-      switch (this.idioma.id_idioma) {
+      switch (this.idioma.idioma) {
         case 'Inglês':
           this.idioma.bandeira += 'ingles.jpg';
           break;
@@ -96,9 +94,9 @@ export class IdiomasPage {
       const idiomaCopy = JSON.parse(JSON.stringify(this.idioma))
       this.idiomas.push(idiomaCopy);
 
-      this.idiomaServ.salvarIdiomas(this.idioma.id_idioma, this.idioma.nivel, this.idioma.bandeira)
+      this.idiomaServ.salvarIdiomas(this.idioma.idioma, this.idioma.nivel, this.idioma.bandeira)
 
-      this.idioma.id_idioma = '';
+      this.idioma.idioma = '';
       this.idioma.nivel = '';
     } else {
       const alerta = await this.mensagem.create(
@@ -122,7 +120,7 @@ export class IdiomasPage {
     const confirmaRemover = await this.mensagem.create(
       {
         header: 'ATENÇÃO',
-        message: 'Confirma a exclusão do ' + idiomaRemove.id_idioma + '?',
+        message: 'Confirma a exclusão do ' + idiomaRemove.idioma + '?',
         buttons:
           [
             {
@@ -134,7 +132,7 @@ export class IdiomasPage {
             {
               text: 'Sim',
               handler: () => {
-                this.idiomaServ.deletar(idiomaRemove.id_idioma)
+                this.idiomaServ.deletar(idiomaRemove.idioma)
                 const index = this.idiomas.indexOf(idiomaRemove);
                 this.idiomas.splice(index, 1);
               }
@@ -145,7 +143,13 @@ export class IdiomasPage {
   }
 
   proximo() {
+    if(localStorage.getItem('editar') === 'true') {
+      localStorage.setItem('editar', '')
+      this.nav.navigateForward('revisao')
+      
+    }else{
     this.nav.navigateRoot('detalhes-usuario');
+    }
   }
 
   ngOnInit() {

@@ -68,7 +68,33 @@ export class CursosPage implements OnInit {
   }
 
   async proximaPagina() {
-    if (this.cursos.length === 0) {
+    if(this.cursos.length === 0 && localStorage.getItem('editar') === 'true') {
+      localStorage.setItem('editar', '')
+      const nextPage = await this.mensagem.create({
+        header: 'Atenção',
+        message: 'Deseja retonar a página de revisão sem adicionar nenhum curso?',
+        buttons: [
+          {
+            text: 'Não',
+            role: 'cancel'
+          },
+          {
+            text: 'Sim',
+            handler: () => {
+              this.nav.navigateForward('revisao')
+            }
+          }
+        ]
+      });
+
+      await nextPage.present();
+      
+    }else if(localStorage.getItem('editar') === 'true') {
+      localStorage.setItem('editar', '')
+      this.nav.navigateForward('revisao')
+      
+    }
+    else if (this.cursos.length === 0) {
       const nextPage = await this.mensagem.create({
         header: 'Atenção',
         message: 'Deseja ir para a próxima página sem adicionar nenhum curso?',
@@ -98,7 +124,6 @@ export class CursosPage implements OnInit {
       message: 'Confima exclusão de ' + cursoRemove.nome + '? Essa ação é irreverssível.',
       buttons: [{
         text: 'Cancelar', role: 'cancel', handler: () => {
-          console.log("CANCELADO")
         }
       },
       {

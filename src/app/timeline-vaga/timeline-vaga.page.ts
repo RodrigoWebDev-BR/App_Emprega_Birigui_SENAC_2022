@@ -14,8 +14,6 @@ export class TimelineVagaPage implements OnInit {
 
   nomeContato(){
 
-    console.log(this.contato)
-
   }
 
   mostrarVaga(){

@@ -10,13 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class EmpresaPage implements OnInit {
 
   public empresa = {
-    nomeEmp: null,
-    nomeFant: null,
+    nomeEmpresa: null,
+    fantasia: null,
     cnpj: null,
     email:null,
-    dtAbertura: null,
+    dtAb: null,
     situacao: null,
-    atividades: null,
+    cnae: null,
     natureza: null,
     senha:null,
     confirmacao:null,
@@ -63,7 +63,7 @@ export class EmpresaPage implements OnInit {
 
   async adicionarEmpresa() {
 
-    if (this.empresa.nomeEmp === '' || this.empresa.nomeEmp === null) {
+    if (this.empresa.nomeEmpresa === '' || this.empresa.nomeEmpresa === null) {
 
       const alerta = await this.mensagem.create(
         {
@@ -89,7 +89,7 @@ export class EmpresaPage implements OnInit {
 
       return;
 
-    } else if (this.empresa.dtAbertura === '' || this.empresa.dtAbertura === null) {
+    } else if (this.empresa.dtAb === '' || this.empresa.dtAb === null) {
       const alerta = await this.mensagem.create(
         {
           header: 'ATENÇÃO!',
@@ -113,7 +113,7 @@ export class EmpresaPage implements OnInit {
       await alerta.present()
 
       return;
-    } else if (this.empresa.atividades === '' || this.empresa.atividades === null) {
+    } else if (this.empresa.cnae === '' || this.empresa.cnae === null) {
       const alerta = await this.mensagem.create(
         {
           header: 'ATENÇÃO!',
@@ -211,6 +211,12 @@ export class EmpresaPage implements OnInit {
       await alerta.present();
 
       return;
+
+    }else if(localStorage.getItem('editar') === 'true') {
+      localStorage.setItem('editar', '')
+      this.salvarTemporariamente();
+      this.nav.navigateForward('revisao')
+      
     }else{
       this.salvarTemporariamente();
       this.nav.navigateForward('endereco');
@@ -220,30 +226,31 @@ export class EmpresaPage implements OnInit {
 
   salvarTemporariamente() {
 
-    const [ano, mes, dia] = this.empresa.dtAbertura.split('-');
+    const [ano, mes, dia] = this.empresa.dtAb.split('-');
 
-    localStorage.setItem('nomeEmp', this.empresa.nomeEmp)
-    localStorage.setItem('nomeFant', this.empresa.nomeFant)
+    localStorage.setItem('nomeEmpresa', this.empresa.nomeEmpresa)
+    localStorage.setItem('fantasia', this.empresa.fantasia)
     localStorage.setItem('cnpj', this.empresa.cnpj)
     localStorage.setItem('email', this.empresa.email)
-    localStorage.setItem('dataAbert', dia + '/' + mes + '/' + ano)
+    localStorage.setItem('dtAb', dia + '/' + mes + '/' + ano)
     localStorage.setItem('situacao', this.empresa.situacao)
-    localStorage.setItem('atividades', this.empresa.atividades)
+    localStorage.setItem('cnae', this.empresa.cnae)
     localStorage.setItem('natureza', this.empresa.natureza)
+    localStorage.setItem('password', this.empresa.senha)
   }
 
   carregarDados() {
 
-    this.empresa.nomeEmp = localStorage.getItem('nomeEmp');
-    this.empresa.nomeFant = localStorage.getItem('nomeFant');
+    this.empresa.nomeEmpresa = localStorage.getItem('nomeEmpresa');
+    this.empresa.fantasia = localStorage.getItem('fantasia');
     this.empresa.cnpj = localStorage.getItem('cnpj');
     this.empresa.email = localStorage.getItem('email');
-    if (localStorage.getItem('dataAbert') !== null) {
-      const [dia, mes, ano] = localStorage.getItem('dataAbert').split('/')
-      this.empresa.dtAbertura = ano + '-' + mes + '-' + dia;
+    if (localStorage.getItem('dtAb') !== null) {
+      const [dia, mes, ano] = localStorage.getItem('dtAb').split('/')
+      this.empresa.dtAb = ano + '-' + mes + '-' + dia;
     }
     this.empresa.situacao = localStorage.getItem('situacao');
-    this.empresa.atividades = localStorage.getItem('atividades');
+    this.empresa.cnae = localStorage.getItem('cnae');
     this.empresa.natureza = localStorage.getItem('natureza');
   }
   

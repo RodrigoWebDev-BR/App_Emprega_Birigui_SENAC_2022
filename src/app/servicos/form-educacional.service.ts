@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FormEducacionalService {
   colecaoForm: any[] = [];
   key = 'formEducional';
-  constructor() { }
+  constructor() {}
 
-  salvarForm(inst: string, curso: string, concl: string, niveis: string) {
-    const recebido = { instituicao: inst  , nomeCurso: curso, conclusao: concl, nivel: niveis }
+  salvarForm(inst: string, nome: string, conclusao: string, niveis: string) {
+    const recebido = {
+      instituicao: inst,
+      curso: nome,
+      nivel: niveis,
+      situacao: conclusao,
+    };
 
     const value = localStorage.getItem(this.key);
 
@@ -21,25 +26,23 @@ export class FormEducacionalService {
       colecao.push(recebido);
       localStorage.setItem(this.key, JSON.stringify(colecao));
     }
-
   }
 
   listar() {
     const value = localStorage.getItem(this.key);
 
     if (value === undefined || value === null) {
-      return
+      return;
     }
 
-    const colecao: any[] = JSON.parse(value)
+    const colecao: any[] = JSON.parse(value);
     return colecao;
   }
 
   deletar(param: any) {
-    const value = this.listar()
-    const result = value.filter(formacoes => formacoes.instituicao !== param)
+    const value = this.listar();
+    const result = value.filter((formacoes) => formacoes.instituicao !== param);
 
-    localStorage.setItem(this.key, JSON.stringify(result))
-
+    localStorage.setItem(this.key, JSON.stringify(result));
   }
 }

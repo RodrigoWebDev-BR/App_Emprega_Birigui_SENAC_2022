@@ -1,3 +1,4 @@
+import { LoginService } from './../servicos/login.service';
 import {
   AlertController,
   NavController,
@@ -15,14 +16,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  candidato = { cpf: '', senha: '' };
+  candidato = { cpf: '', password: '' };
+  resp: any={};
 
   constructor(
     public nav: NavController,
     public menuLeft: MenuController,
     public toast: ToastController,
     public mensagem: AlertController,
-    private activated: ActivatedRoute
+    private activated: ActivatedRoute,
+    private authorize:LoginService
   ) {
     this.menuLeft.enable(false);
   }
@@ -38,7 +41,7 @@ export class LoginPage implements OnInit {
       await alerta.present();
 
       return;
-    } else if (this.candidato.senha === '' || this.candidato.senha === null) {
+    } else if (this.candidato.password === '' || this.candidato.password === null) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário preencher a senha.',
@@ -49,15 +52,43 @@ export class LoginPage implements OnInit {
 
       return;
     } else {
-      if (this.candidato.cpf === 'a') {
-        localStorage.setItem('menu', 'empregado');
-      } else if (this.candidato.cpf === 'b') {
-        localStorage.setItem('menu', 'empresa');
-      } else if (this.candidato.cpf === 'c') {
-        localStorage.setItem('menu', 'master');
-      }
+      const type = this.candidato.cpf.includes('/') ? 'empresa' : 'empregado'
 
-      this.nav.navigateRoot('home');
+      this.authorize
+
+        .login(this.candidato.cpf, this.candidato.password, type)
+
+        .then((response) => {
+          this.resp = response;
+
+          if (this.resp === undefined) {
+            this.exibeToast('Erro de resposta com o servidor.');
+          } else {
+            if (localStorage.getItem('loginAuto') === 'true') {
+              localStorage.setItem('CPF/CNPJ', this.candidato.cpf);
+            }
+
+            this.candidato.cpf = '';
+
+            this.candidato.password = '';
+
+            localStorage.setItem('accessToken', this.resp.accessToken);
+            localStorage.setItem('nomeMenu', this.resp.nome);
+            localStorage.setItem('idUser', this.resp.id);
+            localStorage.setItem('profile', this.resp.profile);
+
+            this.nav.navigateRoot('home');
+            
+          }
+        })
+
+        .catch((e) => {
+          if (this.candidato.cpf.includes('/')) {
+            this.exibeToast('CNPJ ou senha inválidos');
+          } else {
+            this.exibeToast('CPF ou senha inválidos');
+          }
+        });
     }
   }
 
@@ -99,7 +130,9 @@ export class LoginPage implements OnInit {
 
   formataCpf() {
     if (this.candidato.cpf !== '' && this.candidato.cpf !== null) {
+      if(this.candidato.cpf.length <= 11){
       this.candidato.cpf = formatarCpf(this.candidato.cpf);
+      }
     }
   }
 
@@ -108,21 +141,30 @@ export class LoginPage implements OnInit {
       this.candidato.cpf = localStorage.getItem('CPF/CNPJ');
     }
 
-    if (this.activated.snapshot.paramMap.get('id') === 'empregado') {
+    if (this.activated.snapshot.paramMap.get('id').includes('empregado_')) {
       const alerta = await this.mensagem.create({
-        header: 'PRONTO!',
-        message: 'Seu cadastro foi realizado com sucesso, faça seu login.',
+        header: 'Seja bem vindo!',
+        message: this.activated.snapshot.paramMap.get('id').split('_')[1] + ' seu cadastro foi realizado com sucesso, faça seu login',
         buttons: ['ok'],
       });
 
       await alerta.present();
 
       return;
-    } else if (this.activated.snapshot.paramMap.get('id') === 'empresa') {
+    } else if (this.activated.snapshot.paramMap.get('id').includes('empresa_')) {
       const alerta = await this.mensagem.create({
         header: 'PRONTO!',
-        message:
-          'Seu cadastro foi realizado com sucesso. Aguarde a prefeitura de Birigui autorizar seu acesso e tente realizar o login novamente dentro de 48 horas.',
+        message: 'Olá ' + this.activated.snapshot.paramMap.get('id').split('_')[1] + '. Seu cadastro foi realizado com sucesso. Aguarde a prefeitura de Birigui autorizar seu acesso e tente realizar o login novamente dentro de 48 horas.',
+        buttons: ['ok'],
+      });
+
+      await alerta.present();
+
+      return;
+    }else if (this.activated.snapshot.paramMap.get('id').includes('erro')) {
+      const alerta = await this.mensagem.create({
+        header: 'Ops...',
+        message: 'Não foi possível completar seu cadastro por erros internos, tente o cadastro novamente, se o erro persistir, entre em contato com a prefeitura de Birigui',
         buttons: ['ok'],
       });
 

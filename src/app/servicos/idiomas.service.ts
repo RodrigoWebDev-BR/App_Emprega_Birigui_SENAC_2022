@@ -8,8 +8,8 @@ export class IdiomasService {
   key = 'idiomas';
   constructor() { }
 
-  salvarIdiomas(id_idioma: string, nivel: string, bandeira: string) {
-    const recebido = { id_idioma: id_idioma, nivel: nivel, bandeira: bandeira }
+  salvarIdiomas(id: string, nivel: string, bandeira: string) {
+    const recebido = { idioma: id, nivel: nivel, bandeira: bandeira }
 
     const value = localStorage.getItem(this.key);
 
@@ -39,7 +39,7 @@ export class IdiomasService {
     const value = this.listar();
 
     if (value !== undefined) {
-      const result = value.filter(idiomas => idiomas.id_idioma === param)
+      const result = value.filter(idiomas => idiomas.idioma === param)
 
       if (result.length === 0) {
         return true;
@@ -52,7 +52,7 @@ export class IdiomasService {
 
   deletar(param: any) {
     const value = this.listar()
-    const result = value.filter(idiomas => idiomas.id_idioma !== param)
+    const result = value.filter(idiomas => idiomas.idioma !== param)
 
     localStorage.setItem(this.key, JSON.stringify(result))
 

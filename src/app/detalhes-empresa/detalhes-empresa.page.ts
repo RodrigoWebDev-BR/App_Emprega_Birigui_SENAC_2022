@@ -10,7 +10,7 @@ export class DetalhesEmpresaPage implements OnInit {
   detalhes = 
     {
       ramo:'',
-      descricao:''
+      descricaoEmpresa:''
     } ;
 
   caracter = 0
@@ -71,7 +71,7 @@ export class DetalhesEmpresaPage implements OnInit {
       await alerta.present();
 
       return;
-    }else if(this.detalhes.descricao === '' || this.detalhes.descricao === null){
+    }else if(this.detalhes.descricaoEmpresa === '' || this.detalhes.descricaoEmpresa === null){
 
       const alerta = await this.mensagem.create({
         header: 'Atenção',
@@ -96,28 +96,27 @@ export class DetalhesEmpresaPage implements OnInit {
       return;
     }else{
       this.salvarTemporariamente();
-      this.nav.navigateRoot('conclusao')
+      this.nav.navigateRoot('revisao')
     }
   };
 
   salvarTemporariamente(){
     localStorage.setItem('ramo', this.detalhes.ramo);
-    localStorage.setItem('ramo-descricao', this.detalhes.descricao);
+    localStorage.setItem('descricaoEmpresa', this.detalhes.descricaoEmpresa);
   }
 
   carregarDados(){
     this.detalhes.ramo = localStorage.getItem('ramo');
-    this.detalhes.descricao = localStorage.getItem('ramo-descricao');
+    this.detalhes.descricaoEmpresa = localStorage.getItem('descricaoEmpresa');
 
   }
 
   ngOnInit() {
     this.carregarDados();
-    console.log(this.detalhes.descricao);
     
-    if(this.detalhes.descricao !== null){
+    if(this.detalhes.descricaoEmpresa !== null){
 
-    this.contadorReload(this.detalhes.descricao)
+    this.contadorReload(this.detalhes.descricaoEmpresa)
 
     }
   }

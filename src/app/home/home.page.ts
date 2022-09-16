@@ -2,6 +2,8 @@ import { validarCNPJ } from './../../environments/functions';
 import { MenuController, NavController, AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EmpregadoService } from '../servicos/empregado.service';
+import { EmpresaService } from '../servicos/empresa.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+
+  perfil: any = {};
+
   empresa = false;
 
   empregado = false;
@@ -67,7 +72,9 @@ export class HomePage implements OnInit {
     public nav: NavController,
     public menuLeft: MenuController,
     public mensagem: AlertController,
-    public toast: ToastController
+    public toast: ToastController,
+    public servicoEmpregado: EmpregadoService,
+    public servicoEmpresa: EmpresaService
   ) {
     this.menuLeft.enable(true);
   }
@@ -124,7 +131,7 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     if(localStorage.getItem('reload') === null || localStorage.getItem('reload') === undefined){
-      if(localStorage.getItem('menu') !== null || localStorage.getItem('menu') !== undefined){
+      if(localStorage.getItem('profile') !== null || localStorage.getItem('profile') !== undefined){
         if(!this.none){
           localStorage.setItem('reload', 'true');
           window.location.reload();
@@ -134,11 +141,35 @@ export class HomePage implements OnInit {
       this.none = true;
       localStorage.removeItem('reload')
 
-      if(localStorage.getItem('menu') === 'empresa'){
-        this.empresa = true
-      }else if(localStorage.getItem('menu') === 'empregado'){
-        this.empregado = true
+      if(localStorage.getItem('profile') === 'empresa'){
+        this.perfilEmpresa();
+      }else if(localStorage.getItem('profile') === 'empregado'){
+        this.perfilEmpregado();
       }
     }
+  }
+
+  perfilEmpregado(){
+    this.empregado = true;
+    this.servicoEmpregado.perfil()
+    .then((response) =>{
+      this.perfil = response;
+      if(this.perfil === undefined){
+        this.exibeToast('Perfil com Erro!!')
+      }
+    }
+    ).catch();
+  }
+
+  perfilEmpresa(){
+    this.empresa = true;
+    this.servicoEmpresa.perfil()
+    .then((response) =>{
+      this.perfil = response;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+      if(this.perfil === undefined){
+        this.exibeToast('Perfil com Erro!!')
+      }
+    }
+    ).catch();
   }
 }

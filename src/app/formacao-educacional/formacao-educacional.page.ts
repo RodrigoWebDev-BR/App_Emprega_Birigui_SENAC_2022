@@ -12,7 +12,7 @@ export class FormacaoEducacionalPage implements OnInit {
 
   public formEducacional: any[] = [];
 
-  formacao = {instituicao: null, nomeCurso: null, nivel: null, conclusao: null};
+  formacao = {instituicao: null, curso: null, nivel: null, situacao: null};
 
   formacoes = [
     {id: '1', nivel: '2º Grau Médio'},
@@ -70,13 +70,13 @@ export class FormacaoEducacionalPage implements OnInit {
 
       return;
     }
-    else if(this.formacao.conclusao === null || this.formacao.conclusao === '')
+    else if(this.formacao.situacao === null || this.formacao.situacao === '')
     {
       const alerta = await this.mensagem.create(
         {
           header: 'ATENÇÃO',
           subHeader: '',
-          message: 'Necessário informar a conclusão do curso',
+          message: 'Necessário informar a situação do curso',
           buttons: ['OK'],
           cssClass: 'cssAlerta'
         }
@@ -88,24 +88,27 @@ export class FormacaoEducacionalPage implements OnInit {
     else
     {
       const formCopy = JSON.parse(JSON.stringify(this.formacao));
-      console.log(formCopy)
       this.formEducacional.push(formCopy);
 
-      this.formServ.salvarForm(this.formacao.instituicao, this.formacao.nomeCurso, this.formacao.conclusao, this.formacao.nivel )
+      this.formServ.salvarForm(this.formacao.instituicao, this.formacao.curso, this.formacao.situacao, this.formacao.nivel )
 
       this.formacao.instituicao = '';
-      this.formacao.nomeCurso = '';
-      this.formacao.conclusao = '';
+      this.formacao.curso = '';
+      this.formacao.situacao = '';
       this.formacao.nivel = '';
 
     }
   }
 
   async confimar(){
-    
-    if(this.formEducacional.length > 0)
+    if(this.formEducacional.length > 0 && localStorage.getItem('editar') === 'true') {
+      localStorage.setItem('editar', '')
+      this.nav.navigateForward('revisao')
+    }
+    else if(this.formEducacional.length > 0)
     {
       this.nav.navigateForward(['exp-profissional']);
+
     }
     else
     {
@@ -132,7 +135,6 @@ export class FormacaoEducacionalPage implements OnInit {
           text: 'Não',
           role: 'cancel',
           handler: () => {
-            console.log('CANCELADO');
           }
         },
         {
@@ -142,7 +144,6 @@ export class FormacaoEducacionalPage implements OnInit {
 
             const index = this.formEducacional.indexOf(instDelete);
             this.formEducacional.splice(index, 1);
-            console.log('REMOVIDO');
           }
         }
       ]

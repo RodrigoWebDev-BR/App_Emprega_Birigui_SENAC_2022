@@ -215,7 +215,11 @@ export class UsuarioPage implements OnInit {
 
       return;
 
-    } else {
+    } else if(localStorage.getItem('editar') === 'true') {
+      localStorage.setItem('editar', '')
+      this.salvarTemporariamente();
+      this.nav.navigateForward('revisao')
+    }else{
       this.salvarTemporariamente();
       this.nav.navigateForward('endereco');
     }
@@ -232,7 +236,8 @@ export class UsuarioPage implements OnInit {
     localStorage.setItem('email', this.usuario.email)
     localStorage.setItem('dataNasc', dia + '/' + mes + '/' + ano)
     localStorage.setItem('genero', this.usuario.genero)
-    localStorage.setItem('estadoCivil', this.usuario.estadoCivil)
+    localStorage.setItem('estadoCivil', this.usuario.estadoCivil);
+    localStorage.setItem('password', this.usuario.senha);
   }
 
   carregarDados() {
