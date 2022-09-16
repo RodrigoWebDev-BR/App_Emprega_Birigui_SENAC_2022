@@ -164,7 +164,6 @@ export class HomePage implements OnInit {
       .perfil()
       .then((response) => {
         this.perfil = response;
-        console.log(this.perfil);
         if (this.perfil === undefined) {
           this.exibeToast('Perfil com erro!');
         }
@@ -178,7 +177,6 @@ export class HomePage implements OnInit {
       .perfil()
       .then((response) => {
         this.perfil = response;
-        console.log(this.perfil);
         if (this.perfil === undefined) {
           this.exibeToast('Perfil com erro!');
         }

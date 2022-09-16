@@ -59,4 +59,38 @@ export class EmpregadoService {
     const headers = new HttpHeaders().set('Content-Type', `application/json`);
     return this.http.patch(url, subDoc, { headers }).toPromise();
   }
+
+  putUser(documento: any, sessao: string) {
+    //let subDoc: any = [];
+
+    // switch (sessao) {
+    //   case 'contatos':
+    //     subDoc = documento;
+    //     break;
+
+    //     case 'formacaoEdu':
+    //     subDoc = { formacaoEdu: documento };
+    //     break;
+
+    //     case 'expProfissional':
+    //     subDoc = { expProfissional: documento };
+    //     break;
+
+    //     case 'cursos':
+    //     subDoc = { cursos: documento };
+    //     break;
+
+    //     case 'idiomas':
+    //     subDoc = { idiomas: documento };
+    //     break;
+
+    //     default:
+    //     subDoc = documento;
+    //     break;
+    // }
+
+    const url = 'http://localhost:3000/users/' + localStorage.getItem('idUser') + '/' + sessao;
+    const headers = new HttpHeaders().set('Content-Type', `application/json`);
+    return this.http.put(url, documento, { headers }).toPromise();
+  }
 }

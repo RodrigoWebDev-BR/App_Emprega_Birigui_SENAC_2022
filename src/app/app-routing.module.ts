@@ -5,7 +5,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'curriculo',
+    redirectTo: 'conclusao-vaga',
     pathMatch: 'full'
   },
   {
@@ -118,7 +118,18 @@ const routes: Routes = [
     path: 'vagas',
     canActivate: [LoginAuthGuard],
     loadChildren: () => import('./vagas/vagas.module').then( m => m.VagasPageModule)
+  },
+  {
+    path: 'conclusao-vaga',
+    canActivate: [LoginAuthGuard],
+    loadChildren: () => import('./conclusao-vaga/conclusao-vaga.module').then( m => m.ConclusaoVagaPageModule)
+  },
+  {
+    path: 'revisao',
+    loadChildren: () => import('./revisao/revisao.module').then( m => m.RevisaoPageModule)
   }
+
+
 
 ];
 

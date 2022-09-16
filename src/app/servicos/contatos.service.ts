@@ -8,8 +8,8 @@ export class ContatosService {
   key = 'contatos';
   constructor() {}
 
-  salvarContato(tipos: string, contatos: string) {
-    const recebido = { tipo: tipos, contato: contatos };
+  salvarContato(tipos: string, contatos: string, validados: boolean) {
+    const recebido = { tipo: tipos, contato: contatos , validado: validados};
     const value = localStorage.getItem(this.key);
 
     if (value === undefined || value === null) {

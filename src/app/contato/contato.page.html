@@ -13,7 +13,7 @@
     <ion-col>
       <ion-item class="roundedInput ion-margin-top"  >
         <ion-label position="floating">Tipo de contato <span style="color:red">*</span></ion-label>
-        <ion-select style="width:100%" [(ngModel)]="contato.id">
+        <ion-select style="width:100%" [(ngModel)]="contato.tipo">
           <ion-select-option *ngFor="let tipo of tipoContato" value="{{tipo.nome}}">{{tipo.nome}}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -31,7 +31,7 @@
 
   <ion-row>
     <ion-col class="center ion-margin-top">
-      <ion-button color="primary" expand="block" (click)="addContato()">Adicionar</ion-button>
+      <ion-button color="primary" expand="block" (click)="definirPrincipal()">Adicionar</ion-button>
     </ion-col>
   </ion-row>
 

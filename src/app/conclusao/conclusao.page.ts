@@ -16,7 +16,7 @@ import { Component, OnInit } from '@angular/core';
 export class ConclusaoPage implements OnInit {
   resp: any = {};
   nome: string;
-
+  vagas: any = [];
   constructor(
     public leftMenu: MenuController,
     public nav: NavController,
@@ -44,7 +44,7 @@ export class ConclusaoPage implements OnInit {
         if (
           localStorage.getItem('nome') === null
           ) {
-            localStorage.clear();
+            //localStorage.clear();
             this.nav.navigateRoot('login/empresa_' + this.nome);
           } else {
             localStorage.clear();
@@ -92,7 +92,7 @@ export class ConclusaoPage implements OnInit {
       expProfissional: this.servicosExp.listar(),
       cursos: this.servicosCursos.listar(),
       idiomas: this.servicosIdiomas.listar(),
-      descricaoUser: localStorage.getItem('descricao-usuario')
+      descricaoUser: localStorage.getItem('descricao-usuario'),
     };
 
     this.cadastro.cadastrar(empregado, 'empregado')
@@ -106,7 +106,6 @@ export class ConclusaoPage implements OnInit {
       }
     })
     .catch((e)=>{
-      console.log(e);
       this.exibeToast('Erro com o servidor!');
       this.nome = 'erro';
     });
@@ -140,7 +139,6 @@ export class ConclusaoPage implements OnInit {
     this.cadastro.cadastrar(empresa, 'empresa')
     .then((response)=>{
       this.resp = response;
-      console.log(this.resp);
       if(this.resp !== undefined){
         this.nome = this.resp.nomeEmpresa;
       }else{
@@ -149,7 +147,6 @@ export class ConclusaoPage implements OnInit {
       }
     })
     .catch((e)=>{
-      console.log(e);
       this.exibeToast('Erro com o servidor!');
       this.nome = 'erro';
     });

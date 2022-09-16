@@ -167,7 +167,7 @@
           >Vale alimentação <span style="color: red">*</span></ion-label
         >
         <ion-select [(ngModel)]="vaga.alimentacao" interface="popover">
-          <ion-select-option *ngFor="let inc of inclusos" value="{{ inc.nome }}"
+          <ion-select-option *ngFor="let inc of inclusos" value="{{ inc.validado }}"
             >{{ inc.nome }}
           </ion-select-option>
         </ion-select>
@@ -182,7 +182,7 @@
           >Assistênia médica <span style="color: red">*</span></ion-label
         >
         <ion-select [(ngModel)]="vaga.medica" interface="popover">
-          <ion-select-option *ngFor="let inc of inclusos" value="{{ inc.nome }}"
+          <ion-select-option *ngFor="let inc of inclusos" value="{{ inc.validado }}"
             >{{ inc.nome }}
           </ion-select-option>
         </ion-select>
@@ -213,11 +213,10 @@
   <ion-row>
     <ion-col>
       <ion-item class="roundedInput" line="none">
-        <ion-label position="floating"></ion-label>
         <ion-input
           type="text"
           placeholder="Ex: Cesta básica"
-          [(ngModel)]="beneficio.nome"
+          [(ngModel)]="beneficio"
         ></ion-input>
       </ion-item>
     </ion-col>
@@ -244,7 +243,7 @@
             >
               <ion-item>
                 <ion-label>
-                  <h4>{{benef.nome}}</h4>
+                  <h4>{{benef}}</h4>
                 </ion-label>
                 <ion-icon
                   name="trash-outline"
@@ -388,7 +387,7 @@
               <h2>+ Benefícios</h2>
               <div *ngFor="let benef of beneficios">
                 <ion-label>
-                  <p>{{benef.nome}}</p>
+                  <p>{{benef}}</p>
                 </ion-label>
               </div>
             </ion-label>

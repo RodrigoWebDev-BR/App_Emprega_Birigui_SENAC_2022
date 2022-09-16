@@ -218,7 +218,7 @@
                     <ion-item style="margin-top: 10px">
                       <ion-label>
                         <h2>{{contact.contato}}</h2>
-                        <p>{{contact.tipo}}</p>
+                        <p>{{contact.tipo}} <span *ngIf="contact.validado" style="color:#00bd2f"> - Contato Princial</span></p>
                       </ion-label>
                       <ion-icon
                         name="trash-outline"
@@ -398,7 +398,8 @@
                   </ion-row>
                   <div *ngFor="let idioma of perfil.idiomas">
                     <ion-item style="margin-top: 10px">
-                      <ion-label>
+                      <img class="bandeira imgBandeira" src="{{idioma.bandeira}}" />
+                      <ion-label class="labelIdioma">
                         <h2>{{idioma.idioma}}</h2>
                         <p *ngIf="idioma.nivel === 'iniciante'">Iniciante</p>
                         <p *ngIf="idioma.nivel === 'basico'">Intermediário</p>
@@ -418,7 +419,7 @@
           </div>
         </ion-accordion>
       </ion-accordion-group>
-      
+
       <!-- ! Empresa -->
       <ion-accordion-group *ngIf="empresa">
         <ion-accordion value="dadosP">
@@ -526,10 +527,7 @@
                 <ion-list>
                   <ion-row style="display: flex; justify-content: flex-end">
                     <ion-button (click)="abreModal(true, 'endereco')">
-                      <ion-label
-                        style="margin-top: 3px"
-                        >Editar</ion-label
-                      >
+                      <ion-label style="margin-top: 3px">Editar</ion-label>
                       <ion-icon
                         class="iconEditar"
                         name="pencil"
@@ -613,7 +611,7 @@
                     <ion-item style="margin-top: 10px">
                       <ion-label>
                         <h2>{{contact.contato}}</h2>
-                        <p>{{contact.tipo}}</p>
+                        <p>{{contact.tipo}} <span *ngIf="contact.validado" style="color:#00bd2f"> - Contato Princial</span></p>
                       </ion-label>
                       <ion-icon
                         name="trash-outline"
@@ -663,10 +661,7 @@
 
           <ion-item lines="none">
             <ion-label position="floating">RG</ion-label>
-            <ion-input
-              [(ngModel)]="dadosEmpregado.rg"
-              (ionBlur)="formataRG()"
-            ></ion-input>
+            <ion-input [(ngModel)]="dadosEmpregado.rg"></ion-input>
           </ion-item>
 
           <ion-item lines="none">
@@ -679,7 +674,10 @@
 
           <ion-item lines="none">
             <ion-label position="floating">Estado Civil</ion-label>
-            <ion-select interface="popover" [(ngModel)]="dadosEmpregado.estadoCivil">
+            <ion-select
+              interface="popover"
+              [(ngModel)]="dadosEmpregado.estadoCivil"
+            >
               <ion-select-option
                 *ngFor="let etCvl of estadoCivil"
                 value="{{ etCvl.estadoAtual }}"
@@ -755,6 +753,10 @@
               >
             </ion-select>
           </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
   <ion-modal [isOpen]="modal.modalPessoalEmpresa">
     <ng-template>
@@ -866,7 +868,7 @@
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
-            <ion-button color="secondary" (click)="addContatos()"
+            <ion-button color="secondary" (click)="verificaContatos()"
               >Adicionar</ion-button
             >
           </ion-buttons>
@@ -906,7 +908,9 @@
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
-            <ion-button color="secondary">Adicionar</ion-button>
+            <ion-button color="secondary" (click)="addFormacao()"
+              >Adicionar</ion-button
+            >
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
@@ -915,17 +919,18 @@
         <ion-list>
           <ion-item>
             <ion-label position="floating">Nome Instituição</ion-label>
-            <ion-input type="text"> </ion-input>
+            <ion-input type="text" [(ngModel)]="formacao.instituicao">
+            </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Nome Curso</ion-label>
-            <ion-input type="text"> </ion-input>
+            <ion-input type="text" [(ngModel)]="formacao.curso"> </ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Nível</ion-label>
-            <ion-select style="width: 100%">
+            <ion-select style="width: 100%" [(ngModel)]="formacao.nivel">
               <ion-select-option
                 *ngFor="let form of formacoes"
                 value="{{form.nivel}}"
@@ -936,7 +941,7 @@
 
           <ion-item>
             <ion-label position="floating">Situação</ion-label>
-            <ion-select style="width: 100%">
+            <ion-select style="width: 100%" [(ngModel)]="formacao.situacao">
               <ion-select-option
                 *ngFor="let con of conclusoes"
                 value="{{con.resp}}"
@@ -960,37 +965,63 @@
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
-            <ion-button color="secondary">Adicionar</ion-button>
+            <ion-button color="secondary" (click)="addExp()"
+              >Adicionar</ion-button
+            >
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
 
       <ion-content>
         <ion-list>
-          <ion-item lines="none">
+          <ion-item>
             <ion-label position="floating">Empresa</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input
+              type="text"
+              [(ngModel)]="experiencia.empresa"
+            ></ion-input>
           </ion-item>
 
-          <ion-item lines="none">
+          <ion-item>
             <ion-label position="floating">Cargo</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" [(ngModel)]="experiencia.cargo"></ion-input>
           </ion-item>
 
-          <ion-row>
-            <ion-col>
-              <ion-label>Data de início</ion-label>
-              <ion-input type="date"></ion-input>
-            </ion-col>
-            <ion-col>
-              <ion-label>Data de Término</ion-label>
-              <ion-input type="date"></ion-input>
-            </ion-col>
-          </ion-row>
+          <ion-item>
+            <ion-label position="floating">Data de início</ion-label>
+            <ion-input
+              type="date"
+              placeholder=" "
+              [(ngModel)]="experiencia.dtInicio"
+            ></ion-input>
+          </ion-item>
 
-          <ion-item lines="none">
+          <ion-item>
+            <ion-label position="floating">Data de Término</ion-label>
+            <ion-input
+              type="date"
+              [(ngModel)]="experiencia.dtFinal"
+              placeholder=" "
+              disabled="{{checado}}"
+            ></ion-input>
+          </ion-item>
+
+          <br />
+          <ion-item>
+            <ion-checkbox
+              checked="{{checado}}"
+              (ionChange)="atualChk($event)"
+            ></ion-checkbox>
+            <ion-label style="margin-left: 10px">Emprego Atual?</ion-label>
+          </ion-item>
+          <br />
+          <ion-item>
             <ion-label position="floating">Descrição</ion-label>
-            <ion-input type="text" maxlength="300"></ion-input>
+            <ion-input
+              type="text"
+              maxlength="300"
+              [(ngModel)]="experiencia.descricao"
+            ></ion-input>
           </ion-item>
         </ion-list>
       </ion-content>
@@ -1008,7 +1039,9 @@
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
-            <ion-button color="secondary">Adicionar</ion-button>
+            <ion-button color="secondary" (click)="addCurso()"
+              >Adicionar</ion-button
+            >
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
@@ -1017,24 +1050,12 @@
         <ion-list>
           <ion-item>
             <ion-label position="floating">Nome curso</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" [(ngModel)]="curso.nome"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label position="floating">Nome instituição</ion-label>
-            <ion-input type="text"></ion-input>
-          </ion-item>
-
-          <br />
-          <ion-label class="inputData">Data de início</ion-label>
-          <ion-item>
-            <ion-input type="date"> </ion-input>
-          </ion-item>
-
-          <br />
-          <ion-label class="inputData">Data de conclusão</ion-label>
-          <ion-item>
-            <ion-input type="date"> </ion-input>
+            <ion-input type="text" [(ngModel)]="curso.instituicao"></ion-input>
           </ion-item>
         </ion-list>
       </ion-content>
@@ -1052,7 +1073,9 @@
           </ion-buttons>
           <ion-title class="centertext">EDITAR</ion-title>
           <ion-buttons slot="end">
-            <ion-button color="secondary">Adicionar</ion-button>
+            <ion-button color="secondary" (click)="addIdioma()"
+              >Adicionar</ion-button
+            >
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
@@ -1061,7 +1084,7 @@
         <ion-list>
           <ion-item>
             <ion-label position="floating">Idioma</ion-label>
-            <ion-select style="width: 100%">
+            <ion-select style="width: 100%" [(ngModel)]="idioma.idioma">
               <ion-select-option
                 *ngFor="let idm of tipoIdioma"
                 value="{{idm.nome}}"
@@ -1072,7 +1095,7 @@
 
           <ion-item>
             <ion-label position="floating">Nível do idioma</ion-label>
-            <ion-select style="width: 100%">
+            <ion-select style="width: 100%" [(ngModel)]="idioma.nivel">
               <ion-select-option value="iniciante">Iniciante</ion-select-option>
               <ion-select-option value="basico"
                 >Intermediário</ion-select-option

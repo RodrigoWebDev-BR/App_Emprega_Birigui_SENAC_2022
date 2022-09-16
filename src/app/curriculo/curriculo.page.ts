@@ -32,6 +32,7 @@ export class CurriculoPage implements OnInit {
     modalIdiomas: false,
   };
 
+  public checado = false;
   public resultSubDoc: any[];
 
   public dadosEmpregado = {
@@ -65,6 +66,34 @@ export class CurriculoPage implements OnInit {
   public contatos = {
     tipo: '',
     contato: '',
+    validado: false,
+  };
+
+  public formacao = {
+    instituicao: '',
+    curso: '',
+    nivel: '',
+    situacao: '',
+  };
+
+  public experiencia = {
+    empresa: '',
+    cargo: '',
+    dtInicio: '',
+    dtFinal: '',
+    atual: false,
+    descricao: '',
+  };
+
+  public curso = {
+    nome: '',
+    instituicao: '',
+  };
+
+  public idioma = {
+    idioma: '',
+    nivel: '',
+    bandeira: '',
   };
 
   public estadoCivil = [
@@ -152,6 +181,16 @@ export class CurriculoPage implements OnInit {
     }
   }
 
+  loadContato(perfil: any) {
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
+    for (let i = 0; i < perfil.contatos.length; i++) {
+      const element = perfil.contatos[i];
+      if (element.validado) {
+        this.contatoPrincipal = element.contato;
+      }
+    }
+  }
+
   perfilEmpregado(aux: string) {
     this.empregado = true;
     this.servicoEmpregado
@@ -219,16 +258,6 @@ export class CurriculoPage implements OnInit {
       .catch();
   }
 
-  loadContato(perfil: any) {
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    for (let i = 0; i < perfil.contatos.length; i++) {
-      const element = perfil.contatos[i];
-      if (element.tipo === 'Celular') {
-        this.contatoPrincipal = element.contato;
-      }
-    }
-  }
-
   async removerDados(item, sessao: string) {
     switch (sessao) {
       case 'contatos':
@@ -261,9 +290,9 @@ export class CurriculoPage implements OnInit {
                             )
                           )
                         );
-
+                        console.log(colecao);
                         this.servicoEmpregado
-                          .patchUser(colecao, sessao)
+                          .putUser(colecao, sessao)
                           .then((respFinal) => {
                             if (!respFinal) {
                               return;
@@ -271,7 +300,9 @@ export class CurriculoPage implements OnInit {
                               this.perfilEmpregado('');
                             }
                           })
-                          .catch();
+                          .catch((e) => {
+                            console.log(e);
+                          });
                       }
                     })
                     .catch();
@@ -292,7 +323,7 @@ export class CurriculoPage implements OnInit {
                           )
                         );
                         this.servicoEmpresa
-                          .patchEmpresa(colecao, 'contatos')
+                          .putEmpresa(colecao, 'contatos')
                           .then((respFinal) => {
                             if (!respFinal) {
                               return;
@@ -515,7 +546,7 @@ export class CurriculoPage implements OnInit {
     }
   }
 
-  //! #region ValidaDados
+  // #region Update Insert dados
   async updateDados() {
     if (this.dadosEmpregado.nome === '' || this.dadosEmpregado.nome === null) {
       const alerta = await this.mensagem.create({
@@ -844,7 +875,7 @@ export class CurriculoPage implements OnInit {
     }
   }
 
-  async addContatos() {
+  async addContatos(princial: boolean) {
     if (this.contatos.tipo === '' || this.contatos.tipo === null) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
@@ -873,18 +904,21 @@ export class CurriculoPage implements OnInit {
               return;
             } else {
               const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux));
+              this.contatos.validado = princial;
               colecao.push(this.contatos);
               this.servicoEmpregado
-                .patchUser(colecao, 'contatos')
+                .putUser(colecao, 'contatos')
                 .then((respFinal) => {
                   if (!respFinal) {
                     return;
                   } else {
                     this.perfilEmpregado('');
-                    this.exibeToast('Alteração concluída!', 'confirma');
+                    this.exibeToast('Dados inseridos com sucesso!', 'confirma');
                   }
                 })
-                .catch();
+                .catch((e) => {
+                  console.log(e);
+                });
             }
           })
           .catch();
@@ -900,13 +934,13 @@ export class CurriculoPage implements OnInit {
               colecao.push(this.contatos);
 
               this.servicoEmpresa
-                .patchEmpresa(colecao, 'contatos')
+                .putEmpresa(colecao, 'contatos')
                 .then((respFinal) => {
                   if (!respFinal) {
                     return;
                   } else {
                     this.perfilEmpresa('');
-                    this.exibeToast('Alteração concluída!', 'confirma');
+                    this.exibeToast('Dados inseridos com sucesso!', 'confirma');
                   }
                 })
                 .catch();
@@ -917,8 +951,354 @@ export class CurriculoPage implements OnInit {
     }
 
     this.abreModal(false, 'contatos');
+
+    setTimeout(() => {
+      this.contatos.tipo = '';
+      this.contatos.contato = '';
+    }, 1000);
   }
-  //! #endregion
+
+  async addFormacao() {
+    if (
+      this.formacao.instituicao === null ||
+      this.formacao.instituicao === ''
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        subHeader: '',
+        message: 'Necessário informar a instituição',
+        buttons: ['OK'],
+        cssClass: 'cssAlerta',
+      });
+      await alerta.present();
+
+      return;
+    } else if (this.formacao.nivel === null || this.formacao.nivel === '') {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        subHeader: '',
+        message: 'Necessário informar sua formação',
+        buttons: ['OK'],
+        cssClass: 'cssAlerta',
+      });
+      await alerta.present();
+
+      return;
+    } else if (
+      this.formacao.situacao === null ||
+      this.formacao.situacao === ''
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        subHeader: '',
+        message: 'Necessário informar a situação do curso',
+        buttons: ['OK'],
+        cssClass: 'cssAlerta',
+      });
+      await alerta.present();
+
+      return;
+    } else {
+      this.servicoEmpregado
+        .searchSubDoc('formacaoEdu')
+        .then((resp) => {
+          this.itemAux = resp;
+          if (this.itemAux === undefined) {
+            return;
+          } else {
+            const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux));
+            colecao.push(this.formacao);
+            this.servicoEmpregado
+              .putUser(colecao, 'formacaoEdu')
+              .then((respFinal) => {
+                if (!respFinal) {
+                  return;
+                } else {
+                  this.perfilEmpregado('');
+                  this.exibeToast('Dados inseridos com sucesso!', 'confirma');
+                }
+              })
+              .catch();
+          }
+        })
+        .catch();
+    }
+
+    this.abreModal(false, 'formEdu');
+
+    setTimeout(() => {
+      this.formacao.curso = '';
+      this.formacao.instituicao = '';
+      this.formacao.nivel = '';
+      this.formacao.situacao = '';
+    }, 1000);
+  }
+
+  async addExp() {
+    if (this.experiencia.empresa === '' || this.experiencia.empresa === null) {
+      const alerta = await this.mensagem.create({
+        header: 'Atenção',
+        message: 'Necessário preencher o nome da empresa.',
+        buttons: ['OK'],
+      });
+      await alerta.present();
+
+      return;
+    } else if (
+      this.experiencia.cargo === '' ||
+      this.experiencia.cargo === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'Atenção',
+        message: 'Necessário preencher o cargo da empresa.',
+        buttons: ['OK'],
+      });
+      await alerta.present();
+
+      return;
+    } else if (
+      this.experiencia.descricao === '' ||
+      this.experiencia.descricao === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'Atenção',
+        message: 'Necessário preencher a descrição.',
+        buttons: ['OK'],
+      });
+      await alerta.present();
+
+      return;
+    } else if (
+      this.experiencia.dtInicio === '' ||
+      this.experiencia.dtInicio === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'Atenção',
+        message: 'Necessário preencher a data de admissão.',
+        buttons: ['OK'],
+      });
+      await alerta.present();
+
+      //return para cancelar a execução do método
+      return;
+    } else {
+      if (
+        this.experiencia.dtFinal === '' ||
+        this.experiencia.dtFinal === null
+      ) {
+        this.experiencia.dtFinal = 'até Atualmente';
+      } else {
+        const [ano, mes, dia] = this.experiencia.dtFinal.split('-');
+
+        this.experiencia.dtFinal = 'até ' + dia + '/' + mes + '/' + ano;
+      }
+
+      this.experiencia.atual = this.checado;
+      this.checado = false;
+      this.servicoEmpregado
+        .searchSubDoc('expProfissional')
+        .then((resp) => {
+          this.itemAux = resp;
+          if (this.itemAux === undefined) {
+            return;
+          } else {
+            const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux));
+            colecao.push(this.experiencia);
+            this.servicoEmpregado
+              .putUser(colecao, 'expProfissional')
+              .then((respFinal) => {
+                if (!respFinal) {
+                  return;
+                } else {
+                  this.perfilEmpregado('');
+                  this.exibeToast('Dados inseridos com sucesso!', 'confirma');
+                }
+              })
+              .catch();
+          }
+        })
+        .catch();
+
+      this.abreModal(false, 'expP');
+
+      setTimeout(() => {
+        this.experiencia.empresa = '';
+        this.experiencia.cargo = '';
+        this.experiencia.descricao = '';
+        this.experiencia.dtInicio = '';
+        this.experiencia.dtFinal = '';
+      }, 1000);
+    }
+  }
+
+  async addCurso() {
+    if (this.curso.nome === '' || this.curso.nome === null) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'Não é permitido adicionar um curso sem nome.',
+        buttons: ['ok'],
+        cssClass: 'cssAlerta',
+      });
+
+      await alerta.present();
+
+      return;
+    } else if (
+      this.curso.instituicao === '' ||
+      this.curso.instituicao === null
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'Não é permitido um curso sem Instituição de Ensino.',
+        buttons: ['ok'],
+        cssClass: 'cssAlerta',
+      });
+
+      await alerta.present();
+
+      return;
+    } else {
+      this.servicoEmpregado
+        .searchSubDoc('cursos')
+        .then((resp) => {
+          this.itemAux = resp;
+          if (this.itemAux === undefined) {
+            return;
+          } else {
+            const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux));
+            colecao.push(this.curso);
+            this.servicoEmpregado
+              .putUser(colecao, 'cursos')
+              .then((respFinal) => {
+                if (!respFinal) {
+                  return;
+                } else {
+                  this.perfilEmpregado('');
+                  this.exibeToast('Dados inseridos com sucesso!', 'confirma');
+                }
+              })
+              .catch();
+          }
+        })
+        .catch();
+
+      this.abreModal(false, 'cursos');
+
+      setTimeout(() => {
+        this.curso.nome = '';
+        this.curso.instituicao = '';
+      }, 1000);
+    }
+  }
+
+  async addIdioma() {
+    if (this.idioma.idioma === '' || this.idioma.idioma === null) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        subHeader: '',
+        message: 'Não é permitido inserir um idioma sem a linguagem.',
+        buttons: ['OK'],
+      });
+      await alerta.present();
+
+      return;
+    } else if (this.idioma.nivel === '' || this.idioma.nivel === null) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        subHeader: '',
+        message:
+          'Não é permitido inserir um idioma sem o nível de conhecimento.',
+        buttons: ['OK'],
+      });
+
+      await alerta.present();
+
+      return;
+    } else {
+      this.idioma.bandeira = '/assets/bandeiras/';
+
+      switch (this.idioma.idioma) {
+        case 'Inglês':
+          this.idioma.bandeira += 'ingles.jpg';
+          break;
+
+        case 'Espanhol':
+          this.idioma.bandeira += 'espanhol.png';
+          break;
+
+        case 'Japonês':
+          this.idioma.bandeira += 'japones.png';
+          break;
+
+        case 'Frânces':
+          this.idioma.bandeira += 'frances.png';
+          break;
+
+        case 'Italiano':
+          this.idioma.bandeira += 'italiano.png';
+          break;
+
+        default:
+          this.idioma.bandeira += 'alemao.png';
+          break;
+      }
+
+      this.servicoEmpregado
+        .searchSubDoc('idiomas')
+        .then(async (resp) => {
+          this.itemAux = resp;
+          if (this.itemAux === undefined) {
+            return;
+          } else {
+            const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux));
+
+            const redundante: any[] = JSON.parse(
+              JSON.stringify(
+                this.itemAux.filter(
+                  // eslint-disable-next-line no-underscore-dangle
+                  (idioma) => idioma.idioma === this.idioma.idioma
+                )
+              )
+            );
+
+            if (redundante.length > 0) {
+              const alerta = await this.mensagem.create({
+                header: 'ATENÇÃO',
+                subHeader: '',
+                message: 'Não é permitido inserir um idioma repetido.',
+                buttons: ['OK'],
+              });
+
+              await alerta.present();
+
+              return;
+            } else {
+              colecao.push(this.idioma);
+              this.servicoEmpregado
+                .putUser(colecao, 'idiomas')
+                .then((respFinal) => {
+                  if (!respFinal) {
+                    return;
+                  } else {
+                    this.perfilEmpregado('');
+                    this.exibeToast('Dados inseridos com sucesso!', 'confirma');
+                  }
+                })
+                .catch();
+            }
+          }
+        })
+        .catch();
+
+      this.abreModal(false, 'idiomas');
+
+      setTimeout(() => {
+        this.idioma.idioma = '';
+        this.idioma.nivel = '';
+      }, 1000);
+    }
+  }
+  // #endregion
 
   formataCpf() {
     if (this.perfil.cpf !== '' && this.perfil.cpf !== null) {
@@ -971,16 +1351,16 @@ export class CurriculoPage implements OnInit {
         this.modal.modalContatos = open;
         break;
       case 'formEdu':
-        this.modal.modalPessoalEmpregado = open;
+        this.modal.modalFormacao = open;
         break;
       case 'expP':
-        this.modal.modalPessoalEmpregado = open;
+        this.modal.modalExp = open;
         break;
       case 'cursos':
-        this.modal.modalPessoalEmpregado = open;
+        this.modal.modalCursos = open;
         break;
       case 'idiomas':
-        this.modal.modalPessoalEmpregado = open;
+        this.modal.modalIdiomas = open;
         break;
     }
 
@@ -1017,7 +1397,7 @@ export class CurriculoPage implements OnInit {
         toastAviso.present();
         break;
 
-      case 'aviso':
+      case 'erro':
         const toastErro = await this.toast.create({
           message: msg,
           duration: 2000,
@@ -1028,6 +1408,76 @@ export class CurriculoPage implements OnInit {
 
         toastErro.present();
         break;
+    }
+  }
+
+  verificaContatos() {
+    if (localStorage.getItem('profile') === 'empregado') {
+      this.servicoEmpregado
+        .searchSubDoc('contatos')
+        .then((resp) => {
+          this.itemAux = resp;
+          if (this.itemAux === undefined) {
+            return;
+          } else {
+            const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux));
+            const conclusao = colecao.filter(
+              (contatos) => contatos.validado === true
+            );
+            if (
+              this.contatos.tipo === 'Celular' ||
+              this.contatos.tipo === 'Telefone'
+            ) {
+              if (colecao !== undefined && colecao.length > 0) {
+                if (conclusao.length === 0) {
+                  this.mensagemPrincipal();
+                } else {
+                  this.addContatos(false);
+                }
+              } else {
+                this.mensagemPrincipal();
+              }
+            } else {
+              this.addContatos(false);
+            }
+          }
+        })
+        .catch();
+    } else if (localStorage.getItem('profile') === 'empresa') {
+    }
+  }
+
+  async mensagemPrincipal() {
+    const definir = await this.mensagem.create({
+      header: 'ATENÇÃO',
+      message: 'Deseja definir este contato como principal?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'cancel',
+          handler: () => {
+            this.addContatos(false);
+          },
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.addContatos(true);
+          },
+        },
+      ],
+    });
+    await definir.present();
+  }
+
+  atualChk($event) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    $event.currentTarget.checked
+      ? (this.checado = true)
+      : (this.checado = false);
+
+    if (this.checado) {
+      this.experiencia.dtFinal = '';
     }
   }
 }

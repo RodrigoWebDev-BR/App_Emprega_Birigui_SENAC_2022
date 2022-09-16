@@ -1,5 +1,10 @@
+import { EmpresaService } from 'src/app/servicos/empresa.service';
 import { validarCNPJ } from './../../environments/functions';
-import { NavController, AlertController, ToastController } from '@ionic/angular';
+import {
+  NavController,
+  AlertController,
+  ToastController,
+} from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,26 +13,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lancamento-vaga.page.scss'],
 })
 export class LancamentoVagaPage implements OnInit {
-  vaga = {
-    nomeEmpresa: 'Amigão',
-    cidade: 'Birigui-SP',
+  public beneficios: any[] = [];
+  public vaga = {
+    nomeEmpresa: '',
+    cidade: '',
     tituloVaga: '',
     categoria: '',
     contrato: '',
     prazo: '',
-    horario: '',
+    horario: 0,
     combinado: false,
-    salario: '',
+    salario: 0,
     qualificacao: '',
-    alimentacao: '',
-    medica: '',
+    alimentacao: false,
+    medica: false,
     descricao: '',
+    beneficios: this.beneficios,
+    congelada: false, 
+    empresaId: localStorage.getItem('idUser')
   };
 
   isModalOpen = false;
-  public beneficio = { nome: '' };
-  public beneficios: any[] = [];
-
+  public beneficio = '';
+  perfil: any = {};
+  itemAux: any = {};
   qualificacoes = [
     { nivel: 'Aprendiz maior 14 anos' },
     { nivel: 'Aprendiz maior 16 anos' },
@@ -70,12 +79,18 @@ export class LancamentoVagaPage implements OnInit {
 
   prazos = [{ nome: 'Indeterminado' }, { nome: 'Temporário' }];
 
-  inclusos = [{ nome: 'Incluso' }, { nome: 'Não incluso' }];
+  inclusos = [{ nome: 'Incluso', validado: true }, { nome: 'Não incluso', validado: false }];
 
-  constructor(public nav: NavController, public mensagem: AlertController, public toast: ToastController) {}
+  // eslint-disable-next-line max-len
+  constructor(
+    public nav: NavController,
+    public mensagem: AlertController,
+    public toast: ToastController,
+    public servicoEmpresa: EmpresaService
+  ) {}
 
   async addBeneficio() {
-    if (this.beneficio.nome === null || this.beneficio.nome === '') {
+    if (this.beneficio === null || this.beneficio === '') {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário acrescentar um título para o benefício da vaga.',
@@ -86,16 +101,15 @@ export class LancamentoVagaPage implements OnInit {
 
       return;
     } else {
-      const beneficioCopy = JSON.parse(JSON.stringify(this.beneficio));
-      this.beneficios.push(beneficioCopy);
-      this.beneficio.nome = '';
+      this.beneficios.push(this.beneficio);
+      this.beneficio = '';
     }
   }
 
   async removerBenef(benef) {
     const confirmaRemover = await this.mensagem.create({
       header: 'ATENÇÃO!',
-      message: 'Confirmar exclusão de ' + benef.nome + '?',
+      message: 'Confirmar exclusão de ' + benef + '?',
       buttons: [
         {
           text: 'Cancelar',
@@ -132,7 +146,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário informar o título da vaga.',
-        buttons: ['ok']
+        buttons: ['ok'],
       });
 
       await alerta.present();
@@ -142,7 +156,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário informar uma categoria.',
-        buttons: ['ok']
+        buttons: ['ok'],
       });
 
       await alerta.present();
@@ -152,7 +166,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário informar o tipo de contrato.',
-        buttons: ['ok']
+        buttons: ['ok'],
       });
 
       await alerta.present();
@@ -162,27 +176,27 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Necessário informar o prazo de contrato',
-        buttons: ['ok']
+        buttons: ['ok'],
       });
 
       await alerta.present();
 
       return;
-    } else if (this.vaga.horario === null || this.vaga.horario === '') {
+    } else if (this.vaga.horario === 0) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
-        message: 'Necessário informar a carga horária.',
-        buttons: ['ok']
+        message: 'Necessário informar a carga horária semanal.',
+        buttons: ['ok'],
       });
 
       await alerta.present();
 
       return;
-    } else if (!this.vaga.combinado && this.vaga.salario === '') {
+    } else if (!this.vaga.combinado && this.vaga.salario === 0) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Se o salário não está a combinar, favor informar o salário',
-        buttons: ['ok']
+        buttons: ['ok'],
       });
 
       await alerta.present();
@@ -195,27 +209,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Informe uma qualificação.',
-        buttons: ['ok']
-      });
-
-      await alerta.present();
-
-      return;
-    } else if (this.vaga.alimentacao === null || this.vaga.alimentacao === '') {
-      const alerta = await this.mensagem.create({
-        header: 'ATENÇÃO!',
-        message: 'Necessário informar sobre o vale alimentação/refeição.',
-        buttons: ['ok']
-      });
-
-      await alerta.present();
-
-      return;
-    } else if (this.vaga.medica === null || this.vaga.medica === '') {
-      const alerta = await this.mensagem.create({
-        header: 'ATENÇÃO!',
-        message: 'Necessário informar sobre a assistência médica.',
-        buttons: ['ok']
+        buttons: ['ok'],
       });
 
       await alerta.present();
@@ -225,7 +219,7 @@ export class LancamentoVagaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'Por favor informe uma descrição sobre a vaga',
-        buttons: ['ok']
+        buttons: ['ok'],
       });
 
       await alerta.present();
@@ -259,8 +253,7 @@ export class LancamentoVagaPage implements OnInit {
   async lancarVaga(vaga) {
     const vagas = await this.mensagem.create({
       header: 'ATENÇÃO!',
-      message:
-        'Para lançar a vaga de ' + vaga.tituloVaga + ' insira seu CNPJ',
+      message: 'Para lançar a vaga de ' + vaga.tituloVaga + ' insira seu CNPJ',
       buttons: [
         {
           text: 'Cancelar',
@@ -271,8 +264,39 @@ export class LancamentoVagaPage implements OnInit {
           text: 'Finalizar',
           handler: (cnpj) => {
             if (validarCNPJ(cnpj[0])) {
-              this.exibeToast('Vaga inserida com sucesso!', 'success');
-            }else{
+              this.servicoEmpresa
+                .perfil()
+                .then((response) => {
+                  this.perfil = response;
+                  if (this.perfil !== undefined) {
+                    if (cnpj[0] === this.perfil.cnpj) {
+                      this.servicoEmpresa
+                        .lancaVaga(vaga)
+                        .then((finalResp) => {
+                          this.itemAux = finalResp;
+                          if (this.itemAux === undefined) {
+                            this.exibeToast(
+                              'Erro para inserir a vaga!',
+                              'danger'
+                            );
+                          } else {
+                            // eslint-disable-next-line no-underscore-dangle
+                            localStorage.setItem('idVaga', this.itemAux._id);
+                            this.nav.navigateRoot('conclusao-vaga');
+                          }
+                        })
+                        .catch((e)=>{
+                          console.log(e);
+                        });
+                    } else {
+                      this.exibeToast('CNPJ inválido!', 'warning');
+                    }
+                  } else {
+                    this.exibeToast('Erro com servidor!', 'danger');
+                  }
+                })
+                .catch();
+            } else {
               this.exibeToast('CNPJ inválido!', 'warning');
             }
           },
@@ -303,5 +327,22 @@ export class LancamentoVagaPage implements OnInit {
     toast.present();
   }
 
-  ngOnInit() {}
+  perfilEmpresa() {
+    this.servicoEmpresa
+      .perfil()
+      .then((response) => {
+        this.perfil = response;
+        if (this.perfil === undefined) {
+          return;
+        } else {
+          this.vaga.nomeEmpresa = this.perfil.nomeEmpresa;
+          this.vaga.cidade = this.perfil.cidade;
+        }
+      })
+      .catch();
+  }
+
+  ngOnInit() {
+    this.perfilEmpresa();
+  }
 }
