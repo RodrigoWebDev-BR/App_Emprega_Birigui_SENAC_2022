@@ -29,7 +29,8 @@ export class LancamentoVagaPage implements OnInit {
     medica: false,
     descricao: '',
     beneficios: this.beneficios,
-    congelada: false, 
+    congelada: false,
+    finalizada: false,
     empresaId: localStorage.getItem('idUser')
   };
 
