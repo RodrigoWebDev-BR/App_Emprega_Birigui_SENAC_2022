@@ -1,0 +1,35 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-title>Contato</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-row >
+    <ion-col class="espacamento">
+      <ion-label class="ion-margin-top">Tipo de contato</ion-label>
+      <ion-item class="roundedInput ion-margin-top"  >
+      <ion-select style="width:100%">
+        <ion-select-option value="email">E-mail</ion-select-option>
+        <ion-select-option value="celular">Celular</ion-select-option>
+        <ion-select-option value="telefone">Telefone residencial</ion-select-option>
+        <ion-select-option value="linkedin">Likedin</ion-select-option>
+      </ion-select>
+    </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="espacamento">
+        <ion-label>Insira seu contato</ion-label>
+        <ion-item class="roundedInput ion-margin-top">
+        <ion-input type="text" [(ngModel)]="contato.contato"></ion-input>
+        </ion-item>
+    </ion-col>
+  </ion-row> 
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col class="center ion-margin-top">
+      <ion-button color="primary" expand="block">Salvar</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
