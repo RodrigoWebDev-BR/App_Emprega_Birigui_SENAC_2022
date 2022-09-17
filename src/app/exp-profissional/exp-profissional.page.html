@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="center">Experiência Profissional</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col>
+        <ion-label class="ion-margin-top" >Empresa</ion-label>
+        <ion-input class="roundedInput ion-margin-top"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-label class="ion-margin-top" fixed >Cargo</ion-label>     
+        <ion-input class="roundedInput ion-margin-top"  shape="block" expand="block" ></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+        <ion-label>Data de início</ion-label>
+        <ion-input type="date" class="roundedInput ion-margin-top"></ion-input>
+    </ion-col>
+    <ion-col>
+        <ion-label position="floating" class="ion-margin-top">Data de Término</ion-label>
+        <ion-input type="date" class="roundedInput ion-margin-top"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+        <ion-label class="ion-margin-top" position="floating">Descrição</ion-label>
+        <ion-textarea class="roundedInput ion-margin-top"></ion-textarea>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="center ion-margin-top">
+      <ion-button color="dark" expand="block">Adicionar experiência</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-card>
+        <ion-card-header>                  
+          <ion-card-title>Cargo + empresa + Ano término</ion-card-title>       
+        </ion-card-header>
+        <ion-item>
+        <ion-card-content>
+          Descrição
+        </ion-card-content>        
+        <ion-icon name="trash-outline" style="font-size: 25px;" color="danger" slot="end"></ion-icon>
+      </ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col class="center ion-margin-top">
+      <ion-button color="dark" expand="block">Cadastrar</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
