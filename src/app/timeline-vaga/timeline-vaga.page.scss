@@ -23,7 +23,7 @@ ul, li{
   justify-content: center;
   align-items: center;
   padding: 0 1rem;
-  padding: 3rem 0;
+  padding: 1rem 0;
 }
 .wrapper{
   background: #eaf6ff;
@@ -45,6 +45,7 @@ li{
   position: relative;
   padding-left: 10px;
   margin-left: 5px;
+  margin-top: -18px;
   &:last-child{
     border: 0px;
     padding-bottom: 0;
@@ -92,9 +93,9 @@ li{
 }
 p{
   color: #4f4f4f;
-      font-family: sans-serif;
+  font-family: sans-serif;
   line-height: 1.5;
-  margin-top:0.4rem;
+  font-weight: bold;
   @include mobile-only{
     font-size: .9rem;
   }

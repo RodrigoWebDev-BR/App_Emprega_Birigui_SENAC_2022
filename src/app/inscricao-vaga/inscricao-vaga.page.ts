@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,111 +8,156 @@ import { Router } from '@angular/router';
   styleUrls: ['./inscricao-vaga.page.scss'],
 })
 export class InscricaoVagaPage implements OnInit {
-
   public inscricaoVaga = {
-    nome: "",
-    quantidade: "",
-    data: "",
-    salario: ""    
-  }
+    quantidade: 20,
+  };
 
-  public vagas: any[] = [{
-    nome: "teste",
-    quantidade: "10567",
-    data: "29/04/2022",
-    salario: "R$ 2000.00" ,
-  },
-  {
-    nome: "teste",
-    quantidade: "10567",
-    data: "29/04/2022",
-    salario: "R$ 2000.00" 
-  }]
-
-  public vaga = {}
-  
-  proximaPagina() {
-    console.log(this.proximaPagina)
-    this.rota.navigate(['vaga-detalhes'])
-  }
-
-  constructor(public rota: Router) { }
-
-  ngOnInit() {
-  }
-/*
-  async adicionarIdioma() {
-    if (this.inscricaoVaga.nome == "" || this.inscricaoVaga.quantidade == "" || this.inscricaoVaga.data == "" || this.inscricaoVaga.salario == "") {
-      const alerta = await this.mensagem.create(
-        {
-          header: "ATENÇÃO!",
-          message: "Não é permitido inserir um idioma vazio.",
-          buttons: ["ok"],
-          cssClass: "cssAlerta"
-        }
-      )
-
-      await alerta.present()
-
-      return
+  public vagas: any[] = [
+    {
+      nome: 'Administrador',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Administrativo'
+    },
+    {
+      nome: 'Vendedor',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Comércio'
+    },
+    {
+      nome: 'Contador',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Contabilidade'
+    },
+    {
+      nome: 'Docente Senac',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Educação'
+    },
+    {
+      nome: 'Cinema',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Entretenimento'
+    },
+    {
+      nome: 'Analista de suporte',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Escritório'
+    },
+    {
+      nome: 'Auxiliar de farmácia',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Farmácia'
+    },
+    {
+      nome: 'Tesoureiro',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Financeiro'
+    },
+    {
+      nome: 'Advogado',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Jurídico'
+    },
+    {
+      nome: 'Auxiliar de limpeza',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Limpeza'
+    },
+    {
+      nome: 'Produtor',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Linha de produção'
+    },
+    {
+      nome: 'Garçom',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Restaurantes'
+    },
+    {
+      nome: 'Administrador',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Recursos Humanos'
+    },
+    {
+      nome: 'Aux. de Enfermagem',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Saúde'
+    },
+    {
+      nome: 'Servente',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Serviços gerais'
+    },
+    {
+      nome: 'Empacotador',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Supermercado'
+    },
+    {
+      nome: 'Desenvolvedor Angular',
+      nomeEmpresa: 'Santa Casa',
+      cidade: 'Araçatuba',
+      quantidade: 5,
+      salario: 'R$ 2500.00',
+      categoria: 'Tecnologia'
     }
+  ];
 
-    var inscricaoCopy = JSON.parse(JSON.stringify(this.inscricaoVaga))
+  public vaga = {};
 
-    this.inscricao.push(inscricaoCopy)   
+  constructor(public nav: NavController) {}
 
-    this.inscricaoVaga.nome = ""
-    this.inscricaoVaga.quantidade = ""
-    this.inscricaoVaga.data = ""
-    this.inscricaoVaga.salario = ""
-
-    Storage.remove({ key: "nome" })
-    Storage.remove({ key: "quantidade" })
-    Storage.remove({ key: "data" })
-    Storage.remove({ key: "salario" })
-*/
-  }
-/*
-  async removerInscricao(inscricaoRemove) {
-    let confirmaRemover = await this.mensagem.create({
-      header: "ATENÇÃO!",
-      message: "Confima exclusão de " + idiomaRemove.idioma + "? Essa ação é irreverssível.",
-      buttons: [{
-        text: "Cancelar", role: "cancel", handler: () => {
-          console.log("CANCELADO")
-        }
-      },
-      {
-        text: "Excluir", handler: () => {
-          const index = this.inscricao.indexOf(idiomaRemove)
-          this.inscricao.splice(index, 1)
-        }
-      }
-      ]
-    })
-
-    await confirmaRemover.present()
+  detalhes() {
+    this.nav.navigateForward('vaga-detalhes');
   }
 
-  async salvarTemporariamente() {
-    Storage.set({ key: "idioma", value: this.inscricaoVaga.idioma })
-    Storage.set({ key: "nivel", value: this.inscricaoVaga.nivel })
-
-
-    var alerta = await this.mensagem.create(
-      {
-        header: "ATENÇÃO!",
-        message: "Dados armazenados com sucesso!",
-        buttons: ["ok"],
-        cssClass: "cssAlerta"
-      })
-    await alerta.present()
-  }
-
-  async carregarDados() {
-    this.inscricaoVaga.idioma = (await Storage.get({ key: "idioma" })).value
-    this.inscricaoVaga.nivel = (await Storage.get({ key: "nivel" })).value
-  }
-
+  ngOnInit() {}
 }
-*/

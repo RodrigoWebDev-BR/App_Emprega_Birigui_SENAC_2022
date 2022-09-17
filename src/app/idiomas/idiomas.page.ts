@@ -1,7 +1,6 @@
+import { IdiomasService } from './../servicos/idiomas.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import { alertController } from '@ionic/core';
+import { AlertController, MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-idiomas',
@@ -10,80 +9,154 @@ import { alertController } from '@ionic/core';
 })
 export class IdiomasPage {
 
-  public idioma = {id_idioma: '', nivel: '', descricao: ''};
+  public idioma = { idioma: '', nivel: '', bandeira: '' };
 
-  public idiomas: any [] = [];
-  
+  public idiomas: any[] = [];
+
   tipoIdioma = [
 
-    {id: '1', nome: 'ingles'},
-    {id: '2', nome: 'espanhol'},
-    {id: '3', nome: 'frances'},
-    {id: '4', nome: 'italiano'},
-    {id: '5', nome: 'alemao'},
+    { id: '1', nome: 'Ingles' },
+    { id: '2', nome: 'Espanhol' },
+    { id: '3', nome: 'Japones' },
+    { id: '4', nome: 'Frances' },
+    { id: '5', nome: 'Italiano' },
+    { id: '6', nome: 'Alemao' },
 
   ]
 
-  constructor(public mensagem: AlertController, public rota: Router) { }
+  constructor(
+    public mensagem: AlertController,
+    public nav: NavController,
+    public leftMenu: MenuController,
+    public idiomaSave: IdiomasService) {
+    this.leftMenu.enable(false);
+  }
+
+  curso() {
+    this.nav.back();
+  }
 
   async adicionarIdioma() {
 
-    if (this.idioma.id_idioma == '' || this.idioma.nivel == '') {
+    if (this.idioma.idioma === '' || this.idioma.nivel === null) {
       const alerta = await this.mensagem.create(
         {
-          header: "ATENÇÃO",
-          subHeader: "",
-          message: "Não é permitido inserir um idioma com o campo vazio",
-          buttons: ["OK"],
-          cssClass: "cssAlerta"
+          header: 'ATENÇÃO',
+          subHeader: '',
+          message: 'Não é permitido inserir um idioma sem a linguagem',
+          buttons: ['OK'],
+        }
+      );
+      await alerta.present();
+
+      return;
+    } else if (this.idioma.nivel === '' || this.idioma.nivel === null) {
+
+      const alerta = await this.mensagem.create(
+        {
+          header: 'ATENÇÃO',
+          subHeader: '',
+          message: 'Não é permitido inserir um idioma sem o nível de conhecimento',
+          buttons: ['OK'],
         }
       );
       await alerta.present();
 
       return;
     }
-    
-    var idiomaCopy = JSON.parse(JSON.stringify(this.idioma))
-    this.idiomas.push(idiomaCopy);
 
-    console.log(this.idiomas)
+    else if (this.idiomaSave.reduntante(this.idioma.idioma)) {
 
-    this.idioma.id_idioma = '';
-    this.idioma.nivel = '';
+      this.idioma.bandeira = '/assets/bandeiras/';
 
-  }
-  async removerIdioma(idiomaRemove) 
-  {
-    let confirmaRemover = await this.mensagem.create(
-    {
-      header: "ATENÇÃO",
-      message: "Confirma a exclusão do " + idiomaRemove.id_idioma + "?",
-      buttons: 
-      [
+      switch (this.idioma.idioma) {
+        case 'Ingles':
+          this.idioma.bandeira = this.idioma.bandeira + 'ingles.jpg';
+          break;
+
+        case 'Espanhol':
+          this.idioma.bandeira = this.idioma.bandeira + 'espanhol.png';
+          break;
+
+        case 'Japones':
+          this.idioma.bandeira = this.idioma.bandeira + 'japones.png';
+          break;
+
+        case 'Frances':
+          this.idioma.bandeira = this.idioma.bandeira + 'frances.png';
+          break;
+
+        case 'Italiano':
+          this.idioma.bandeira = this.idioma.bandeira + 'italiano.png';
+          break;
+
+        case 'Alemao':
+          this.idioma.bandeira = this.idioma.bandeira + 'alemao.png';
+          break;
+      }
+
+      const idiomaCopy = JSON.parse(JSON.stringify(this.idioma))
+      this.idiomas.push(idiomaCopy);
+
+      this.idiomaSave.salvarIdiomas(this.idioma.idioma, this.idioma.nivel, this.idioma.bandeira)
+
+      this.idioma.idioma = '';
+      this.idioma.nivel = '';
+
+    } else {
+      const alerta = await this.mensagem.create(
         {
-          text: "Não",
-          role: "cancel",
-          handler: () => 
-          {
-            console.log("CANCELADO");
-          }
-        },
-        {
-          text: "Sim",
-          handler: () => 
-
-          {
-            const index = this.idiomas.indexOf(idiomaRemove);
-
-            this.idiomas.splice(index, 1);
-          }
+          header: 'ATENÇÃO',
+          subHeader: '',
+          message: 'Não é permitido inserir um idioma repetido.',
+          buttons: ['OK'],
         }
-      ],
-    });
+      );
+
+      await alerta.present();
+      return;
+    }
+  }
+
+  async removerIdioma(idiomaRemove) {
+    const confirmaRemover = await this.mensagem.create(
+      {
+        header: 'ATENÇÃO',
+        message: 'Confirma a exclusão do ' + idiomaRemove.idioma + '?',
+        buttons:
+          [
+            {
+              text: 'Não',
+              role: 'cancel',
+              handler: () => {
+
+              }
+            },
+            {
+              text: 'Sim',
+              handler: () => {
+                this.idiomaSave.deletar(idiomaRemove.idioma)
+                const index = this.idiomas.indexOf(idiomaRemove);
+
+                this.idiomas.splice(index, 1);
+              }
+            }
+          ],
+      });
     await confirmaRemover.present();
   }
-    proximo() {
+  proximo() {
     console.log(this.idioma);
-    this.rota.navigate(['exp-profissional']);
+    this.nav.navigateRoot('detalhes-usuario');
+  }
+
+  ngOnInit() {
+    this.carregarDados();
+  }
+
+  carregarDados() {
+    if (this, this.idiomaSave.listar() !== undefined) {
+      this.idiomas = this.idiomaSave.listar();
+    }
   }
 }

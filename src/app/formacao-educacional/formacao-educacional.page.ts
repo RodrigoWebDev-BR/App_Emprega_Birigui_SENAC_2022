@@ -1,6 +1,6 @@
+import { FormEducacionalService } from './../servicos/form-educacional.service';
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { alertController } from '@ionic/core';
+import { AlertController, MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-formacao-educacional',
@@ -8,30 +8,155 @@ import { alertController } from '@ionic/core';
   styleUrls: ['./formacao-educacional.page.scss'],
 })
 export class FormacaoEducacionalPage implements OnInit {
+  public formEducacional: any[] = [];
 
-  formacao = {};
+  formacao = {
+    instituicao: null,
+    curso: null,
+    nivel: null,
+    situacao: null,
+  };
 
-  constructor(public mensagem: AlertController) {
+  formacoes = [
+    { id: '1', nivel: '2º Grau Médio' },
+    { id: '2', nivel: 'Técnologo' },
+    { id: '3', nivel: 'Ensino Superior' },
+    { id: '4', nivel: 'Pós Graduação' },
+    { id: '5', nivel: 'Mestrado' },
+    { id: '6', nivel: 'Doutorado' },
+    { id: '7', nivel: 'Outros' },
+  ];
+
+  conclusoes = [
+    { id: 'I', resp: 'Incompleto' },
+    { id: 'A', resp: 'Em andamento' },
+    { id: 'C', resp: 'Concluído' },
+  ];
+
+  constructor(
+    public mensagem: AlertController,
+    public nav: NavController,
+    public leftMenu: MenuController,
+    public formEdu: FormEducacionalService
+  ) {
+    this.leftMenu.enable(false);
   }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+
+  async adicionar() {
+    if (
+      this.formacao.instituicao === null ||
+      this.formacao.instituicao === ''
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        subHeader: '',
+        message: 'Necessário informar a instituição',
+        buttons: ['OK'],
+        cssClass: 'cssAlerta',
+      });
+      await alerta.present();
+
+      return;
+    } else if (this.formacao.nivel === null || this.formacao.nivel === '') {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        subHeader: '',
+        message: 'Necessário informar sua formação',
+        buttons: ['OK'],
+        cssClass: 'cssAlerta',
+      });
+      await alerta.present();
+
+      return;
+    } else if (
+      this.formacao.situacao === null ||
+      this.formacao.situacao === ''
+    ) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        subHeader: '',
+        message: 'Necessário informar a conclusao do curso',
+        buttons: ['OK'],
+        cssClass: 'cssAlerta',
+      });
+      await alerta.present();
+
+      return;
+    } else {
+      const formCopy = JSON.parse(JSON.stringify(this.formacao));
+
+      this.formEducacional.push(formCopy);
+
+      this.formEdu.salvarFormacao(
+        this.formacao.instituicao,
+        this.formacao.curso,
+        this.formacao.nivel,
+        this.formacao.situacao
+      );
+
+      this.formacao.instituicao = null;
+      this.formacao.curso = null;
+      this.formacao.nivel = null;
+      this.formacao.situacao = null;
+    }
   }
 
-  async adicionarFormacao() {
+  async confirmar() {
+    if (this.formEducacional.length > 0) {
+      this.nav.navigateForward('exp-profissional');
+    } else {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        subHeader: '',
+        message: 'Necessário informar a situacao do curso',
+        buttons: ['OK'],
+      });
+      await alerta.present();
 
-    const alerta = await this.mensagem.create(
-      {
-        header: "ATENÇÃO",
-        subHeader: "",
-        message: "Informações armazenadas com sucesso",
-        buttons: ["OK"],
-        cssClass: "cssAlerta"
-      }
-    );
-    await alerta.present();
-    console.log(this.formacao);
+      return;
+    }
   }
-  proximo() {
-    console.log(this.formacao)
+
+  async removeForms(instDelete) {
+    const confirmarRemocao = await this.mensagem.create({
+      header: 'ATENÇÃO',
+      message:
+        'Deseja realmente remover a formação em ' +
+        instDelete.instituicao +
+        '?',
+      buttons: [
+        {
+          text: 'Não',
+          role: 'Cancel',
+          handler: () => {
+            console.log('CANCELADO');
+          },
+        },
+        {
+          text: 'Sim',
+          handler: () => {
+            this.formEdu.deletar(instDelete.instituicao);
+
+            const index = this.formEducacional.indexOf(instDelete);
+            this.formEducacional.splice(index, 1);
+          },
+        },
+      ],
+    });
+
+    await confirmarRemocao.present();
+  }
+
+  ngOnInit() {
+    this.carregarDados();
+  }
+
+  carregarDados() {
+    if (this.formEdu.listar() !== undefined) {
+      this.formEducacional = this.formEdu.listar();
+    }
+  }
+  contato() {
+    this.nav.back();
   }
 }

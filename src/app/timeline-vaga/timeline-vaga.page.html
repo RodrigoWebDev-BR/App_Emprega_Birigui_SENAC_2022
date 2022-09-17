@@ -1,6 +1,9 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title class="center">Andamento da vaga</ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button ></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ folder }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,13 +14,12 @@
         <ion-col>
           <ion-card style="background-color: rgba(168, 168, 168, 0);" class="noshadow">
             <ion-card-header>                  
-              <ion-card-title style="color: black;">Administrador de vendas</ion-card-title>       
+              <ion-card-title style="color: black; text-decoration: underline;">Administrador de vendas</ion-card-title>       
             </ion-card-header>
             <ion-card-content>
-              <p>-Nível<p>
-              <p>-Empresa</p>
-              <p>-Cidade-UF</p>
-              <ion-button style="float:right; height: 20px; margin-bottom: 10px; text-transform: initial;" click="mostrarVaga()">Detalhes</ion-button>
+              <p>Nível<p>
+              <p>Empresa</p>
+              <p>Cidade-UF</p>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -30,16 +32,7 @@
         <li class="verde" >
           <p>Inscrição Realizada</p>
         </li>
-        <li>
-          <p>Análise de currículo</p>
-        </li>
-        <li>
-          <p>Processo seletivo 1</p>
-        </li>
-        <li>
-          <p>Processo seletivo 2</p>
-        </li>
-        <li>
+        <li class="verde">
           <p>Entrevista</p>
         </li>
         <li>

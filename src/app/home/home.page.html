@@ -1,93 +1,117 @@
+<ion-header [translucent]="true" *ngIf="none">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content class="fundobg">
-
+<ion-content class="fundobg" *ngIf="none">
   <div class="header">
-    <ion-row>
-  
-      <ion-col style="display: flex;">
-        <ion-icon style="font-size: 80px;" name="person-circle-outline"></ion-icon>
-        <h2 class="margin-h2-user white" style="font-size: 20px;">Olá @User</h2>
-      </ion-col>
-      
-  
-      <ion-col >
-        
-        <ion-row>
-          <ion-col class="ion-no-padding" >
-          <ion-item color="#368E59" lines="none">
-            <ion-icon style="font-size: 35px;" name="menu-outline" class="removeMarginIcon" slot="end"></ion-icon>
-            <ion-icon style="font-size: 30px;" name="notifications-outline" class="white removeMarginIcon" slot="end"></ion-icon>
-          </ion-item>
+    <div *ngIf="empregado">
+      <ion-row class="perfil">
+        <ion-col class="centertext" style="margin-top: 10px">
+          <img src="../../assets/icon/user.png" />
+          <h2
+            class="margin-h2-user white"
+            style="font-size: 20px; margin-top: 2x"
+          >
+            EMPREGADO
+          </h2>
         </ion-col>
-        </ion-row>
-  
-        <ion-row>
-          <ion-col class="ion-no-padding">
-          
-            <h2 class="ion-no-margin" style="text-align: right; padding-right:10px">Sair</h2>
-         
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-  
-  </div><!--header-->
+      </ion-row>
+    </div>
 
-  <div class="corpo"> 
+    <div *ngIf="empresa">
+      <ion-row class="perfil">
+        <ion-col class="centertext" style="margin-top: 10px">
+          <img src="../../assets/icon/buildings.png" />
+          <h2
+            class="marv margin-h2-user white"
+            style="font-size: 20px; margin-top: 5px"
+          >
+          {{perfil.nomeEmpresa}}
+          </h2>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
 
-    <ion-row>
-      <ion-col>
-          <ion-item class="roundedInputSearch" lines="none" style="margin-top: 15px; box-shadow: none;"> 
-            <ion-input class="black" expand="block" type="text" >
-            </ion-input>
-            <ion-icon name="search-outline" class="black" slot="end"></ion-icon>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-
-    <div style="overflow-x: scroll; white-space: nowrap;">
-      
-
-        <div class="box-vagas" *ngFor="let vaga of vagaDestaque">
-            <h2 class="ion-no-margin" style="font-size: 13px; text-align: center; padding-top: 25px;" >{{vaga.titulo}}</h2>
-            <h2 style="font-size: 13px; text-align: center;">Cadastre seu currículo</h2>
-            <p style="font-size: 13px; text-align: center;">{{vaga.cidade}}-{{vaga.estado}}</p>
-
-        </div>
-
-      </div> 
-
-
-    <ion-row>
-      <ion-col>
-        
-        <div *ngFor="let vaga of vagaDisponivel" (click)="abrirVaga()">
-
-          <ion-row class="box-vagas-big" >
-
-            <ion-col>
+  <div *ngIf="empregado">
+    <div *ngFor="let vaga of vagaDisponivel">
+      <ion-row>
+        <ion-col>
+          <ion-card class="cardVagas">
+            <ion-card-header>
+              <ion-card-title>{{vaga.titulo}}</ion-card-title>
+              <ion-card-subtitle color="primary"
+                >{{vaga.status}} <img src="../../assets/check.png"
+              /></ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p style="font-weight: bold">
+                Salário:
+                <span class="under">R${{vaga.salario}}.<small>00</small></span>
+              </p>
               <ion-row>
-                <h2>{{vaga.titulo}}</h2>
-                <h2 style="position: absolute; right: 0px;">{{vaga.data_publicacao}}</h2> 
-              </ion-row>           
-                <h2>{{vaga.quantidade}}</h2>
-                <h2>{{vaga.salario}}</h2>
-                <h2>Clique aqui e cadastre seu currículo</h2>
-              </ion-col>  
+                <ion-col size="6">
+                  <p style="font-weight: bold" class="under">
+                    {{vaga.dataPub}}
+                  </p>
+                </ion-col>
+                <ion-col size="6" style="text-align: end">
+                  <ion-button size="small" (click)="abrirVaga()" fill="outline">
+                    <ion-icon name="analytics" color="primary"></ion-icon>
+                    <ion-label style="margin-top: 0px; margin-left: 6px"
+                      >Processos</ion-label
+                    >
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
 
-          </ion-row>
+  <div *ngIf="empresa">
+    <div *ngFor="let emprego of empregosDisponivel">
+      <ion-row>
+        <ion-col>
+          <ion-card class="cardVagas">
+            <ion-card-header>
+              <ion-card-title>{{emprego.titulo}}</ion-card-title>
+              <ion-card-subtitle color="primary" class="under" *ngIf="emprego.online">Vaga Online <img src="../../assets/check.png"/></ion-card-subtitle>
 
-      
-
-          
-
-         </div>
-
-      </ion-col>
-    </ion-row>
-
-  </div><!--corpo-->
-
-
+              <ion-card-subtitle color="danger" class="under" *ngIf="!emprego.online">Vaga Fechada <img src="../../assets/delete.png"/></ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p style="font-weight: bold">
+                Contrato:
+                <span class="under"
+                  >{{emprego.tipo}} - {{emprego.contrato}}</span
+                >
+              </p>
+              <ion-row>
+                <ion-col size="6">
+                  <p style="font-weight: bold" class="under">
+                    {{emprego.dataPub}}
+                  </p>
+                </ion-col>
+                <ion-col size="6" style="text-align: end">
+                  <ion-button size="small" (click)="fecharVaga(emprego)" color="danger" *ngIf="emprego.online">
+                    <ion-icon name="close-circle" color="light"></ion-icon>
+                    <ion-label style="margin-top: 0px; margin-left: 6px"
+                      >Finalizar</ion-label
+                    >
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
 </ion-content>

@@ -1,17 +1,66 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
-    <ion-menu contentId="main-content" type="overlay">
+    <ion-menu contentId="main-content" type="overlay" class="menuEdit" style="width: 280px">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Emprega +</ion-list-header>
-          <ion-note>Birigui</ion-note>
+          <ion-list-header>{{nomeMenu}}</ion-list-header>
+          <ion-note>03 candidatura(s)</ion-note>
 
+          <div *ngIf="menus === 'empregado'">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" lines="none" detail="false" routerLinkActive="selected" (click)="logout()">
+              <ion-icon slot="start" name="power"></ion-icon>
+              <ion-label>Sair</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </div>
+
+        <div *ngIf="menus === 'empresa'">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages2; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" lines="none" detail="false" routerLinkActive="selected" (click)="logout()">
+              <ion-icon slot="start" name="power"></ion-icon>
+              <ion-label>Sair</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </div>
+
+        <div *ngIf="menus === 'master'">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages3; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerDirection="root" lines="none" detail="false" routerLinkActive="selected" (click)="logout()">
+              <ion-icon slot="start" name="power"></ion-icon>
+              <ion-label>Sair</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </div>
+
+        </ion-list>
+
+        <ion-list id="labels-list">
+          <ion-list-header style="font-size: 25px; color: black;" class="bold">Emprega +</ion-list-header>
+          <ion-note>Birigui</ion-note>
+          <ion-col>
+            <img src="/assets/logo.png">
+          </ion-col>
+
         </ion-list>
 
  

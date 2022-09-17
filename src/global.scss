@@ -77,3 +77,58 @@
    .centertext{
        text-align: center;
    }
+
+   .iconPad{
+    padding-top: 9px;
+   }
+
+   .espacamentoLogin{
+    margin: 0px 8%;
+    }
+
+    .icone{
+    width: 35px;
+    height: 35px;
+    }
+
+    .tituloPadding{
+        padding-left: 0px;
+    }
+
+    .tituloProject{
+        padding-right:  52px;
+        padding-left: 0px;
+    }
+
+    .bold{
+        font-weight: bold;
+    }
+
+    .middle{
+        display: flex;
+        justify-content: center;
+    }
+
+    .sublinhado{
+        text-decoration: underline #000000;
+    }
+
+    .border{
+        border-bottom-style: solid;
+        border-color: #69696958;
+        border-bottom-width: 0.5px;
+    }
+
+    .under{
+        text-decoration: underline;
+    }
+
+    .paddingLabel{
+        padding-left: 30px;
+    }
+
+    .labelChk{
+        margin-left: 8px;
+    }
+
+    

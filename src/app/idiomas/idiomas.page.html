@@ -1,22 +1,20 @@
-<ion-header>
+<ion-header mode="md">
   <ion-toolbar color="primary">
-    <ion-title>Cadastro de curriculo</ion-title>
+  <ion-buttons (click)="curso()" slot="start" style="padding-left: 15px;">
+  <ion-icon name="arrow-back" class="light icone"></ion-icon>
+  </ion-buttons>
+  <ion-title class="centertext tituloPadding bold">Idiomas <ion-icon name="globe"></ion-icon></ion-title>
   </ion-toolbar>
-</ion-header>
+  </ion-header>
 
 <ion-content class="fundobg" [fullscreen]="true">
 
-  <ion-row>
-    <ion-col>
-      <H4 class="centertext">Cursos de Idiomas</H4>
-    </ion-col>
-  </ion-row>
 
   <ion-row>
-    <ion-col class="espacamento">
-      <ion-label position="floating" class="ion-margin-top">Idioma</ion-label>
+    <ion-col>
       <ion-item class="roundedInput" lines="none">
-        <ion-select [(ngModel)]="idioma.id_idioma" style="width: 100%;">
+        <ion-label position="floating" class="ion-margin-top">Idioma</ion-label>
+        <ion-select [(ngModel)]="idioma.idioma" style="width: 100%;">
           <ion-select-option *ngFor="let idm of tipoIdioma" value="{{idm.nome}}">{{idm.nome}}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -24,12 +22,11 @@
   </ion-row>
 
   <ion-row>
-    <ion-col class="espacamento">
-      <ion-label position="floating">Nível do idioma</ion-label>
+    <ion-col>
       <ion-item class="roundedInput " lines="none">
+        <ion-label position="floating">Nível do idioma</ion-label>
         <ion-select [(ngModel)]="idioma.nivel" style="width: 100%;">
           <ion-select-option value="iniciante">Iniciante</ion-select-option>
-          <ion-select-option value="basico">Básico</ion-select-option>
           <ion-select-option value="intermediario">Intermediário</ion-select-option>
           <ion-select-option value="avancado">Avançado</ion-select-option>
           <ion-select-option value="fluente">Fluente</ion-select-option>
@@ -39,7 +36,7 @@
   </ion-row>
 
   <ion-row>
-    <ion-col class="espacamento">
+    <ion-col>
       <ion-button shape="block" (click)="adicionarIdioma()">Adicionar idioma</ion-button>
     </ion-col>
   </ion-row>
@@ -52,9 +49,10 @@
         <ion-item>
           <ion-list style="width: 100%">
 
-            <ion-item *ngFor="let idm of idiomas">
-              <ion-label>
-                <h2>Idioma: {{idm.id_idioma}}</h2>
+            <ion-item *ngFor="let idm of idiomas" class="border animate__animated animate__fadeInUp">
+              <img class="bandeira" src="{{idm.bandeira}}">
+              <ion-label class="labelIdioma">
+                <h2>Idioma: {{idm.idioma}}</h2>
                 <h2>Nivel: {{idm.nivel}}</h2>
               </ion-label> 
               <ion-icon name="trash-outline" slot="end" color="danger" (click)="removerIdioma(idm)" 
