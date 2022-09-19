@@ -1,56 +1,65 @@
-
 @mixin tablet-and-up {
-    @media screen and (min-width: 769px) { @content; }
+  @media screen and (min-width: 769px) {
+    @content;
+  }
 }
 @mixin mobile-and-up {
-    @media screen and (min-width: 601px) { @content; }
+  @media screen and (min-width: 601px) {
+    @content;
+  }
 }
-@mixin tablet-and-down  {
-    @media screen and (max-width: 768px) { @content; }
+@mixin tablet-and-down {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
 }
 @mixin mobile-only {
-    @media screen and (max-width: 600px) { @content; }
+  @media screen and (max-width: 600px) {
+    @content;
+  }
 }
 
-
-ul, li{
+ul,
+li {
   list-style: none;
   padding: 0;
 }
 
-.container{
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 1rem;
-  padding: 3rem 0;
+  padding: 1rem 0;
 }
-.wrapper{
+
+.wrapper {
   background: #eaf6ff;
   padding: 2rem;
   border-radius: 15px;
 }
-h1{
+h1 {
   font-size: 1.1rem;
   font-family: sans-serif;
 }
-.sessions{
+.sessions {
   margin-top: 2rem;
   border-radius: 12px;
   position: relative;
 }
-li{
+li {
   padding-bottom: 1.5rem;
   border-left: 2px solid #cfcece;
   position: relative;
   padding-left: 10px;
   margin-left: 5px;
-  &:last-child{
+  margin-top: -18px;
+  &:last-child {
     border: 0px;
     padding-bottom: 0;
   }
-  &:before{
-    content: '';
+  &:before {
+    content: "";
     width: 15px;
     height: 15px;
     background: #cfcece;
@@ -61,45 +70,47 @@ li{
     top: 0px;
   }
 }
-.vermelho{
-    &:before{
-        content: '';
+.vermelho {
+  &:before {
+    content: "";
     background: red;
-    border: 1px solid red;}
-    border-left: 2px solid red;
-}
-.verde{
-    &:before{
-        content: '';
-    background: green;
-    border: 1px solid green;}
-    border-left: 2px solid green;
-}
-
-
-.time{
-  color: #2a2839;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
-  @include mobile-and-up{
-    font-size: .9rem;
+    border: 1px solid red;
   }
-  @include mobile-only{
-    margin-bottom: .3rem;
+  border-left: 2px solid red;
+}
+.verde {
+  &:before {
+    content: "";
+    size: 20px;
+    color: white;
+    background: green;
+    border: 1px solid green;
+  }
+  border-left: 2px solid green;
+}
+
+.time {
+  color: #2a2839;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  @include mobile-and-up {
+    font-size: 0.9rem;
+  }
+  @include mobile-only {
+    margin-bottom: 0.3rem;
     font-size: 0.85rem;
   }
-
 }
-p{
+p {
   color: #4f4f4f;
-      font-family: sans-serif;
+  font-family: sans-serif;
   line-height: 1.5;
-  margin-top:0.4rem;
-  @include mobile-only{
-    font-size: .9rem;
+  font-weight: bold;
+  @include mobile-only {
+    font-size: 1.1rem;
   }
 }
 
-.noshadow{
+.noshadow {
   box-shadow: none !important;
 }

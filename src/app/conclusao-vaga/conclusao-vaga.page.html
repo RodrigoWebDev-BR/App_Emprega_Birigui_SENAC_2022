@@ -1,0 +1,47 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" style="padding-left: 15px" (click)="home()">
+      <ion-icon name="arrow-undo" class="light icone"></ion-icon>
+    </ion-buttons>
+    <!-- <ion-title class="centertext tituloPadding bold">Contato <ion-icon name="call"></ion-icon></ion-title> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-row>
+    <ion-col>
+      <ion-card class="cardVagas">
+
+        <ion-card-header>
+          <ion-card-title>Vaga disponível</ion-card-title>
+          <ion-card-subtitle color="primary"
+            >Status <img src="../../assets/check.png"
+          /></ion-card-subtitle>
+          
+        </ion-card-header>
+        <ion-card-content>
+          <p style="font-weight: bold">
+            Salário:
+            <span class="under">R$.<small>00</small></span>
+          </p>
+          <ion-row>
+            <ion-col size="6">
+              <p style="font-weight: bold" class="under"></p>
+            </ion-col>
+            <ion-col size="6" style="text-align: end">
+              <ion-button size="small" (click)="abrirVaga()" fill="outline">
+                <ion-icon name="analytics" color="primary"></ion-icon>
+                <ion-label style="margin-top: 0px; margin-left: 6px"
+                  >Processos</ion-label
+                >
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+      
+    </ion-col>
+  </ion-row>
+  <img class="medalha" src="../../assets/icon/distintivo.png" />
+</ion-content>

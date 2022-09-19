@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,32 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./vagas.page.scss'],
 })
 export class VagasPage implements OnInit {
-
   empregosDisponivel = [
     {
-      titulo : 'Programador WEB',
-      tipo : 'CLT',
-      contrato : 'PPrazo Indeterminado',
-      online : true,
-      dataPub : '01/01/2022',
+      titulo: 'Programador web',
+      tipo: 'CLT',
+      contrato: 'Prazo indeterminado',
+      online: true,
+      dataPub: '01/01/2022',
     },
     {
-      titulo : 'Programador Angular ',
-      tipo : 'pj',
-      contrato : 'PPrazo Indeterminado',
-      online : false,
-      dataPub : '01/01/2022',
-    },
-    {
-      titulo : 'DevOps',
-      tipo : 'CLT',
-      contrato : 'PPrazo Indeterminado',
-      online : true,
-      dataPub : '01/01/2022',
-    },
-  ]
-
-  constructor() { }
+      titulo: 'Docente em Administração',
+      tipo: 'CLT',
+      contrato: 'Prazo indeterminado',
+      online: true,
+      dataPub: '01/01/2022',
+    }
+  ];
+  constructor(public nav: NavController) { }
 
   ngOnInit() {
   }

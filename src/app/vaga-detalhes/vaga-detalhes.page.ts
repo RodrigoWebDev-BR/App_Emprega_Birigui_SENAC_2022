@@ -1,5 +1,6 @@
+import { validaCPF } from './../../environments/functions';
+import { NavController, AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vaga-detalhes',
@@ -8,21 +9,66 @@ import { Router } from '@angular/router';
 })
 export class VagaDetalhesPage implements OnInit {
   router: any;
+  esconderConteudo = false;
+  mostrarConteudo = true;
 
-  inscrever(){
-    this.rota.navigate(['timeline-vaga']);
+  constructor(public nav: NavController, public mensagem: AlertController, public toast: ToastController ) {}
+
+  async candidatar() {
+    const alerta = await this.mensagem.create({
+      header: 'Atenção',
+      message: 'Deseja candidatar-se a vaga ? Necessário informar o CPF.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {},
+        },
+        {
+          text: 'Candidatar-se',
+          handler: (cpf) => {
+            if (validaCPF(cpf[0])) {
+              this.mostrarConteudo = false;
+              this.esconderConteudo = true;
+
+              setTimeout(() => {
+                this.nav.navigateForward('timeline-vaga');
+              }, 5000);
+            }else{
+              this.exibeToast('CPF inválido');
+            }
+          },
+        },
+      ],
+      inputs: [
+        {
+          placeholder: 'CPF',
+          attributes: {
+            maxlength: 15,
+          },
+        },
+      ],
+    });
+    await alerta.present();
+
+    return;
   }
 
-  voltar(){
-    this.rota.navigate(['home']);
+  async exibeToast(msg) {
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 1000,
+      position: 'top',
+      animated: true,
+      color: 'warning',
+    });
+
+    toast.present();
   }
 
-  constructor(public rota : Router) { 
-
-
+  voltar() {
+    this.nav.navigateForward('inscricao-vaga');
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

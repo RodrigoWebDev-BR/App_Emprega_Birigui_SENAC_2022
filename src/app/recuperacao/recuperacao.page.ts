@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,21 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recuperacao.page.scss'],
 })
 export class RecuperacaoPage implements OnInit {
+  email = { email: '' };
 
-  email = {email : ''};
-
-  constructor(public route: Router ,public menuLeft: MenuController) 
-  { this.menuLeft.enable(false) }
-
-  login(){
-    this.route.navigate(['login']);
+  constructor(public nav: NavController, public menuLeft: MenuController) {
+    this.menuLeft.enable(false);
   }
 
-  recuperacao(){
-    this.route.navigate(['login']);
+  login() {
+    this.nav.navigateRoot('login/login');
   }
 
-  ngOnInit() {
+  recuperacao() {
+    this.nav.navigateRoot('login/login');
   }
 
+  ngOnInit() {}
 }

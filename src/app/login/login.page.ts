@@ -1,52 +1,79 @@
-/* eslint-disable @typescript-eslint/member-ordering */
+import { ActivatedRoute } from '@angular/router';
+import { formatarCPF } from './../../environments/functions';
+import { LoginService } from './../servicos/login.service';
+import { ToastController, AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-  candidato = {cpf : '' , senha : ''};
-
-<<<<<<< Updated upstream
-  constructor( public nav: NavController, public menuLeft: MenuController )
-  { 
+  user = { cpf: '', password: '' };
+  resp: any = {};
+  constructor(
+    public nav: NavController,
+    public menuLeft: MenuController,
+    public toast: ToastController,
+    public mensagem: AlertController,
+    public activated: ActivatedRoute,
+    private authorize: LoginService
+  ) {
     this.menuLeft.enable(false);
-=======
+  }
+
+  async confirmarLogin() {
+    if (this.user.cpf === '' || this.user.cpf === null) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        message: 'Necessário preencher com seu CPF ou CNPJ.',
+        buttons: ['OK'],
+      });
+
+      await alerta.present();
+
+      return;
+    } else if (this.user.password === '' || this.user.password === null) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        message: 'Necessário preencher a senha.',
+        buttons: ['OK'],
+      });
+
+      await alerta.present();
+
       return;
     } else {
       const type = this.user.cpf.includes('/') ? 'empresa' : 'empregado';
 
       this.authorize
-      .login(this.user.cpf, this.user.password, type)
-      .then((response) => {
-        this.resp = response;
-        if (this.resp === undefined) {
-          this.exibeToast('Erro de resposta com o servidor.');
-        } else {
-          if (localStorage.getItem('loginAuto') === 'true') {
-            localStorage.setItem('CPF/CNPJ', this.user.cpf);
-          }
-          this.user.cpf = '';
-          this.user.password = '';
-          localStorage.setItem('accessToken', this.resp.accessToken);
-          localStorage.setItem('idUser', this.resp.id);
-          localStorage.setItem('nome', this.resp.nome);
-          localStorage.setItem('profile', this.resp.profile);
+        .login(this.user.cpf, this.user.password, type)
+        .then((response) => {
+          this.resp = response;
+          if (this.resp === undefined) {
+            this.exibeToast('Erro de resposta com o servidor.');
+          } else {
+            if (localStorage.getItem('loginAuto') === 'true') {
+              localStorage.setItem('CPF/CNPJ', this.user.cpf);
+            }
+            this.user.cpf = '';
+            this.user.password = '';
+            localStorage.setItem('accessToken', this.resp.accessToken);
+            localStorage.setItem('idUser', this.resp.id);
+            localStorage.setItem('profile', this.resp.profile);
+            localStorage.setItem('nomeMenu', this.resp.nome);
 
-          this.nav.navigateRoot('home');
-        }
-      })
-      .catch((e) => {
-        if (this.user.cpf.includes('/')) {
-          this.exibeToast('CNPJ ou senha inválidos');
-        } else {
-          this.exibeToast('CPF ou senha inválidos');
-        }
-      });
+            this.nav.navigateRoot('home');
+          }
+        })
+        .catch((e) => {
+          if (this.user.cpf.includes('/')) {
+            this.exibeToast('CNPJ ou senha inválidos');
+          } else {
+            this.exibeToast('CPF ou senha inválidos');
+          }
+        });
     }
   }
 
@@ -64,21 +91,22 @@ export class LoginPage implements OnInit {
 
   cadastro() {
     this.nav.navigateForward('cadastro');
->>>>>>> Stashed changes
   }
 
-  confirmarLogin(){
-    this.nav.navigateRoot('home')
+  recuperacao() {
+    this.nav.navigateForward('recuperacao');
   }
 
-  cadastro(){
-    this.nav.navigateForward('usuario')
+  automatico($event) {
+    if ($event.currentTarget.checked) {
+      localStorage.setItem('loginAuto', 'true');
+    } else {
+      if (localStorage.getItem('loginAuto') !== null) {
+        localStorage.removeItem('loginAuto');
+      }
+    }
   }
 
-<<<<<<< Updated upstream
-  recuperacao(){
-    this.nav.navigateForward('recuperacao')
-=======
   async ngOnInit() {
     if (localStorage.getItem('loginAuto') === 'true') {
       this.user.cpf = localStorage.getItem('CPF/CNPJ');
@@ -87,28 +115,37 @@ export class LoginPage implements OnInit {
     if (this.activated.snapshot.paramMap.get('id').includes('empregado_')) {
       const alerta = await this.mensagem.create({
         header: 'Seja Bem-Vindo!',
-        message: this.activated.snapshot.paramMap.get('id').split('_')[1] + ' seu cadastro foi realizado com sucesso, faça seu login.',
+        message:
+          this.activated.snapshot.paramMap.get('id').split('_')[1] +
+          ' seu cadastro foi realizado com sucesso, faça seu login.',
         buttons: ['OK'],
       });
 
       await alerta.present();
 
       return;
-    } else if (this.activated.snapshot.paramMap.get('id').includes('empresa')) {
+    } else if (
+      this.activated.snapshot.paramMap.get('id').includes('empresa_')
+    ) {
       const alerta = await this.mensagem.create({
         header: 'PRONTO!!!',
         message:
-          'Olá ' + this.activated.snapshot.paramMap.get('id').split('_')[1] + ' seu cadastro foi realizado com sucesso. Aguarde a prefeitura de Birigui autorizar seu acesso e tente o login novamente dentro de 48 horas.',
+        'Olá ' +
+        this.activated.snapshot.paramMap.get('id').split('_')[1] +
+        // eslint-disable-next-line max-len
+          ' seu cadastro foi realizado com sucesso. Aguarde a prefeitura de Birigui autorizar seu acesso e tente o login novamente dentro de 48 horas.',
         buttons: ['OK'],
       });
 
       await alerta.present();
 
       return;
-    }else if(this.activated.snapshot.paramMap.get('id').includes('erro')){
+    } else if (this.activated.snapshot.paramMap.get('id').includes('erro')) {
       const alerta = await this.mensagem.create({
         header: 'Ops...',
-        message: 'Não foi possível completar seu cadastro por erros internos, tente o cadastro novamente, se o erro persistir, entre em contato com a prefeitura de Birigui.',
+        message:
+        // eslint-disable-next-line max-len
+        'Não foi possível completar seu cadastro por erros internos, tente o cadastro novamente, se o erro persistir, entre em contato com a prefeitura de Birigui.',
         buttons: ['OK'],
       });
 
@@ -116,9 +153,19 @@ export class LoginPage implements OnInit {
 
       return;
     }
->>>>>>> Stashed changes
   }
-  
-  ngOnInit() {
+
+  loginInput(evento) {
+    if (evento.key === 'Enter') {
+      this.confirmarLogin();
+    }
+  }
+
+  formataCpf() {
+    if (this.user.cpf !== '' && this.user.cpf !== null) {
+      if (this.user.cpf.length <= 11) {
+        this.user.cpf = formatarCPF(this.user.cpf);
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="md">
   <ion-toolbar color="primary">
     <ion-buttons (click)="endereco()" slot="start" style="padding-left: 15px;">
       <ion-icon name="arrow-back" class="light icone"></ion-icon>
@@ -39,7 +39,7 @@
     <ion-col>
       <ion-item lines="none">
         <ion-list style="width: 100%">
-          <ion-item *ngFor="let cont of contatos" lines="none">
+          <ion-item *ngFor="let cont of contatos" lines="none" class="border animate__animated animate__fadeInUp">
             <ion-label>
               <p>{{cont.tipo}}</p>
               <h2>{{cont.contato}}</h2>

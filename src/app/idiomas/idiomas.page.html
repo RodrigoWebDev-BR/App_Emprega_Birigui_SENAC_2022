@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="md">
   <ion-toolbar color="primary">
     <ion-buttons (click)="curso()" slot="start" style="padding-left: 15px;">
       <ion-icon name="arrow-back" class="light icone"></ion-icon>
@@ -47,7 +47,7 @@
       <ion-col>
         <ion-item>
           <ion-list style="width: 100%">
-            <ion-item *ngFor="let idm of idiomas">
+            <ion-item *ngFor="let idm of idiomas" class="border animate__animated animate__fadeInUp">
               <img class="bandeira" src="{{idm.bandeira}}">
               <ion-label class="labelIdioma">
                 <h2>Idioma: {{idm.idioma}}</h2>

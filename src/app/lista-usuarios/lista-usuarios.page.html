@@ -1,0 +1,140 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-searchbar placeholder="Nome ou CPF"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let usuario of usuarios">
+    <ion-row>
+      <ion-col>
+        <div>
+          <ion-card class="cardUsuarios">
+            <ion-card-header>
+              <ion-card-title>{{usuario.nome}}</ion-card-title>
+              <ion-card-subtitle class="bold"
+                >{{usuario.contato}}</ion-card-subtitle
+              >
+            </ion-card-header>
+            <ion-card-content>
+              <ion-accordion-group>
+                <ion-accordion value="usuario.idAccordion">
+                  <ion-item slot="header" color="light">
+                    <ion-label>Ficha de {{usuario.nome}}</ion-label>
+                  </ion-item>
+                  <div slot="content">
+                    <ion-row>
+                      <ion-col>
+                        <ion-list>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">E-Mail:</span>
+                                {{usuario.email}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">CPF:</span>
+                                {{usuario.cpf}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">Nascimento:</span>
+                                {{usuario.dtNascimento}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">Gênero:</span>
+                                {{usuario.genero}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">Estado Civil:</span>
+                                {{usuario.eCivil}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">CEP:</span>
+                                {{usuario.cep}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">Endereço:</span>
+                                {{usuario.end}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">Número:</span>
+                                {{usuario.nmr}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">Bairro:</span> 
+                                {{usuario.bairro}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">Cidade:</span>
+                                {{usuario.cidade}} - {{usuario.estado}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">Contato: </span> 
+                                {{usuario.contato}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                          <ion-item>
+                            <ion-row>
+                              <ion-label
+                                ><span class="bold">Contato 2:</span> 
+                                {{usuario.contato2}}</ion-label
+                              >
+                            </ion-row>
+                          </ion-item>
+                        </ion-list>
+                      </ion-col>
+                    </ion-row>
+                  </div>
+                </ion-accordion>
+              </ion-accordion-group>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

@@ -1,48 +1,42 @@
+import { NavController } from '@ionic/angular';
 import { Component } from '@angular/core';
-import { EmpregadoService } from './servicos/empregado.service';
-import { EmpresaService } from './servicos/empresa.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-
-  nome : string;
+  nomeMenu: string;
   menus: string;
   public appPages = [
     { title: 'Perfil', url: '/home', icon: 'person' },
-    { title: 'Notificações', url: '/notificacao', icon: 'notifications'},
-    { title: 'Curriculo', url: '/curriculo', icon: 'folder'},
-    { title: 'Vagas', url: '/inscricao-vaga', icon: 'briefcase'},
-    { title: 'Sair', url: '/login', icon: 'power'}
+    { title: 'Notificações', url: '/notificacao', icon: 'notifications' },
+    { title: 'Curriculo', url: '/curriculo', icon: 'folder' },
+    { title: 'Vagas', url: '/inscricao-vaga', icon: 'briefcase' },
   ];
 
   public appPages2 = [
     { title: 'Perfil', url: '/home', icon: 'person' },
-    { title: 'Notificações', url: '/notificacao', icon: 'notifications' },
+    { title: 'Candidatos', url: '/vagas', icon: 'people-circle' },
     { title: 'Nova vaga', url: '/lancamento-vaga', icon: 'add-circle' },
-    { title: 'Dados', url: '/curriculo', icon: 'server' }
+    { title: 'Dados', url: '/curriculo', icon: 'server' },
   ];
 
   public appPages3 = [
     { title: 'Usuários', url: '/lista-usuarios', icon: 'body' },
-    { title: 'Empresas', url: '/lista-empresas', icon: 'storefront' }
+    { title: 'Empresas', url: '/lista-empresas', icon: 'storefront' },
   ];
 
-  constructor(public nav: NavController,
-              public servicoEmpregado: EmpregadoService,
-              public servicoEmpresa: EmpresaService
-    ) {}
+  constructor(public nav: NavController) {}
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
   ngOnInit(){
-    if(localStorage.getItem('nome') !== null){
-     this.nome = localStorage.getItem('nome').split(' ')[0];
-  }
-  this.menus = localStorage.getItem('profile');
-  }
+    if(localStorage.getItem('nomeMenu') !== null){
+      this.nomeMenu = localStorage.getItem('nomeMenu').split(' ')[0];
+    }
 
+    this.menus = localStorage.getItem('profile');
+  }
 
   logout() {
     localStorage.clear();

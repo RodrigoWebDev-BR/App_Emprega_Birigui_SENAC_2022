@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -26,99 +26,123 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 .roundedInput {
+  --border-radius: 10px;
+  border-radius: 10px;
+  --highlight-height: 0;
 
-    --border-radius: 10px;
-      border-radius: 10px;
-    --highlight-height: 0;
+  --background: rgb(241, 241, 241);
 
-    --background: rgb(241, 241, 241);
+  -webkit-box-shadow: 4px 4px 20px 5px rgba(0, 0, 0, 0.5);
 
-    -webkit-box-shadow: 4px 4px 20px 5px rgba(0,0,0,0.5); 
+  box-shadow: 4px 4px 20px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
 
-    box-shadow: 4px 4px 20px 0px rgba(0,0,0,0.2);
-    border-radius: 10px;
+.center {
+  margin: 0 auto;
+}
 
-   }
+.black {
+  color: black;
+}
 
-   .center{
-       margin: 0 auto;
-   }
+.white {
+  color: white;
+}
 
-   .black{
-       color: black;
-   }
+.espacamento {
+  margin-left: 15px;
+  margin-right: 15px;
+}
 
-   .white{
-       color: white;
-   }
+.margin-left {
+  margin-left: 60%;
+}
 
-   .espacamento{
-       margin-left: 15px;
-       margin-right: 15px;
-   }
+.txtPassword {
+  font-size: 12px;
+}
 
-   .margin-left{
-       margin-left: 60%;
-   }
+.txtNewAccount {
+  font-size: 12px;
+}
 
-   .txtPassword{
-    font-size: 12px;
-    
-   }
+.fundobg {
+  --background: rgb(232, 232, 232);
+}
 
-   .txtNewAccount{
-       font-size: 12px;
-   }
+.centertext {
+  text-align: center;
+}
 
-   .fundobg{
-       --background: rgb(232, 232, 232);
-   }
+.iconPad {
+  padding-top: 9px;
+}
 
-   .centertext{
-       text-align: center;
-   }
+.espacamentoLogin {
+  margin: 0px 8%;
+}
 
-   .iconPad{
-    padding-top: 9px;
-   }
+.icone {
+  width: 35px;
+  height: 35px;
+}
 
-   .espacamentoLogin{
-    margin: 0px 8%;
-   }
+.tituloPadding {
+  padding-left: 0px;
+}
 
-   .icone{
-    width: 35px; 
-    height: 35px;
-    padding-left: 10px;
-   }
+.tituloProject {
+  padding-right: 52px;
+  padding-left: 0px;
+}
 
-   .tituloPadding{
-    padding-left: 0px
-   }
+.bold {
+  font-weight: bold;
+}
 
-   .bold{
-    font-weight: bold;
-   }
+.middle {
+  display: flex;
+  justify-content: center;
+}
 
-   .middle{
-    display: flex;
-    justify-content: center;
-   }
+.sublinhado {
+  text-decoration: underline #000000;
+}
 
-   .sublinhado{
-    text-decoration: underline #000000;
-   }
+.perfil {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
 
-   .perfil{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-   }
 
-   .icon{
-    width: 35px;
-    height: 35px;
-    padding-left: 10px;
-   }
+.border {
+  border-bottom-style: solid;
+  border-color: #69696958;
+  border-bottom-width: 0.5px;
+}
+
+.under {
+  text-decoration: underline;
+}
+
+.paddingLabel {
+  padding-left: 30px;
+}
+
+.labelChk{
+  margin-left: 8px;
+}
+
+.bandeira{
+  width: 50px;
+  height: 33px;
+}
+
+.labelIdioma{
+  padding-left: 20px;
+}
+
 

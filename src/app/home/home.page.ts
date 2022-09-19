@@ -1,19 +1,13 @@
-<<<<<<< Updated upstream
-import { MenuController } from '@ionic/angular';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-=======
+import { EmpresaService } from './../servicos/empresa.service';
+import { EmpregadoService } from './../servicos/empregado.service';
 import { validarCNPJ } from './../../environments/functions';
 import {
   MenuController,
   NavController,
   AlertController,
-  ToastController, 
+  ToastController,
 } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { EmpregadoService } from '../servicos/empregado.service';
-import { EmpresaService } from '../servicos/empresa.service';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-home',
@@ -21,28 +15,7 @@ import { EmpresaService } from '../servicos/empresa.service';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-<<<<<<< Updated upstream
-  vagaDestaque = [
-    {titulo: 'Programador web', cidade: 'Birigui', estado: 'SP'},
-    {titulo: 'DBA', cidade: 'Araçatuba', estado: 'SP'},
-    {titulo: 'Programador java', cidade: 'Lins', estado: 'SP'},
-    {titulo: 'Programador c#', cidade: 'Guararapes', estado: 'SP'},
-    {titulo: 'Programador mobile', cidade: 'Birigui', estado: 'SP'}
-  ]
-
-  vagaDisponivel =[
-    {titulo: 'Programador web', quantidade: '3 vagas', salario: 'a combinar' , data_publicacao: '14/06'},
-    {titulo: 'Programador Php', quantidade: '3 vagas', salario: 'a combinar', data_publicacao: '24/12'  },
-    {titulo: 'Programador Javascript', quantidade: '1 vaga', salario: 'a combinar', data_publicacao: '12/03' },
-    {titulo: 'Programador .net', quantidade: '3 vagas' , salario: 'a combinar', data_publicacao: '03/02' },
-    {titulo: 'Programador .net core', quantidade: '2 vagas', salario: 'a combinar', data_publicacao: '06/02' }
-  ]
-
-  abrirVaga(){
-    this.route.navigate(['vaga-detalhes']);
-=======
-  perfil : any = {};
+  perfil: any = {};
   empresa = false;
   empregado = false;
   none = false;
@@ -145,59 +118,69 @@ export class HomePage implements OnInit {
     });
 
     await finalizar.present();
->>>>>>> Stashed changes
   }
 
-  constructor(public route: Router, public menuLeft: MenuController) 
-  { 
-    this.menuLeft.enable(true);
+  async exibeToast(msg) {
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 1000,
+      position: 'top',
+      animated: true,
+      color: 'warning',
+    });
+
+    toast.present();
   }
 
   ngOnInit() {
-<<<<<<< Updated upstream
-  }
-
-=======
-    if (localStorage.getItem('reload') === null || localStorage.getItem('reload') === undefined) {
-      if (localStorage.getItem('profile') !== null || localStorage.getItem('profile') !== undefined) {
+    if (
+      localStorage.getItem('reload') === null ||
+      localStorage.getItem('reload') === undefined
+    ) {
+      if (
+        localStorage.getItem('profile') !== null ||
+        localStorage.getItem('profile') !== undefined
+      ) {
         if (!this.none) {
           localStorage.setItem('reload', 'true');
           window.location.reload();
         }
       }
-    }else{
+    } else {
       this.none = true;
       localStorage.removeItem('reload');
-
-      if(localStorage.getItem('profile') === 'empresa'){
+      if (localStorage.getItem('profile') === 'empresa') {
         this.perfilEmpresa();
-      }else if(localStorage.getItem('profile') === 'empregado'){
+      } else if (localStorage.getItem('profile') === 'empregado') {
         this.perfilEmpregado();
       }
     }
   }
 
-  perfilEmpregado(){
+  perfilEmpregado() {
     this.empregado = true;
 
-    this.servicoEmpregado.perfil().then((response) => {
-      this.perfil = response;
-      if(this.perfil === undefined){
-        this.exibeToast('Perfil com erro!')
-      }
-    }).catch();
+    this.servicoEmpregado
+      .perfil()
+      .then((response) => {
+        this.perfil = response;
+        if (this.perfil === undefined) {
+          this.exibeToast('Perfil com erro!');
+        }
+      })
+      .catch();
   }
 
-  perfilEmpresa(){
+  perfilEmpresa() {
     this.empresa = true;
-
-    this.servicoEmpresa.perfil().then((response) => {
-      this.perfil = response;
-      if(this.perfil === undefined){
-        this.exibeToast('Perfil com erro!')
-      }
-    }).catch();
+    this.servicoEmpresa
+      .perfil()
+      .then((response) => {
+        this.perfil = response;
+        if (this.perfil === undefined) {
+          this.exibeToast('Perfil com erro!');
+        }
+      })
+      .catch();
   }
-
->>>>>>> Stashed changes
 }
