@@ -42,7 +42,7 @@
           <ion-item *ngFor="let cont of contatos" lines="none" class="border animate__animated animate__fadeInUp">
             <ion-label>
               <p>{{cont.tipo}}</p>
-              <h2>{{cont.contato}}</h2>
+              <h2>{{cont.contato}} <span *ngIf="cont.validado">-</span><span *ngIf="cont.validado" style="color:#00bd2f"> Contato Princial</span></h2>
             </ion-label>
             <ion-icon name="trash-outline" slot="end" color="danger" (click)="removerContato(cont)"></ion-icon>
           </ion-item>

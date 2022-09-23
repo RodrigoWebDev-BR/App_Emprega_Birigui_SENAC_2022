@@ -84,7 +84,11 @@ export class CursosPage implements OnInit {
           {
             text: 'Sim',
             handler: () => {
-              this.nav.navigateForward('idiomas');
+              if (localStorage.getItem('editar') === 'true') {
+                this.nav.navigateForward('revisao');
+              } else {
+                this.nav.navigateForward('idiomas');
+              }
             },
           },
         ],
@@ -92,7 +96,11 @@ export class CursosPage implements OnInit {
 
       await nextPage.present();
     } else {
-      this.nav.navigateForward('idiomas');
+      if (localStorage.getItem('editar') === 'true') {
+        this.nav.navigateForward('revisao');
+      } else {
+        this.nav.navigateForward('idiomas');
+      }
     }
   }
 

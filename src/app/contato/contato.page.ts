@@ -49,7 +49,7 @@ export class ContatoPage implements OnInit {
       } else {
         this.mensagemPrincipal();
       }
-    }else{
+    } else {
       this.addContato(false);
     }
   }
@@ -115,13 +115,18 @@ export class ContatoPage implements OnInit {
 
   async confirmar() {
     if (this.contatos.length > 0) {
-      if (
-        localStorage.getItem('nome') === null ||
-        localStorage.getItem('nome') === undefined
-      ) {
-        this.nav.navigateForward('detalhes-empresa');
+      if (localStorage.getItem('profile') === 'empregado') {
+        if (localStorage.getItem('editar') === 'true') {
+          this.nav.navigateRoot('revisao');
+        } else {
+          this.nav.navigateForward('formacao-educacional');
+        }
       } else {
-        this.nav.navigateForward('formacao-educacional');
+        if (localStorage.getItem('editar') === 'true') {
+          this.nav.navigateRoot('revisao');
+        } else {
+          this.nav.navigateForward('detalhes-empresa');
+        }
       }
     } else {
       const alerta = await this.mensagem.create({

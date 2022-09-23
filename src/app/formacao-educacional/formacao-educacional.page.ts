@@ -104,7 +104,11 @@ export class FormacaoEducacionalPage implements OnInit {
 
   async confimar() {
     if (this.formEducacional.length > 0) {
-      this.nav.navigateForward('exp-profissional');
+      if (localStorage.getItem('editar') === 'true') {
+        this.nav.navigateForward('revisao');
+      } else {
+        this.nav.navigateForward('exp-profissional');
+      }
     } else {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO',

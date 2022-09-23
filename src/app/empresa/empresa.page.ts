@@ -161,7 +161,12 @@ export class EmpresaPage implements OnInit {
 
     } else {
       this.salvarTemporariamente();
-      this.nav.navigateForward('endereco');
+
+      if (localStorage.getItem('editar') === 'true') {
+        this.nav.navigateForward('revisao');
+      } else {
+        this.nav.navigateForward('endereco');
+      }
     }
   }
 

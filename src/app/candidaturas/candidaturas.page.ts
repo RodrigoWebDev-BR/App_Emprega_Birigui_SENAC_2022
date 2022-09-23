@@ -1,4 +1,4 @@
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -87,7 +87,7 @@ export class CandidaturasPage implements OnInit {
     },
   ];
 
-  constructor(public mensagem: AlertController) {}
+  constructor(public mensagem: AlertController, public nav: NavController) {}
 
   abreModal(open: boolean) {
     this.isModalOpen = open;
@@ -145,4 +145,8 @@ export class CandidaturasPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  home(){
+    this.nav.back();
+  }
 }

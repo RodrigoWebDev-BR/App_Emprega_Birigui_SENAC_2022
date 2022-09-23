@@ -10,7 +10,9 @@ ion-card{
         }   
     }
 
-    
+    ion-card-content{
+        padding-left: 0px;
+    }
 }
 
 .medalha{
@@ -19,4 +21,11 @@ ion-card{
     width: 70px;
     top: 1.8rem;
     margin-left: 70%;
+}
+
+@media (min-width: 426px) {
+    .mgCard{
+        margin-left: 9%;
+        margin-right: 9%;
+    }
 }

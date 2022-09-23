@@ -11,31 +11,133 @@
   
   <ion-row>
     <ion-col>
-      <ion-card class="cardVagas">
+      <ion-card class="cardVagas mgCard">
 
         <ion-card-header>
           <ion-card-title>Vaga disponível</ion-card-title>
+          <br>
           <ion-card-subtitle color="primary"
             >Status <img src="../../assets/check.png"
           /></ion-card-subtitle>
           
         </ion-card-header>
         <ion-card-content>
-          <p style="font-weight: bold">
-            Salário:
-            <span class="under">R$.<small>00</small></span>
-          </p>
           <ion-row>
-            <ion-col size="6">
-              <p style="font-weight: bold" class="under"></p>
-            </ion-col>
-            <ion-col size="6" style="text-align: end">
-              <ion-button size="small" (click)="abrirVaga()" fill="outline">
-                <ion-icon name="analytics" color="primary"></ion-icon>
-                <ion-label style="margin-top: 0px; margin-left: 6px"
-                  >Processos</ion-label
-                >
-              </ion-button>
+            <ion-col >
+              <ion-list>
+                <ion-item>
+                  <ion-icon name="business" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>Nome Empresa</h2>
+                    <p>{{itemAux.nomeEmpresa}}</p>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-icon name="location" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>Cidade</h2>
+                    <p>{{itemAux.cidade}}</p>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-icon name="briefcase" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>Vaga</h2>
+                    <p *ngIf="itemAux.qtde > 1">{{itemAux.tituloVaga}} - {{itemAux.qtde}} Vagas</p>
+                    <p *ngIf="itemAux.qtde === 1">{{itemAux.tituloVaga}}</p>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-icon name="golf" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>Categoria</h2>
+                    <p>{{itemAux.categoria}}</p>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-icon name="reader" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>Tipo de contrato</h2>
+                    <p>{{itemAux.contrato}}</p>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-icon name="hourglass" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>Prazo do contrato</h2>
+                    <p>{{itemAux.prazo}}</p>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-icon name="time" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>Carga horária</h2>
+                    <p>{{itemAux.horario}} hora(s) semanais</p>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-icon name="cash" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>Salário</h2>
+                    <p *ngIf="itemAux.combinado">A combinar</p>
+                    <p *ngIf="!itemAux.combinado">
+                      R$ {{itemAux.salario}}.<small>00</small>
+                    </p>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-icon name="medal" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>Qualificações</h2>
+                    <p>{{itemAux.qualificacao}}</p>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-icon name="nutrition" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>Vale alimentação</h2>
+                    <p>{{itemAux.alimentacao}}</p>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-icon name="medkit" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>Assistência médica</h2>
+                    <p>{{itemAux.medica}}</p>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item line="none" *ngIf="contadorBenef > 0">
+                  <ion-icon name="accessibility" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel">
+                    <h2>+ Benefícios</h2>
+                    <div *ngFor="let benef of itemAux.beneficios">
+                      <ion-label>
+                        <p>{{benef}}</p>
+                      </ion-label>
+                    </div>
+                  </ion-label>
+                </ion-item>
+      
+                <ion-item>
+                  <ion-icon name="receipt" color="dark"></ion-icon>
+                  <ion-label class="paddingLabel ion-text-wrap">
+                    <h2>Descrição</h2>
+                   <p>{{itemAux.descricao}}</p>
+                  </ion-label>
+                </ion-item>
+                <br />
+              </ion-list>
             </ion-col>
           </ion-row>
         </ion-card-content>

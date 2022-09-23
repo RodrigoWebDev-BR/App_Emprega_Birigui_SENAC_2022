@@ -52,4 +52,15 @@ export class NotificacaoPage implements OnInit {
   ngOnInit() {
   }
 
+  curriculo() {
+    this.nav.navigateRoot('curriculo');
+  }
+
+  vagas() {
+    this.nav.navigateRoot('inscricao-vaga');
+  }
+
+  home() {
+    this.nav.navigateRoot('home');
+  }
 }

@@ -1,32 +1,36 @@
 <ion-header [translucent]="true" mode="md">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title
-      *ngIf="empregado"
-      color="light"
-      class="centertext tituloProject bold"
-      >Currículo</ion-title
-    >
-    <ion-title
-      *ngIf="empresa"
-      color="light"
-      class="centertext tituloProject bold"
-      >Dados empresariais</ion-title
-    >
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <img *ngIf="empregado" src="../../assets/icon/user.png" />
+            <img *ngIf="empresa" src="../../assets/icon/buildings.png" />
+          </ion-thumbnail>
+          <ion-label class="bold" class="ion-text-wrap">
+            <h1 *ngIf="empregado" style="margin-bottom: 0px; font-weight: bold">
+              {{perfil.nome}}
+            </h1>
+            <h1 *ngIf="empresa" style="margin-bottom: 0px; font-weight: bold">
+              {{perfil.nomeEmpresa}}
+            </h1>
+            <p style="margin-top: 5px">{{contatoPrincipal}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
-</ion-header>
+</ion-header> 
 
 <ion-content>
-  <ion-row>
+  <!-- <ion-row>
     <ion-col>
       <ion-item lines="none">
         <ion-thumbnail slot="start">
           <img *ngIf="empregado" src="../../assets/icon/user.png" />
           <img *ngIf="empresa" src="../../assets/icon/buildings.png" />
         </ion-thumbnail>
-        <ion-label class="bold">
+        <ion-label class="bold" class="ion-text-wrap">
           <h1 *ngIf="empregado" style="margin-bottom: 0px; font-weight: bold">
             {{perfil.nome}}
           </h1>
@@ -37,7 +41,7 @@
         </ion-label>
       </ion-item>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
 
   <ion-row>
     <ion-col>
@@ -218,7 +222,14 @@
                     <ion-item style="margin-top: 10px">
                       <ion-label>
                         <h2>{{contact.contato}}</h2>
-                        <p>{{contact.tipo}} <span *ngIf="contact.validado" style="color:#00bd2f"> - Contato Princial</span></p>
+                        <p>
+                          {{contact.tipo}}
+                          <span *ngIf="contact.validado"
+                            >-<span style="color: #00bd2f">
+                              Contato Princial</span
+                            ></span
+                          >
+                        </p>
                       </ion-label>
                       <ion-icon
                         name="trash-outline"
@@ -398,7 +409,10 @@
                   </ion-row>
                   <div *ngFor="let idioma of perfil.idiomas">
                     <ion-item style="margin-top: 10px">
-                      <img class="bandeira imgBandeira" src="{{idioma.bandeira}}" />
+                      <img
+                        class="bandeira imgBandeira"
+                        src="{{idioma.bandeira}}"
+                      />
                       <ion-label class="labelIdioma">
                         <h2>{{idioma.idioma}}</h2>
                         <p *ngIf="idioma.nivel === 'iniciante'">Iniciante</p>
@@ -504,13 +518,15 @@
                       >
                     </ion-row>
                   </ion-item>
-                  <br />
-                  <ion-row style="margin-left: 16px">
-                    <ion-label
-                      ><span class="bold">Descrição:</span>
-                      {{perfil.descricaoEmpresa}}</ion-label
-                    >
-                  </ion-row>
+                  <ion-item>
+                    <br />
+                    <ion-row>
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Descrição:</span>
+                        {{perfil.descricaoEmpresa}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
                 </ion-list>
               </ion-col>
             </ion-row>
@@ -611,7 +627,14 @@
                     <ion-item style="margin-top: 10px">
                       <ion-label>
                         <h2>{{contact.contato}}</h2>
-                        <p>{{contact.tipo}} <span *ngIf="contact.validado" style="color:#00bd2f"> - Contato Princial</span></p>
+                        <p>
+                          {{contact.tipo}}
+                          <span *ngIf="contact.validado"
+                            >-<span style="color: #00bd2f">
+                              Contato Princial</span
+                            ></span
+                          >
+                        </p>
                       </ion-label>
                       <ion-icon
                         name="trash-outline"
@@ -753,33 +776,7 @@
               >
             </ion-select>
           </ion-item>
-        </ion-list>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
 
-  <ion-modal [isOpen]="modal.modalPessoalEmpresa">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button
-              (click)="abreModal(false, 'pessoalEmpresa')"
-              color="secondary"
-              >Fechar</ion-button
-            >
-          </ion-buttons>
-          <ion-title class="centertext">EDITAR</ion-title>
-          <ion-buttons slot="end">
-            <ion-button color="secondary" (click)="updateDadosEmpresa()"
-              >Salvar</ion-button
-            >
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-
-      <ion-content>
-        <ion-list>
           <ion-item lines="none">
             <ion-label position="floating">Ramo</ion-label>
             <ion-select interface="popover" [(ngModel)]="dadosEmpresa.ramo">
@@ -1108,4 +1105,45 @@
       </ion-content>
     </ng-template>
   </ion-modal>
+
+  <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" style="margin-bottom: 3rem; margin-right: 1rem;" class="foot">
+    <ion-fab-button color="danger" (click)="logout()">
+      <ion-icon name="power"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
+
+<ion-footer [translucent]="true" class="foot" *ngIf="empresa">
+  <ion-toolbar color="primary">
+    <ion-segment value="person">
+      <ion-segment-button value="home" (click)="home()">
+        <ion-icon name="home"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="person">
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="pin" (click)="config()">
+        <ion-icon name="cog"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer [translucent]="true" *ngIf="empregado" class="foot">
+  <ion-toolbar color="primary">
+    <ion-segment value="person">
+      <ion-segment-button value="home" (click)="home()">
+        <ion-icon name="home"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="person">
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="search" (click)="vagas()">
+        <ion-icon name="search"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="notifications" (click)="notifi()">
+        <ion-icon name="notifications"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

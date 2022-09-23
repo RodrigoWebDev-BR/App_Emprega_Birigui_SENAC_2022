@@ -14,7 +14,6 @@ import { Storage } from '@capacitor/storage';
   styleUrls: ['./usuario.page.scss'],
 })
 export class UsuarioPage implements OnInit {
-
   public usuario = {
     nome: null,
     rg: null,
@@ -204,7 +203,12 @@ export class UsuarioPage implements OnInit {
       return;
     } else {
       this.salvarTemporariamente();
-      this.nav.navigateForward('endereco');
+
+      if (localStorage.getItem('editar') === 'true') {
+        this.nav.navigateRoot('revisao');
+      } else {
+        this.nav.navigateForward('endereco');
+      }
     }
   }
 
@@ -241,7 +245,6 @@ export class UsuarioPage implements OnInit {
       this.usuario.cpf = formatarCPF(this.usuario.cpf);
     }
   }
-
 
   formataRG() {
     if (this.usuario.rg !== '' && this.usuario.rg !== null) {

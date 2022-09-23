@@ -1,3 +1,4 @@
+import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,13 +10,11 @@ import { Router } from '@angular/router';
 export class TimelineVagaPage implements OnInit {
   contato = { contato: '', id: '' };
 
-  constructor(private rota: Router) {}
-
-  nomeContato() {}
-
-  mostrarVaga() {
-    this.rota.navigate['home'];
-  }
+  constructor(private nav: NavController) {}
 
   ngOnInit() {}
+
+  home(){
+    this.nav.navigateRoot('home');
+  }
 }

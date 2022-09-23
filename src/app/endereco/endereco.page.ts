@@ -67,7 +67,11 @@ export class EnderecoPage {
     }
 
     this.salvarTemporariamente();
-    this.nav.navigateForward('contato');
+    if (localStorage.getItem('editar') === 'true') {
+      this.nav.navigateRoot('revisao');
+    } else {
+      this.nav.navigateForward('contato');
+    }
   }
 
   searchCEP(evento) {

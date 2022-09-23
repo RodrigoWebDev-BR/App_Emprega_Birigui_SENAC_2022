@@ -1,3 +1,4 @@
+import { EmpresaService } from 'src/app/servicos/empresa.service';
 import { ActivatedRoute } from '@angular/router';
 import { formatarCPF } from './../../environments/functions';
 import { LoginService } from './../servicos/login.service';
@@ -12,13 +13,15 @@ import { MenuController, NavController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   user = { cpf: '', password: '' };
   resp: any = {};
+  itemAux: any = {};
   constructor(
     public nav: NavController,
     public menuLeft: MenuController,
     public toast: ToastController,
     public mensagem: AlertController,
     public activated: ActivatedRoute,
-    private authorize: LoginService
+    private authorize: LoginService,
+    public servicoEmpresa: EmpresaService
   ) {
     this.menuLeft.enable(false);
   }
@@ -64,7 +67,30 @@ export class LoginPage implements OnInit {
             localStorage.setItem('profile', this.resp.profile);
             localStorage.setItem('nomeMenu', this.resp.nome);
 
-            this.nav.navigateRoot('home');
+            if (this.resp.profile === 'empresa') {
+              this.servicoEmpresa
+                .perfil()
+                .then(async (emp) => {
+                  this.itemAux = emp;
+                  if (!this.itemAux.autorizado) {
+                    const alerta = await this.mensagem.create({
+                      header: 'Paciência!',
+                      message:
+                        'Seu cadastro ainda não foi aprovado pela prefeitura de Birigui.',
+                      buttons: ['OK'],
+                    });
+
+                    await alerta.present();
+
+                    return;
+                  } else {
+                    this.nav.navigateRoot('home');
+                  }
+                })
+                .catch();
+            } else {
+              this.nav.navigateRoot('home');
+            }
           }
         })
         .catch((e) => {
@@ -130,9 +156,9 @@ export class LoginPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'PRONTO!!!',
         message:
-        'Olá ' +
-        this.activated.snapshot.paramMap.get('id').split('_')[1] +
-        // eslint-disable-next-line max-len
+          'Olá ' +
+          this.activated.snapshot.paramMap.get('id').split('_')[1] +
+          // eslint-disable-next-line max-len
           ' seu cadastro foi realizado com sucesso. Aguarde a prefeitura de Birigui autorizar seu acesso e tente o login novamente dentro de 48 horas.',
         buttons: ['OK'],
       });
@@ -144,8 +170,8 @@ export class LoginPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'Ops...',
         message:
-        // eslint-disable-next-line max-len
-        'Não foi possível completar seu cadastro por erros internos, tente o cadastro novamente, se o erro persistir, entre em contato com a prefeitura de Birigui.',
+          // eslint-disable-next-line max-len
+          'Não foi possível completar seu cadastro por erros internos, tente o cadastro novamente, se o erro persistir, entre em contato com a prefeitura de Birigui.',
         buttons: ['OK'],
       });
 

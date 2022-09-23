@@ -136,7 +136,11 @@ export class IdiomasPage {
   }
 
   proximo() {
-    this.nav.navigateRoot('detalhes-usuario');
+    if (localStorage.getItem('editar') === 'true') {
+      this.nav.navigateForward('revisao');
+    } else {
+      this.nav.navigateRoot('detalhes-usuario');
+    }
   }
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface

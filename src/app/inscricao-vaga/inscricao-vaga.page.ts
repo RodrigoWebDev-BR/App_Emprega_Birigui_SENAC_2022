@@ -1,3 +1,5 @@
+import { VagasService } from './../servicos/vagas.service';
+import { EmpresaService } from './../servicos/empresa.service';
 import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,156 +9,50 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inscricao-vaga.page.scss'],
 })
 export class InscricaoVagaPage implements OnInit {
-  public inscricaoVaga = {
-    quantidade: 20,
-  };
+  quantidade = 0;
+  itemAux: any = {};
 
-  public vagas: any[] = [
-    {
-      nome: 'Administrador',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Administrativo'
-    },
-    {
-      nome: 'Vendedor',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Comércio'
-    },
-    {
-      nome: 'Contador',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Contabilidade'
-    },
-    {
-      nome: 'Docente Senac',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Educação'
-    },
-    {
-      nome: 'Cinema',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Entretenimento'
-    },
-    {
-      nome: 'Analista de suporte',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Escritório'
-    },
-    {
-      nome: 'Auxiliar de farmácia',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Farmácia'
-    },
-    {
-      nome: 'Tesoureiro',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Financeiro'
-    },
-    {
-      nome: 'Advogado',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Jurídico'
-    },
-    {
-      nome: 'Auxiliar de limpeza',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Limpeza'
-    },
-    {
-      nome: 'Produtor',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Linha de produção'
-    },
-    {
-      nome: 'Garçom',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Restaurantes'
-    },
-    {
-      nome: 'Administrador',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Recursos Humanos'
-    },
-    {
-      nome: 'Aux. de Enfermagem',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Saúde'
-    },
-    {
-      nome: 'Servente',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Serviços gerais'
-    },
-    {
-      nome: 'Empacotador',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Supermercado'
-    },
-    {
-      nome: 'Desenvolvedor Angular',
-      nomeEmpresa: 'Santa Casa',
-      cidade: 'Araçatuba',
-      quantidade: 5,
-      salario: 'R$ 2500.00',
-      categoria: 'Tecnologia'
-    }
-  ];
+  constructor(
+    public nav: NavController,
+    public servicoEmpresa: EmpresaService,
+    public servicoVagas: VagasService
+  ) {}
 
-  public vaga = {};
-
-  constructor(public nav: NavController) {}
-
-  detalhes() {
+  detalhes(id: string, idEmp: string) {
+    localStorage.setItem('idVaga', id);
+    localStorage.setItem('idEmp', idEmp);
     this.nav.navigateForward('vaga-detalhes');
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.servicoVagas
+      .searchVagas()
+      .then((resp) => {
+        this.itemAux = resp;
+        if (this.itemAux !== undefined) {
+          const congeline = this.itemAux.items.filter(
+            (vagas) => vagas.online && !vagas.congelada
+          );
+          this.itemAux.items = congeline;
+          if (this.itemAux.items !== undefined) {
+            if (this.itemAux.items.length > 0) {
+              this.quantidade = this.itemAux.items.length;
+            }
+          }
+        }
+      })
+      .catch();
+  }
+
+  home() {
+    this.nav.navigateRoot('home');
+  }
+
+  curriculo() {
+    this.nav.navigateRoot('curriculo');
+  }
+
+  notifi() {
+    this.nav.navigateRoot('notificacao');
+  }
 }

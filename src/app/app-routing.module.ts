@@ -1,3 +1,4 @@
+import { VagaAuthGuard } from './guards/vaga-auth.guard';
 import { LoginAuthGuard } from './guards/login-auth.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
@@ -115,19 +116,19 @@ const routes: Routes = [
     loadChildren: () => import('./candidaturas/candidaturas.module').then( m => m.CandidaturasPageModule)
   },
   {
-    path: 'vagas',
-    canActivate: [LoginAuthGuard],
-    loadChildren: () => import('./vagas/vagas.module').then( m => m.VagasPageModule)
-  },
-  {
     path: 'conclusao-vaga',
-    canActivate: [LoginAuthGuard],
+    canActivate: [LoginAuthGuard, VagaAuthGuard],
     loadChildren: () => import('./conclusao-vaga/conclusao-vaga.module').then( m => m.ConclusaoVagaPageModule)
   },
   {
     path: 'revisao',
     loadChildren: () => import('./revisao/revisao.module').then( m => m.RevisaoPageModule)
+  },
+  {
+    path: 'config',
+    loadChildren: () => import('./config/config.module').then( m => m.ConfigPageModule)
   }
+
 
 
 

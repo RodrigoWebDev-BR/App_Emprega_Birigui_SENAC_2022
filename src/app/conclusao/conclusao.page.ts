@@ -93,6 +93,7 @@ export class ConclusaoPage implements OnInit {
       cursos: this.servicosCursos.listar(),
       idiomas: this.servicosIdiomas.listar(),
       descricaoUser: localStorage.getItem('descricao-usuario'),
+      candidaturas: undefined
     };
 
     this.cadastro.cadastrar(empregado, 'empregado')
@@ -133,7 +134,8 @@ export class ConclusaoPage implements OnInit {
       contatos: this.servicosContato.listar(),
       ramo: localStorage.getItem('ramo'),
       descricaoEmpresa: localStorage.getItem('descricaoEmpresa'),
-      autorizado: false
+      aceita: false,
+      recusada: false
     };
 
     this.cadastro.cadastrar(empresa, 'empresa')

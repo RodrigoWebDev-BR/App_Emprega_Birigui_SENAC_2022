@@ -1,8 +1,8 @@
 <ion-header mode="md">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+    <ion-buttons (click)="home()" slot="start">
+      <ion-icon name="chevron-back" class="light icone"></ion-icon>
+    </ion-buttons> 
     <ion-searchbar placeholder="Nome candidato"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
@@ -114,7 +114,7 @@
           <div style="margin-left: 15px">
             <ion-row>
               <ion-col>
-                <ion-label>
+                <ion-label class="ion-text-wrap">
                   <p class="bold">Descrição completa sobre o candidato</p>
                 </ion-label>
               </ion-col>
@@ -123,7 +123,7 @@
             <br />
             <ion-row>
               <ion-col>
-                <ion-label
+                <ion-label class="ion-text-wrap"
                   ><span class="bold">Contato:</span> (18)99999-9999</ion-label
                 >
               </ion-col>
@@ -131,7 +131,7 @@
 
             <ion-row>
               <ion-col>
-                <ion-label
+                <ion-label class="ion-text-wrap"
                   ><span class="bold">Contato 2:</span>
                   (18)99999-9999</ion-label
                 >
@@ -140,7 +140,7 @@
 
             <ion-row>
               <ion-col>
-                <ion-label
+                <ion-label class="ion-text-wrap"
                   ><span class="bold">E-Mail:</span>
                   exemplo@exemplo.com</ion-label
                 >
@@ -149,7 +149,7 @@
 
             <ion-row>
               <ion-col>
-                <ion-label
+                <ion-label class="ion-text-wrap"
                   ><span class="bold">Data nascimento:</span> 12/08/1995
                 </ion-label>
               </ion-col>
@@ -157,13 +157,13 @@
 
             <ion-row>
               <ion-col>
-                <ion-label><span class="bold">Gênero:</span> Outros</ion-label>
+                <ion-label class="ion-text-wrap"><span class="bold">Gênero:</span> Outros</ion-label>
               </ion-col>
             </ion-row>
 
             <ion-row>
               <ion-col>
-                <ion-label
+                <ion-label class="ion-text-wrap"
                   ><span class="bold">Estado Civil:</span> Solteiro</ion-label
                 >
               </ion-col>
@@ -171,13 +171,13 @@
 
             <ion-row>
               <ion-col>
-                <ion-label><span class="bold">CEP:</span> 16012-444</ion-label>
+                <ion-label class="ion-text-wrap"><span class="bold">CEP:</span> 16012-444</ion-label>
               </ion-col>
             </ion-row>
 
             <ion-row>
               <ion-col>
-                <ion-label
+                <ion-label class="ion-text-wrap"
                   ><span class="bold">Endereço:</span> Av. Brasília Nº 1450 -
                   Jd. Nova York</ion-label
                 >
@@ -186,7 +186,7 @@
 
             <ion-row>
               <ion-col>
-                <ion-label
+                <ion-label class="ion-text-wrap"
                   ><span class="bold">Cidade:</span> Araçatuba - SP</ion-label
                 >
               </ion-col>
@@ -208,7 +208,7 @@
             <div>
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Nome instituição:</span> USP</ion-label
                   >
                 </ion-col>
@@ -216,7 +216,7 @@
 
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Nome Curso:</span> Medicina</ion-label
                   >
                 </ion-col>
@@ -224,7 +224,7 @@
 
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Nível:</span> Ensino superior</ion-label
                   >
                 </ion-col>
@@ -232,7 +232,7 @@
 
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Situação:</span> Completo</ion-label
                   >
                 </ion-col>
@@ -255,7 +255,7 @@
             <div>
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Empresa:</span> Santa Casa</ion-label
                   >
                 </ion-col>
@@ -263,13 +263,13 @@
 
               <ion-row>
                 <ion-col>
-                  <ion-label><span class="bold">Cargo:</span> Médico</ion-label>
+                  <ion-label class="ion-text-wrap"><span class="bold">Cargo:</span> Médico</ion-label>
                 </ion-col>
               </ion-row>
 
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Data admissão:</span>
                     10/05/2021</ion-label
                   >
@@ -278,7 +278,7 @@
 
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Data demissão:</span> -</ion-label
                   >
                 </ion-col>
@@ -286,7 +286,7 @@
 
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Descrição:</span> Trabalhar com a linha
                     de frente em um hospital no COVID como voluntário</ion-label
                   >
@@ -295,20 +295,20 @@
             </div>
 
             <br />
+            
+            <!-- //?------------------------------------------------->
+            <!-- //?------------------------------------------------->
+            <!-- //?------------------------------------------------->
             <ion-row>
               <ion-col size="12">
                 <ion-title class="bold centertext under">Cursos</ion-title>
               </ion-col>
             </ion-row>
-
-            <!-- //?------------------------------------------------->
-            <!-- //?------------------------------------------------->
-            <!-- //?------------------------------------------------->
             <br />
             <div>
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Nome Curso:</span> USP</ion-label
                   >
                 </ion-col>
@@ -316,7 +316,7 @@
 
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Nome Instituição:</span>
                     Medicina</ion-label
                   >
@@ -325,7 +325,7 @@
 
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Data início:</span>
                     03/10/2020</ion-label
                   >
@@ -334,7 +334,7 @@
 
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Data término:</span>
                     01/12/2020</ion-label
                   >
@@ -356,7 +356,7 @@
             <div>
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Idioma:</span> Inglês</ion-label
                   >
                 </ion-col>
@@ -364,7 +364,7 @@
 
               <ion-row>
                 <ion-col>
-                  <ion-label
+                  <ion-label class="ion-text-wrap"
                     ><span class="bold">Nível:</span> Avançado</ion-label
                   >
                 </ion-col>

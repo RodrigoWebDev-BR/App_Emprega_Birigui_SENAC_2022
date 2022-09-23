@@ -148,7 +148,11 @@ export class ExpProfissionalPage implements OnInit {
           {
             text: 'Sim',
             handler: () => {
-              this.nav.navigateForward('cursos');
+              if (localStorage.getItem('editar') === 'true') {
+                this.nav.navigateForward('revisao');
+              } else {
+                this.nav.navigateForward('cursos');
+              }
             },
           },
         ],
@@ -156,7 +160,11 @@ export class ExpProfissionalPage implements OnInit {
 
       await confirma.present();
     } else {
-      this.nav.navigateForward('cursos');
+      if (localStorage.getItem('editar') === 'true') {
+        this.nav.navigateForward('revisao');
+      } else {
+        this.nav.navigateForward('cursos');
+      }
     }
   }
 

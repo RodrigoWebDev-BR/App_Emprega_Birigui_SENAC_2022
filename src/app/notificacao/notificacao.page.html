@@ -1,9 +1,9 @@
 <ion-header [translucent]="true" mode="md">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
+    <!-- <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title color="light" class="centertext tituloProject bold"
+    </ion-buttons> -->
+    <ion-title color="light" class="centertext bold"
       >Notificações</ion-title
     >
   </ion-toolbar>
@@ -27,3 +27,22 @@
   </div>
 
 </ion-content>
+
+<ion-footer [translucent]="true" class="foot">
+  <ion-toolbar color="primary">
+    <ion-segment value="notifications">
+      <ion-segment-button value="home" (click)="home()">
+        <ion-icon name="home"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="person" (click)="curriculo()">
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="search" (click)="vagas()">
+        <ion-icon name="search"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="notifications">
+        <ion-icon name="notifications"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

@@ -5,7 +5,11 @@ import {
   formatarRG,
   validaCPF,
 } from './../../environments/functions';
-import { AlertController, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  ToastController,
+  NavController,
+} from '@ionic/angular';
 import { EmpregadoService } from './../servicos/empregado.service';
 import { EmpresaService } from './../servicos/empresa.service';
 import { Component, OnInit } from '@angular/core';
@@ -170,7 +174,8 @@ export class CurriculoPage implements OnInit {
     public servicoEmpresa: EmpresaService,
     public mensagem: AlertController,
     public toast: ToastController,
-    public cep: CepService
+    public cep: CepService,
+    public nav: NavController
   ) {}
 
   ngOnInit() {
@@ -290,7 +295,6 @@ export class CurriculoPage implements OnInit {
                             )
                           )
                         );
-                        console.log(colecao);
                         this.servicoEmpregado
                           .putUser(colecao, sessao)
                           .then((respFinal) => {
@@ -300,9 +304,7 @@ export class CurriculoPage implements OnInit {
                               this.perfilEmpregado('');
                             }
                           })
-                          .catch((e) => {
-                            console.log(e);
-                          });
+                          .catch();
                       }
                     })
                     .catch();
@@ -916,9 +918,7 @@ export class CurriculoPage implements OnInit {
                     this.exibeToast('Dados inseridos com sucesso!', 'confirma');
                   }
                 })
-                .catch((e) => {
-                  console.log(e);
-                });
+                .catch();
             }
           })
           .catch();
@@ -931,8 +931,8 @@ export class CurriculoPage implements OnInit {
               return;
             } else {
               const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux));
+              this.contatos.validado = princial;
               colecao.push(this.contatos);
-
               this.servicoEmpresa
                 .putEmpresa(colecao, 'contatos')
                 .then((respFinal) => {
@@ -1444,6 +1444,36 @@ export class CurriculoPage implements OnInit {
         })
         .catch();
     } else if (localStorage.getItem('profile') === 'empresa') {
+      this.servicoEmpresa
+        .searchSubDoc('contatos')
+        .then((resp) => {
+          this.itemAux = resp;
+          if (this.itemAux === undefined) {
+            return;
+          } else {
+            const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux));
+            const conclusao = colecao.filter(
+              (contatos) => contatos.validado === true
+            );
+            if (
+              this.contatos.tipo === 'Celular' ||
+              this.contatos.tipo === 'Telefone'
+            ) {
+              if (colecao !== undefined && colecao.length > 0) {
+                if (conclusao.length === 0) {
+                  this.mensagemPrincipal();
+                } else {
+                  this.addContatos(false);
+                }
+              } else {
+                this.mensagemPrincipal();
+              }
+            } else {
+              this.addContatos(false);
+            }
+          }
+        })
+        .catch();
     }
   }
 
@@ -1479,5 +1509,25 @@ export class CurriculoPage implements OnInit {
     if (this.checado) {
       this.experiencia.dtFinal = '';
     }
+  }
+
+  home() {
+    this.nav.navigateRoot('home');
+  }
+
+  config() {
+    this.nav.navigateRoot('config');
+  }
+  notifi() {
+    this.nav.navigateRoot('notificacao');
+  }
+
+  vagas() {
+    this.nav.navigateRoot('inscricao-vaga');
+  }
+
+  logout() {
+    localStorage.clear();
+    this.nav.navigateRoot('login/login');
   }
 }

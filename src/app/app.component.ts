@@ -17,7 +17,6 @@ export class AppComponent {
 
   public appPages2 = [
     { title: 'Perfil', url: '/home', icon: 'person' },
-    { title: 'Candidatos', url: '/vagas', icon: 'people-circle' },
     { title: 'Nova vaga', url: '/lancamento-vaga', icon: 'add-circle' },
     { title: 'Dados', url: '/curriculo', icon: 'server' },
   ];

@@ -1,3 +1,4 @@
+import { VagasService } from './../servicos/vagas.service';
 import { EmpresaService } from './../servicos/empresa.service';
 import { EmpregadoService } from './../servicos/empregado.service';
 import { validarCNPJ } from './../../environments/functions';
@@ -16,60 +17,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
   perfil: any = {};
+  itemAux: any = {};
+  itemAux2: any = {};
+  itemAux3: any = [];
   empresa = false;
   empregado = false;
   none = false;
-  empregosDisponivel = [
-    {
-      titulo: 'Programador web',
-      tipo: 'CLT',
-      contrato: 'Prazo indeterminado',
-      online: true,
-      dataPub: '01/01/2022',
-    },
-    {
-      titulo: 'Docente em Administração',
-      tipo: 'CLT',
-      contrato: 'Prazo indeterminado',
-      online: true,
-      dataPub: '01/01/2022',
-    },
-    {
-      titulo: 'Auxiliar de limpeza',
-      tipo: 'CLT',
-      contrato: 'Prazo indeterminado',
-      online: false,
-      dataPub: '01/01/2022',
-    },
-    {
-      titulo: 'Auxiliar de RH',
-      tipo: 'PJ',
-      contrato: 'Temporário',
-      online: false,
-      dataPub: '01/01/2022',
-    },
-  ];
-
-  vagaDisponivel = [
-    {
-      titulo: 'Programador web',
-      status: 'Currículo cadastrado',
-      salario: '4000',
-      dataPub: '14/06/2022',
-    },
-    {
-      titulo: 'Programador C#',
-      status: 'Currículo cadastrado',
-      salario: '2000',
-      dataPub: '15/01/2022',
-    },
-    {
-      titulo: 'Programador FULLSTACK',
-      status: 'Currículo cadastrado',
-      salario: '6000',
-      dataPub: '12/03/2022',
-    },
-  ];
 
   constructor(
     public nav: NavController,
@@ -77,16 +30,23 @@ export class HomePage implements OnInit {
     public mensagem: AlertController,
     public toast: ToastController,
     public servicoEmpregado: EmpregadoService,
-    public servicoEmpresa: EmpresaService
+    public servicoEmpresa: EmpresaService,
+    public servicoVagas: VagasService
   ) {
     this.menuLeft.enable(true);
+  }
+
+  segmentChanged(ev: any) {
+    console.log('Segment changed', ev);
   }
 
   async fecharVaga(emprego) {
     const finalizar = await this.mensagem.create({
       header: 'ATENÇÃO!',
       message:
-        'Para finalizar as vagas de ' + emprego.titulo + ' insira seu CNPJ',
+        'Para finalizar as vagas de ' +
+        emprego.tituloVaga +
+        ' insira seu CNPJ. Esta ação é irreversível',
       buttons: [
         {
           text: 'Cancelar',
@@ -97,12 +57,41 @@ export class HomePage implements OnInit {
           text: 'Finalizar',
           handler: (cnpj) => {
             if (validarCNPJ(cnpj[0])) {
-              emprego.online = false;
-              this.empregosDisponivel[
-                this.empregosDisponivel.indexOf(emprego)
-              ] = emprego;
+              this.servicoEmpresa
+                .perfil()
+                .then((response) => {
+                  this.perfil = response;
+                  if (this.perfil !== undefined) {
+                    if (cnpj[0] === this.perfil.cnpj) {
+                      this.servicoVagas
+                        // eslint-disable-next-line no-underscore-dangle
+                        .patchVaga(false, 'closed', emprego._id)
+                        .then((finalResp) => {
+                          this.itemAux2 = finalResp;
+                          if (this.itemAux2 === undefined) {
+                            this.exibeToast(
+                              'Erro para inserir a vaga!',
+                              'danger'
+                            );
+                          } else {
+                            this.exibeToast(
+                              'Vaga finalizada com sucesso',
+                              'primary'
+                            );
+                            this.perfilEmpresa();
+                          }
+                        })
+                        .catch();
+                    } else {
+                      this.exibeToast('CNPJ inválido!', 'warning');
+                    }
+                  } else {
+                    this.exibeToast('Erro com servidor!', 'danger');
+                  }
+                })
+                .catch();
             } else {
-              this.exibeToast('CNPJ inválido.');
+              this.exibeToast('CNPJ inválido!', 'warning');
             }
           },
         },
@@ -120,19 +109,21 @@ export class HomePage implements OnInit {
     await finalizar.present();
   }
 
-  async exibeToast(msg) {
+  async exibeToast(msg, cor: string) {
     const toast = await this.toast.create({
       message: msg,
       duration: 1000,
       position: 'top',
       animated: true,
-      color: 'warning',
+      color: cor,
     });
 
     toast.present();
   }
 
   ngOnInit() {
+    localStorage.removeItem('idVaga');
+
     if (
       localStorage.getItem('reload') === null ||
       localStorage.getItem('reload') === undefined
@@ -142,13 +133,14 @@ export class HomePage implements OnInit {
         localStorage.getItem('profile') !== undefined
       ) {
         if (!this.none) {
-          localStorage.setItem('reload', 'true');
-          window.location.reload();
+          if (localStorage.getItem('reload') !== 'true') {
+            window.location.reload();
+            localStorage.setItem('reload', 'true');
+          }
         }
       }
     } else {
       this.none = true;
-      localStorage.removeItem('reload');
       if (localStorage.getItem('profile') === 'empresa') {
         this.perfilEmpresa();
       } else if (localStorage.getItem('profile') === 'empregado') {
@@ -165,10 +157,17 @@ export class HomePage implements OnInit {
       .then((response) => {
         this.perfil = response;
         if (this.perfil === undefined) {
-          this.exibeToast('Perfil com erro!');
+          this.exibeToast('Perfil com erro!', 'danger');
         }
       })
       .catch();
+
+    this.servicoEmpregado.searchSubDoc('candidaturas')
+    .then((e1) =>{
+      this.itemAux3 = e1;
+      console.log(this.itemAux3);
+    })
+    .catch();
   }
 
   perfilEmpresa() {
@@ -178,9 +177,79 @@ export class HomePage implements OnInit {
       .then((response) => {
         this.perfil = response;
         if (this.perfil === undefined) {
-          this.exibeToast('Perfil com erro!');
+          this.exibeToast('Perfil com erro!', 'danger');
         }
       })
       .catch();
+
+    this.servicoVagas
+      .searchVagas()
+      .then((resp) => {
+        this.itemAux = resp;
+        if (this.itemAux !== undefined) {
+        }
+      })
+      .catch();
+  }
+
+  congelar(id: string) {
+    this.servicoVagas
+      .patchVaga(true, 'temp', id)
+      .then((resp) => {
+        this.itemAux2 = resp;
+        if (this.itemAux2 !== undefined) {
+          this.exibeToast('Vaga congelada', 'tertiary');
+          this.perfilEmpresa();
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  descongelar(id: string) {
+    this.servicoVagas
+      .patchVaga(false, 'temp', id)
+      .then((resp) => {
+        this.itemAux2 = resp;
+        if (this.itemAux2 !== undefined) {
+          this.exibeToast('Vaga descongelada', 'secondary');
+          this.perfilEmpresa();
+        }
+      })
+
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  abrirVaga(id: string) {
+    localStorage.setItem('idVaga', id);
+    this.nav.navigateRoot('timeline-vaga');
+  }
+
+  candidatos(id: string) {
+    localStorage.setItem('idVaga', id);
+    this.nav.navigateRoot('candidaturas');
+  }
+
+  curriculo() {
+    this.nav.navigateRoot('curriculo');
+  }
+
+  config() {
+    this.nav.navigateRoot('config');
+  }
+
+  novaVaga() {
+    this.nav.navigateRoot('lancamento-vaga');
+  }
+
+  vagas() {
+    this.nav.navigateRoot('inscricao-vaga');
+  }
+
+  notifi() {
+    this.nav.navigateRoot('notificacao');
   }
 }
