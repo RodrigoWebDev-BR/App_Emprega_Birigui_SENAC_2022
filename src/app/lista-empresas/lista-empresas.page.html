@@ -1,43 +1,49 @@
 <ion-header mode="md">
   <ion-toolbar color="primary">
-    <ion-buttons (click)="home()" slot="start" style="padding-left: 15px;">
+    <ion-buttons (click)="home()" slot="start" style="padding-left: 15px">
       <ion-icon name="chevron-back" class="light icone"></ion-icon>
-    </ion-buttons> 
+    </ion-buttons>
     <!-- <ion-searchbar placeholder="Nome empresa"></ion-searchbar> -->
-    <ion-title class="centertext bold"
-      >Lista de empresas</ion-title
-    >
+    <ion-title class="centertext bold">Lista de empresas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-row>
     <ion-col size="6">
-      <ion-item>
-        <ion-checkbox color="secondary" checked="true"></ion-checkbox>
+      <ion-item (click)="pendenteChk()">
+        <ion-checkbox color="secondary" checked="{{pendente}}"></ion-checkbox>
         <ion-label class="bold labelChk">Pendentes</ion-label>
       </ion-item>
     </ion-col>
     <ion-col size="6">
-      <ion-item>
-        <ion-checkbox color="secondary"></ion-checkbox>
+      <ion-item (click)="confirmaChk()">
+        <ion-checkbox color="secondary" checked="{{confirmada}}"></ion-checkbox>
         <ion-label class="bold labelChk">Confirmadas</ion-label>
       </ion-item>
     </ion-col>
   </ion-row>
 
   <br />
-  <div *ngFor="let empresa of itemAux.items">
+  <div *ngFor="let empresa of itemAux">
     <ion-row>
       <ion-col>
         <ion-card>
           <ion-card-header>
             <ion-card-title>{{empresa.nomeEmpresa}}</ion-card-title>
-            <ion-card-subtitle>{{empresa.contatos}}</ion-card-subtitle>
-            <ion-card-subtitle color="primary" *ngIf="empresa.aceita && !empresa.recusada"
+            <div *ngFor="let contatos of empresa.contatos">
+              <ion-card-subtitle *ngIf="contatos.validado"
+                >{{contatos.tipo}} - {{contatos.contato}}</ion-card-subtitle
+              >
+            </div>
+            <ion-card-subtitle
+              color="primary"
+              *ngIf="empresa.aceita && !empresa.recusada"
               >Empresa autorizada <img src="../../assets/check.png"
             /></ion-card-subtitle>
-            <ion-card-subtitle color="danger" *ngIf="!empresa.aceita && empresa.recusada"
+            <ion-card-subtitle
+              color="danger"
+              *ngIf="!empresa.aceita && empresa.recusada"
               >Empresa recusada <img src="../../assets/delete.png"
             /></ion-card-subtitle>
             <ion-card-subtitle
@@ -63,7 +69,7 @@
 
           <ion-card-content>
             <ion-accordion-group>
-              <ion-accordion value="empresa.idAccordion">
+              <ion-accordion value="empresa._id">
                 <ion-item slot="header" color="light">
                   <ion-label>Dados de {{empresa.nomeEmpresa}}</ion-label>
                 </ion-item>
@@ -152,7 +158,8 @@
                         <ion-item>
                           <ion-row>
                             <ion-label class="ion-text-wrap">
-                              <span class="bold">Número:</span> {{empresa.numero}}
+                              <span class="bold">Número:</span>
+                              {{empresa.numero}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
@@ -178,22 +185,12 @@
                         <ion-item>
                           <ion-row>
                             <ion-label class="ion-text-wrap">
-                              <span class="bold">Contato 2:</span>
-                              {{empresa.contato2}}
-                            </ion-label>
-                          </ion-row>
-                        </ion-item>
-
-                        <ion-item>
-                          <ion-row>
-                            <ion-label class="ion-text-wrap">
                               <span class="bold">Ramo empresarial:</span>
                               {{empresa.ramo}}
                             </ion-label>
                           </ion-row>
                         </ion-item>
 
-                        <br>
                         <ion-item>
                           <ion-row>
                             <ion-label class="ion-text-wrap">
@@ -203,6 +200,26 @@
                           </ion-row>
                         </ion-item>
                         <br />
+                        <div *ngFor="let contatos of empresa.contatos">
+                          <ion-item *ngIf="contatos.tipo === 'Celular' || contatos.tipo === 'Telefone'">
+                            <ion-row>
+                              <ion-label class="ion-text-wrap">
+                                <span class="bold">Contato:</span>
+                                {{contatos.tipo}} - {{contatos.contato}}
+                              </ion-label>
+                            </ion-row>
+                          </ion-item>
+                        </div>
+                        <div *ngFor="let contatos of empresa.contatos">
+                          <ion-item *ngIf="contatos.tipo === 'LinkedIn' || contatos.tipo === 'Instagram' || contatos.tipo === 'Facebook'">
+                            <ion-row>
+                              <ion-label class="ion-text-wrap">
+                                <span class="bold">Redes Sociais:</span>
+                                {{contatos.tipo}} - {{contatos.contato}}
+                              </ion-label>
+                            </ion-row>
+                          </ion-item>
+                        </div>
                       </ion-list>
                     </ion-col>
                   </ion-row>

@@ -32,27 +32,23 @@ export class ConclusaoPage implements OnInit {
   }
 
   async ngOnInit() {
+    switch (localStorage.getItem('profile')) {
+      case 'empresa':
+        this.cadastroEmpresa();
+        break;
 
-    if(localStorage.getItem('nome') === null){
-      this.cadastroEmpresa();
-    }else{
-      this.cadastroEmpregado();
+      case 'empregado':
+        this.cadastroEmpregado();
+        break;
+
+      case 'user_master':
+        this.cadastroMaster();
+        break;
     }
 
     setTimeout(() => {
-      if (this.nome !== 'erro') {
-        if (
-          localStorage.getItem('nome') === null
-          ) {
-            //localStorage.clear();
-            this.nav.navigateRoot('login/empresa_' + this.nome);
-          } else {
-            localStorage.clear();
-            this.nav.navigateRoot('login/empregado_' + this.nome);
-          }
-        } else {
-          this.nav.navigateRoot('login/erro');
-        }
+      localStorage.setItem('nomeCadastro', this.nome);
+      this.nav.navigateRoot('login');
     }, 4000);
   }
 
@@ -68,8 +64,32 @@ export class ConclusaoPage implements OnInit {
     toast.present();
   }
 
+  cadastroMaster() {
+    const master = {
+      nome: localStorage.getItem('nome'),
+      email: localStorage.getItem('email'),
+      password: localStorage.getItem('password'),
+      profiles: ['user_master'],
+    };
 
-  cadastroEmpregado(){
+    this.cadastro
+      .cadastrar(master, 'masters')
+      .then((response) => {
+        this.resp = response;
+        if (this.resp !== undefined) {
+          this.nome = this.resp.nome;
+        } else {
+          this.exibeToast('Erro ao cadastrar!');
+          this.nome = 'erro';
+        }
+      })
+      .catch((e) => {
+        this.exibeToast('Erro com o servidor!');
+        this.nome = 'erro';
+      });
+  }
+
+  cadastroEmpregado() {
     const empregado = {
       nome: localStorage.getItem('nome'),
       rg: localStorage.getItem('rg'),
@@ -93,26 +113,27 @@ export class ConclusaoPage implements OnInit {
       cursos: this.servicosCursos.listar(),
       idiomas: this.servicosIdiomas.listar(),
       descricaoUser: localStorage.getItem('descricao-usuario'),
-      candidaturas: undefined
+      candidaturas: undefined,
     };
 
-    this.cadastro.cadastrar(empregado, 'empregado')
-    .then((response)=>{
-      this.resp = response;
-      if(this.resp !== undefined){
-        this.nome = this.resp.nome;
-      }else{
-        this.exibeToast('Erro ao cadastrar!');
+    this.cadastro
+      .cadastrar(empregado, 'empregado')
+      .then((response) => {
+        this.resp = response;
+        if (this.resp !== undefined) {
+          this.nome = this.resp.nome;
+        } else {
+          this.exibeToast('Erro ao cadastrar!');
+          this.nome = 'erro';
+        }
+      })
+      .catch((e) => {
+        this.exibeToast('Erro com o servidor!');
         this.nome = 'erro';
-      }
-    })
-    .catch((e)=>{
-      this.exibeToast('Erro com o servidor!');
-      this.nome = 'erro';
-    });
+      });
   }
 
-  cadastroEmpresa(){
+  cadastroEmpresa() {
     const empresa = {
       nomeEmpresa: localStorage.getItem('nomeEmpresa'),
       fantasia: localStorage.getItem('fantasia'),
@@ -135,22 +156,23 @@ export class ConclusaoPage implements OnInit {
       ramo: localStorage.getItem('ramo'),
       descricaoEmpresa: localStorage.getItem('descricaoEmpresa'),
       aceita: false,
-      recusada: false
+      recusada: false,
     };
 
-    this.cadastro.cadastrar(empresa, 'empresa')
-    .then((response)=>{
-      this.resp = response;
-      if(this.resp !== undefined){
-        this.nome = this.resp.nomeEmpresa;
-      }else{
-        this.exibeToast('Erro ao cadastrar!');
+    this.cadastro
+      .cadastrar(empresa, 'empresa')
+      .then((response) => {
+        this.resp = response;
+        if (this.resp !== undefined) {
+          this.nome = this.resp.nomeEmpresa;
+        } else {
+          this.exibeToast('Erro ao cadastrar!');
+          this.nome = 'erro';
+        }
+      })
+      .catch((e) => {
+        this.exibeToast('Erro com o servidor!');
         this.nome = 'erro';
-      }
-    })
-    .catch((e)=>{
-      this.exibeToast('Erro com o servidor!');
-      this.nome = 'erro';
-    });
+      });
   }
 }

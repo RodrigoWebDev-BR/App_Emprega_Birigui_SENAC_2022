@@ -62,7 +62,7 @@ export class UsuarioPage implements OnInit {
           text: 'Sim',
           handler: () => {
             localStorage.clear();
-            this.nav.navigateRoot('login/login');
+            this.nav.navigateRoot('login');
           },
         },
       ],

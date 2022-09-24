@@ -27,9 +27,9 @@ export class LoginService {
         break;
 
       default:
-        const master = { cnpj: documento, password: senha };
+        const master = { email: documento, password: senha };
         return this.http
-          .post(url + 'master/authenticate', master, { headers })
+          .post(url + 'masters/authenticate', master, { headers })
           .toPromise();
         break;
     }

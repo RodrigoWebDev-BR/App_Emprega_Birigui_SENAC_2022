@@ -26,7 +26,7 @@
             </ion-menu-toggle>
           </div>
 
-          <div *ngIf="menus === 'master'">
+          <div *ngIf="menus === 'user_master'">
             <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages3; let i = index">
               <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"   routerLinkActive="selected" >
                 <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'">

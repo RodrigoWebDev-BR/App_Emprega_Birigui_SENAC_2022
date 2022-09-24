@@ -33,21 +33,26 @@ export class EmpresaService {
     return this.http.get(url, { headers }).toPromise();
   }
 
-  patchEmpresa(documento: any, sessao: string) {
+  patchEmpresa(documento: any, sessao: string, id: string) {
     let subDoc: any = {};
 
     switch (sessao) {
       case 'contatos':
-        subDoc = { congelada: documento };
+        subDoc = { contatos: documento };
         break;
 
       default:
         subDoc = documento;
         break;
     }
-
-    const url =
-      'http://localhost:3000/empresas/' + localStorage.getItem('idUser');
+    let url =
+    'http://localhost:3000/empresas/';
+    if(id !== null && id !== undefined){
+      url += id;
+    }else{
+      url += localStorage.getItem('idUser');
+    }
+    console.log(id, url);
     const headers = new HttpHeaders().set('Content-Type', `application/json`);
     return this.http.patch(url, subDoc, { headers }).toPromise();
   }

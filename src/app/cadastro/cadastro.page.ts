@@ -19,7 +19,7 @@ export class CadastroPage implements OnInit {
   }
 
   login(){
-    this.nav.navigateRoot('login/login');
+    this.nav.navigateRoot('login');
   }
 
   usuario(){

@@ -8,6 +8,18 @@ export const formatarCPF = (cpf) => {
   return aocpf;
 };
 
+export const formatarCNPJ = (cnpj) => {
+  let x = cnpj.replace('.', '').replace('-', '');
+  x = x
+    .replace(/\D/g, '')
+    .match(/(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})/);
+  x = !x[2]
+    ? x[1]
+    : x[1] + '.' + x[2] + '.' + x[3] + '/' + x[4] + (x[5] ? '-' + x[5] : '');
+
+    return x;
+};
+
 export const formatarRG = (rg) => {
   let aorg = rg;
   aorg = aorg.replace(/(\d{2})(\d)/, '$1.$2');

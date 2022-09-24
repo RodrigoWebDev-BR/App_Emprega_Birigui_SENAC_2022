@@ -15,11 +15,11 @@ export class RecuperacaoPage implements OnInit {
   }
 
   login() {
-    this.nav.navigateRoot('login/login');
+    this.nav.navigateRoot('login');
   }
 
   recuperacao() {
-    this.nav.navigateRoot('login/login');
+    this.nav.navigateRoot('login');
   }
 
   ngOnInit() {}

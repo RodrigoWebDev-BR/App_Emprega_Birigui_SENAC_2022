@@ -1,0 +1,70 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-title class="centertext bold"
+      >Usuário principal <ion-icon name="reader"></ion-icon
+    ></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fundobg" [fullscreen]="true">
+  <div>
+    <ion-row>
+      <ion-col>
+        <h5 style="text-align: start">
+          Campos com a flag <span style="color: red">*</span> necessário
+          preencher
+        </h5>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" lines="none">
+          <ion-label position="floating"
+            >E-mail <span style="color: red">*</span></ion-label
+          >
+          <ion-input type="email" [(ngModel)]="master.email"></ion-input>
+          <ion-icon name="mail-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" lines="none">
+          <ion-label position="floating"
+            >Senha <span style="color: red">*</span></ion-label
+          >
+          <ion-input type="password" [(ngModel)]="master.password"></ion-input>
+          <ion-icon name="key-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" lines="none">
+          <ion-label position="floating"
+            >Confirme sua senha <span style="color: red">*</span></ion-label
+          >
+          <ion-input
+            type="password"
+            [(ngModel)]="master.confirmacao"
+          ></ion-input>
+          <ion-icon name="key-outline" slot="end" class="iconPad"></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col class="espacamento">
+      <ion-button shape="block" (click)="finaliza()"
+        >Finalizar</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</ion-footer>

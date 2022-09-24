@@ -757,7 +757,7 @@ export class CurriculoPage implements OnInit {
     } else {
       // eslint-disable-next-line max-len
       this.servicoEmpresa
-        .patchEmpresa(this.dadosEmpresa, '')
+        .patchEmpresa(this.dadosEmpresa, '', null)
         .then((resp) => {
           this.itemAux = resp;
           if (this.itemAux === undefined) {
@@ -856,7 +856,7 @@ export class CurriculoPage implements OnInit {
           .catch();
       } else {
         this.servicoEmpresa
-          .patchEmpresa(this.enderecos, '')
+          .patchEmpresa(this.enderecos, '', null)
           .then((resp) => {
             this.itemAux = resp;
             if (this.itemAux === undefined) {
@@ -1528,6 +1528,6 @@ export class CurriculoPage implements OnInit {
 
   logout() {
     localStorage.clear();
-    this.nav.navigateRoot('login/login');
+    this.nav.navigateRoot('login');
   }
 }

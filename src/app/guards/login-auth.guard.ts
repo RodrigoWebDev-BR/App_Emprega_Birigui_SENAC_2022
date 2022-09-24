@@ -17,7 +17,7 @@ export class LoginAuthGuard implements CanActivate {
     if(login.includes('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9')){
       return true;
     }else{
-      this.nav.navigateRoot('login/login');
+      this.nav.navigateRoot('login');
       return;
     }
   }

@@ -15,6 +15,13 @@ export class EmpregadoService {
     return this.http.get(url, { headers }).toPromise();
   }
 
+  perfis() {
+    const url = 'http://localhost:3000/users';
+
+    const headers = new HttpHeaders().set('Content-Type', `application/json`);
+    return this.http.get(url, { headers }).toPromise();
+  }
+
   searchSubDoc(sessao: string) {
     const url =
       'http://localhost:3000/users/' +

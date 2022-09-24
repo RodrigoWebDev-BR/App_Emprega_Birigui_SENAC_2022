@@ -22,6 +22,7 @@ export class HomePage implements OnInit {
   itemAux3: any = [];
   empresa = false;
   empregado = false;
+  master = false;
   none = false;
 
   constructor(
@@ -141,10 +142,17 @@ export class HomePage implements OnInit {
       }
     } else {
       this.none = true;
-      if (localStorage.getItem('profile') === 'empresa') {
-        this.perfilEmpresa();
-      } else if (localStorage.getItem('profile') === 'empregado') {
-        this.perfilEmpregado();
+
+      switch (localStorage.getItem('profile')) {
+        case 'empresa':
+          this.perfilEmpresa();
+          break;
+        case 'empregado':
+          this.perfilEmpregado();
+          break;
+        case 'user_master':
+          this.master = true;
+          break;
       }
     }
   }
@@ -162,12 +170,13 @@ export class HomePage implements OnInit {
       })
       .catch();
 
-    this.servicoEmpregado.searchSubDoc('candidaturas')
-    .then((e1) =>{
-      this.itemAux3 = e1;
-      console.log(this.itemAux3);
-    })
-    .catch();
+    this.servicoEmpregado
+      .searchSubDoc('candidaturas')
+      .then((e1) => {
+        this.itemAux3 = e1;
+        console.log(this.itemAux3);
+      })
+      .catch();
   }
 
   perfilEmpresa() {

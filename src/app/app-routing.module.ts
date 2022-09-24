@@ -22,7 +22,7 @@ const routes: Routes = [
     loadChildren: () => import('./contato/contato.module').then( m => m.ContatoPageModule)
   },
   {
-    path: 'login/:id',
+    path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
@@ -127,7 +127,12 @@ const routes: Routes = [
   {
     path: 'config',
     loadChildren: () => import('./config/config.module').then( m => m.ConfigPageModule)
+  },
+  {
+    path: 'master',
+    loadChildren: () => import('./master/master.module').then( m => m.MasterPageModule)
   }
+
 
 
 

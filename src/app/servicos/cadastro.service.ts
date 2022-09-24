@@ -23,6 +23,12 @@ export class CadastroService {
           .post(url + 'empresas', documento, { headers })
           .toPromise();
         break;
+
+      case 'masters':
+        return this.http
+          .post(url + 'masters', documento, { headers })
+          .toPromise();
+        break;
     }
   }
 }

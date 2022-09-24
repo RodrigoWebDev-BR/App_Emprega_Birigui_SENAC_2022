@@ -1,27 +1,33 @@
 <ion-header mode="md">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-searchbar placeholder="Nome ou CPF"></ion-searchbar>
+    <ion-buttons (click)="home()" slot="start" style="padding-left: 15px;">
+      <ion-icon name="chevron-back" class="light icone"></ion-icon>
+    </ion-buttons> 
+    <!-- <ion-searchbar placeholder="Nome empresa"></ion-searchbar> -->
+    <ion-title class="centertext bold"
+      >Lista de usuários</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-  <div *ngFor="let usuario of usuarios">
+  <div *ngFor="let usuario of itemAux">
     <ion-row>
       <ion-col>
         <div>
           <ion-card class="cardUsuarios">
             <ion-card-header>
               <ion-card-title>{{usuario.nome}}</ion-card-title>
-              <ion-card-subtitle class="bold"
-                >{{usuario.contato}}</ion-card-subtitle
-              >
+              <div *ngFor="let contatos of usuario.contatos">
+                <ion-card-subtitle *ngIf="contatos.validado"
+                  >{{contatos.tipo}} - {{contatos.contato}}</ion-card-subtitle
+                >
+              </div>
             </ion-card-header>
             <ion-card-content>
               <ion-accordion-group>
-                <ion-accordion value="usuario.idAccordion">
+                <ion-accordion value="usuario._id">
                   <ion-item slot="header" color="light">
                     <ion-label>Ficha de {{usuario.nome}}</ion-label>
                   </ion-item>
@@ -49,7 +55,7 @@
                             <ion-row>
                               <ion-label
                                 ><span class="bold">Nascimento:</span>
-                                {{usuario.dtNascimento}}</ion-label
+                                {{usuario.dataNasc}}</ion-label
                               >
                             </ion-row>
                           </ion-item>
@@ -65,7 +71,7 @@
                             <ion-row>
                               <ion-label
                                 ><span class="bold">Estado Civil:</span>
-                                {{usuario.eCivil}}</ion-label
+                                {{usuario.estadoCivil}}</ion-label
                               >
                             </ion-row>
                           </ion-item>
@@ -81,7 +87,7 @@
                             <ion-row>
                               <ion-label
                                 ><span class="bold">Endereço:</span>
-                                {{usuario.end}}</ion-label
+                                {{usuario.endereco}}</ion-label
                               >
                             </ion-row>
                           </ion-item>
@@ -89,7 +95,7 @@
                             <ion-row>
                               <ion-label
                                 ><span class="bold">Número:</span>
-                                {{usuario.nmr}}</ion-label
+                                {{usuario.numero}}</ion-label
                               >
                             </ion-row>
                           </ion-item>
@@ -109,22 +115,26 @@
                               >
                             </ion-row>
                           </ion-item>
-                          <ion-item>
-                            <ion-row>
-                              <ion-label
-                                ><span class="bold">Contato: </span> 
-                                {{usuario.contato}}</ion-label
-                              >
-                            </ion-row>
-                          </ion-item>
-                          <ion-item>
-                            <ion-row>
-                              <ion-label
-                                ><span class="bold">Contato 2:</span> 
-                                {{usuario.contato2}}</ion-label
-                              >
-                            </ion-row>
-                          </ion-item>
+                          <div *ngFor="let contatos of usuario.contatos">
+                            <ion-item *ngIf="contatos.tipo === 'Celular' || contatos.tipo === 'Telefone'">
+                              <ion-row>
+                                <ion-label class="ion-text-wrap">
+                                  <span class="bold">Contato:</span>
+                                  {{contatos.tipo}} - {{contatos.contato}}
+                                </ion-label>
+                              </ion-row>
+                            </ion-item>
+                          </div>
+                          <div *ngFor="let contatos of usuario.contatos">
+                            <ion-item *ngIf="contatos.tipo === 'LinkedIn' || contatos.tipo === 'Instagram' || contatos.tipo === 'Facebook'">
+                              <ion-row>
+                                <ion-label class="ion-text-wrap">
+                                  <span class="bold">Redes Sociais:</span>
+                                  {{contatos.tipo}} - {{contatos.contato}}
+                                </ion-label>
+                              </ion-row>
+                            </ion-item>
+                          </div>
                         </ion-list>
                       </ion-col>
                     </ion-row>
