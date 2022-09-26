@@ -147,10 +147,13 @@
     </div>
   </div>
 
-  <div class="divisao">
+  <div class="divisao" *ngIf="master">
     <ion-row class="linha">
-      <ion-col class="middle">
+      <ion-col class="middle" (click)="listausers()">
         <ion-card style="width: 160px">
+          <ion-item lines="none">
+            <ion-badge slot="end" color="secondary">{{qtdUsers}}</ion-badge>
+          </ion-item>
           <ion-card-header class="centertext">
             <ion-card-title>Usuários</ion-card-title>
           </ion-card-header>
@@ -161,8 +164,11 @@
         </ion-card>
       </ion-col>
 
-      <ion-col (click)="empresa()" class="middle">
+      <ion-col (click)="listaempresa()" class="middle">
         <ion-card style="width: 160px">
+          <ion-item lines="none">
+            <ion-badge color="warning" slot="end" >{{qtdEmpresas}}</ion-badge>
+          </ion-item>
           <ion-card-header class="centertext">
             <ion-card-title>Empresas</ion-card-title>
           </ion-card-header>
@@ -286,6 +292,12 @@
   >
     <ion-fab-button color="danger" (click)="novaVaga()">
       <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" style="margin-bottom: 3rem; margin-right: 1rem;" class="foot" *ngIf="master">
+    <ion-fab-button color="danger" (click)="logout()">
+      <ion-icon name="power"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

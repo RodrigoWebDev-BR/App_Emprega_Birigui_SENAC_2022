@@ -106,7 +106,7 @@
         <ion-label position="floating"
           ><span style="color: red">*</span></ion-label
         >
-        <ion-input type="number" [(ngModel)]="vaga.horario"></ion-input>
+        <ion-input type="text" [(ngModel)]="vaga.horario"></ion-input>
         <ion-icon name="time-outline" slot="end" class="iconPad"></ion-icon>
       </ion-item>
     </ion-col>
@@ -134,7 +134,7 @@
           >Salário <span style="color: red">*</span></ion-label
         >
         <ion-input
-          type="number"
+          type="text"
           [(ngModel)]="vaga.salario"
           placeholder="Ex: 2000"
           disabled="{{vaga.combinado}}"

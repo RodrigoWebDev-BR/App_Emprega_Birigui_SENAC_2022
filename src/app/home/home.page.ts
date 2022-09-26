@@ -20,6 +20,8 @@ export class HomePage implements OnInit {
   itemAux: any = {};
   itemAux2: any = {};
   itemAux3: any = [];
+  qtdEmpresas: number;
+  qtdUsers: number;
   empresa = false;
   empregado = false;
   master = false;
@@ -34,9 +36,9 @@ export class HomePage implements OnInit {
     public servicoEmpresa: EmpresaService,
     public servicoVagas: VagasService
   ) {
-    if(localStorage.getItem('profile') === 'user_master'){
+    if (localStorage.getItem('profile') === 'user_master') {
       this.menuLeft.enable(false);
-    }else{
+    } else {
       this.menuLeft.enable(true);
     }
   }
@@ -156,6 +158,8 @@ export class HomePage implements OnInit {
           break;
         case 'user_master':
           this.master = true;
+          this.loadEmpresas();
+          this.loadUsers();
           break;
       }
     }
@@ -236,6 +240,32 @@ export class HomePage implements OnInit {
       });
   }
 
+  loadEmpresas() {
+    this.servicoEmpresa
+      .perfis()
+      .then((e1) => {
+        this.itemAux = e1;
+        if (this.itemAux !== undefined) {
+          this.itemAux = this.itemAux.items;
+          this.qtdEmpresas = this.itemAux.filter(emp => !emp.recusada && !emp.aceita).length;
+        }
+      })
+      .catch();
+  }
+
+  loadUsers() {
+    this.servicoEmpregado
+      .perfis()
+      .then((e1) => {
+        this.itemAux = e1;
+        if (this.itemAux !== undefined) {
+          this.itemAux = this.itemAux.items;
+          this.qtdUsers = this.itemAux.filter(emp => !emp.recusada && !emp.aceita).length;
+        }
+      })
+      .catch();
+  }
+
   abrirVaga(id: string) {
     localStorage.setItem('idVaga', id);
     this.nav.navigateRoot('timeline-vaga');
@@ -264,5 +294,18 @@ export class HomePage implements OnInit {
 
   notifi() {
     this.nav.navigateRoot('notificacao');
+  }
+
+  listaempresa() {
+    this.nav.navigateForward('lista-empresas');
+  }
+
+  listausers() {
+    this.nav.navigateForward('lista-usuarios');
+  }
+
+  logout(){
+    localStorage.clear();
+    this.nav.navigateRoot('login');
   }
 }
