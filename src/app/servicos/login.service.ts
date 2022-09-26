@@ -34,4 +34,26 @@ export class LoginService {
         break;
     }
   }
+
+  verificaDoc(documento: string, userType: string) {
+    const headers = new HttpHeaders().set('Content-Type', `application/json`);
+    const url = 'http://localhost:3000/';
+
+    switch (userType) {
+      case 'empregado':
+        const empregado = { cpf: documento};
+        return this.http
+          .post(url + 'users/authenticateCPF', empregado, { headers })
+          .toPromise();
+        break;
+
+      case 'empresa':
+        const empresa = { cnpj: documento };
+        return this.http
+          .post(url + 'empresas/authenticateCNPJ', empresa, { headers })
+          .toPromise();
+        break;
+    }
+  }
+
 }

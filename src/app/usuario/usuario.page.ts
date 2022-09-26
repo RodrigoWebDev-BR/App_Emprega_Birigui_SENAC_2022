@@ -1,3 +1,4 @@
+import { LoginService } from './../servicos/login.service';
 import {
   validaCPF,
   validaEmail,
@@ -5,7 +6,12 @@ import {
   formatarRG,
 } from './../../environments/functions';
 import { Component, OnInit } from '@angular/core';
-import { AlertController, MenuController, NavController } from '@ionic/angular';
+import {
+  AlertController,
+  MenuController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 import { Storage } from '@capacitor/storage';
 
 @Component({
@@ -40,11 +46,13 @@ export class UsuarioPage implements OnInit {
     { id: '4', estadoAtual: 'Divorciado(a)' },
     { id: '5', estadoAtual: 'Viúvo(a)' },
   ];
-
+  public valida: boolean;
   constructor(
     public mensagem: AlertController,
     public nav: NavController,
-    public menuLeft: MenuController
+    public menuLeft: MenuController,
+    public gerais: LoginService,
+    public toast: ToastController
   ) {
     this.menuLeft.enable(false);
   }
@@ -201,7 +209,17 @@ export class UsuarioPage implements OnInit {
       await alerta.present();
 
       return;
-    } else {
+    } else if(this.valida){
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'CPF já cadastrado.',
+        buttons: ['ok'],
+      });
+
+      await alerta.present();
+
+      return;
+    }else{
       this.salvarTemporariamente();
 
       if (localStorage.getItem('editar') === 'true') {
@@ -213,13 +231,11 @@ export class UsuarioPage implements OnInit {
   }
 
   salvarTemporariamente() {
-    const [ano, mes, dia] = this.usuario.dataNasc.split('-');
-
     localStorage.setItem('nome', this.usuario.nome);
     localStorage.setItem('rg', this.usuario.rg);
     localStorage.setItem('cpf', this.usuario.cpf);
     localStorage.setItem('email', this.usuario.email);
-    localStorage.setItem('dataNasc', dia + '/' + mes + '/' + ano);
+    localStorage.setItem('dataNasc', this.usuario.dataNasc);
     localStorage.setItem('genero', this.usuario.genero);
     localStorage.setItem('estadoCivil', this.usuario.estadoCivil);
     localStorage.setItem('password', this.usuario.senha);
@@ -230,25 +246,51 @@ export class UsuarioPage implements OnInit {
     this.usuario.rg = localStorage.getItem('rg');
     this.usuario.cpf = localStorage.getItem('cpf');
     this.usuario.email = localStorage.getItem('email');
-
-    if (localStorage.getItem('dataNasc') !== null) {
-      const [dia, mes, ano] = localStorage.getItem('dataNasc').split('/');
-      this.usuario.dataNasc = ano + '-' + mes + '-' + dia;
-    }
-
+    this.usuario.dataNasc = localStorage.getItem('dataNasc');
     this.usuario.genero = localStorage.getItem('genero');
     this.usuario.estadoCivil = localStorage.getItem('estadoCivil');
   }
 
-  formataCpf() {
-    if (this.usuario.cpf !== '' && this.usuario.cpf !== null) {
-      this.usuario.cpf = formatarCPF(this.usuario.cpf);
-    }
+  verificaCpf() {
+    this.gerais
+      .verificaDoc(this.usuario.cpf, 'empregado')
+      .then((r1) => {
+        const itemAux: any = r1;
+        if (itemAux !== undefined && itemAux !== null) {
+          if (itemAux.validado) {
+            this.exibeToast('Este CPF já está cadastrado', 'warning');
+          }
+
+          this.valida = itemAux.validado;
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
-  formataRG() {
-    if (this.usuario.rg !== '' && this.usuario.rg !== null) {
-      this.usuario.rg = formatarRG(this.usuario.rg);
-    }
+  async exibeToast(msg: string, cor: string) {
+
+    const toastConfirma = await this.toast.create({
+      message: msg,
+      duration: 2000,
+      position: 'top',
+      animated: true,
+      color: cor,
+    });
+
+    toastConfirma.present();
   }
+
+  // formataCpf() {
+  //   if (this.usuario.cpf !== '' && this.usuario.cpf !== null) {
+  //     this.usuario.cpf = formatarCPF(this.usuario.cpf);
+  //   }
+  // }
+
+  // formataRG() {
+  //   if (this.usuario.rg !== '' && this.usuario.rg !== null) {
+  //     this.usuario.rg = formatarRG(this.usuario.rg);
+  //   }
+  // }
 }

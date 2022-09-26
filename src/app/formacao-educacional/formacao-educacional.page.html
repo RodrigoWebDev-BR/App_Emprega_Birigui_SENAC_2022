@@ -65,9 +65,9 @@
           <ion-list style="width: 100%">
             <ion-item *ngFor="let formado of formEducacional" lines="none" class="border animate__animated animate__fadeInUp">
               <ion-label>
-                <h2 class="bold">{{formado.instituicao}}</h2>
+                <h2 class="bold ion-text-wrap">{{formado.instituicao}}</h2>
                 <br>
-                <p>{{formado.curso}} - {{formado.situacao}}</p>
+                <p class="ion-text-wrap">{{formado.curso}} - {{formado.situacao}}</p>
                 <h3>{{formado.nivel}}</h3>
               </ion-label>
               <ion-icon name="trash-outline" slot="end" color="danger" (click)="removeForms(formado)" ></ion-icon>

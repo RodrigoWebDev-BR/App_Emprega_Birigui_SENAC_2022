@@ -39,7 +39,19 @@ export class LoginPage implements OnInit {
       this.user.cpf = localStorage.getItem('CPF/CNPJ');
     }
 
-    if (localStorage.getItem('profile') === 'empregado') {
+    if (localStorage.getItem('nomeCadastro') === 'erro') {
+      const alerta = await this.mensagem.create({
+        header: 'Ops...',
+        message:
+          'Não foi possível completar seu cadastro por erros internos, tente o cadastro novamente, se o erro persistir, entre em contato com a prefeitura de Birigui.',
+        buttons: ['OK'],
+      });
+
+      localStorage.clear();
+      await alerta.present();
+
+      return;
+    }else if (localStorage.getItem('profileConcluido') === 'empregado') {
       const alerta = await this.mensagem.create({
         header: 'Seja Bem-Vindo!',
         message:
@@ -52,7 +64,7 @@ export class LoginPage implements OnInit {
       await alerta.present();
 
       return;
-    } else if (localStorage.getItem('profile') === 'empresa') {
+    } else if (localStorage.getItem('profileConcluido') === 'empresa') {
       const alerta = await this.mensagem.create({
         header: 'PRONTO!!!',
         message:
@@ -67,25 +79,13 @@ export class LoginPage implements OnInit {
       await alerta.present();
 
       return;
-    } else if (localStorage.getItem('profile') === 'user_master') {
+    } else if (localStorage.getItem('profileConcluido') === 'user_master') {
       const alerta = await this.mensagem.create({
         header: 'PRONTO!!!',
         message:
           'Olá ' +
           localStorage.getItem('nomeCadastro') +
           ' seu sistema agora está totalmente disponível para uso. Espalhe a palavra para todas empresas e cidadãos',
-        buttons: ['OK'],
-      });
-
-      localStorage.clear();
-      await alerta.present();
-
-      return;
-    } else if (localStorage.getItem('profile') === 'erro') {
-      const alerta = await this.mensagem.create({
-        header: 'Ops...',
-        message:
-          'Não foi possível completar seu cadastro por erros internos, tente o cadastro novamente, se o erro persistir, entre em contato com a prefeitura de Birigui.',
         buttons: ['OK'],
       });
 

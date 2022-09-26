@@ -76,11 +76,11 @@ export class EnderecoPage {
 
   searchCEP(evento) {
     const cepDig = evento.detail.value;
-    if (cepDig.length > 7) {
+    if (cepDig.length > 8) {
       if (cepDig.includes('-')) {
         cepDig.replace('-', '');
       }
-
+      console.log(cepDig);
       this.cep
         .localizaCEP(cepDig)
         .then((response) => {

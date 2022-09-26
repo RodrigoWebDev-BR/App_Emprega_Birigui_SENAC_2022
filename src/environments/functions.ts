@@ -1,4 +1,4 @@
-import { ToastController } from '@ionic/angular';
+/* eslint-disable arrow-body-style */
 /* eslint-disable one-var */
 export const formatarCPF = (cpf) => {
   let aocpf = cpf;
@@ -17,7 +17,7 @@ export const formatarCNPJ = (cnpj) => {
     ? x[1]
     : x[1] + '.' + x[2] + '.' + x[3] + '/' + x[4] + (x[5] ? '-' + x[5] : '');
 
-    return x;
+  return x;
 };
 
 export const formatarRG = (rg) => {
@@ -26,6 +26,13 @@ export const formatarRG = (rg) => {
   aorg = aorg.replace(/(\d{3})(\d)/, '$1.$2');
   aorg = aorg.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
   return aorg;
+};
+
+export const formataCelular = (cel) => {
+   let aocel = cel;
+  //  aocel = aocel.replace(/^(?:\+)[0-9]{2}\s?(?:\()[0-9]{2}(?:\))\s?[0-9]{4,5}(?:-)[0-9]{4}$/);
+   aocel = aocel.replace(/^\([1-9]{2}\) [9]{0,1}[6-9]{1}[0-9]{3}\-[0-9]{4}$/);
+   return aocel;
 };
 
 export const validaCPF = (cpf): boolean => {

@@ -13,7 +13,7 @@
     <ion-col>
       <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">CEP <span style="color:red">*</span></ion-label>
-        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.cep" placeholder="00000-000" 
+        <ion-input type="text" class="black" expand="block" [(ngModel)]="endereco.cep" placeholder="00000-000" mask="*****-***" 
         (ionChange)="searchCEP($event)"></ion-input>
       </ion-item>
     </ion-col>

@@ -1,3 +1,4 @@
+import { formataCelular } from './../../environments/functions';
 import { ContatosService } from './../servicos/contatos.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -10,7 +11,7 @@ import { AlertController, MenuController, NavController } from '@ionic/angular';
 })
 export class ContatoPage implements OnInit {
   public contatos: any[] = [];
-
+  exibir = { cel: false, tel: false, neutro: false };
   contato = { tipo: '', contato: '', validado: false };
 
   tipoContato = [
@@ -174,6 +175,29 @@ export class ContatoPage implements OnInit {
   carregarDados() {
     if (this.contatoServ.listar() !== undefined) {
       this.contatos = this.contatoServ.listar();
+    }
+  }
+
+  inputMask() {
+    switch (this.contato.tipo) {
+      case 'Celular':
+        // this.contato.contato = formataCelular(this.contato.contato);
+        this.exibir.cel = true;
+        this.exibir.tel = false;
+        this.exibir.neutro = false;
+        break;
+
+      case 'Telefone':
+        this.exibir.tel = true;
+        this.exibir.cel = false;
+        this.exibir.neutro = false;
+        break;
+
+      default:
+        this.exibir.neutro = true;
+        this.exibir.tel = false;
+        this.exibir.cel = false;
+        break;
     }
   }
 }

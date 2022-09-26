@@ -43,7 +43,7 @@
             type="text"
             [(ngModel)]="usuario.rg"
             placeholder="********-*"
-            (ionBlur)="formataRG()"
+            mask="**.***.***-*"
           >
           </ion-input>
           <ion-icon
@@ -63,7 +63,8 @@
             type="text"
             [(ngModel)]="usuario.cpf"
             placeholder="***.***.***-**"
-            (ionBlur)="formataCpf()"
+            mask="***.***.***-**"
+            (ionBlur)="verificaCpf()"
           >
           </ion-input>
           <ion-icon
@@ -90,8 +91,8 @@
     <ion-row>
       <ion-col>
         <ion-item class="roundedInput" lines="none">
-          <ion-label position="floating">Data de nascimento</ion-label>
-          <ion-input type="date" [(ngModel)]="usuario.dataNasc" placeholder=" "></ion-input>
+          <ion-label position="floating">Data de nascimento <span style="color: red">*</span></ion-label>
+          <ion-input type="text" [(ngModel)]="usuario.dataNasc" placeholder=" " mask="**/**/****"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>

@@ -38,7 +38,7 @@
       <ion-col>
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">CNPJ <span style="color: red">*</span></ion-label>
-          <ion-input type="text" [(ngModel)]="empresa.cnpj" placeholder="**.***.**/0001-**">
+          <ion-input type="text" [(ngModel)]="empresa.cnpj" (ionBlur)="verificaCnpj()" placeholder="**.***.**/****-**" mask="**.***.**/****-**">
           </ion-input>
           <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
         </ion-item>
@@ -60,7 +60,7 @@
       <ion-col>
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Data de abertura</ion-label>
-          <ion-input type="date" [(ngModel)]="empresa.dataAb" placeholder=" ">
+          <ion-input type="text" [(ngModel)]="empresa.dataAb" placeholder=" " mask="**/**/****">
           </ion-input>
         </ion-item>
       </ion-col>

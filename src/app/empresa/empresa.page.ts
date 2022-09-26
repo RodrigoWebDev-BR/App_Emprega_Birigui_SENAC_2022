@@ -1,5 +1,11 @@
+import { LoginService } from './../servicos/login.service';
 import { validarCNPJ } from './../../environments/functions';
-import { MenuController, NavController, AlertController } from '@ionic/angular';
+import {
+  MenuController,
+  NavController,
+  AlertController,
+  ToastController,
+} from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { validaEmail } from 'src/environments/functions';
 
@@ -33,11 +39,13 @@ export class EmpresaPage implements OnInit {
     { id: '3', naturezas: 'Perfil Objetivo ou Patrimonial' },
     { id: '4', naturezas: 'Perfil Corporativo' },
   ];
-
+  public valida: boolean;
   constructor(
     public menuLeft: MenuController,
     public nav: NavController,
-    public mensagem: AlertController
+    public mensagem: AlertController,
+    public gerais: LoginService,
+    public toast: ToastController
   ) {
     this.menuLeft.enable(false);
   }
@@ -148,7 +156,7 @@ export class EmpresaPage implements OnInit {
       await alerta.present();
 
       return;
-    } else if(!validarCNPJ(this.empresa.cnpj)){
+    } else if (!validarCNPJ(this.empresa.cnpj)) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'CNPJ inválido.',
@@ -158,7 +166,16 @@ export class EmpresaPage implements OnInit {
       await alerta.present();
 
       return;
+    } else if (this.valida) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'CNPJ já cadastrado.',
+        buttons: ['ok'],
+      });
 
+      await alerta.present();
+
+      return;
     } else {
       this.salvarTemporariamente();
 
@@ -193,18 +210,15 @@ export class EmpresaPage implements OnInit {
   }
 
   salvarTemporariamente() {
-    const [ano, mes, dia] = this.empresa.dataAb.split('-');
-
     localStorage.setItem('nomeEmpresa', this.empresa.nome);
     localStorage.setItem('fantasia', this.empresa.fantasia);
     localStorage.setItem('cnpj', this.empresa.cnpj);
     localStorage.setItem('email', this.empresa.email);
-    localStorage.setItem('dataAb', dia + '/' + mes + '/' + ano);
+    localStorage.setItem('dataAb', this.empresa.dataAb);
     localStorage.setItem('cnae', this.empresa.cnae);
     localStorage.setItem('situacao', this.empresa.situacao);
     localStorage.setItem('natureza', this.empresa.natureza);
     localStorage.setItem('password', this.empresa.senha);
-
   }
 
   carregarDados() {
@@ -212,15 +226,39 @@ export class EmpresaPage implements OnInit {
     this.empresa.fantasia = localStorage.getItem('fantasia');
     this.empresa.cnpj = localStorage.getItem('cnpj');
     this.empresa.email = localStorage.getItem('email');
-
-    if (localStorage.getItem('dataAb') !== null) {
-      const [dia, mes, ano] = localStorage.getItem('dataAb').split('/');
-      this.empresa.dataAb = ano + '-' + mes + '-' + dia;
-    }
-
+    this.empresa.dataAb = localStorage.getItem('dataAb');
     this.empresa.cnae = localStorage.getItem('cnae');
     this.empresa.situacao = localStorage.getItem('situacao');
     this.empresa.natureza = localStorage.getItem('ocultarIdade');
   }
 
+  verificaCnpj() {
+    this.gerais
+      .verificaDoc(this.empresa.cnpj, 'empresa')
+      .then((r1) => {
+        const itemAux: any = r1;
+        if (itemAux !== undefined && itemAux !== null) {
+          if (itemAux.validado) {
+            this.exibeToast('Este CNPJ já está cadastrado', 'warning');
+          }
+
+          this.valida = itemAux.validado;
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  async exibeToast(msg: string, cor: string) {
+    const toastConfirma = await this.toast.create({
+      message: msg,
+      duration: 2000,
+      position: 'top',
+      animated: true,
+      color: cor,
+    });
+
+    toastConfirma.present();
+  }
 }

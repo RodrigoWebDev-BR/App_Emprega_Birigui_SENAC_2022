@@ -82,31 +82,37 @@ export class ExpProfissionalPage implements OnInit {
       ) {
         this.experiencia.dtFinal = 'até Atualmente';
       } else {
-        const [ano, mes, dia] = this.experiencia.dtFinal.split('-');
 
-        this.experiencia.dtFinal = 'até ' + dia + '/' + mes + '/' + ano;
+        this.experiencia.dtFinal = 'até ' + this.experiencia.dtFinal;
       }
 
       const experienciaCopy = JSON.parse(JSON.stringify(this.experiencia));
       this.experiencias.push(experienciaCopy);
 
-      this.exp.salvarExp(
-        this.experiencia.empresa,
-        this.experiencia.cargo,
-        this.experiencia.dtInicio,
-        this.experiencia.dtFinal,
-        this.checado,
-        this.experiencia.descricao
-      );
+      this.salvarAutomaticamente();
 
-      this.checado = false;
+      this.limpaCampos();
+    }
+  }
 
+  salvarAutomaticamente(){
+    this.exp.salvarExp(
+      this.experiencia.empresa,
+      this.experiencia.cargo,
+      this.experiencia.dtInicio,
+      this.experiencia.dtFinal,
+      this.checado,
+      this.experiencia.descricao
+    );
+  }
+
+  limpaCampos(){
+    this.checado = false;
       this.experiencia.empresa = '';
       this.experiencia.cargo = '';
       this.experiencia.descricao = '';
       this.experiencia.dtInicio = '';
       this.experiencia.dtFinal = '';
-    }
   }
 
   async delExperiencia(experienciasRemove) {

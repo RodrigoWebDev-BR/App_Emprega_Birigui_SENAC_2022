@@ -65,10 +65,15 @@
 
     <div *ngIf="master">
       <ion-row class="perfil">
-        <ion-col class="centertext" style="margin-top: 10px">
-          <img src="../../assets/icon/prestige.png" />
+        <ion-col class="centertext" style="margin-top: -1rem">
+          <img
+            src="../../assets/icon/prestige.png"
+            style="width: 7rem; height: 7rem"
+          />
         </ion-col>
         <ion-col class="centertext" style="padding-top: 60px">
+          <br>
+          <br>
           <h2
             class="marv margin-h2-user white"
             style="font-size: 20px; margin-top: 5px"
@@ -116,7 +121,7 @@
                   >R$ {{vaga.vagaId.salario}}.<small>00</small></span
                 >
               </p>
-              <p style="font-weight: bold" >
+              <p style="font-weight: bold">
                 Data inscrição: <span class="under">{{vaga.vagaId.dtPub}}</span>
               </p>
               <ion-item-divider></ion-item-divider>
@@ -140,6 +145,34 @@
         </ion-col>
       </ion-row>
     </div>
+  </div>
+
+  <div class="divisao">
+    <ion-row class="linha">
+      <ion-col class="middle">
+        <ion-card style="width: 160px">
+          <ion-card-header class="centertext">
+            <ion-card-title>Usuários</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content class="centertext" style="font-size: 100px">
+            <ion-icon name="accessibility" color="success"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col (click)="empresa()" class="middle">
+        <ion-card style="width: 160px">
+          <ion-card-header class="centertext">
+            <ion-card-title>Empresas</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content class="centertext" style="font-size: 100px">
+            <ion-icon name="business" color="success"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
   </div>
 
   <div *ngIf="empresa">

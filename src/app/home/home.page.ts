@@ -34,12 +34,16 @@ export class HomePage implements OnInit {
     public servicoEmpresa: EmpresaService,
     public servicoVagas: VagasService
   ) {
-    this.menuLeft.enable(true);
+    if(localStorage.getItem('profile') === 'user_master'){
+      this.menuLeft.enable(false);
+    }else{
+      this.menuLeft.enable(true);
+    }
   }
 
-  segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
-  }
+  // segmentChanged(ev: any) {
+  //   console.log('Segment changed', ev);
+  // }
 
   async fecharVaga(emprego) {
     const finalizar = await this.mensagem.create({

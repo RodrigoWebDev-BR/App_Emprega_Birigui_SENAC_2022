@@ -48,6 +48,7 @@ export class ConclusaoPage implements OnInit {
 
     setTimeout(() => {
       localStorage.setItem('nomeCadastro', this.nome);
+      localStorage.setItem('profileConcluido', localStorage.getItem('profile'));
       this.nav.navigateRoot('login');
     }, 4000);
   }

@@ -37,9 +37,10 @@
       <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">Data de início</ion-label>
         <ion-input
-          type="date"
+          type="text"
           [(ngModel)]="experiencia.dtInicio"
-          placeholder=""
+          placeholder=" "
+          mask="**/**/****"
         >
         </ion-input>
       </ion-item>
@@ -47,13 +48,7 @@
     <ion-col>
       <ion-item class="roundedInput" lines="none">
         <ion-label position="floating">Data de Término</ion-label>
-        <ion-input
-          type="date"
-          [(ngModel)]="experiencia.dtFinal"
-          placeholder=""
-          disabled="{{checado}}"
-        >
-        </ion-input>
+        <ion-input type="text" [(ngModel)]="experiencia.dtFinal" placeholder=" " mask="**/**/****" disabled="{{checado}}"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row>
@@ -104,10 +99,10 @@
             lines="none"
             class="border animate__animated animate__fadeInUp"
           >
-            <ion-label>
+            <ion-label class="ion-text-wrap">
               <h2>{{exp.cargo}}</h2>
               <p>{{exp.empresa}}</p>
-              <p>De {{exp.dtInicio | date:'dd/MM/yyyy'}} {{exp.dtFinal}}</p>
+              <p>De {{exp.dtInicio}} {{exp.dtFinal}}</p>
               <p>{{exp.descricao}}</p>
             </ion-label>
             <ion-icon
