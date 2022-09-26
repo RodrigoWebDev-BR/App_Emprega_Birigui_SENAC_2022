@@ -51,13 +51,14 @@ export class EnderecoPage {
 
       return;
       
-    }else if(localStorage.getItem('editar') === 'true') {
+    }
+    this.salvarTemporariamente();
+
+    if(localStorage.getItem('editar') === 'true') {
       localStorage.setItem('editar', '')
-      this.salvarTemporariamente();
       this.nav.navigateForward('revisao')
 
     }else{
-    this.salvarTemporariamente();
     this.nav.navigateForward('contato');
     }
   }

@@ -114,18 +114,21 @@ export class ContatoPage implements OnInit {
 
   async confirmar() {
     if (this.contatos.length > 0) {
+      
       if(localStorage.getItem('editar') === 'true') {
-        localStorage.setItem('editar', '')
         this.nav.navigateForward('revisao')
   
-      }else if (
-        localStorage.getItem('nome') === null ||
-        localStorage.getItem('nome') === undefined
-      ) {
-        this.nav.navigateForward(['detalhes-empresa']);
-      } else {
-        this.nav.navigateForward(['formacao-educacional']);
-      }
+      }else{
+
+        if (localStorage.getItem('nome') === null ||
+            localStorage.getItem('nome') === undefined
+        ) {
+          this.nav.navigateForward(['detalhes-empresa']);
+        } else {
+          this.nav.navigateForward(['formacao-educacional']);
+        }
+      } 
+
     } else {
       const alerta = await this.mensagem.create({
         header: 'Atenção',

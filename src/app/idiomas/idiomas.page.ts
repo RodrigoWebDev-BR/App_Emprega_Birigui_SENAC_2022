@@ -144,9 +144,7 @@ export class IdiomasPage {
 
   proximo() {
     if(localStorage.getItem('editar') === 'true') {
-      localStorage.setItem('editar', '')
       this.nav.navigateForward('revisao')
-      
     }else{
     this.nav.navigateRoot('detalhes-usuario');
     }

@@ -215,14 +215,15 @@ export class UsuarioPage implements OnInit {
 
       return;
 
-    } else if(localStorage.getItem('editar') === 'true') {
-      localStorage.setItem('editar', '')
-      this.salvarTemporariamente();
-      this.nav.navigateForward('revisao')
     }else{
       this.salvarTemporariamente();
-      this.nav.navigateForward('endereco');
-    }
+
+      if(localStorage.getItem('editar') === 'true') {
+        this.nav.navigateForward('revisao')
+      }else{
+        this.nav.navigateForward('endereco');
+      }
+    } 
 
   }
 

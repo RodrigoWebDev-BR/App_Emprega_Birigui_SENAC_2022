@@ -13,13 +13,7 @@ import { IdiomasService } from '../servicos/idiomas.service';
 })
 export class RevisaoPage implements OnInit {
 
-  
-
-  formacoes: any [] = this.servicosFormacao.listar();
-  experiencias: any [] = this.servicosExp.listar();
-  cursos: any [] = this.servicosCursos.listar();
-  idiomas: any [] = this.servicosIdiomas.listar();
-  contatos: any [] = this.servicosContatos.listar();
+  profile = localStorage.getItem('profile')
   
   endereco = {
     cep: localStorage.getItem('cep'),
@@ -41,6 +35,11 @@ export class RevisaoPage implements OnInit {
     estadoCivil: localStorage.getItem('estadoCivil'),
     password: localStorage.getItem('password'),
     descricaoUser: localStorage.getItem('descricao-usuario'),
+    formacoes: this.servicosFormacao.listar(),
+    experiencias: this.servicosExp.listar(),
+    cursos: this.servicosCursos.listar(),
+    idiomas: this.servicosIdiomas.listar(),
+    contatos:  this.servicosContatos.listar()
   }
 
   empresa = {
@@ -68,6 +67,7 @@ export class RevisaoPage implements OnInit {
    }
 
   ngOnInit() {
+    localStorage.removeItem('editar')
   }
     
   empregadoEdit(){

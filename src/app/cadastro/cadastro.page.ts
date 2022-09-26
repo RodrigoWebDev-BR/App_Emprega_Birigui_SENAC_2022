@@ -20,10 +20,12 @@ export class CadastroPage implements OnInit {
   }
 
   usuario(){
+    localStorage.setItem('profile', 'empregado')
     this.nav.navigateRoot('usuario')
   }
-
+  
   empresa(){
+    localStorage.setItem('profile', 'empresa')
     this.nav.navigateRoot('empresa')
   }
 }

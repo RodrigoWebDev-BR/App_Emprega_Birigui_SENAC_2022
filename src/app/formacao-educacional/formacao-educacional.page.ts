@@ -101,14 +101,14 @@ export class FormacaoEducacionalPage implements OnInit {
   }
 
   async confimar(){
-    if(this.formEducacional.length > 0 && localStorage.getItem('editar') === 'true') {
-      localStorage.setItem('editar', '')
-      this.nav.navigateForward('revisao')
-    }
-    else if(this.formEducacional.length > 0)
-    {
-      this.nav.navigateForward(['exp-profissional']);
-
+    if(this.formEducacional.length > 0) {
+      
+      if(localStorage.getItem('editar') === 'true'){
+        this.nav.navigateForward('revisao')
+      }else{
+        this.nav.navigateForward(['exp-profissional']);
+      }
+      
     }
     else
     {

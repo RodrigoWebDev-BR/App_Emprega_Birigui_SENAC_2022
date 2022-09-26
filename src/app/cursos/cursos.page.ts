@@ -68,53 +68,55 @@ export class CursosPage implements OnInit {
   }
 
   async proximaPagina() {
-    if(this.cursos.length === 0 && localStorage.getItem('editar') === 'true') {
-      localStorage.setItem('editar', '')
-      const nextPage = await this.mensagem.create({
-        header: 'Atenção',
-        message: 'Deseja retonar a página de revisão sem adicionar nenhum curso?',
-        buttons: [
-          {
-            text: 'Não',
-            role: 'cancel'
-          },
-          {
-            text: 'Sim',
-            handler: () => {
-              this.nav.navigateForward('revisao')
-            }
-          }
-        ]
-      });
-
-      await nextPage.present();
+    if(this.cursos.length === 0) {
       
-    }else if(localStorage.getItem('editar') === 'true') {
-      localStorage.setItem('editar', '')
-      this.nav.navigateForward('revisao')
-      
-    }
-    else if (this.cursos.length === 0) {
-      const nextPage = await this.mensagem.create({
-        header: 'Atenção',
-        message: 'Deseja ir para a próxima página sem adicionar nenhum curso?',
-        buttons: [
-          {
-            text: 'Não',
-            role: 'cancel'
-          },
-          {
-            text: 'Sim',
-            handler: () => {
-              this.nav.navigateForward('idiomas')
+      if(localStorage.getItem('editar') === 'true'){
+        const nextPage = await this.mensagem.create({
+          header: 'Atenção',
+          message: 'Deseja retonar a página de revisão sem adicionar nenhum curso?',
+          buttons: [
+            {
+              text: 'Não',
+              role: 'cancel'
+            },
+            {
+              text: 'Sim',
+              handler: () => {
+                this.nav.navigateForward('revisao')
+              }
             }
-          }
-        ]
-      });
-
-      await nextPage.present();
+          ]
+        });
+  
+        await nextPage.present();
+      }else{
+        const nextPage = await this.mensagem.create({
+          header: 'Atenção',
+          message: 'Deseja ir para a próxima página sem adicionar nenhum curso?',
+          buttons: [
+            {
+              text: 'Não',
+              role: 'cancel'
+            },
+            {
+              text: 'Sim',
+              handler: () => {
+                this.nav.navigateForward('idiomas')
+              }
+            }
+          ]
+        });
+  
+        await nextPage.present();
+      }
+      
+      
     } else {
-      this.nav.navigateForward('idiomas')
+      if(localStorage.getItem('editar') === 'true') {
+        this.nav.navigateForward('revisao')
+      }else{
+        this.nav.navigateForward('idiomas')
+      }
     }
   }
 
