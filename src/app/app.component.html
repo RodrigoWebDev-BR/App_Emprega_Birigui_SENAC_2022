@@ -4,7 +4,8 @@
       <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>{{nomeMenu}}</ion-list-header>
-          <ion-note>03 candidatura(s)</ion-note>
+          <ion-note *ngIf="menus === 'empregado'">{{contator}} candidatura(s)</ion-note>
+          <ion-note *ngIf="menus === 'empresa'">{{contator}} vagas(s)</ion-note>
 
           <div *ngIf="menus === 'empregado'"> 
             <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">

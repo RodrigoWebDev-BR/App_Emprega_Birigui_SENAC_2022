@@ -1,3 +1,6 @@
+import { VagasService } from './servicos/vagas.service';
+import { EmpresaService } from 'src/app/servicos/empresa.service';
+import { EmpregadoService } from './servicos/empregado.service';
 import { NavController } from '@ionic/angular';
 import { Component } from '@angular/core';
 @Component({
@@ -8,6 +11,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   nomeMenu: string;
   menus: string;
+  public contator: number;
   public appPages = [
     { title: 'Perfil', url: '/home', icon: 'person' },
     { title: 'Notificações', url: '/notificacao', icon: 'notifications' },
@@ -26,15 +30,42 @@ export class AppComponent {
     { title: 'Empresas', url: '/lista-empresas', icon: 'storefront' },
   ];
 
-  constructor(public nav: NavController) {}
+  constructor(
+    public nav: NavController,
+    public servicoEmpregado: EmpregadoService,
+    public servicoVagas: VagasService
+  ) {}
 
   // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
-  ngOnInit(){
-    if(localStorage.getItem('nomeMenu') !== null){
+  ngOnInit() {
+    if (localStorage.getItem('nomeMenu') !== null) {
       this.nomeMenu = localStorage.getItem('nomeMenu').split(' ')[0];
     }
 
     this.menus = localStorage.getItem('profile');
+
+    if (localStorage.getItem('profile') === 'empregado') {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      this.servicoEmpregado.searchSubDoc('candidaturas')
+      .then((e1) => {
+        const itemAux: any = e1;
+
+        if(itemAux !== undefined){
+          this.contator = itemAux.length;
+        }
+      })
+      .catch;
+    }else if(localStorage.getItem('profile') === 'empregado'){
+      this.servicoEmpregado.searchSubDoc('candidaturas')
+      .then((e1) => {
+        const itemAux: any = e1;
+
+        if(itemAux !== undefined){
+          this.contator = itemAux.length;
+        }
+      })
+      .catch;
+    }
   }
 
   logout() {
