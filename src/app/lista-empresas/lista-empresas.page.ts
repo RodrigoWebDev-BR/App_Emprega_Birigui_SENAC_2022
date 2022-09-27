@@ -163,7 +163,6 @@ export class ListaEmpresasPage implements OnInit {
       this.pendente= false;
       this.reloadEmpresas(true);
     }
-
   }
 
   async exibeToast(msg, cor: string) {

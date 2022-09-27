@@ -182,7 +182,6 @@ export class HomePage implements OnInit {
       .searchSubDoc('candidaturas')
       .then((e1) => {
         this.itemAux3 = e1;
-        console.log(this.itemAux3);
       })
       .catch();
   }

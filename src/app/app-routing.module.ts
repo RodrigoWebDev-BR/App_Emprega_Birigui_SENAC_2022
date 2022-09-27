@@ -6,7 +6,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'conclusao-vaga',
+    redirectTo: 'candidaturas',
     pathMatch: 'full'
   },
   {

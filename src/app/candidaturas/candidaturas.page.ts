@@ -1,4 +1,14 @@
-import { AlertController, NavController } from '@ionic/angular';
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+import { EmpresaService } from './../servicos/empresa.service';
+/* eslint-disable max-len */
+import { EmpregadoService } from './../servicos/empregado.service';
+import { VagasService } from './../servicos/vagas.service';
+import {
+  AlertController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,89 +18,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CandidaturasPage implements OnInit {
   isModalOpen = false;
-  public usuarios = [
-    {
-      nome: 'Diego',
-      contato: '1684565616',
-      contato2: '46464646',
-      email: 'diego-PKblinder@gmail.com',
-      cpf: '4564654564-65',
-      dtNascimento: '01/01/2005',
-      genero: 'masculino',
-      eCivil: 'solteiro',
-      cep: '1661616',
-      end: 'rua da exposição',
-      nmr: '120',
-      bairro: 'santana',
-      cidade: 'Araçatuba',
-      estado: 'SP',
-      descricao: 'Moro ao lado do asilo',
-      aceita: true,
-      recusada: false,
-    },
-    {
-      nome: 'João do chocolate',
-      contato: '89189948',
-      contato2: '16548431',
-      email: 'cacaushow@gmail.com',
-      cpf: '54982319849-85',
-      dtNascimento: '24/07/1992',
-      genero: 'Indefinido',
-      eCivil: 'Casado',
-      cep: '16125198',
-      end: 'rua perto do thauã',
-      nmr: '120',
-      bairro: 'Sumaré',
-      cidade: 'birigui',
-      estado: 'SP',
-      descricao: 'Moro la no aguas claras e sou da correria',
-      aceita: false,
-      recusada: true,
-    },
-    {
-      nome: 'Rodrigo',
-      contato: '14613186',
-      contato2: '18412351486',
-      email: 'birigui-klin@gmail.com',
-      cpf: '456465454-56',
-      dtNascimento: '18/09/2001',
-      genero: 'Masculino',
-      eCivil: 'Divorciado',
-      cep: '161561566',
-      end: 'rua de birigui',
-      nmr: '500',
-      bairro: 'jardim birigui',
-      cidade: 'birigui',
-      estado: 'SP',
-      descricao: 'Sou de birigui, menti que sou de araçatuba',
-      aceita: false,
-      recusada: false,
-    },
-    {
-      nome: 'Eminem',
-      contato: '14613186',
-      contato2: '18412351486',
-      email: 'slinShady@gmail.com',
-      cpf: '456465454-56',
-      dtNascimento: '18/09/2001',
-      genero: 'Masculino',
-      eCivil: 'Divorciado',
-      cep: '161561566',
-      end: 'rua de nova york',
-      nmr: '500',
-      bairro: 'jardim birigui',
-      cidade: 'nova york',
-      estado: 'NY',
-      descricao: 'Mommy spaghet',
-      aceita: true,
-      recusada: false,
-    },
-  ];
+  itemAux: any = [];
+  user: any = [];
+  idVaga: string;
+  pendente: boolean = false;
+  confirmada: boolean = false;
+  constructor(
+    public mensagem: AlertController,
+    public nav: NavController,
+    public servicoVagas: VagasService,
+    public servicoEmpregado: EmpregadoService,
+    public servicoEmpresa: EmpresaService,
+    public toast: ToastController
+  ) {}
 
-  constructor(public mensagem: AlertController, public nav: NavController) {}
-
-  abreModal(open: boolean) {
+  abreModal(open: boolean, id: string) {
     this.isModalOpen = open;
+    if (id !== '') {
+      this.servicoEmpregado
+        .perfilId(id)
+        .then((e1) => {
+          if (e1) {
+            this.user = e1;
+          } else {
+            this.isModalOpen = false;
+            this.exibeToast('Erro ao encontrar candidato', 'danger');
+          }
+        })
+        .catch((e) => {
+          this.isModalOpen = false;
+          this.exibeToast('Erro ao encontrar candidato', 'danger');
+        });
+    }
   }
 
   async convidar(usuario) {
@@ -101,16 +60,17 @@ export class CandidaturasPage implements OnInit {
         {
           text: 'Cancelar',
           role: 'cancel',
-          handler: () => {}
+          handler: () => {},
         },
         {
           text: 'Convidar',
           handler: () => {
-            usuario.aceita = true;
-            usuario.recusada = false;
-            this.usuarios[this.usuarios.indexOf(usuario)] = usuario;
+            const doc = {
+              aceita: true,
+              recusada: false,
+            };
           },
-        }
+        },
       ],
     });
 
@@ -133,9 +93,17 @@ export class CandidaturasPage implements OnInit {
         {
           text: 'Rejeitar',
           handler: () => {
-            usuario.aceita = false;
-            usuario.recusada = true;
-            this.usuarios[this.usuarios.indexOf(usuario)] = usuario;
+            // this.servicoVagas
+            //   .searchSubDoc()
+            //   .then((e1) => {
+            //     const aux1: any = e1;
+            //     const aux2: any = aux1.filter(a => a.userId._id !== usuario._id);
+            //     let aux3: any = {};
+            //     aux3 = aux1.filter(a => a.userId._id === usuario._id);
+            //     aux3[0].recusado = true;
+            //     console.log(aux1)
+            //   })
+            //   .catch();
           },
         },
       ],
@@ -144,9 +112,75 @@ export class CandidaturasPage implements OnInit {
     await alerta.present();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.idVaga = localStorage.getItem('idVaga');
+    this.loadCandidatos();
+  }
 
-  home(){
+  loadCandidatos() {
+    this.servicoVagas
+      .searchSubDoc()
+      .then((e1) => {
+        this.itemAux = e1;
+      })
+      .catch();
+  }
+
+  reloadCandidatos(v: boolean) {
+    this.servicoVagas.searchSubDoc().then((e1) => {
+      this.itemAux = e1;
+      if (v) {
+        this.itemAux = this.itemAux.filter(
+          (cand) => cand.aprovado && !cand.recusado
+        );
+      } else {
+        this.itemAux = this.itemAux.filter(
+          (cand) => !cand.aprovado && !cand.recusado
+        );
+      }
+    });
+  }
+
+  async exibeToast(msg, cor: string) {
+    const toast = await this.toast.create({
+      message: msg,
+      duration: 2000,
+      position: 'top',
+      animated: true,
+      color: cor,
+    });
+
+    toast.present();
+  }
+
+  home() {
     this.nav.back();
+  }
+
+  pendenteChk() {
+    if (this.pendente) {
+      this.pendente = false;
+      this.loadCandidatos();
+    } else {
+      this.pendente = true;
+      this.confirmada = false;
+      this.reloadCandidatos(false);
+    }
+  }
+
+  confirmaChk() {
+    if (this.confirmada) {
+      this.confirmada = false;
+      this.loadCandidatos();
+    } else {
+      this.confirmada = true;
+      this.pendente = false;
+      this.reloadCandidatos(true);
+    }
+  }
+
+  geraAleatorio(): number {
+    const aleatorio: number = Math.random() * (35 - 1) + 1;
+    return parseInt(aleatorio.toString(), 10);
   }
 }

@@ -8,10 +8,14 @@ export class EmpregadoService {
   constructor(private http: HttpClient) {}
 
   perfil() {
-    let url = 'http://localhost:3000/users';
-
+    const url = 'http://localhost:3000/users/' + localStorage.getItem('idUser');
     const headers = new HttpHeaders().set('Content-Type', `application/json`);
-    url += '/' + localStorage.getItem('idUser');
+    return this.http.get(url, { headers }).toPromise();
+  }
+
+  perfilId(id: string) {
+    const url = 'http://localhost:3000/users/' + id;
+    const headers = new HttpHeaders().set('Content-Type', `application/json`);
     return this.http.get(url, { headers }).toPromise();
   }
 
