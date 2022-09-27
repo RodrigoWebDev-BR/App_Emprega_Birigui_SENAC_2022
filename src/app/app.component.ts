@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { VagasService } from './servicos/vagas.service';
 import { EmpresaService } from 'src/app/servicos/empresa.service';
 import { EmpregadoService } from './servicos/empregado.service';
@@ -44,8 +45,7 @@ export class AppComponent {
 
     this.menus = localStorage.getItem('profile');
 
-    if (localStorage.getItem('profile') === 'empregado') {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    if (localStorage.getItem('profile') === 'empregado' && window.location.pathname === '/home') {
       this.servicoEmpregado.searchSubDoc('candidaturas')
       .then((e1) => {
         const itemAux: any = e1;
@@ -55,13 +55,12 @@ export class AppComponent {
         }
       })
       .catch;
-    }else if(localStorage.getItem('profile') === 'empregado'){
-      this.servicoEmpregado.searchSubDoc('candidaturas')
+    }else if(localStorage.getItem('profile') === 'empresa' && window.location.pathname === '/home'){
+      this.servicoVagas.searchVagas()
       .then((e1) => {
         const itemAux: any = e1;
-
         if(itemAux !== undefined){
-          this.contator = itemAux.length;
+          this.contator = itemAux.items.length;
         }
       })
       .catch;

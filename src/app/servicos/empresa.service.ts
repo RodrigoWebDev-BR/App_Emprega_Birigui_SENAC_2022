@@ -45,12 +45,11 @@ export class EmpresaService {
         subDoc = documento;
         break;
     }
-    
-    let url =
-    'http://localhost:3000/empresas/';
-    if(id !== null && id !== undefined){
+
+    let url = 'http://localhost:3000/empresas/';
+    if (id !== null && id !== undefined) {
       url += id;
-    }else{
+    } else {
       url += localStorage.getItem('idUser');
     }
     console.log(id, url);

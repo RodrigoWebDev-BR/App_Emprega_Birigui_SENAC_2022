@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-row>
       <ion-col>
-        <ion-item lines="none">
+        <ion-item lines="none" color="primary">
           <ion-thumbnail slot="start">
             <img *ngIf="empregado" src="../../assets/icon/user.png" />
             <img *ngIf="empresa" src="../../assets/icon/buildings.png" />
@@ -330,12 +330,8 @@
                     <ion-item style="margin-top: 10px">
                       <ion-label>
                         <h2>{{exp.empresa}} - {{exp.cargo}}</h2>
-                        <h3 *ngIf="exp.atual">
-                          {{exp.dtInicio | date:'dd/MM/yyyy'}} - {{exp.dtFinal}}
-                        </h3>
-                        <h3 *ngIf="!exp.atual">
-                          {{exp.dtInicio | date:'dd/MM/yyyy'}} - {{exp.dtFinal |
-                          date:'dd/MM/yyyy'}}
+                        <h3 >
+                          {{exp.dtInicio }} - {{exp.dtFinal}}
                         </h3>
                         <p>{{exp.descricao}}</p>
                       </ion-label>

@@ -149,8 +149,8 @@
 
   <div class="divisao" *ngIf="master">
     <ion-row class="linha">
-      <ion-col class="middle" (click)="listausers()">
-        <ion-card style="width: 160px">
+      <ion-col (click)="listausers()">
+        <ion-card>
           <ion-item lines="none">
             <ion-badge slot="end" color="secondary">{{qtdUsers}}</ion-badge>
           </ion-item>
@@ -164,8 +164,8 @@
         </ion-card>
       </ion-col>
 
-      <ion-col (click)="listaempresa()" class="middle">
-        <ion-card style="width: 160px">
+      <ion-col (click)="listaempresa()">
+        <ion-card>
           <ion-item lines="none">
             <ion-badge color="warning" slot="end" >{{qtdEmpresas}}</ion-badge>
           </ion-item>
