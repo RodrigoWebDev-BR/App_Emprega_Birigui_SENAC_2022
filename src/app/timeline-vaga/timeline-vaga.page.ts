@@ -1,3 +1,5 @@
+import { VagasService } from './../servicos/vagas.service';
+import { EmpregadoService } from './../servicos/empregado.service';
 import { NavController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -9,10 +11,12 @@ import { Router } from '@angular/router';
 })
 export class TimelineVagaPage implements OnInit {
   contato = { contato: '', id: '' };
+  itemAux: any = {};
+  constructor(private nav: NavController, public servicoEmpregado: EmpregadoService, public servicoVaga: VagasService) {}
 
-  constructor(private nav: NavController) {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    // this.
+  }
 
   home(){
     this.nav.navigateRoot('home');

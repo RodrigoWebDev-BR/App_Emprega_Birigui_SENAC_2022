@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { VagasService } from './../servicos/vagas.service';
 import { EmpresaService } from './../servicos/empresa.service';
 import { NavController } from '@ionic/angular';
@@ -11,7 +12,8 @@ import { Component, OnInit } from '@angular/core';
 export class InscricaoVagaPage implements OnInit {
   quantidade = 0;
   itemAux: any = {};
-
+  alt: any;
+  idUser: string;
   constructor(
     public nav: NavController,
     public servicoEmpresa: EmpresaService,
@@ -25,6 +27,8 @@ export class InscricaoVagaPage implements OnInit {
   }
 
   ngOnInit() {
+    this.idUser = localStorage.getItem('idUser');
+
     this.servicoVagas
       .searchVagas()
       .then((resp) => {
@@ -39,6 +43,17 @@ export class InscricaoVagaPage implements OnInit {
               this.quantidade = this.itemAux.items.length;
             }
           }
+
+          this.itemAux.items.forEach((element) => {
+            let valida: boolean;
+            element.candidaturas.forEach((element2) => {
+              if (element2.userId === this.idUser) {
+                valida = true;
+              }
+            });
+
+            element.candidato = valida;
+          });
         }
       })
       .catch();

@@ -1515,8 +1515,8 @@ export class CurriculoPage implements OnInit {
     this.nav.navigateRoot('home');
   }
 
-  config() {
-    this.nav.navigateRoot('config');
+  novaVaga() {
+    this.nav.navigateRoot('lancamento-vaga');
   }
   notifi() {
     this.nav.navigateRoot('notificacao');

@@ -29,7 +29,7 @@
     class="animate__animated animate__fadeInUp"
   >
     <ion-card class="cardVaga" *ngIf="quantidade > 0">
-      <ion-card-header style="padding-left: 0px; padding-bottom: 5px;">
+      <ion-card-header style="padding-left: 0px; padding-bottom: 5px">
         <ion-row>
           <ion-col>
             <ion-item>
@@ -149,12 +149,8 @@
                   {{vaga.tituloVaga}}
                 </ion-card-title>
                 <br />
-                <ion-card-subtitle
-                  >{{ vaga.nomeEmpresa }} </ion-card-subtitle
-                >
-                <ion-card-subtitle
-                  >{{vaga.cidade}}</ion-card-subtitle
-                >
+                <ion-card-subtitle>{{ vaga.nomeEmpresa }} </ion-card-subtitle>
+                <ion-card-subtitle>{{vaga.cidade}}</ion-card-subtitle>
                 <ion-card-subtitle *ngIf="vaga.qtde > 1"
                   >Qtde. de vagas: {{vaga.qtde}} vaga(s)</ion-card-subtitle
                 >
@@ -181,24 +177,38 @@
         </ion-row>
       </ion-card-header>
       <ion-card-content>
-        <ion-row class="displays">
-          <ion-button (click)="detalhes(vaga._id, vaga.empresaId)" color="warning">
-            <ion-label style="margin-top: 3px" class="bold">Detalhes</ion-label>
-            <ion-icon
-              style="font-size: 20px; margin-left: 7px"
-              name="receipt"
-              color="dark"
-            ></ion-icon>
-          </ion-button>
-        </ion-row>
-        <div class="middle">
-          <div
-            class="centertext"
-            style="background-color: #00bd2f; border-radius: 5px; width: 280px"
-          >
-            <ion-label color="light" style="font-size: 1rem"
-              >JÁ INSCRITO<ion-icon name="checkmark-done" style="font-size: 1.2rem; padding-left: 5px;"></ion-icon></ion-label
+        <div>
+          <ion-row class="displays" *ngIf="!vaga.candidato">
+            <ion-button
+              (click)="detalhes(vaga._id, vaga.empresaId)"
+              color="warning"
             >
+              <ion-label style="margin-top: 3px" class="bold"
+                >Detalhes</ion-label
+              >
+              <ion-icon
+                style="font-size: 20px; margin-left: 7px"
+                name="receipt"
+                color="dark"
+              ></ion-icon>
+            </ion-button>
+          </ion-row>
+          <div class="middle" *ngIf="vaga.candidato">
+            <div
+              class="centertext"
+              style="
+                background-color: #00bd2f;
+                border-radius: 5px;
+                width: 280px;
+              "
+            >
+              <ion-label color="light" style="font-size: 1rem"
+                >JÁ INSCRITO<ion-icon
+                  name="checkmark-done"
+                  style="font-size: 1.2rem; padding-left: 5px"
+                ></ion-icon
+              ></ion-label>
+            </div>
           </div>
         </div>
       </ion-card-content>

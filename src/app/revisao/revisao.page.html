@@ -27,7 +27,7 @@
             ></ion-icon>
             Dados pessoais
           </ion-card-title>
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-header>
         <ion-card-content>
           <p style="font-weight: bold">Nome: {{empregado.nome}}</p>
@@ -40,7 +40,7 @@
             Estado civil: {{empregado.estadoCivil}}
           </p>
           <p style="font-weight: bold">Senha: ******</p>
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-content>
         <ion-row>
           <ion-col style="text-align: end">
@@ -61,7 +61,7 @@
             ><ion-icon name="business" class="icon" color="primary"></ion-icon>
             Dados empresariais</ion-card-title
           >
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-header>
         <ion-card-content>
           <p style="font-weight: bold">
@@ -77,7 +77,7 @@
             Natureza jurídica: {{empresa.natureza}}
           </p>
           <p style="font-weight: bold">Senha: ******</p>
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-content>
         <ion-row>
           <ion-col style="text-align: end">
@@ -102,7 +102,7 @@
             ><ion-icon name="location" class="icon" color="primary"></ion-icon>
             Endereço</ion-card-title
           >
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-header>
         <ion-card-content>
           <p style="font-weight: bold">CEP: {{endereco.cep}}</p>
@@ -113,7 +113,7 @@
           <p style="font-weight: bold">
             Cidade: {{endereco.cidade}} - {{endereco.estado}}
           </p>
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-content>
         <ion-row>
           <ion-col style="text-align: end">
@@ -138,7 +138,7 @@
             ><ion-icon name="call" class="icon" color="primary"></ion-icon>
             Contatos</ion-card-title
           >
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-header>
         <ion-card-content *ngFor="let cont of contatos">
           <p style="font-weight: bold" *ngIf="!cont.principal === true">
@@ -148,7 +148,7 @@
             {{cont.tipo}} - {{cont.contato}} | Principal
           </p>
         </ion-card-content>
-        <ion-item-divider> </ion-item-divider>
+        <ion-item-divider mode="md"> </ion-item-divider>
         <ion-row>
           <ion-col style="text-align: end">
             <ion-button size="small" (click)="contatoEdit()">
@@ -172,14 +172,14 @@
             ><ion-icon name="school" class="icon" color="primary"></ion-icon>
             Formação educacional</ion-card-title
           >
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-header>
         <ion-card-content *ngFor="let form of formacoes">
           <p style="font-weight: bold">Instituição: {{form.instituicao}}</p>
           <p style="font-weight: bold">Curso: {{form.curso}}</p>
           <p style="font-weight: bold">Nível: {{form.nivel}}</p>
           <p style="font-weight: bold">Situação: {{form.situacao}}</p>
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-content>
         <ion-row>
           <ion-col style="text-align: end">
@@ -208,7 +208,7 @@
             ></ion-icon>
             Experiência profissional</ion-card-title
           >
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-header>
         <ion-card-content *ngFor="let exp of experiencias">
           <p style="font-weight: bold">Empresa: {{exp.empresa}}</p>
@@ -216,7 +216,7 @@
           <p style="font-weight: bold">Data Admissão: {{exp.dtInicio}}</p>
           <p style="font-weight: bold">Data Final: {{exp.dtFinal}}</p>
           <p style="font-weight: bold">Descrição: {{exp.descricao}}</p>
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-content>
         <ion-row>
           <ion-col style="text-align: end">
@@ -241,12 +241,12 @@
             ><ion-icon name="library" class="icon" color="primary"></ion-icon>
             Cursos</ion-card-title
           >
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-header>
         <ion-card-content *ngFor="let curso of cursos">
           <p style="font-weight: bold">Curso: {{curso.nome}}</p>
           <p style="font-weight: bold">Instituição: {{curso.instituicao}}</p>
-          <ion-item-divider> </ion-item-divider>
+           <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-content>
         <ion-row>
           <ion-col style="text-align: end">
@@ -271,12 +271,12 @@
             ><ion-icon name="language" class="icon" color="primary"></ion-icon>
             Idiomas</ion-card-title
           >
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-header>
         <ion-card-content *ngFor="let idm of idiomas">
           <p style="font-weight: bold">Idioma: {{idm.idioma}}</p>
           <p style="font-weight: bold">Nível: {{idm.nivel}}</p>
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-content>
         <ion-row>
           <ion-col style="text-align: end">
@@ -301,14 +301,14 @@
             ><ion-icon name="create" class="icon" color="primary"></ion-icon>
             Sua descrição</ion-card-title
           >
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-header>
 
         <ion-card-content>
           <p style="font-weight: bold">
             Descrição: {{empregado.descricaoUser}}
           </p>
-          <ion-item-divider> </ion-item-divider>
+           <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-content>
 
         <ion-row>
@@ -333,7 +333,7 @@
             ></ion-icon>
             Ramo e Detalhes</ion-card-title
           >
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-header>
 
         <ion-card-content>
@@ -341,7 +341,7 @@
           <p style="font-weight: bold">
             Detalhes: {{empresa.descricaoEmpresa}}
           </p>
-          <ion-item-divider> </ion-item-divider>
+          <ion-item-divider mode="md"> </ion-item-divider>
         </ion-card-content>
 
         <ion-row>

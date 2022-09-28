@@ -42,12 +42,12 @@ export class CandidaturasPage implements OnInit {
             this.user = e1;
           } else {
             this.isModalOpen = false;
-            this.exibeToast('Erro ao encontrar candidato', 'danger');
+            this.exibeToast('Erro ao encontrar o candidato', 'danger');
           }
         })
         .catch((e) => {
           this.isModalOpen = false;
-          this.exibeToast('Erro ao encontrar candidato', 'danger');
+          this.exibeToast('Erro ao encontrar o candidato', 'danger');
         });
     }
   }

@@ -80,11 +80,8 @@ li {
 }
 .verde {
   &:before {
-    content: "";
-    size: 20px;
-    color: white;
-    background: green;
-    border: 1px solid green;
+    background-image: url("../../assets/ok.png");
+    background-size: 15px;
   }
   border-left: 2px solid green;
 }

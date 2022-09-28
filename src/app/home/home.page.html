@@ -59,15 +59,6 @@
   </div>
 
   <div *ngIf="empregado">
-    <div *ngIf="itemAux3.length === 0">
-      <div class="middle">
-        <img src="../../assets/404.png">
-      </div>
-      <div class="centertext bold ion-text-wrap">
-        <h1 class="under">Nenhuma candidatura</h1>
-        <p >Clique no icone <ion-icon name="search"></ion-icon> para encontrar vagas</p>
-      </div>
-    </div>
     <div
       *ngFor="let vaga of itemAux3"
       class="animate__animated animate__fadeInUp"
@@ -106,7 +97,7 @@
               <p style="font-weight: bold">
                 Data inscrição: <span class="under">{{vaga.vagaId.dtPub}}</span>
               </p>
-              <ion-item-divider></ion-item-divider>
+              <ion-item-divider mode="md"></ion-item-divider>
               <ion-row>
                 <ion-col size="6"> </ion-col>
                 <ion-col size="6" style="text-align: end">
@@ -126,6 +117,15 @@
           </ion-card>
         </ion-col>
       </ion-row>
+    </div>
+    <div *ngIf="itemAux3.length === 0">
+      <div class="middle">
+        <img src="../../assets/404.png">
+      </div>
+      <div class="centertext bold ion-text-wrap">
+        <h1 class="under">Nenhuma candidatura</h1>
+        <p >Clique no icone <ion-icon name="search"></ion-icon> para encontrar vagas</p>
+      </div>
     </div>
   </div>
 
@@ -200,7 +200,7 @@
                 Data publicação:
                 <span class="under"> {{emprego.dtPub}} </span>
               </p>
-              <ion-item-divider></ion-item-divider>
+              <ion-item-divider mode="md"></ion-item-divider>
               <ion-row>
                 <ion-col>
                   <ion-button
@@ -266,20 +266,6 @@
     </div>
   </div>
 
-  <ion-fab
-    vertical="bottom"
-    horizontal="end"
-    edge
-    slot="fixed"
-    style="margin-bottom: 3rem; margin-right: 1rem"
-    class="foot"
-    *ngIf="empresa"
-  >
-    <ion-fab-button color="danger" (click)="novaVaga()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
   <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" style="margin-bottom: 3rem; margin-right: 1rem;" class="foot" *ngIf="master">
     <ion-fab-button color="danger" (click)="logout()">
       <ion-icon name="power"></ion-icon>
@@ -293,11 +279,11 @@
       <ion-segment-button value="home">
         <ion-icon name="home"></ion-icon>
       </ion-segment-button>
+      <ion-segment-button value="vagas" (click)="novaVaga()">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-segment-button>
       <ion-segment-button value="person" (click)="curriculo()">
         <ion-icon name="person"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button value="pin" (click)="config()">
-        <ion-icon name="cog"></ion-icon>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
