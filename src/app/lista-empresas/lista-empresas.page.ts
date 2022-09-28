@@ -54,7 +54,7 @@ export class ListaEmpresasPage implements OnInit {
                 .then((e1) => {
                   if (e1 === undefined) {
                     this.exibeToast(
-                      'Não foi possível rejeitar a empresa',
+                      'Não foi possível aceitar a empresa',
                       'warning'
                     );
                   } else {

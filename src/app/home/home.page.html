@@ -59,6 +59,15 @@
   </div>
 
   <div *ngIf="empregado">
+    <div *ngIf="itemAux3.length === 0">
+      <div class="middle">
+        <img src="../../assets/404.png">
+      </div>
+      <div class="centertext bold ion-text-wrap">
+        <h1 class="under">Nenhuma candidatura</h1>
+        <p >Clique no icone <ion-icon name="search"></ion-icon> para encontrar vagas</p>
+      </div>
+    </div>
     <div
       *ngFor="let vaga of itemAux3"
       class="animate__animated animate__fadeInUp"
@@ -155,10 +164,13 @@
   </div>
 
   <div *ngIf="empresa">
-    <div *ngIf="!itemAux.items">
-      <h1>Nenhuma vaga</h1>
+    <div *ngIf="itemAux.length === 0">
+      <div class="middle">
+        <img src="../../assets/404.png">
+      </div>
+      <h1 class="centertext under bold">Nenhuma vaga lançada</h1>
     </div>
-    <div *ngFor="let emprego of itemAux.items">
+    <div *ngFor="let emprego of itemAux">
       <ion-row>
         <ion-col>
           <ion-card class="cardVagas">

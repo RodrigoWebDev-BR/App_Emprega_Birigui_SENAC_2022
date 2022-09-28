@@ -17,7 +17,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
   perfil: any = {};
-  itemAux: any = {};
+  itemAux: any = [];
   itemAux2: any = {};
   itemAux3: any = [];
   qtdEmpresas: number;
@@ -181,7 +181,7 @@ export class HomePage implements OnInit {
     this.servicoEmpregado
       .searchSubDoc('candidaturas')
       .then((e1) => {
-        this.itemAux3 = e1;
+        // this.itemAux3 = e1;
       })
       .catch();
   }
@@ -201,9 +201,8 @@ export class HomePage implements OnInit {
     this.servicoVagas
       .searchVagas()
       .then((resp) => {
-        this.itemAux = resp;
-        if (this.itemAux !== undefined) {
-        }
+        // this.itemAux = resp;
+        // this.itemAux = this.itemAux.items.filter(a => a.empresaId === localStorage.getItem('idUser'));
       })
       .catch();
   }

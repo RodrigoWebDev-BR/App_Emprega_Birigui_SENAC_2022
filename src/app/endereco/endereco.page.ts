@@ -80,7 +80,6 @@ export class EnderecoPage {
       if (cepDig.includes('-')) {
         cepDig.replace('-', '');
       }
-      console.log(cepDig);
       this.cep
         .localizaCEP(cepDig)
         .then((response) => {

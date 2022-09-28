@@ -65,10 +65,53 @@ export class CandidaturasPage implements OnInit {
         {
           text: 'Convidar',
           handler: () => {
-            const doc = {
-              aceita: true,
-              recusada: false,
-            };
+            this.servicoVagas
+              .searchSubDoc()
+              .then((e1) => {
+                const aux1: any = e1;
+                // const aux2: any = aux1.filter(
+                //   (a) => a.userId._id !== usuario._id
+                // );
+                let aux2: any = {};
+                aux2 = aux1.filter((a) => a.userId._id === usuario._id);
+                aux2[0].aprovado = true;
+                this.servicoVagas
+                  .putVaga(aux1)
+                  .then((e2) => {
+                    if (e2) {
+                      this.loadCandidatos();
+                    }
+                  })
+                  .catch((e)=>{
+                    this.exibeToast('Erro com servidor', 'danger');
+                  });
+              })
+              .catch((e)=>{
+                this.exibeToast('Erro com servidor', 'danger');
+              });
+
+            this.servicoEmpregado
+              .searchSubDocId('candidaturas', usuario._id)
+              .then((e3) => {
+                const aux3: any = e3;
+                let aux4: any = {};
+                aux4 = aux3.filter(
+                  (a) => a.vagaId._id === localStorage.getItem('idVaga')
+                );
+
+                aux4[0].aprovado = true;
+                this.servicoEmpregado
+                  .putUserId(aux3, 'candidaturas', usuario._id)
+                  .then((e4) => {
+                    this.exibeToast('Candidato aceito!', 'success');
+                  })
+                  .catch((e)=>{
+                    this.exibeToast('Erro com servidor', 'danger');
+                  });
+              })
+              .catch((e)=>{
+                this.exibeToast('Erro com servidor', 'danger');
+              });
           },
         },
       ],
@@ -93,17 +136,53 @@ export class CandidaturasPage implements OnInit {
         {
           text: 'Rejeitar',
           handler: () => {
-            // this.servicoVagas
-            //   .searchSubDoc()
-            //   .then((e1) => {
-            //     const aux1: any = e1;
-            //     const aux2: any = aux1.filter(a => a.userId._id !== usuario._id);
-            //     let aux3: any = {};
-            //     aux3 = aux1.filter(a => a.userId._id === usuario._id);
-            //     aux3[0].recusado = true;
-            //     console.log(aux1)
-            //   })
-            //   .catch();
+            this.servicoVagas
+              .searchSubDoc()
+              .then((e1) => {
+                const aux1: any = e1;
+                const aux2: any = aux1.filter(
+                  (a) => a.userId._id !== usuario._id
+                );
+                let aux3: any = {};
+                aux3 = aux1.filter((a) => a.userId._id === usuario._id);
+                aux3[0].recusado = true;
+                this.servicoVagas
+                  .putVaga(aux1)
+                  .then((e2) => {
+                    if (e2) {
+                      this.loadCandidatos();
+                    }
+                  })
+                  .catch((e)=>{
+                    this.exibeToast('Erro com servidor', 'danger');
+                  });
+              })
+              .catch((e)=>{
+                this.exibeToast('Erro com servidor', 'danger');
+              });
+
+              this.servicoEmpregado
+              .searchSubDocId('candidaturas', usuario._id)
+              .then((e3) => {
+                const aux3: any = e3;
+                let aux4: any = {};
+                aux4 = aux3.filter(
+                  (a) => a.vagaId._id === localStorage.getItem('idVaga')
+                );
+
+                aux4[0].recusado = true;
+                this.servicoEmpregado
+                  .putUserId(aux3, 'candidaturas', usuario._id)
+                  .then((e4) => {
+                    this.exibeToast('Candidato recusado!', 'success');
+                  })
+                  .catch((e)=>{
+                    this.exibeToast('Erro com servidor', 'danger');
+                  });
+              })
+              .catch((e)=>{
+                this.exibeToast('Erro com servidor', 'danger');
+              });
           },
         },
       ],

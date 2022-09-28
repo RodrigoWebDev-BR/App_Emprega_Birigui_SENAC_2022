@@ -116,21 +116,11 @@
                             </ion-row>
                           </ion-item>
                           <div *ngFor="let contatos of usuario.contatos">
-                            <ion-item *ngIf="contatos.tipo === 'Celular' || contatos.tipo === 'Telefone'">
+                            <ion-item>
                               <ion-row>
                                 <ion-label class="ion-text-wrap">
-                                  <span class="bold">Contato:</span>
-                                  {{contatos.tipo}} - {{contatos.contato}}
-                                </ion-label>
-                              </ion-row>
-                            </ion-item>
-                          </div>
-                          <div *ngFor="let contatos of usuario.contatos">
-                            <ion-item *ngIf="contatos.tipo === 'LinkedIn' || contatos.tipo === 'Instagram' || contatos.tipo === 'Facebook'">
-                              <ion-row>
-                                <ion-label class="ion-text-wrap">
-                                  <span class="bold">Redes Sociais:</span>
-                                  {{contatos.tipo}} - {{contatos.contato}}
+                                  <span class="bold">{{contatos.tipo}}:</span>
+                                   {{contatos.contato}}
                                 </ion-label>
                               </ion-row>
                             </ion-item>

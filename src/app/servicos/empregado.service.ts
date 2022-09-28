@@ -37,6 +37,17 @@ export class EmpregadoService {
     return this.http.get(url, { headers }).toPromise();
   }
 
+  searchSubDocId(sessao: string, id: string) {
+    const url =
+      'http://localhost:3000/users/' +
+      id +
+      '/' +
+      sessao;
+
+    const headers = new HttpHeaders().set('Content-Type', `application/json`);
+    return this.http.get(url, { headers }).toPromise();
+  }
+
   patchUser(documento: any, sessao: string) {
     let subDoc: any = {};
 
@@ -77,18 +88,9 @@ export class EmpregadoService {
     return this.http.put(url, documento, { headers }).toPromise();
   }
 
-  searchCands() {
-    const url = 'http://localhost:3000/candidaturas';
-
+  putUserId(documento: any, sessao: string, id: string) {
+    const url = 'http://localhost:3000/users/' + id + '/' + sessao;
     const headers = new HttpHeaders().set('Content-Type', `application/json`);
-    return this.http.get(url, { headers }).toPromise();
+    return this.http.put(url, documento, { headers }).toPromise();
   }
-
-  cadastraCand(documento: any){
-    const url = 'http://localhost:3000/candidaturas';
-    const headers = new HttpHeaders().set('Content-Type', `application/json`);
-    return this.http.post(url, documento, { headers }).toPromise();
-  }
-
-
 }

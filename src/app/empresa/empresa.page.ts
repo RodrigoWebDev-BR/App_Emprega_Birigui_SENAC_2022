@@ -245,9 +245,7 @@ export class EmpresaPage implements OnInit {
           this.valida = itemAux.validado;
         }
       })
-      .catch((e) => {
-        console.log(e);
-      });
+      .catch();
   }
 
   async exibeToast(msg: string, cor: string) {
