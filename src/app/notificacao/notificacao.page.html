@@ -1,0 +1,48 @@
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar color="primary">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
+    <ion-title color="light" class="centertext bold"
+      >Notificações</ion-title
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fundobg" [fullscreen]="true">
+  
+  <div *ngFor="let item of notificacoes">
+    <ion-item-sliding>
+      <ion-item (click)="timeline()">
+        <ion-label>
+          <h2>{{item.vaga}}</h2>
+          <p>{{item.empresa}}</p>
+          <p>Data de inscrição: {{item.dtInsc}}</p>
+          <p *ngIf="item.aprovado" color="success">Status: {{item.status}}</p>
+          <p *ngIf="!item.aprovado" color="warning">Status: {{item.status}}</p>
+        </ion-label>
+        <ion-note slot="end">{{item.hora}}</ion-note>
+      </ion-item>
+    </ion-item-sliding>
+  </div>
+
+</ion-content>
+
+<ion-footer [translucent]="true" class="foot">
+  <ion-toolbar color="primary">
+    <ion-segment value="notifications">
+      <ion-segment-button value="home" (click)="home()">
+        <ion-icon name="home"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="person" (click)="curriculo()">
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="search" (click)="vagas()">
+        <ion-icon name="search"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="notifications">
+        <ion-icon name="notifications"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

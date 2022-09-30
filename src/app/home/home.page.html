@@ -1,0 +1,309 @@
+<ion-header [translucent]="true">
+
+</ion-header>
+
+<ion-content class="fundobg">
+  <div class="header">
+    <div *ngIf="empregado">
+      <ion-row class="perfil">
+        <ion-col class="centertext" style="margin-top: 10px">
+          <img src="../../assets/icon/user.png" />
+        </ion-col>
+        <ion-col class="centertext" style="padding-top: 60px">
+          <h2
+            class="marv margin-h2-user white"
+            style="font-size: 20px; margin-top: 5px"
+          >
+            {{perfil.nome}}
+          </h2>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="empresa">
+      <ion-row class="perfil">
+        <ion-col class="centertext" style="margin-top: 10px">
+          <img src="../../assets/icon/buildings.png" />
+        </ion-col>
+        <ion-col class="centertext" style="padding-top: 60px">
+          <h2
+            class="marv margin-h2-user white"
+            style="font-size: 20px; margin-top: 5px"
+          >
+            {{perfil.nomeEmpresa}}
+          </h2>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngIf="master">
+      <ion-row class="perfil">
+        <ion-col class="centertext" style="margin-top: -1rem">
+          <img
+            src="../../assets/icon/prestige.png"
+            style="width: 7rem; height: 7rem"
+          />
+        </ion-col>
+        <ion-col class="centertext" style="padding-top: 60px">
+          <br>
+          <br>
+          <h2
+            class="marv margin-h2-user white"
+            style="font-size: 20px; margin-top: 5px"
+          >
+            Prefeitura de birigui
+          </h2>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <div *ngIf="empregado">
+    <div
+      *ngFor="let vaga of itemAux3"
+      class="animate__animated animate__fadeInUp"
+    >
+      <ion-row>
+        <ion-col>
+          <ion-card class="cardVagas">
+            <ion-card-header>
+              <ion-card-title>{{vaga.vagaId.tituloVaga}}</ion-card-title>
+              <ion-card-subtitle
+                color="primary"
+                *ngIf="vaga.aprovado && !vaga.recusado"
+                >Solicitação aprovada <img src="../../assets/check.png"
+              /></ion-card-subtitle>
+              <ion-card-subtitle
+                color="warning"
+                *ngIf="!vaga.aprovado && !vaga.recusado"
+                >Solicitação pendente <img src="../../assets/pendente.png"
+              /></ion-card-subtitle>
+              <ion-card-subtitle
+                color="danger"
+                *ngIf="!vaga.aprovado && vaga.recusado"
+                >Solicitação indeferida <img src="../../assets/delete.png"
+              /></ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p style="font-weight: bold">
+                Salário:
+                <span *ngIf="vaga.vagaId.combinado" class="under"
+                  >A combinar</span
+                >
+                <span *ngIf="!vaga.vagaId.combinado" class="under"
+                  >R$ {{vaga.vagaId.salario}}.<small>00</small></span
+                >
+              </p>
+              <p style="font-weight: bold">
+                Data inscrição: <span class="under">{{vaga.vagaId.dtPub}}</span>
+              </p>
+              <ion-item-divider mode="md"></ion-item-divider>
+              <ion-row>
+                <ion-col size="6"> </ion-col>
+                <ion-col size="6" style="text-align: end">
+                  <ion-button
+                    size="small"
+                    (click)="abrirVaga(vaga.vagaId._id)"
+                    fill="outline"
+                  >
+                    <ion-icon name="analytics" color="primary"></ion-icon>
+                    <ion-label style="margin-top: 0px; margin-left: 6px"
+                      >Processos</ion-label
+                    >
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+    <div *ngIf="itemAux3.length === 0">
+      <div class="middle">
+        <img src="../../assets/404.png">
+      </div>
+      <div class="centertext bold ion-text-wrap">
+        <h1 class="under">Nenhuma candidatura</h1>
+        <p >Clique no icone <ion-icon name="search"></ion-icon> para encontrar vagas</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divisao" *ngIf="master" mode="md">
+    <ion-row class="linha">
+      <ion-col (click)="listausers()">
+        <ion-card>
+          <ion-item lines="none">
+            <ion-badge slot="end" color="secondary">{{qtdUsers}}</ion-badge>
+          </ion-item>
+          <ion-card-header class="centertext">
+            <ion-card-title>Usuários</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content class="centertext" style="font-size: 100px">
+            <ion-icon name="accessibility" color="success"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col (click)="listaempresa()">
+        <ion-card>
+          <ion-item lines="none">
+            <ion-badge color="warning" slot="end" >{{qtdEmpresas}}</ion-badge>
+          </ion-item>
+          <ion-card-header class="centertext">
+            <ion-card-title>Empresas</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content class="centertext" style="font-size: 100px">
+            <ion-icon name="business" color="success"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div *ngIf="empresa">
+    <div *ngIf="itemAux.length === 0">
+      <div class="middle">
+        <img src="../../assets/404.png">
+      </div>
+      <h1 class="centertext under bold">Nenhuma vaga lançada</h1>
+    </div>
+    <div *ngFor="let emprego of itemAux">
+      <ion-row>
+        <ion-col>
+          <ion-card class="cardVagas">
+            <ion-card-header>
+              <ion-card-title>{{emprego.tituloVaga}}</ion-card-title>
+              <ion-card-subtitle
+                color="primary"
+                class="under"
+                *ngIf="emprego.online && !emprego.congelada"
+                >Vaga Online <img src="../../assets/check.png"
+              /></ion-card-subtitle>
+              <ion-card-subtitle
+                color="danger"
+                class="under"
+                *ngIf="!emprego.online || emprego.congelada"
+                >Vaga Fechada <img src="../../assets/delete.png"
+              /></ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              <p style="font-weight: bold">
+                Contrato:
+                <span class="under">
+                  {{emprego.contrato}} - {{emprego.prazo}}</span
+                >
+              </p>
+              <p style="font-weight: bold">
+                Data publicação:
+                <span class="under"> {{emprego.dtPub}} </span>
+              </p>
+              <ion-item-divider mode="md"></ion-item-divider>
+              <ion-row>
+                <ion-col>
+                  <ion-button
+                    size="small"
+                    expand="block"
+                    color="secondary"
+                    *ngIf="!emprego.congelada && emprego.online"
+                    (click)="congelar(emprego._id)"
+                  >
+                    <ion-icon name="snow" color="light"></ion-icon>
+                    <ion-label style="margin-top: 0px; margin-left: 6px"
+                      >Congelar</ion-label
+                    >
+                  </ion-button>
+                  <ion-button
+                    size="small"
+                    color="tertiary"
+                    expand="block"
+                    *ngIf="emprego.congelada"
+                    (click)="descongelar(emprego._id)"
+                  >
+                    <ion-icon name="flame" color="light"></ion-icon>
+                    <ion-label style="margin-top: 0px; margin-left: 6px"
+                      >Descongelar</ion-label
+                    >
+                  </ion-button>
+                </ion-col>
+                <ion-col>
+                  <ion-button
+                    size="small"
+                    expand="block"
+                    (click)="fecharVaga(emprego)"
+                    color="danger"
+                    *ngIf="emprego.online"
+                  >
+                    <ion-icon name="close-circle" color="light"></ion-icon>
+                    <ion-label style="margin-top: 0px; margin-left: 6px"
+                      >Finalizar</ion-label
+                    >
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button
+                    size="small"
+                    expand="block"
+                    color="primary"
+                    *ngIf="emprego.online"
+                    (click)="candidatos(emprego._id)"
+                  >
+                    <ion-icon name="person-add" color="light"></ion-icon>
+                    <ion-label style="margin-top: 0px; margin-left: 6px"
+                      >Candidatos</ion-label
+                    ></ion-button
+                  >
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" style="margin-bottom: 3rem; margin-right: 1rem;" class="foot" *ngIf="master">
+    <ion-fab-button color="danger" (click)="logout()">
+      <ion-icon name="power"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer [translucent]="true" *ngIf="empresa" class="foot">
+  <ion-toolbar color="primary">
+    <ion-segment value="home">
+      <ion-segment-button value="home">
+        <ion-icon name="home"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="vagas" (click)="novaVaga()">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="person" (click)="curriculo()">
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer [translucent]="true" *ngIf="empregado" class="foot">
+  <ion-toolbar color="primary">
+    <ion-segment value="home">
+      <ion-segment-button value="home">
+        <ion-icon name="home"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="person" (click)="curriculo()">
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="search" (click)="vagas()">
+        <ion-icon name="search"></ion-icon>
+      </ion-segment-button>
+      <!-- <ion-segment-button value="notifications" (click)="notifi()">
+        <ion-icon name="notifications" color="danger"></ion-icon>
+      </ion-segment-button> -->
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

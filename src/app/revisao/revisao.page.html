@@ -1,0 +1,360 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Revisão</ion-title>
+    <ion-button
+      slot="end"
+      (click)="concluir()"
+      fill="outline"
+      color="light"
+      size="small"
+      style="padding-right: 1rem"
+      >Concluir</ion-button
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fundobg">
+  <ion-row>
+    <ion-col>
+      <!-- dados pessoais -->
+      <ion-card class="cardVagas" *ngIf="empresa.cnpj === null">
+        <ion-card-header>
+          <ion-card-title
+            ><ion-icon
+              name="finger-print"
+              class="icon"
+              color="primary"
+            ></ion-icon>
+            Dados pessoais
+          </ion-card-title>
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-header>
+        <ion-card-content>
+          <p style="font-weight: bold">Nome: {{empregado.nome}}</p>
+          <p style="font-weight: bold">RG: {{empregado.rg}}</p>
+          <p style="font-weight: bold">CPF: {{empregado.cpf}}</p>
+          <p style="font-weight: bold">E-mail: {{empregado.email}}</p>
+          <p style="font-weight: bold">Nascimento: {{empregado.dataNasc}}</p>
+          <p style="font-weight: bold">Gênero: {{empregado.genero}}</p>
+          <p style="font-weight: bold">
+            Estado civil: {{empregado.estadoCivil}}
+          </p>
+          <p style="font-weight: bold">Senha: ******</p>
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-content>
+        <ion-row>
+          <ion-col style="text-align: end">
+            <ion-button size="small" (click)="empregadoEdit()">
+              <ion-icon name="pencil" color="white"></ion-icon>
+              <ion-label style="margin-top: 0px; margin-left: 6px"
+                >Editar</ion-label
+              >
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+
+      <!-- dados empresariais -->
+      <ion-card class="cardVagas" *ngIf="empregado.cpf === null">
+        <ion-card-header>
+          <ion-card-title
+            ><ion-icon name="business" class="icon" color="primary"></ion-icon>
+            Dados empresariais</ion-card-title
+          >
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-header>
+        <ion-card-content>
+          <p style="font-weight: bold">
+            Nome Empresarial: {{empresa.nomeEmpresa}}
+          </p>
+          <p style="font-weight: bold">Nome Fantasia: {{empresa.fantasia}}</p>
+          <p style="font-weight: bold">CNPJ: {{empresa.cnpj}}</p>
+          <p style="font-weight: bold">E-mail: {{empresa.email}}</p>
+          <p style="font-weight: bold">Data de abertura: {{empresa.dataAb}}</p>
+          <p style="font-weight: bold">Situação: {{empresa.situacao}}</p>
+          <p style="font-weight: bold">CNAE: {{empresa.cnae}}</p>
+          <p style="font-weight: bold">
+            Natureza jurídica: {{empresa.natureza}}
+          </p>
+          <p style="font-weight: bold">Senha: ******</p>
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-content>
+        <ion-row>
+          <ion-col style="text-align: end">
+            <ion-button size="small" (click)="empresaEdit()">
+              <ion-icon name="pencil" color="white"></ion-icon>
+              <ion-label style="margin-top: 0px; margin-left: 6px"
+                >Editar</ion-label
+              >
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <!-- endereco -->
+      <ion-card class="cardVagas">
+        <ion-card-header>
+          <ion-card-title
+            ><ion-icon name="location" class="icon" color="primary"></ion-icon>
+            Endereço</ion-card-title
+          >
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-header>
+        <ion-card-content>
+          <p style="font-weight: bold">CEP: {{endereco.cep}}</p>
+          <p style="font-weight: bold">Número: {{endereco.numero}}</p>
+          <p style="font-weight: bold">Complemento: {{endereco.complemento}}</p>
+          <p style="font-weight: bold">Endereço: {{endereco.endereco}}</p>
+          <p style="font-weight: bold">Bairro: {{endereco.bairro}}</p>
+          <p style="font-weight: bold">
+            Cidade: {{endereco.cidade}} - {{endereco.estado}}
+          </p>
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-content>
+        <ion-row>
+          <ion-col style="text-align: end">
+            <ion-button size="small" (click)="enderecoEdit()">
+              <ion-icon name="pencil" color="white"></ion-icon>
+              <ion-label style="margin-top: 0px; margin-left: 6px"
+                >Editar</ion-label
+              >
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <!-- contato -->
+      <ion-card class="cardVagas">
+        <ion-card-header>
+          <ion-card-title
+            ><ion-icon name="call" class="icon" color="primary"></ion-icon>
+            Contatos</ion-card-title
+          >
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-header>
+        <ion-card-content *ngFor="let cont of contatos">
+          <p style="font-weight: bold" *ngIf="!cont.principal === true">
+            {{cont.tipo}} - {{cont.contato}}
+          </p>
+          <p style="font-weight: bold" *ngIf="cont.principal === true">
+            {{cont.tipo}} - {{cont.contato}} | Principal
+          </p>
+        </ion-card-content>
+        <ion-item-divider mode="md"> </ion-item-divider>
+        <ion-row>
+          <ion-col style="text-align: end">
+            <ion-button size="small" (click)="contatoEdit()">
+              <ion-icon name="pencil" color="white"></ion-icon>
+              <ion-label style="margin-top: 0px; margin-left: 6px"
+                >Editar</ion-label
+              >
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="empresa.cnpj === null">
+    <ion-col>
+      <!-- formacao-educacional -->
+      <ion-card class="cardVagas">
+        <ion-card-header>
+          <ion-card-title
+            ><ion-icon name="school" class="icon" color="primary"></ion-icon>
+            Formação educacional</ion-card-title
+          >
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-header>
+        <ion-card-content *ngFor="let form of formacoes">
+          <p style="font-weight: bold">Instituição: {{form.instituicao}}</p>
+          <p style="font-weight: bold">Curso: {{form.curso}}</p>
+          <p style="font-weight: bold">Nível: {{form.nivel}}</p>
+          <p style="font-weight: bold">Situação: {{form.situacao}}</p>
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-content>
+        <ion-row>
+          <ion-col style="text-align: end">
+            <ion-button size="small" (click)="formacaoEdit()">
+              <ion-icon name="pencil" color="white"></ion-icon>
+              <ion-label style="margin-top: 0px; margin-left: 6px"
+                >Editar</ion-label
+              >
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="empresa.cnpj === null">
+    <ion-col>
+      <!-- experiencia-profissional -->
+      <ion-card class="cardVagas">
+        <ion-card-header>
+          <ion-card-title
+            ><ion-icon
+              name="document-text"
+              class="icon"
+              color="primary"
+            ></ion-icon>
+            Experiência profissional</ion-card-title
+          >
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-header>
+        <ion-card-content *ngFor="let exp of experiencias">
+          <p style="font-weight: bold">Empresa: {{exp.empresa}}</p>
+          <p style="font-weight: bold">Cargo: {{exp.cargo}}</p>
+          <p style="font-weight: bold">Data Admissão: {{exp.dtInicio}}</p>
+          <p style="font-weight: bold">Data Final: {{exp.dtFinal}}</p>
+          <p style="font-weight: bold">Descrição: {{exp.descricao}}</p>
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-content>
+        <ion-row>
+          <ion-col style="text-align: end">
+            <ion-button size="small" (click)="expEdit()">
+              <ion-icon name="pencil" color="white"></ion-icon>
+              <ion-label style="margin-top: 0px; margin-left: 6px"
+                >Editar</ion-label
+              >
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="empresa.cnpj === null">
+    <ion-col>
+      <!-- cursos -->
+      <ion-card class="cardVagas">
+        <ion-card-header>
+          <ion-card-title
+            ><ion-icon name="library" class="icon" color="primary"></ion-icon>
+            Cursos</ion-card-title
+          >
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-header>
+        <ion-card-content *ngFor="let curso of cursos">
+          <p style="font-weight: bold">Curso: {{curso.nome}}</p>
+          <p style="font-weight: bold">Instituição: {{curso.instituicao}}</p>
+           <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-content>
+        <ion-row>
+          <ion-col style="text-align: end">
+            <ion-button size="small" (click)="cursoEdit()">
+              <ion-icon name="pencil" color="white"></ion-icon>
+              <ion-label style="margin-top: 0px; margin-left: 6px"
+                >Editar</ion-label
+              >
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="empresa.cnpj === null">
+    <ion-col>
+      <!-- idiomas -->
+      <ion-card class="cardVagas">
+        <ion-card-header>
+          <ion-card-title
+            ><ion-icon name="language" class="icon" color="primary"></ion-icon>
+            Idiomas</ion-card-title
+          >
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-header>
+        <ion-card-content *ngFor="let idm of idiomas">
+          <p style="font-weight: bold">Idioma: {{idm.idioma}}</p>
+          <p style="font-weight: bold">Nível: {{idm.nivel}}</p>
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-content>
+        <ion-row>
+          <ion-col style="text-align: end">
+            <ion-button size="small" (click)="idiomaEdit()">
+              <ion-icon name="pencil" color="white"></ion-icon>
+              <ion-label style="margin-top: 0px; margin-left: 6px"
+                >Editar</ion-label
+              >
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <!-- descricao -->
+      <ion-card class="cardVagas" *ngIf="empresa.cnpj === null">
+        <ion-card-header>
+          <ion-card-title
+            ><ion-icon name="create" class="icon" color="primary"></ion-icon>
+            Sua descrição</ion-card-title
+          >
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p style="font-weight: bold">
+            Descrição: {{empregado.descricaoUser}}
+          </p>
+           <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-content>
+
+        <ion-row>
+          <ion-col style="text-align: end">
+            <ion-button size="small" (click)="descEdit()">
+              <ion-icon name="pencil" color="white"></ion-icon>
+              <ion-label style="margin-top: 0px; margin-left: 6px"
+                >Editar</ion-label
+              >
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+      <!-- ramo-detalhes -->
+      <ion-card class="cardVagas" *ngIf="empregado.cpf === null">
+        <ion-card-header>
+          <ion-card-title
+            ><ion-icon
+              name="git-branch"
+              class="icon"
+              color="primary"
+            ></ion-icon>
+            Ramo e Detalhes</ion-card-title
+          >
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p style="font-weight: bold">Ramo: {{empresa.ramo}}</p>
+          <p style="font-weight: bold">
+            Detalhes: {{empresa.descricaoEmpresa}}
+          </p>
+          <ion-item-divider mode="md"> </ion-item-divider>
+        </ion-card-content>
+
+        <ion-row>
+          <ion-col style="text-align: end">
+            <ion-button size="small" (click)="ramoEdit()">
+              <ion-icon name="pencil" color="white"></ion-icon>
+              <ion-label style="margin-top: 0px; margin-left: 6px"
+                >Editar</ion-label
+              >
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

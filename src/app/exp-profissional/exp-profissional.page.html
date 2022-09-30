@@ -1,0 +1,129 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="formEdu()" slot="start" style="padding-left: 15px">
+      <ion-icon name="arrow-back" class="light icone"></ion-icon>
+    </ion-buttons>
+    <ion-title class="centertext tituloPadding bold"
+      >Experiências profissionais <ion-icon name="briefcase"></ion-icon
+    ></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          >Empresa <span style="color: red">*</span></ion-label
+        >
+        <ion-input type="text" [(ngModel)]="experiencia.empresa"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          >Cargo <span style="color: red">*</span></ion-label
+        >
+        <ion-input [(ngModel)]="experiencia.cargo"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Data de início</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="experiencia.dtInicio"
+          placeholder=" "
+          mask="**/**/****"
+          maxlength="10"
+        >
+        </ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Data de Término</ion-label>
+        <ion-input type="text" [(ngModel)]="experiencia.dtFinal" placeholder=" " mask="**/**/****" disabled="{{checado}}" maxlength="10"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-checkbox
+          checked="{{checado}}"
+          (ionChange)="empregado($event)"
+        ></ion-checkbox>
+        <ion-label style="margin-left: 10px" class="bold"
+          >Emprego Atual?</ion-label
+        >
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          >Descrição <span style="color: red">*</span></ion-label
+        >
+        <ion-textarea
+          [(ngModel)]="experiencia.descricao"
+          maxlength="300"
+        ></ion-textarea>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="center ion-margin-top">
+      <ion-button color="primary" expand="block" (click)="addExperiencia()"
+        >Adicionar experiência</ion-button
+      >
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item lines="none">
+        <ion-list style="width: 100%">
+          <ion-item
+            *ngFor="let exp of experiencias"
+            lines="none"
+            class="border animate__animated animate__fadeInUp"
+          >
+            <ion-label class="ion-text-wrap">
+              <h2>{{exp.cargo}}</h2>
+              <p>{{exp.empresa}}</p>
+              <p>De {{exp.dtInicio}} {{exp.dtFinal}}</p>
+              <p>{{exp.descricao}}</p>
+            </ion-label>
+            <ion-icon
+              name="trash-outline"
+              slot="end"
+              color="danger"
+              (click)="delExperiencia(exp)"
+            ></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col class="center ion-margin-top">
+      <ion-button color="primary" (click)="confirmar()" expand="block"
+        >Cadastrar</ion-button
+      >
+    </ion-col>
+  </ion-row>
+</ion-footer>

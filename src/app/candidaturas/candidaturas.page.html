@@ -1,0 +1,440 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="home()" slot="start">
+      <ion-icon name="chevron-back" class="light icone"></ion-icon>Retornar
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="6">
+      <ion-item (click)="pendenteChk()">
+        <ion-checkbox color="secondary" checked="{{pendente}}"></ion-checkbox>
+        <ion-label class="bold labelChk">Pendentes</ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item (click)="confirmaChk()">
+        <ion-checkbox color="secondary" checked="{{confirmada}}"></ion-checkbox>
+        <ion-label class="bold labelChk">Confirmados</ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <div *ngIf="itemAux.length < 1">
+    <br>
+    <div class="middle">
+      <img src="../../assets/empty.png" style="width: 360px; height: auto" />
+    </div>
+    <div class="centertext bold ion-text-wrap">
+      <h1 class="under">Nenhum candidato</h1>
+    </div>
+  </div>
+
+  <div *ngFor="let usuario of itemAux">
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{usuario.userId.nome}}</ion-card-title>
+            <div *ngFor="let cont of usuario.userId.contatos">
+              <ion-card-subtitle *ngIf="cont.validado"
+                >{{cont.contato}}</ion-card-subtitle
+              >
+            </div>
+            <ion-card-subtitle
+              >{{usuario.userId.descricaoUser}}</ion-card-subtitle
+            >
+            <div *ngFor="let candidatura of usuario.userId.candidaturas">
+              <div *ngIf="candidatura.vagaId === idVaga">
+                <br />
+                <ion-card-subtitle color="primary" *ngIf="usuario.aprovado"
+                  >Candidato aprovado <img src="../../assets/check.png"
+                /></ion-card-subtitle>
+                <ion-card-subtitle color="primary" *ngIf="usuario.entrevista === 'aprovado'"
+                  >Convidado para entrevista <img src="../../assets/check.png"
+                /></ion-card-subtitle>
+                <ion-card-subtitle color="danger" *ngIf="usuario.entrevista === 'recusado'"
+                >Rejeitado para entrevista <img src="../../assets/delete.png"
+              /></ion-card-subtitle>
+                <ion-card-subtitle color="danger" *ngIf="usuario.recusado"
+                  >Candidato recusado <img src="../../assets/delete.png"
+                /></ion-card-subtitle>
+                <ion-card-subtitle color="danger" *ngIf="usuario.recusado"
+                  >Recusado para entrevista <img src="../../assets/delete.png"
+                /></ion-card-subtitle>
+                <ion-card-subtitle
+                  color="warning"
+                  *ngIf="!usuario.recusado && !usuario.aprovado"
+                  >Candidato pendente <img src="../../assets/pendente.png"
+                /></ion-card-subtitle>
+                <ion-item-divider mode="md"> </ion-item-divider>
+                <ion-row>
+                  <ion-col>
+                    <ion-button
+                      size="small"
+                      expand="block"
+                      *ngIf="!usuario.recusado && !usuario.aprovado"
+                      (click)="convidar(usuario.userId)"
+                      >Convidar</ion-button
+                    >
+                  </ion-col>
+                  <ion-col>
+                    <ion-button
+                      size="small"
+                      expand="block"
+                      *ngIf="!usuario.recusado && !usuario.aprovado"
+                      color="danger"
+                      (click)="rejeitar(usuario.userId)"
+                      >Rejeitar</ion-button
+                    >
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!usuario.recusado && usuario.aprovado && usuario.entrevista === 'null'" >
+                  <ion-col>
+                    <ion-button
+                      size="small"
+                      expand="block"
+                      color="primary"
+                      (click)="entrevistar(usuario.userId)"
+                    >
+                      <ion-icon name="chatbubbles" color="light"></ion-icon>
+                      <ion-label class="labelChk">Entrevistar</ion-label>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-button
+                      size="small"
+                      expand="block"
+                      color="secondary"
+                      (click)="abreModal(true, usuario.userId._id)"
+                    >
+                      <ion-icon name="eye" color="light"></ion-icon>
+                      <ion-label class="labelChk">Visualizar</ion-label>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </div>
+          </ion-card-header>
+
+          <ion-card-content> </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-modal [isOpen]="isModalOpen" mode="md">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="abreModal(false, '')" color="secondary"
+              ><ion-icon
+                name="close"
+                color="danger"
+                style="font-size: 2rem"
+              ></ion-icon
+            ></ion-button>
+          </ion-buttons>
+          <ion-title class="centertext" mode="ios">Candidato</ion-title>
+          <!-- <ion-buttons slot="end">
+            <ion-button
+              color="secondary"
+              (click)="convidar('João do chocolate')"
+              >Aceitar</ion-button
+            >
+          </ion-buttons> -->
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <br />
+          <ion-row>
+            <ion-col size="12">
+              <ion-title class="bold centertext under"
+                >Dados Pessoais</ion-title
+              >
+            </ion-col>
+          </ion-row>
+
+          <br />
+          <ion-row>
+            <ion-title class="bold">{{user.nome}}</ion-title>
+          </ion-row>
+
+          <div style="margin-left: 15px">
+            <ion-row>
+              <ion-col>
+                <ion-label class="ion-text-wrap">
+                  <p class="bold">{{user.descricaoUser}}</p>
+                </ion-label>
+              </ion-col>
+            </ion-row>
+            <br />
+            <br />
+
+            <ion-row>
+              <ion-col>
+                <ion-label class="ion-text-wrap"
+                  ><span class="bold">E-Mail:</span> {{user.email}}</ion-label
+                >
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-label class="ion-text-wrap"
+                  ><span class="bold">Data nascimento:</span> {{user.dataNasc}}
+                </ion-label>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-label class="ion-text-wrap"
+                  ><span class="bold">Gênero:</span> {{user.genero}}</ion-label
+                >
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-label class="ion-text-wrap"
+                  ><span class="bold">Estado Civil:</span>
+                  {{user.estadoCivil}}</ion-label
+                >
+              </ion-col>
+            </ion-row>
+
+            <div *ngFor="let cont of user.contatos">
+              <ion-row>
+                <ion-col>
+                  <ion-label class="ion-text-wrap"
+                    ><span class="bold">{{cont.tipo}}:</span>
+                    {{cont.contato}}</ion-label
+                  >
+                </ion-col>
+              </ion-row>
+            </div>
+
+            <ion-row>
+              <ion-col>
+                <ion-label class="ion-text-wrap"
+                  ><span class="bold">CEP:</span> {{user.cep}}</ion-label
+                >
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-label class="ion-text-wrap"
+                  ><span class="bold">Endereço:</span> {{user.endereco}} -
+                  {{user.numero}} - {{user.bairro}}</ion-label
+                >
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-label class="ion-text-wrap"
+                  ><span class="bold">Cidade:</span> {{user.cidade}} -
+                  {{user.estado}}</ion-label
+                >
+              </ion-col>
+            </ion-row>
+
+            <br />
+            <ion-item-divider mode="md"> </ion-item-divider>
+            <ion-row>
+              <ion-col size="12">
+                <ion-title class="bold centertext under"
+                  >Formação Educacional</ion-title
+                >
+              </ion-col>
+            </ion-row>
+
+            <div *ngFor="let form of user.formacaoEdu">
+              <br />
+              <ion-card style="margin-left: 0px">
+                <ion-card-header>
+                  <ion-card-title class="ion-text-wrap"
+                    >{{form.curso}}</ion-card-title
+                  >
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-row>
+                    <ion-col>
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Nome instituição:</span>
+                        {{form.instituicao}}</ion-label
+                      >
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col>
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Nível:</span>
+                        {{form.nivel}}</ion-label
+                      >
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col>
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Situação:</span>
+                        <span
+                          *ngIf="form.situacao === 'Concluído'"
+                          style="color: #00bd2f"
+                        >
+                          {{form.situacao}}</span
+                        >
+                        <span
+                          *ngIf="form.situacao === 'Em andamento'"
+                          style="color: #ffc409"
+                        >
+                          {{form.situacao}}</span
+                        >
+                        <span
+                          *ngIf="form.situacao === 'Incompleto'"
+                          style="color: #eb445a"
+                        >
+                          {{form.situacao}}</span
+                        >
+                      </ion-label>
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+            </div>
+
+            <br />
+            <ion-item-divider mode="md"> </ion-item-divider>
+            <ion-row>
+              <ion-col size="12">
+                <ion-title class="bold centertext under"
+                  >Experiência profissional</ion-title
+                >
+              </ion-col>
+            </ion-row>
+
+            <div *ngFor="let emp of user.expProfissional">
+              <ion-card style="margin-left: 0px">
+                <ion-card-header>
+                  <ion-card-title class="ion-text-wrap"
+                    >{{emp.cargo}}</ion-card-title
+                  >
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-row>
+                    <ion-col>
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Empresa:</span>
+                        {{emp.empresa}}</ion-label
+                      >
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col>
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Data admissão:</span>
+                        {{emp.dtInicio}}</ion-label
+                      >
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col>
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Data demissão:</span>
+                        {{emp.dtFinal}}</ion-label
+                      >
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col>
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Descrição:</span>
+                        {{emp.descricao}}</ion-label
+                      >
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+            </div>
+
+            <br />
+            <ion-item-divider mode="md"> </ion-item-divider>
+            <ion-row>
+              <ion-col size="12">
+                <ion-title class="bold centertext under">Cursos</ion-title>
+              </ion-col>
+            </ion-row>
+
+            <div *ngFor="let curso of user.cursos">
+              <ion-card style="margin-left: 0px">
+                <ion-card-header>
+                  <ion-card-title class="ion-text-wrap"
+                    >{{curso.nome}}</ion-card-title
+                  >
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-row>
+                    <ion-col>
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Nome Instituição:</span>
+                        {{curso.instituicao}}</ion-label
+                      >
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+            </div>
+
+            <br />
+            <ion-item-divider mode="md"> </ion-item-divider>
+            <ion-row>
+              <ion-col size="12">
+                <ion-title class="bold centertext under">Idiomas</ion-title>
+              </ion-col>
+            </ion-row>
+            <div *ngFor="let idioma of user.idiomas">
+              <ion-card style="margin-left: 0px">
+                <ion-card-header style="padding: 1rem 1rem 0px 22px">
+                  <!-- <ion-card-title class="ion-text-wrap">{{curso.nome}}</ion-card-title> -->
+                  <img class="bandeiraCard" src="{{idioma.bandeira}}" />
+                </ion-card-header>
+                <ion-card-content>
+                  <ion-row>
+                    <ion-col style="padding-bottom: 0px">
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Idioma:</span> {{idioma.idioma}}
+                      </ion-label>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col>
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Nível:</span>
+                        {{idioma.nivel}}</ion-label
+                      >
+                    </ion-col>
+                  </ion-row>
+                </ion-card-content>
+              </ion-card>
+            </div>
+          </div>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

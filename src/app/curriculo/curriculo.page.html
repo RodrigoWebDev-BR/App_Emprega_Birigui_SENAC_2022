@@ -1,0 +1,1145 @@
+<ion-header [translucent]="true" mode="md">
+  <ion-toolbar color="primary">
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none" color="primary">
+          <ion-thumbnail slot="start">
+            <img *ngIf="empregado" src="../../assets/icon/user.png" />
+            <img *ngIf="empresa" src="../../assets/icon/buildings.png" />
+          </ion-thumbnail>
+          <ion-label class="bold" class="ion-text-wrap">
+            <h1 *ngIf="empregado" style="margin-bottom: 0px; font-weight: bold">
+              {{perfil.nome}}
+            </h1>
+            <h1 *ngIf="empresa" style="margin-bottom: 0px; font-weight: bold">
+              {{perfil.nomeEmpresa}}
+            </h1>
+            <p style="margin-top: 5px">{{contatoPrincipal}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header> 
+
+<ion-content>
+  <!-- <ion-row>
+    <ion-col>
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img *ngIf="empregado" src="../../assets/icon/user.png" />
+          <img *ngIf="empresa" src="../../assets/icon/buildings.png" />
+        </ion-thumbnail>
+        <ion-label class="bold" class="ion-text-wrap">
+          <h1 *ngIf="empregado" style="margin-bottom: 0px; font-weight: bold">
+            {{perfil.nome}}
+          </h1>
+          <h1 *ngIf="empresa" style="margin-bottom: 0px; font-weight: bold">
+            {{perfil.nomeEmpresa}}
+          </h1>
+          <p style="margin-top: 5px">{{contatoPrincipal}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row> -->
+
+  <ion-row>
+    <ion-col>
+      <!-- ! Empregado -->
+      <ion-accordion-group *ngIf="empregado">
+        <ion-accordion value="dadosP">
+          <ion-item slot="header" color="light">
+            <ion-label>Dados Pessoais</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end">
+                    <ion-button (click)="abreModal(true, 'pessoal')">
+                      <ion-label style="margin-top: 3px">Editar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="pencil"
+                        color="light"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">E-Mail:</span>
+                        {{perfil.email}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">RG:</span> {{perfil.rg}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">CPF:</span>
+                        {{perfil.cpf}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Nascimento:</span>
+                        {{perfil.dataNasc}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Gênero:</span>
+                        {{perfil.genero}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Estado Civil:</span>
+                        {{perfil.estadoCivil}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Senha:</span> **********</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion value="endereco">
+          <ion-item slot="header" color="light">
+            <ion-label>Endereço</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end">
+                    <ion-button (click)="abreModal(true, 'endereco')">
+                      <ion-label style="margin-top: 3px">Editar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="pencil"
+                        color="light"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">CEP:</span>
+                        {{perfil.cep}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Endereço:</span>
+                        {{perfil.endereco}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Número:</span>
+                        {{perfil.numero}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label *ngIf="perfil.complemento !== ''"
+                        ><span class="bold">Complemento:</span>
+                        {{perfil.complemento}}</ion-label
+                      >
+                      <ion-label *ngIf="perfil.complemento === ''"
+                        ><span class="bold">Complemento:</span> -</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Bairro:</span>
+                        {{perfil.bairro}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Cidade:</span> {{perfil.cidade}} -
+                        {{perfil.estado}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion value="contato">
+          <ion-item slot="header" color="light">
+            <ion-label>Contatos</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end">
+                    <ion-button (click)="abreModal(true, 'contatos')">
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="add-circle"
+                        color="light"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <div *ngFor="let contact of perfil.contatos">
+                    <ion-item style="margin-top: 10px">
+                      <ion-label>
+                        <h2>{{contact.contato}}</h2>
+                        <p>
+                          {{contact.tipo}}
+                          <span *ngIf="contact.validado"
+                            >-<span style="color: #00bd2f">
+                              Contato Princial</span
+                            ></span
+                          >
+                        </p>
+                      </ion-label>
+                      <ion-icon
+                        name="trash-outline"
+                        color="danger"
+                        (click)="removerDados(contact, 'contatos')"
+                      ></ion-icon>
+                    </ion-item>
+                  </div>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion value="formacao">
+          <ion-item slot="header" color="light">
+            <ion-label>Formações educacionais</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end">
+                    <ion-button (click)="abreModal(true, 'formEdu')">
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="add-circle"
+                        color="light"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <div *ngFor="let forms of perfil.formacaoEdu">
+                    <ion-item style="margin-top: 10px">
+                      <ion-label>
+                        <h2>{{forms.instituicao }}</h2>
+                        <h2>{{forms.curso }}</h2>
+                        <p *ngIf="forms.situacao === 'Concluído'">
+                          {{forms.nivel }} -
+                          <span
+                            style="color: #00bd2f; text-decoration: underline"
+                          >
+                            {{forms.situacao }}</span
+                          >
+                        </p>
+                        <p *ngIf="forms.situacao === 'Em andamento'">
+                          {{forms.nivel }} -
+                          <span
+                            style="color: #ffc409; text-decoration: underline"
+                          >
+                            {{forms.situacao }}</span
+                          >
+                        </p>
+                        <p *ngIf="forms.situacao === 'Incompleto'">
+                          {{forms.nivel }} -
+                          <span
+                            style="color: #eb445a; text-decoration: underline"
+                          >
+                            {{forms.situacao }}</span
+                          >
+                        </p>
+                      </ion-label>
+                      <ion-icon
+                        name="trash-outline"
+                        color="danger"
+                        (click)="removerDados(forms, 'formacaoEdu')"
+                      ></ion-icon>
+                    </ion-item>
+                  </div>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion value="exp">
+          <ion-item slot="header" color="light">
+            <ion-label>Experiências profissionais</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end">
+                    <ion-button (click)="abreModal(true, 'expP')">
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="add-circle"
+                        color="light"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <div
+                    *ngFor="let exp of perfil.expProfissional
+                  "
+                  >
+                    <ion-item style="margin-top: 10px">
+                      <ion-label>
+                        <h2>{{exp.empresa}} - {{exp.cargo}}</h2>
+                        <h3 >
+                          {{exp.dtInicio }} - {{exp.dtFinal}}
+                        </h3>
+                        <p>{{exp.descricao}}</p>
+                      </ion-label>
+                      <ion-icon
+                        name="trash-outline"
+                        color="danger"
+                        (click)="removerDados(exp, 'expProfissional')"
+                      ></ion-icon>
+                    </ion-item>
+                  </div>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion value="cursos">
+          <ion-item slot="header" color="light">
+            <ion-label>Cursos</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end">
+                    <ion-button (click)="abreModal(true, 'cursos')">
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="add-circle"
+                        color="light"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <div *ngFor="let curso of perfil.cursos">
+                    <ion-item style="margin-top: 10px">
+                      <ion-label>
+                        <h2>{{curso.nome}}</h2>
+                        <p>{{curso.instituicao}}</p>
+                      </ion-label>
+                      <ion-icon
+                        name="trash-outline"
+                        color="danger"
+                        (click)="removerDados(curso, 'cursos')"
+                      ></ion-icon>
+                    </ion-item>
+                  </div>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion value="idioma">
+          <ion-item slot="header" color="light">
+            <ion-label>Idiomas</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end">
+                    <ion-button (click)="abreModal(true, 'idiomas')">
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="add-circle"
+                        color="light"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <div *ngFor="let idioma of perfil.idiomas">
+                    <ion-item style="margin-top: 10px">
+                      <img
+                        class="bandeira imgBandeira"
+                        src="{{idioma.bandeira}}"
+                      />
+                      <ion-label class="labelIdioma">
+                        <h2>{{idioma.idioma}}</h2>
+                        <p *ngIf="idioma.nivel === 'iniciante'">Iniciante</p>
+                        <p *ngIf="idioma.nivel === 'basico'">Intermediário</p>
+                        <p *ngIf="idioma.nivel === 'avancado'">Avançado</p>
+                        <p *ngIf="idioma.nivel === 'fluente'">Fluente</p>
+                      </ion-label>
+                      <ion-icon
+                        name="trash-outline"
+                        color="danger"
+                        (click)="removerDados(idioma, 'idiomas')"
+                      ></ion-icon>
+                    </ion-item>
+                  </div>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+
+      <!-- ! Empresa -->
+      <ion-accordion-group *ngIf="empresa">
+        <ion-accordion value="dadosP">
+          <ion-item slot="header" color="light">
+            <ion-label>Dados Empresa</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end">
+                    <ion-button (click)="abreModal(true, 'pessoalEmpresa')">
+                      <ion-label style="margin-top: 3px">Editar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="pencil"
+                        color="light"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Nome Fantasia:</span>
+                        {{perfil.fantasia}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">E-Mail:</span>
+                        {{perfil.email}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">CNPJ:</span>
+                        {{perfil.cnpj}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Data abertura:</span>
+                        {{perfil.dataAb}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">CNAE:</span>
+                        {{perfil.cnae}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Situação:</span>
+                        {{perfil.situacao}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Natureza Jurídica:</span>
+                        {{perfil.natureza}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Ramo empresarial:</span>
+                        {{perfil.ramo}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <br />
+                    <ion-row>
+                      <ion-label class="ion-text-wrap"
+                        ><span class="bold">Descrição:</span>
+                        {{perfil.descricaoEmpresa}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion value="endereco">
+          <ion-item slot="header" color="light">
+            <ion-label>Endereço</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end">
+                    <ion-button (click)="abreModal(true, 'endereco')">
+                      <ion-label style="margin-top: 3px">Editar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="pencil"
+                        color="light"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">CEP:</span>
+                        {{perfil.cep}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Endereço:</span>
+                        {{perfil.endereco}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Número:</span>
+                        {{perfil.numero}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Complemento:</span>
+                        {{perfil.complemento}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Bairro:</span>
+                        {{perfil.bairro}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                  <ion-item>
+                    <ion-row>
+                      <ion-label
+                        ><span class="bold">Cidade:</span> {{perfil.cidade}} -
+                        {{perfil.estado}}</ion-label
+                      >
+                    </ion-row>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+
+        <ion-accordion value="contato">
+          <ion-item slot="header" color="light">
+            <ion-label>Contatos</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-row>
+              <ion-col>
+                <ion-list>
+                  <ion-row style="display: flex; justify-content: flex-end">
+                    <ion-button (click)="abreModal(true, 'contatos')">
+                      <ion-label style="margin-top: 3px">Adicionar</ion-label>
+                      <ion-icon
+                        class="iconEditar"
+                        name="add-circle"
+                        color="light"
+                      ></ion-icon>
+                    </ion-button>
+                  </ion-row>
+                  <div *ngFor="let contact of perfil.contatos">
+                    <ion-item style="margin-top: 10px">
+                      <ion-label>
+                        <h2>{{contact.contato}}</h2>
+                        <p>
+                          {{contact.tipo}}
+                          <span *ngIf="contact.validado"
+                            >-<span style="color: #00bd2f">
+                              Contato Princial</span
+                            ></span
+                          >
+                        </p>
+                      </ion-label>
+                      <ion-icon
+                        name="trash-outline"
+                        color="danger"
+                        (click)="removerDados(contact, 'contatos')"
+                      ></ion-icon>
+                    </ion-item>
+                  </div>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-col>
+  </ion-row>
+
+  <ion-modal [isOpen]="modal.modalPessoalEmpregado">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="abreModal(false, 'pessoal')" color="secondary"
+              >Fechar</ion-button
+            >
+          </ion-buttons>
+          <ion-title class="centertext">EDITAR</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="secondary" (click)="updateDados()"
+              >Salvar</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-item lines="none">
+            <ion-label position="floating">Nome</ion-label>
+            <ion-input [(ngModel)]="dadosEmpregado.nome"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">E-Mail</ion-label>
+            <ion-input [(ngModel)]="dadosEmpregado.email"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">RG</ion-label>
+            <ion-input [(ngModel)]="dadosEmpregado.rg"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">CPF</ion-label>
+            <ion-input
+              [(ngModel)]="dadosEmpregado.cpf"
+              (ionBlur)="formataCpf()"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Estado Civil</ion-label>
+            <ion-select
+              interface="popover"
+              [(ngModel)]="dadosEmpregado.estadoCivil"
+            >
+              <ion-select-option
+                *ngFor="let etCvl of estadoCivil"
+                value="{{ etCvl.estadoAtual }}"
+                >{{ etCvl.estadoAtual }}</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="modal.modalPessoalEmpresa">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button
+              (click)="abreModal(false, 'pessoalEmpresa')"
+              color="secondary"
+              >Fechar</ion-button
+            >
+          </ion-buttons>
+          <ion-title class="centertext">EDITAR</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="secondary" (click)="updateDadosEmpresa()"
+              >Salvar</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-item lines="none">
+            <ion-label position="floating">Nome Fantasia</ion-label>
+            <ion-input [(ngModel)]="dadosEmpresa.fantasia"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">E-Mail</ion-label>
+            <ion-input [(ngModel)]="dadosEmpresa.email"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">CNPJ</ion-label>
+            <ion-input [(ngModel)]="dadosEmpresa.cnpj"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">CNAE</ion-label>
+            <ion-input [(ngModel)]="dadosEmpresa.cnae"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Situação</ion-label>
+            <ion-select interface="popover" [(ngModel)]="dadosEmpresa.situacao">
+              <ion-select-option
+                *ngFor="let sit of situacoes"
+                value="{{ sit.sitAtual }}"
+                >{{ sit.sitAtual }}</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Natureza Jurídica</ion-label>
+            <ion-select interface="popover" [(ngModel)]="dadosEmpresa.natureza">
+              <ion-select-option
+                *ngFor="let nat of naturezas"
+                value="{{ nat.naturezas }}"
+                >{{ nat.naturezas }}</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Ramo</ion-label>
+            <ion-select interface="popover" [(ngModel)]="dadosEmpresa.ramo">
+              <ion-select-option
+                *ngFor="let ramo of ramos"
+                value="{{ ramo.nome }}"
+                >{{ ramo.nome }}</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="modal.modalEndereco">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="abreModal(false, 'endereco')" color="secondary"
+              >Fechar</ion-button
+            >
+          </ion-buttons>
+          <ion-title class="centertext">EDITAR</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="secondary" (click)="updateDadosEndereco()"
+              >Salvar</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-item lines="none">
+            <ion-label position="floating">CEP</ion-label>
+            <ion-input
+              [(ngModel)]="enderecos.cep"
+              (ionChange)="searchCEP($event)"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Endereço</ion-label>
+            <ion-input [(ngModel)]="enderecos.endereco"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Número</ion-label>
+            <ion-input [(ngModel)]="enderecos.numero"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Complemento</ion-label>
+            <ion-input [(ngModel)]="enderecos.complemento"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Bairro</ion-label>
+            <ion-input [(ngModel)]="enderecos.bairro"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Cidade</ion-label>
+            <ion-input [(ngModel)]="enderecos.cidade"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">Estado</ion-label>
+            <ion-input [(ngModel)]="enderecos.estado"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="modal.modalContatos">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="abreModal(false, 'contatos')" color="secondary"
+              >Fechar</ion-button
+            >
+          </ion-buttons>
+          <ion-title class="centertext">EDITAR</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="secondary" (click)="verificaContatos()"
+              >Adicionar</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Tipo de contato</ion-label>
+            <ion-select style="width: 100%" [(ngModel)]="contatos.tipo">
+              <ion-select-option
+                *ngFor="let tipo of tipoContato"
+                value="{{tipo.nome}}"
+                >{{tipo.nome}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Contato</ion-label>
+            <ion-input type="text" [(ngModel)]="contatos.contato"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="modal.modalFormacao">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="abreModal(false, 'formEdu')" color="secondary"
+              >Fechar</ion-button
+            >
+          </ion-buttons>
+          <ion-title class="centertext">EDITAR</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="secondary" (click)="addFormacao()"
+              >Adicionar</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Nome Instituição</ion-label>
+            <ion-input type="text" [(ngModel)]="formacao.instituicao">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nome Curso</ion-label>
+            <ion-input type="text" [(ngModel)]="formacao.curso"> </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nível</ion-label>
+            <ion-select style="width: 100%" [(ngModel)]="formacao.nivel">
+              <ion-select-option
+                *ngFor="let form of formacoes"
+                value="{{form.nivel}}"
+                >{{form.nivel}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Situação</ion-label>
+            <ion-select style="width: 100%" [(ngModel)]="formacao.situacao">
+              <ion-select-option
+                *ngFor="let con of conclusoes"
+                value="{{con.resp}}"
+                >{{con.resp}}</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="modal.modalExp">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="abreModal(false, 'expP')" color="secondary"
+              >Fechar</ion-button
+            >
+          </ion-buttons>
+          <ion-title class="centertext">EDITAR</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="secondary" (click)="addExp()"
+              >Adicionar</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Empresa</ion-label>
+            <ion-input
+              type="text"
+              [(ngModel)]="experiencia.empresa"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Cargo</ion-label>
+            <ion-input type="text" [(ngModel)]="experiencia.cargo"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Data de início</ion-label>
+            <ion-input
+              type="date"
+              placeholder=" "
+              [(ngModel)]="experiencia.dtInicio"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Data de Término</ion-label>
+            <ion-input
+              type="date"
+              [(ngModel)]="experiencia.dtFinal"
+              placeholder=" "
+              disabled="{{checado}}"
+            ></ion-input>
+          </ion-item>
+
+          <br />
+          <ion-item>
+            <ion-checkbox
+              checked="{{checado}}"
+              (ionChange)="atualChk($event)"
+            ></ion-checkbox>
+            <ion-label style="margin-left: 10px">Emprego Atual?</ion-label>
+          </ion-item>
+          <br />
+          <ion-item>
+            <ion-label position="floating">Descrição</ion-label>
+            <ion-input
+              type="text"
+              maxlength="300"
+              [(ngModel)]="experiencia.descricao"
+            ></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="modal.modalCursos">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="abreModal(false, 'cursos')" color="secondary"
+              >Fechar</ion-button
+            >
+          </ion-buttons>
+          <ion-title class="centertext">EDITAR</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="secondary" (click)="addCurso()"
+              >Adicionar</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Nome curso</ion-label>
+            <ion-input type="text" [(ngModel)]="curso.nome"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nome instituição</ion-label>
+            <ion-input type="text" [(ngModel)]="curso.instituicao"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="modal.modalIdiomas">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="abreModal(false, 'idiomas')" color="secondary"
+              >Fechar</ion-button
+            >
+          </ion-buttons>
+          <ion-title class="centertext">EDITAR</ion-title>
+          <ion-buttons slot="end">
+            <ion-button color="secondary" (click)="addIdioma()"
+              >Adicionar</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Idioma</ion-label>
+            <ion-select style="width: 100%" [(ngModel)]="idioma.idioma">
+              <ion-select-option
+                *ngFor="let idm of tipoIdioma"
+                value="{{idm.nome}}"
+                >{{idm.nome}}</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Nível do idioma</ion-label>
+            <ion-select style="width: 100%" [(ngModel)]="idioma.nivel">
+              <ion-select-option value="iniciante">Iniciante</ion-select-option>
+              <ion-select-option value="basico"
+                >Intermediário</ion-select-option
+              >
+              <ion-select-option value="avancado">Avançado</ion-select-option>
+              <ion-select-option value="fluente">Fluente</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-fab vertical="bottom" horizontal="end" edge slot="fixed" style="margin-bottom: 3rem; margin-right: 1rem;" class="foot">
+    <ion-fab-button color="danger" (click)="logout()">
+      <ion-icon name="power"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer [translucent]="true" class="foot" *ngIf="empresa">
+  <ion-toolbar color="primary">
+    <ion-segment value="person">
+      <ion-segment-button value="home" (click)="home()">
+        <ion-icon name="home"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="vagas" (click)="novaVaga()">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="person">
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer [translucent]="true" *ngIf="empregado" class="foot">
+  <ion-toolbar color="primary">
+    <ion-segment value="person">
+      <ion-segment-button value="home" (click)="home()">
+        <ion-icon name="home"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="person">
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="search" (click)="vagas()">
+        <ion-icon name="search"></ion-icon>
+      </ion-segment-button>
+      <!-- <ion-segment-button value="notifications" (click)="notifi()">
+        <ion-icon name="notifications"></ion-icon>
+      </ion-segment-button> -->
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

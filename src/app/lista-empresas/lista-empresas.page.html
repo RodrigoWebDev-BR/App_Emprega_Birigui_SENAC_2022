@@ -1,0 +1,233 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="home()" slot="start" style="padding-left: 15px">
+      <ion-icon name="chevron-back" class="light icone"></ion-icon>Retornar
+    </ion-buttons>
+    <ion-title class="centertext bold">Lista de empresas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col size="6">
+      <ion-item (click)="pendenteChk()">
+        <ion-checkbox color="secondary" checked="{{pendente}}"></ion-checkbox>
+        <ion-label class="bold labelChk">Pendentes</ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col size="6">
+      <ion-item (click)="confirmaChk()">
+        <ion-checkbox color="secondary" checked="{{confirmada}}"></ion-checkbox>
+        <ion-label class="bold labelChk">Confirmadas</ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <br />
+  <div *ngFor="let empresa of itemAux">
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{empresa.nomeEmpresa}}</ion-card-title>
+            <div *ngFor="let contatos of empresa.contatos">
+              <ion-card-subtitle *ngIf="contatos.validado"
+                >{{contatos.tipo}} - {{contatos.contato}}</ion-card-subtitle
+              >
+            </div>
+            <ion-card-subtitle
+              color="primary"
+              *ngIf="empresa.aceita && !empresa.recusada"
+              >Empresa autorizada <img src="../../assets/check.png"
+            /></ion-card-subtitle>
+            <ion-card-subtitle
+              color="danger"
+              *ngIf="!empresa.aceita && empresa.recusada"
+              >Empresa recusada <img src="../../assets/delete.png"
+            /></ion-card-subtitle>
+            <ion-card-subtitle
+              color="warning"
+              *ngIf="!empresa.recusada && !empresa.aceita"
+              >Empresa pendente <img src="../../assets/pendente.png"
+            /></ion-card-subtitle>
+
+            <ion-button
+              size="small"
+              *ngIf="!empresa.recusada && !empresa.aceita"
+              (click)="aceitar(empresa)"
+              >Aceitar</ion-button
+            >
+            <ion-button
+              size="small"
+              *ngIf="!empresa.recusada && !empresa.aceita"
+              color="danger"
+              (click)="rejeitar(empresa)"
+              >Rejeitar</ion-button
+            >
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-accordion-group>
+              <ion-accordion value="empresa._id">
+                <ion-item slot="header" color="light">
+                  <ion-label>Dados de {{empresa.nomeEmpresa}}</ion-label>
+                </ion-item>
+                <div slot="content">
+                  <ion-row>
+                    <ion-col>
+                      <ion-list>
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">Nome Fantasia:</span>
+                              {{empresa.fantasia}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">CNPJ:</span> {{empresa.cnpj}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">E-Mail:</span>
+                              {{empresa.email}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">Data abertura:</span>
+                              {{empresa.dataAb}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">CNAE:</span> {{empresa.cnae}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold"> Situação:</span>
+                              {{empresa.situacao}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">Natureza:</span>
+                              {{empresa.natureza}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">CEP:</span> {{empresa.cep}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">Endereço:</span>
+                              {{empresa.endereco}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">Número:</span>
+                              {{empresa.numero}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">Bairro:</span>
+                              {{empresa.bairro}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">Cidade:</span>
+                              {{empresa.cidade}} - {{empresa.estado}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">Ramo empresarial:</span>
+                              {{empresa.ramo}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold"> Descrição completa:</span>
+                              {{empresa.descricaoEmpresa}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+                        <br />
+                        <div *ngFor="let contatos of empresa.contatos">
+                          <ion-item *ngIf="contatos.tipo === 'Celular' || contatos.tipo === 'Telefone'">
+                            <ion-row>
+                              <ion-label class="ion-text-wrap">
+                                <span class="bold">Contato:</span>
+                                {{contatos.tipo}} - {{contatos.contato}}
+                              </ion-label>
+                            </ion-row>
+                          </ion-item>
+                        </div>
+                        <div *ngFor="let contatos of empresa.contatos">
+                          <ion-item *ngIf="contatos.tipo === 'LinkedIn' || contatos.tipo === 'Instagram' || contatos.tipo === 'Facebook'">
+                            <ion-row>
+                              <ion-label class="ion-text-wrap">
+                                <span class="bold">Redes Sociais:</span>
+                                {{contatos.tipo}} - {{contatos.contato}}
+                              </ion-label>
+                            </ion-row>
+                          </ion-item>
+                        </div>
+                      </ion-list>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </ion-accordion>
+            </ion-accordion-group>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

@@ -1,0 +1,45 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="login()" slot="start">
+      <ion-icon name="arrow-back" class="light icone"></ion-icon>
+    </ion-buttons>
+    <ion-title class="centertext tituloPadding bold">Cadastrar como</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content mode="md">
+
+  <div class="divisao background">
+
+    <ion-row class="linha">
+
+      <ion-col size="6" (click)="usuario()">
+        <ion-card>
+          <ion-card-header class="centertext">
+            <ion-card-title>Pessoa</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content class="centertext" style="font-size: 100px;">
+            <ion-icon name="accessibility" color="success"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" (click)="empresa()">
+        <ion-card>
+          <ion-card-header class="centertext">
+            <ion-card-title>Empresa</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content class="centertext" style="font-size: 100px;">
+            <ion-icon name="business" color="success"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+
+  </div>
+
+
+</ion-content>

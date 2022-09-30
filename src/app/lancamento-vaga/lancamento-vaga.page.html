@@ -1,0 +1,434 @@
+<ion-header mode="md">
+  <ion-toolbar color="primary">
+    <ion-buttons (click)="home()" slot="start" style="padding-left: 15px;">
+      <ion-icon name="chevron-back" class="light icone"></ion-icon>Retornar
+    </ion-buttons> 
+    <ion-button
+      slot="end"
+      color="light"
+      fill="outline"
+      size="small"
+      style="margin-right: 10px"
+      (click)="abreModal(true)"
+      >Disponibilizar</ion-button
+    >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Empresa</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="vaga.nomeEmpresa"
+          disabled="true"
+        ></ion-input>
+        <ion-icon name="business-outline" slot="end" class="iconPad"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating">Cidade</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="vaga.cidade"
+          disabled="true"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          >Titulo da vaga <span style="color: red">*</span></ion-label
+        >
+        <ion-input type="text" [(ngModel)]="vaga.tituloVaga"></ion-input>
+        <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          >Categoria vaga <span style="color: red">*</span></ion-label
+        >
+        <ion-select [(ngModel)]="vaga.categoria" interface="popover">
+          <ion-select-option *ngFor="let ca of categorias" value="{{ ca.nome }}"
+            >{{ ca.nome }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          >Tipo contrato <span style="color: red">*</span></ion-label
+        >
+        <ion-select [(ngModel)]="vaga.contrato" interface="popover">
+          <ion-select-option
+            *ngFor="let con of contratos"
+            value="{{ con.nome }}"
+            >{{ con.nome }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          >Prazo contrato <span style="color: red">*</span></ion-label
+        >
+        <ion-select [(ngModel)]="vaga.prazo" interface="popover">
+          <ion-select-option *ngFor="let pr of prazos" value="{{ pr.nome }}"
+            >{{ pr.nome }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="4">
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          ><span style="color: red">*</span></ion-label
+        >
+        <ion-input type="text" [(ngModel)]="vaga.horario"></ion-input>
+        <ion-icon name="time-outline" slot="end" class="iconPad"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col size="8" class="horas bold">
+      <ion-label> Hora(s) semanais</ion-label>
+    </ion-col>
+  </ion-row>
+
+  <ion-row (click)="scrolldiv('qualificacao')">
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-checkbox
+          checked="false"
+          (ionChange)="combinar($event)"
+        ></ion-checkbox>
+        <ion-label class="labelChk">A combinar? </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          >Salário <span style="color: red">*</span></ion-label
+        >
+        <ion-input
+          type="text"
+          [(ngModel)]="vaga.salario"
+          placeholder="Ex: 2000"
+          disabled="{{vaga.combinado}}"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row id="qualificacao">
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          >Qualificação <span style="color: red">*</span></ion-label
+        >
+        <ion-select [(ngModel)]="vaga.qualificacao" interface="popover">
+          <ion-select-option
+            *ngFor="let quali of qualificacoes"
+            value="{{ quali.nivel }}"
+            >{{ quali.nivel }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          >Vale alimentação <span style="color: red">*</span></ion-label
+        >
+        <ion-select [(ngModel)]="vaga.alimentacao" interface="popover">
+          <ion-select-option *ngFor="let inc of inclusos" value="{{ inc.nome }}"
+            >{{ inc.nome }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" lines="none">
+        <ion-label position="floating"
+          >Assistênia médica <span style="color: red">*</span></ion-label
+        >
+        <ion-select [(ngModel)]="vaga.medica" interface="popover">
+          <ion-select-option *ngFor="let inc of inclusos" value="{{ inc.nome }}"
+            >{{ inc.nome }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <br />
+  <ion-label class="labelIdioma bold">Quantidade vagas: {{ vaga.qtde }}</ion-label>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-range (ionChange)="onIonChange($event)"></ion-range>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput">
+        <ion-label position="floating"
+          >Descrição <span style="color: red">*</span></ion-label
+        >
+        <ion-textarea
+          placeholder="Detalhes sobre a vaga"
+          [(ngModel)]="vaga.descricao"
+        ></ion-textarea>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row (click)="detalhes()">
+    <ion-col>
+      <ion-item class="roundedInput" >
+        <ion-label position="floating"
+          >Mensagem para entrevista <span style="color: red">*</span></ion-label
+        >
+        <ion-textarea
+          [(ngModel)]="vaga.msgEntrevista"
+        ></ion-textarea>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="centertext" size="12">
+      <h2>Benefícios +</h2>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item class="roundedInput" line="none">
+        <ion-input
+          type="text"
+          placeholder="Ex: Cesta básica"
+          [(ngModel)]="beneficio"
+        ></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-button color="primary" shape="block" (click)="addBeneficio()">
+        ADICIONAR BENEFÍCIO
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <div *ngIf="beneficios?.length > 0" class="espacamento">
+    <hr />
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-list style="width: 100%">
+            <div
+              *ngFor="let benef of beneficios"
+              lines="none"
+              class="animate__animated animate__fadeInUp"
+            >
+              <ion-item>
+                <ion-label>
+                  <h4>{{benef}}</h4>
+                </ion-label>
+                <ion-icon
+                  name="trash-outline"
+                  color="danger"
+                  (click)="removerBenef(benef)"
+                  style="width: 30px; height: 30px"
+                ></ion-icon>
+              </ion-item>
+            </div>
+          </ion-list>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <ion-row>
+    <ion-col class="espacamento">
+      <ion-button color="primary" shape="block" (click)="abreModal(true)"
+        >Disponibilizar Vaga</ion-button
+      >
+    </ion-col>
+  </ion-row>
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header mode="ios">
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="abreModal(false)" color="secondary"
+              >Cancelar</ion-button
+            >
+          </ion-buttons>
+          <ion-title class="centertext">REVISAR VAGA</ion-title>
+          <ion-buttons slot="end" (click)="lancarVaga(vaga)">
+            <ion-button color="secondary">Lançar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="business" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>Nome Empresa</h2>
+              <p>{{vaga.nomeEmpresa}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="location" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>Cidade</h2>
+              <p>{{vaga.cidade}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="briefcase" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>Vaga</h2>
+              <p *ngIf="vaga.qtde > 1">
+                {{vaga.tituloVaga}} - {{vaga.qtde}} Vagas
+              </p>
+              <p *ngIf="vaga.qtde === 1">{{vaga.tituloVaga}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="golf" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>Categoria</h2>
+              <p>{{vaga.categoria}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="reader" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>Tipo de contrato</h2>
+              <p>{{vaga.contrato}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="hourglass" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>Prazo do contrato</h2>
+              <p>{{vaga.prazo}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="time" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>Carga horária</h2>
+              <p>{{vaga.horario}} hora(s) semanais</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="cash" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>Salário</h2>
+              <p *ngIf="vaga.combinado">A combinar</p>
+              <p *ngIf="!vaga.combinado">
+                R$ {{vaga.salario}}.<small>00</small>
+              </p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="medal" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>Qualificações</h2>
+              <p>{{vaga.qualificacao}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="nutrition" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>Vale alimentação</h2>
+              <p>{{vaga.alimentacao}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="medkit" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>Assistência médica</h2>
+              <p>{{vaga.medica}}</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item line="none" *ngIf="beneficios.length > 0">
+            <ion-icon name="accessibility" color="dark"></ion-icon>
+            <ion-label class="paddingLabel">
+              <h2>+ Benefícios</h2>
+              <div *ngFor="let benef of beneficios">
+                <ion-label>
+                  <p>{{benef}}</p>
+                </ion-label>
+              </div>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="receipt" color="dark"></ion-icon>
+            <ion-label class="paddingLabel ion-text-wrap">
+              <h2>Descrição</h2>
+              <p>{{vaga.descricao}}</p>
+            </ion-label>
+          </ion-item>
+          <br />
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
