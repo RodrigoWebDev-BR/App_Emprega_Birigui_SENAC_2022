@@ -129,7 +129,7 @@
     </div>
   </div>
 
-  <div class="divisao" *ngIf="master">
+  <div class="divisao" *ngIf="master" mode="md">
     <ion-row class="linha">
       <ion-col (click)="listausers()">
         <ion-card>
@@ -301,9 +301,9 @@
       <ion-segment-button value="search" (click)="vagas()">
         <ion-icon name="search"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="notifications" (click)="notifi()">
+      <!-- <ion-segment-button value="notifications" (click)="notifi()">
         <ion-icon name="notifications" color="danger"></ion-icon>
-      </ion-segment-button>
+      </ion-segment-button> -->
     </ion-segment>
   </ion-toolbar>
 </ion-footer>

@@ -8,7 +8,7 @@
 
   <ion-row>
     <ion-col>
-      <img class="logo" src="/assets/logo.png">
+      <img class="logo" src="/assets/logoPrincipal.png">
     </ion-col>
   </ion-row>
 
@@ -51,17 +51,28 @@
 
   <ion-row class="iconPad" >
     <ion-col class="espacamento">
-      <ion-item lines="none" (click)="cadastro()">
-        <h2 class="txtNewAccount black center">Não possui uma conta? <span style="color:blue">Clique aqui e cadastre-se</span></h2>
+      <ion-item lines="none" (click)="cadastro()" style="--background: rgba(255, 255, 255, 0);">
+        <h2 class="txtNewAccount black center bold">Não possui uma conta? <span style="color:blue" class="under">Clique aqui e cadastre-se</span></h2>
       </ion-item>
     </ion-col>
   </ion-row>
 
   <ion-row>
     <ion-col class="espacamento ">
-      <ion-item lines="none" (click)="recuperacao()">
-        <h2 class="txtPassword black center">Esqueceu sua senha?</h2>
+      <ion-item lines="none" (click)="recuperacao()" style="--background: rgba(255, 255, 255, 0);">
+        <h2 class="txtPassword black center bold under">Esqueceu sua senha?</h2>
       </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="opacity: 0.8;">
+    <ion-col style="display: flex; flex-direction: row; justify-content: space-between; padding-bottom: 0px;">
+      <div>
+        <img src="../../assets/logo.png" style="width: 5rem; height: auto; padding-left: 1rem;">
+      </div>
+      <div>
+        <img src="../../assets/senac.png" style="width: 5rem; height: auto; padding-right: 1rem;">
+      </div>
     </ion-col>
   </ion-row>
 </ion-content>

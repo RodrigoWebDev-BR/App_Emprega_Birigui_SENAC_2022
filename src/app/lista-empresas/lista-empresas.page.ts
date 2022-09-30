@@ -58,14 +58,12 @@ export class ListaEmpresasPage implements OnInit {
                       'warning'
                     );
                   } else {
-                    console.log(e1);
+                    this.loadEmpresas();
                   }
                 })
                 .catch((e) => {
                   this.exibeToast('Erro com o servidor', 'danger');
                 });
-
-              this.loadEmpresas();
             }
           },
         },
@@ -116,14 +114,12 @@ export class ListaEmpresasPage implements OnInit {
                       'warning'
                     );
                   } else {
-                    console.log(e1);
+                    this.loadEmpresas();
                   }
                 })
                 .catch((e) => {
                   this.exibeToast('Erro com o servidor', 'danger');
                 });
-
-              this.loadEmpresas();
             }
           },
         },
@@ -142,25 +138,24 @@ export class ListaEmpresasPage implements OnInit {
     await rejeitar.present();
   }
 
-  pendenteChk(){
-    if(this.pendente){
-      this.pendente= false;
+  pendenteChk() {
+    if (this.pendente) {
+      this.pendente = false;
       this.loadEmpresas();
-    }else{
-      this.pendente= true;
+    } else {
+      this.pendente = true;
       this.confirmada = false;
       this.reloadEmpresas(false);
     }
-
   }
 
-  confirmaChk(){
-    if(this.confirmada){
+  confirmaChk() {
+    if (this.confirmada) {
       this.confirmada = false;
       this.loadEmpresas();
-    }else{
+    } else {
       this.confirmada = true;
-      this.pendente= false;
+      this.pendente = false;
       this.reloadEmpresas(true);
     }
   }
@@ -195,16 +190,20 @@ export class ListaEmpresasPage implements OnInit {
       .catch();
   }
 
-  reloadEmpresas(v: boolean){
+  reloadEmpresas(v: boolean) {
     this.servicoEmpresa
       .perfis()
       .then((e1) => {
         this.itemAux = e1;
         this.itemAux = this.itemAux.items;
-         if(v){
-           this.itemAux = this.itemAux.filter(emp => !emp.recusada && emp.aceita);
-         }else{
-          this.itemAux = this.itemAux.filter(emp => !emp.recusada && !emp.aceita);
+        if (v) {
+          this.itemAux = this.itemAux.filter(
+            (emp) => !emp.recusada && emp.aceita
+          );
+        } else {
+          this.itemAux = this.itemAux.filter(
+            (emp) => !emp.recusada && !emp.aceita
+          );
         }
       })
       .catch();

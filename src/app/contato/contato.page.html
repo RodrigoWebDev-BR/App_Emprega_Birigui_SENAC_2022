@@ -24,8 +24,8 @@
     <ion-col>
       <ion-item class="roundedInput ion-margin-top">
         <ion-label position="floating">Insira seu contato <span style="color:red">*</span></ion-label>
-        <ion-input type="text" [(ngModel)]="contato.contato" mask="(**) *****-****" *ngIf="exibir.cel"></ion-input>
-        <ion-input type="text" [(ngModel)]="contato.contato" mask="(**) ****-****" *ngIf="exibir.tel"></ion-input>
+        <ion-input type="text" [(ngModel)]="contato.contato" mask="(**) *****-****" *ngIf="exibir.cel" maxlength="15"></ion-input>
+        <ion-input type="text" [(ngModel)]="contato.contato" mask="(**) ****-****" *ngIf="exibir.tel" maxlength="14"></ion-input>
         <ion-input type="text" [(ngModel)]="contato.contato" *ngIf="exibir.neutro"></ion-input>
       </ion-item>
     </ion-col>

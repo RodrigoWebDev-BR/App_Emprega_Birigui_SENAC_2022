@@ -29,6 +29,7 @@ export class VagaDetalhesPage implements OnInit {
     dtCandidatura: this.formatDate(new Date()).toString(),
     aprovado: false,
     recusado: false,
+    entrevista: 'null',
     userId: localStorage.getItem('idUser'),
     empresaId: '',
   };
@@ -80,6 +81,7 @@ export class VagaDetalhesPage implements OnInit {
                           dtCandidatura: this.formatDate(new Date()).toString(),
                           aprovado: false,
                           recusado: false,
+                          entrevista: 'null',
                           userId: localStorage.getItem('idUser'),
                           empresaId: localStorage.getItem('idEmp')
                         };
@@ -113,6 +115,7 @@ export class VagaDetalhesPage implements OnInit {
                           dtCandidatura: this.formatDate(new Date()).toString(),
                           aprovado: false,
                           recusado: false,
+                          entrevista: 'null',
                           vagaId: localStorage.getItem('idVaga')
                         };
                         colecao.push(vagaAtual);

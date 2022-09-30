@@ -39,6 +39,20 @@ export class LoginPage implements OnInit {
       this.user.cpf = localStorage.getItem('CPF/CNPJ');
     }
 
+    if(localStorage.getItem('recovery') === 'ok'){
+      const alerta = await this.mensagem.create({
+        header: 'Ops...',
+        message:
+          'Senha alterada com sucesso!!!',
+        buttons: ['OK'],
+      });
+
+      localStorage.clear();
+      await alerta.present();
+
+      return;
+    }
+
     if (localStorage.getItem('nomeCadastro') === 'erro') {
       const alerta = await this.mensagem.create({
         header: 'Ops...',
@@ -98,24 +112,12 @@ export class LoginPage implements OnInit {
 
   async confirmarLogin() {
     if (this.user.cpf === '' || this.user.cpf === null) {
-      const alerta = await this.mensagem.create({
-        header: 'ATENÇÃO',
-        message: 'Necessário preencher com seu CPF ou CNPJ.',
-        buttons: ['OK'],
-      });
-
-      await alerta.present();
+      this.exibeToast('Necessário informar CPF/CNPJ e senha');
 
       return;
     } else if (this.user.password === '' || this.user.password === null) {
-      const alerta = await this.mensagem.create({
-        header: 'ATENÇÃO',
-        message: 'Necessário preencher a senha.',
-        buttons: ['OK'],
-      });
 
-      await alerta.present();
-
+      this.exibeToast('Necessário preencher a senha');
       return;
     } else {
       let type = this.user.cpf.includes('/') ? 'empresa' : 'empregado';
@@ -158,7 +160,7 @@ export class LoginPage implements OnInit {
                     const alerta = await this.mensagem.create({
                       header: 'Desculpe',
                       message:
-                        'Infelizmente sua empresa não foi aprovada pela prefeitura de birigui. Qualquer dúvida entre em contato pelo site http://www.birigui.sp.gov.br/',
+                        'Infelizmente sua empresa não foi aprovada pela prefeitura de birigui. Qualquer dúvida entre em contato pelo site www.birigui.sp.gov.br/',
                       buttons: ['OK'],
                     });
 

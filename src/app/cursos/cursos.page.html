@@ -23,7 +23,7 @@
       <ion-col>
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Nome Instituição <span style="color:red">*</span></ion-label>
-          <ion-input type="text" [(ngModel)]="curso.instituicaoEnsino">
+          <ion-input type="text" [(ngModel)]="curso.instituicao">
           </ion-input>
         </ion-item>
       </ion-col>
@@ -44,9 +44,9 @@
           <ion-item>
             <ion-list style="width: 100%;">
               <ion-item *ngFor="let curso of cursos" lines="none" class="animate__animated animate__fadeInUp">
-                <ion-label>
+                <ion-label class="ion-text-wrap">
                   <p>Curso: {{ curso.nome }}</p>             
-                  <h2>Instituição de Ensino: {{ curso.instituicaoEnsino }}</h2>
+                  <h2>Instituição de Ensino: {{ curso.instituicao }}</h2>
                 </ion-label>
                 <ion-icon name="trash-outline" slot="end" color="danger" (click)="removerCurso(curso)" style="width: 30px; height: 30px;"></ion-icon>
               </ion-item>

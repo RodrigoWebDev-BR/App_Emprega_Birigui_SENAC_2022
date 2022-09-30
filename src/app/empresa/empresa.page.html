@@ -38,7 +38,7 @@
       <ion-col>
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">CNPJ <span style="color: red">*</span></ion-label>
-          <ion-input type="text" [(ngModel)]="empresa.cnpj" (ionBlur)="verificaCnpj()" placeholder="**.***.**/****-**" mask="**.***.**/****-**">
+          <ion-input type="text" [(ngModel)]="empresa.cnpj" (ionBlur)="verificaCnpj()" placeholder="**.***.**/****-**" mask="**.***.**/****-**" maxlength="18">
           </ion-input>
           <ion-icon name="id-card-outline" slot="end" class="iconPad"></ion-icon>
         </ion-item>
@@ -60,7 +60,7 @@
       <ion-col>
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Data de abertura</ion-label>
-          <ion-input type="text" [(ngModel)]="empresa.dataAb" placeholder=" " mask="**/**/****">
+          <ion-input type="text" [(ngModel)]="empresa.dataAb" placeholder=" " mask="**/**/****" maxlength="10">
           </ion-input>
         </ion-item>
       </ion-col>
@@ -70,7 +70,7 @@
       <ion-col>
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Atividades Ecônomicas(CNAE) <span style="color: red">*</span></ion-label>
-          <ion-input type="text" [(ngModel)]="empresa.cnae" placeholder="**.**-*-**">
+          <ion-input type="text" [(ngModel)]="empresa.cnae" placeholder="**.**-*-**" mask="**.**-*-**" maxlength="10">
           </ion-input>
         </ion-item>
       </ion-col>
@@ -102,7 +102,7 @@
       <ion-col>
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Senha <span style="color: red">*</span></ion-label>
-          <ion-input type="password" [(ngModel)]="empresa.senha"></ion-input>
+          <ion-input type="password" [(ngModel)]="empresa.senha" maxlength="20"></ion-input>
           <ion-icon name="key-outline" slot="end" class="iconPad"></ion-icon>
         </ion-item>
       </ion-col>
@@ -112,8 +112,8 @@
       <ion-col>
         <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">Confirme sua senha <span style="color: red">*</span></ion-label>
-          <ion-input type="password" [(ngModel)]="empresa.confirmacao"></ion-input>
-          <ion-icon name="key-outline" slot="end" class="iconPad"></ion-icon>
+          <ion-input type="password" [(ngModel)]="empresa.confirmacao" maxlength="20"></ion-input>
+          <ion-icon name="key-outline" slot="end" class="iconPad" ></ion-icon>
         </ion-item>
       </ion-col>
     </ion-row>

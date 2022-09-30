@@ -11,7 +11,7 @@ import { Storage } from '@capacitor/storage';
 export class CursosPage implements OnInit {
   public curso = {
     nome: '',
-    instituicaoEnsino: ''
+    instituicao: ''
   };
 
   public cursos: any[] = [];
@@ -39,8 +39,8 @@ export class CursosPage implements OnInit {
 
       return;
     } else if (
-      this.curso.instituicaoEnsino === '' ||
-      this.curso.instituicaoEnsino === null
+      this.curso.instituicao === '' ||
+      this.curso.instituicao === null
     ) {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
@@ -59,11 +59,11 @@ export class CursosPage implements OnInit {
 
       this.cursoSave.salvarCurso(
         this.curso.nome,
-        this.curso.instituicaoEnsino
+        this.curso.instituicao
       );
 
       this.curso.nome = '';
-      this.curso.instituicaoEnsino = '';
+      this.curso.instituicao = '';
     }
   }
 

@@ -115,6 +115,7 @@ export class ConclusaoPage implements OnInit {
       idiomas: this.servicosIdiomas.listar(),
       descricaoUser: localStorage.getItem('descricao-usuario'),
       candidaturas: undefined,
+      numberRecovery: 0,
     };
 
     this.cadastro
@@ -158,6 +159,7 @@ export class ConclusaoPage implements OnInit {
       descricaoEmpresa: localStorage.getItem('descricaoEmpresa'),
       aceita: false,
       recusada: false,
+      numberRecovery: 0,
     };
 
     this.cadastro

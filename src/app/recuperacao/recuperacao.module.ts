@@ -1,3 +1,4 @@
+import { IonicInputMaskModule } from '@thiagoprz/ionic-input-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,8 @@ import { RecuperacaoPage } from './recuperacao.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RecuperacaoPageRoutingModule
+    RecuperacaoPageRoutingModule,
+    IonicInputMaskModule
   ],
   declarations: [RecuperacaoPage]
 })

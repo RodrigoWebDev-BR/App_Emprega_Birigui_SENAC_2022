@@ -4,7 +4,7 @@ import { validarCNPJ } from './../../environments/functions';
 import {
   NavController,
   AlertController,
-  ToastController
+  ToastController,
 } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
@@ -30,16 +30,18 @@ export class LancamentoVagaPage implements OnInit {
     alimentacao: '',
     medica: '',
     descricao: '',
+    msgEntrevista: '',
     qtde: 0,
     beneficios: this.beneficios,
     congelada: false,
     online: true,
     empresaId: localStorage.getItem('idUser'),
-    candidaturas: undefined
+    candidaturas: undefined,
   };
   qtde: 0;
   isModalOpen = false;
   public beneficio = '';
+  public msg = false;
   perfil: any = {};
   itemAux: any = {};
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
@@ -248,7 +250,6 @@ export class LancamentoVagaPage implements OnInit {
         this.vaga.salario = 0;
       }
 
-
       if (isOpen) {
         setTimeout(() => {
           this.aviso();
@@ -391,7 +392,29 @@ export class LancamentoVagaPage implements OnInit {
     ].join('/');
   }
 
-  home(){
+  home() {
     this.nav.navigateRoot('home');
+  }
+
+  async detalhes() {
+    if (!this.msg) {
+      const detalhe = await this.mensagem.create({
+        header: 'ATENÇÃO',
+        message:
+          'Detalhes sobre a entrevista. Informe local, hora e data, alguma mensagem e mais Informações se necessário.',
+        buttons: [
+          {
+            text: 'OK',
+            role: 'cancel',
+            handler: () => {
+              this.msg = true;
+            },
+          },
+        ],
+      });
+      await detalhe.present();
+
+      return;
+    }
   }
 }

@@ -22,68 +22,85 @@
 ul,
 li {
   list-style: none;
-  padding: 0;
 }
 
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 0 1rem;
-  padding: 1rem 0;
 }
 
 .wrapper {
   background: #eaf6ff;
-  padding: 2rem;
+  padding: 1.2rem 7rem 0px 0px;
   border-radius: 15px;
 }
-h1 {
-  font-size: 1.1rem;
-  font-family: sans-serif;
-}
+
 .sessions {
   margin-top: 2rem;
-  border-radius: 12px;
+  border-radius: 10px;
   position: relative;
 }
 li {
-  padding-bottom: 1.5rem;
+  height: 24px;
+  top: -10px;
+  padding-bottom: 5rem;
   border-left: 2px solid #cfcece;
   position: relative;
   padding-left: 10px;
   margin-left: 5px;
-  margin-top: -18px;
   &:last-child {
     border: 0px;
     padding-bottom: 0;
   }
   &:before {
     content: "";
-    width: 15px;
-    height: 15px;
+    width: 1.6rem;
+    height: 1.6rem;
     background: #cfcece;
-    border: 1px solid #cfcece;
     border-radius: 50%;
     position: absolute;
-    left: -10px;
-    top: 0px;
+    left: -0.8rem;
+    top: -1rem;
   }
 }
 .vermelho {
   &:before {
-    content: "";
-    background: red;
-    border: 1px solid red;
+    margin-top: 0.8rem;
+    background-image: url("../../assets/erro-timeline.png");
+    background-size: 1.8rem;
+    background-repeat: no-repeat;
+    background-position: center;
   }
-  border-left: 2px solid red;
+  border-left: 3px solid red;
 }
 .verde {
   &:before {
+    margin-top: 0.8rem;
     background-image: url("../../assets/ok.png");
-    background-size: 15px;
+    background-size: 1.8rem;
+    background-repeat: no-repeat;
+    background-position: center;
   }
-  border-left: 2px solid green;
+  border-left: 3px solid green;
+}
+.amarelo {
+  &:before {
+    margin-top: 0.8rem;
+    background-image: url("../../assets/relogio.png");
+    background-size: 1.8rem;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  border-left: 3px solid orange;
+}
+.cinza {
+  &:before {
+    margin-top: 0.8rem;
+    background-size: 1.8rem;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  border-left: 3px solid #cfcece;
 }
 
 .time {
@@ -98,16 +115,44 @@ li {
     font-size: 0.85rem;
   }
 }
-p {
-  color: #4f4f4f;
-  font-family: sans-serif;
-  line-height: 1.5;
-  font-weight: bold;
-  @include mobile-only {
-    font-size: 1.1rem;
-  }
-}
 
 .noshadow {
   box-shadow: none !important;
 }
+
+.label{
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+ion-card{
+  border-radius: 30px;
+  margin-top: 3rem;
+  ion-card-header{
+      margin-top: 2rem;
+      
+      ion-card-title{
+          font-size: 2.1rem;
+      }   
+  }
+
+  ion-card-content{
+      padding-left: 0px;
+  }
+}
+
+.medalha{
+  position: absolute;
+  height: 70px;
+  width: 70px;
+  top: 1.7rem;
+  margin-left: 68%;
+}
+
+@media (min-width: 426px) {
+  .mgCard{
+      margin-left: 9%;
+      margin-right: 9%;
+  }
+}
+

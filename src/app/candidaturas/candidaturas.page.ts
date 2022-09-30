@@ -191,6 +191,129 @@ export class CandidaturasPage implements OnInit {
     await alerta.present();
   }
 
+  async entrevistar(usuario) {
+    const alerta = await this.mensagem.create({
+      header: 'ATENÇÃO!',
+      message:
+        'Deseja entrevistar ' +
+        usuario.nome +
+        ' para a vaga? Este processo é irreversível',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {},
+        },
+        {
+          text: 'Entrevistar',
+          handler: () => {
+            this.servicoVagas
+              .searchSubDoc()
+              .then((e1) => {
+                const aux1: any = e1;
+                const aux2: any = aux1.filter(
+                  (a) => a.userId._id !== usuario._id
+                );
+                let aux3: any = {};
+                aux3 = aux1.filter((a) => a.userId._id === usuario._id);
+                aux3[0].entrevista = 'aprovado';
+                this.servicoVagas
+                  .putVaga(aux1)
+                  .then((e2) => {
+                    if (e2) {
+                      this.loadCandidatos();
+                    }
+                  })
+                  .catch((e)=>{
+                    this.exibeToast('Erro com servidor', 'danger');
+                  });
+              })
+              .catch((e)=>{
+                this.exibeToast('Erro com servidor', 'danger');
+              });
+
+              this.servicoEmpregado
+              .searchSubDocId('candidaturas', usuario._id)
+              .then((e3) => {
+                const aux3: any = e3;
+                let aux4: any = {};
+                aux4 = aux3.filter(
+                  (a) => a.vagaId._id === localStorage.getItem('idVaga')
+                );
+
+                aux4[0].entrevista = 'aprovado';
+                this.servicoEmpregado
+                  .putUserId(aux3, 'candidaturas', usuario._id)
+                  .then((e4) => {
+                    this.exibeToast('Candidato recusado!', 'success');
+                  })
+                  .catch((e)=>{
+                    this.exibeToast('Erro com servidor', 'danger');
+                  });
+              })
+              .catch((e)=>{
+                this.exibeToast('Erro com servidor', 'danger');
+              });
+          },
+        },
+        {
+          text: 'Não entrevistar',
+          handler: () => {
+            this.servicoVagas
+              .searchSubDoc()
+              .then((e1) => {
+                const aux1: any = e1;
+                const aux2: any = aux1.filter(
+                  (a) => a.userId._id !== usuario._id
+                );
+                let aux3: any = {};
+                aux3 = aux1.filter((a) => a.userId._id === usuario._id);
+                aux3[0].entrevista = 'recusado';
+                this.servicoVagas
+                  .putVaga(aux1)
+                  .then((e2) => {
+                    if (e2) {
+                      this.loadCandidatos();
+                    }
+                  })
+                  .catch((e)=>{
+                    this.exibeToast('Erro com servidor', 'danger');
+                  });
+              })
+              .catch((e)=>{
+                this.exibeToast('Erro com servidor', 'danger');
+              });
+
+              this.servicoEmpregado
+              .searchSubDocId('candidaturas', usuario._id)
+              .then((e3) => {
+                const aux3: any = e3;
+                let aux4: any = {};
+                aux4 = aux3.filter(
+                  (a) => a.vagaId._id === localStorage.getItem('idVaga')
+                );
+
+                aux4[0].entrevista = 'recusado';
+                this.servicoEmpregado
+                  .putUserId(aux3, 'candidaturas', usuario._id)
+                  .then((e4) => {
+                    this.exibeToast('Candidato recusado!', 'success');
+                  })
+                  .catch((e)=>{
+                    this.exibeToast('Erro com servidor', 'danger');
+                  });
+              })
+              .catch((e)=>{
+                this.exibeToast('Erro com servidor', 'danger');
+              });
+          },
+        },
+      ],
+    });
+
+    await alerta.present();
+  }
+
   ngOnInit() {
     this.idVaga = localStorage.getItem('idVaga');
     this.loadCandidatos();
@@ -233,7 +356,7 @@ export class CandidaturasPage implements OnInit {
   }
 
   home() {
-    this.nav.back();
+    this.nav.navigateRoot('home');
   }
 
   pendenteChk() {

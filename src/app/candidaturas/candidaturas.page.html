@@ -50,10 +50,19 @@
               <div *ngIf="candidatura.vagaId === idVaga">
                 <br />
                 <ion-card-subtitle color="primary" *ngIf="usuario.aprovado"
-                  >Candidato convidado <img src="../../assets/check.png"
+                  >Candidato aprovado <img src="../../assets/check.png"
                 /></ion-card-subtitle>
+                <ion-card-subtitle color="primary" *ngIf="usuario.entrevista === 'aprovado'"
+                  >Convidado para entrevista <img src="../../assets/check.png"
+                /></ion-card-subtitle>
+                <ion-card-subtitle color="danger" *ngIf="usuario.entrevista === 'recusado'"
+                >Rejeitado para entrevista <img src="../../assets/delete.png"
+              /></ion-card-subtitle>
                 <ion-card-subtitle color="danger" *ngIf="usuario.recusado"
                   >Candidato recusado <img src="../../assets/delete.png"
+                /></ion-card-subtitle>
+                <ion-card-subtitle color="danger" *ngIf="usuario.recusado"
+                  >Recusado para entrevista <img src="../../assets/delete.png"
                 /></ion-card-subtitle>
                 <ion-card-subtitle
                   color="warning"
@@ -80,6 +89,19 @@
                       (click)="rejeitar(usuario.userId)"
                       >Rejeitar</ion-button
                     >
+                  </ion-col>
+                </ion-row>
+                <ion-row *ngIf="!usuario.recusado && usuario.aprovado && usuario.entrevista === 'null'" >
+                  <ion-col>
+                    <ion-button
+                      size="small"
+                      expand="block"
+                      color="primary"
+                      (click)="entrevistar(usuario.userId)"
+                    >
+                      <ion-icon name="chatbubbles" color="light"></ion-icon>
+                      <ion-label class="labelChk">Entrevistar</ion-label>
+                    </ion-button>
                   </ion-col>
                 </ion-row>
                 <ion-row>

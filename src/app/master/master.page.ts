@@ -25,7 +25,7 @@ export class MasterPage implements OnInit {
 
     const alerta = await this.mensagem.create({
       header: 'Bem Vindo!',
-      message: 'Você é o primeiro a pisar por essas bandas. <br /> <br /> Você será o usuário principal de todo o sistema. Para prosseguir, informe alguns dados',
+      message: 'Você será o usuário principal de todo o sistema. Para prosseguir, informe alguns dados',
       buttons: ['ok'],
     });
     await alerta.present();
