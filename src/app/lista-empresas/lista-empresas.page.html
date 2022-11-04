@@ -30,6 +30,9 @@
         <ion-card>
           <ion-card-header>
             <ion-card-title>{{empresa.nomeEmpresa}}</ion-card-title>
+            <ion-card-subtitle
+                >Responsavel: {{empresa.responsavel}}</ion-card-subtitle
+              >
             <div *ngFor="let contatos of empresa.contatos">
               <ion-card-subtitle *ngIf="contatos.validado"
                 >{{contatos.tipo}} - {{contatos.contato}}</ion-card-subtitle
@@ -81,6 +84,15 @@
                             <ion-label class="ion-text-wrap">
                               <span class="bold">Nome Fantasia:</span>
                               {{empresa.fantasia}}
+                            </ion-label>
+                          </ion-row>
+                        </ion-item>
+
+                        <ion-item>
+                          <ion-row>
+                            <ion-label class="ion-text-wrap">
+                              <span class="bold">Nome Fantasia:</span>
+                              {{empresa.responsavel}}
                             </ion-label>
                           </ion-row>
                         </ion-item>

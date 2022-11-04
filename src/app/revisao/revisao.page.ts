@@ -44,6 +44,7 @@ export class RevisaoPage implements OnInit {
   empresa = {
     nomeEmpresa: localStorage.getItem('nomeEmpresa'),
     fantasia: localStorage.getItem('fantasia'),
+    responsavel: localStorage.getItem('responsavel'),
     cnpj: localStorage.getItem('cnpj'),
     email: localStorage.getItem('email'),
     dataAb: localStorage.getItem('dtAb'),

@@ -46,11 +46,11 @@ export class ConclusaoPage implements OnInit {
         break;
     }
 
-    setTimeout(() => {
-      localStorage.setItem('nomeCadastro', this.nome);
-      localStorage.setItem('profileConcluido', localStorage.getItem('profile'));
-      this.nav.navigateRoot('login');
-    }, 4000);
+    // setTimeout(() => {
+    //   localStorage.setItem('nomeCadastro', this.nome);
+    //   localStorage.setItem('profileConcluido', localStorage.getItem('profile'));
+    //   this.nav.navigateRoot('login');
+    // }, 4000);
   }
 
   async exibeToast(msg) {
@@ -139,6 +139,7 @@ export class ConclusaoPage implements OnInit {
     const empresa = {
       nomeEmpresa: localStorage.getItem('nomeEmpresa'),
       fantasia: localStorage.getItem('fantasia'),
+      responsavel: localStorage.getItem('responsavel'),
       cnpj: localStorage.getItem('cnpj'),
       email: localStorage.getItem('email'),
       dataAb: localStorage.getItem('dataAb'),

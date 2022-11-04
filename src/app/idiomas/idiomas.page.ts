@@ -19,7 +19,8 @@ export class IdiomasPage {
     { id: '3', nome: 'Japonês' },
     { id: '4', nome: 'Frânces' },
     { id: '5', nome: 'Italiano' },
-    { id: '6', nome: 'Alemão' },
+    { id: '6', nome: 'Mandarim' },
+    { id: '7', nome: 'Alemão' },
   ];
 
   constructor(
@@ -82,6 +83,10 @@ export class IdiomasPage {
           this.idioma.bandeira += 'italiano.png';
           break;
 
+        case 'Mandarim':
+          this.idioma.bandeira += 'china.png';
+          break;
+
         default:
           this.idioma.bandeira += 'alemao.png';
           break;
@@ -99,6 +104,10 @@ export class IdiomasPage {
       this.idioma.idioma = '';
       this.idioma.nivel = '';
     } else {
+
+      this.idioma.idioma = '';
+      this.idioma.nivel = '';
+
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO',
         subHeader: '',

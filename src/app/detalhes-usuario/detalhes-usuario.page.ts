@@ -54,10 +54,10 @@ export class DetalhesUsuarioPage implements OnInit {
       await alerta.present();
 
       return;
-    }else if(this.caracter < 100){
+    }else if(this.caracter < 50){
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
-        message: 'Descrição deve conter no mínimo 100 caracteres!',
+        message: 'Descrição deve conter no mínimo 50 caracteres!',
         buttons: ['ok'],
         cssClass: 'cssAlerta',
       });

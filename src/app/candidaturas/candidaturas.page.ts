@@ -200,11 +200,6 @@ export class CandidaturasPage implements OnInit {
         ' para a vaga? Este processo é irreversível',
       buttons: [
         {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {},
-        },
-        {
           text: 'Entrevistar',
           handler: () => {
             this.servicoVagas
@@ -307,6 +302,11 @@ export class CandidaturasPage implements OnInit {
                 this.exibeToast('Erro com servidor', 'danger');
               });
           },
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {},
         },
       ],
     });

@@ -41,7 +41,6 @@ export class LancamentoVagaPage implements OnInit {
   qtde: 0;
   isModalOpen = false;
   public beneficio = '';
-  public msg = false;
   perfil: any = {};
   itemAux: any = {};
   // eslint-disable-next-line @typescript-eslint/no-inferrable-types
@@ -396,25 +395,5 @@ export class LancamentoVagaPage implements OnInit {
     this.nav.navigateRoot('home');
   }
 
-  async detalhes() {
-    if (!this.msg) {
-      const detalhe = await this.mensagem.create({
-        header: 'ATENÇÃO',
-        message:
-          'Detalhes sobre a entrevista. Informe local, hora e data, alguma mensagem e mais Informações se necessário.',
-        buttons: [
-          {
-            text: 'OK',
-            role: 'cancel',
-            handler: () => {
-              this.msg = true;
-            },
-          },
-        ],
-      });
-      await detalhe.present();
 
-      return;
-    }
-  }
 }

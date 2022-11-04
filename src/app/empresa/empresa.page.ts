@@ -17,6 +17,7 @@ import { validaEmail } from 'src/environments/functions';
 export class EmpresaPage implements OnInit {
   empresa = {
     nome: null,
+    responsavel: null,
     fantasia: null,
     cnpj: null,
     email: null,
@@ -59,6 +60,15 @@ export class EmpresaPage implements OnInit {
       const alerta = await this.mensagem.create({
         header: 'ATENÇÃO!',
         message: 'É necessário informar o nome da empresa.',
+        buttons: ['ok'],
+      });
+      await alerta.present();
+
+      return;
+    } else  if (this.empresa.responsavel === '' || this.empresa.responsavel === null) {
+      const alerta = await this.mensagem.create({
+        header: 'ATENÇÃO!',
+        message: 'É necessário informar o nome do responsavel.',
         buttons: ['ok'],
       });
       await alerta.present();
@@ -212,6 +222,7 @@ export class EmpresaPage implements OnInit {
   salvarTemporariamente() {
     localStorage.setItem('nomeEmpresa', this.empresa.nome);
     localStorage.setItem('fantasia', this.empresa.fantasia);
+    localStorage.setItem('responsavel', this.empresa.responsavel);
     localStorage.setItem('cnpj', this.empresa.cnpj);
     localStorage.setItem('email', this.empresa.email);
     localStorage.setItem('dataAb', this.empresa.dataAb);
@@ -224,6 +235,7 @@ export class EmpresaPage implements OnInit {
   carregarDados() {
     this.empresa.nome = localStorage.getItem('nomeEmpresa');
     this.empresa.fantasia = localStorage.getItem('fantasia');
+    this.empresa.responsavel = localStorage.getItem('responsavel');
     this.empresa.cnpj = localStorage.getItem('cnpj');
     this.empresa.email = localStorage.getItem('email');
     this.empresa.dataAb = localStorage.getItem('dataAb');

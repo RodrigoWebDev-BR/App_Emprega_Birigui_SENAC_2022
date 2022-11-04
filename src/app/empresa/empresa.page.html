@@ -37,6 +37,15 @@
     <ion-row>
       <ion-col>
         <ion-item class="roundedInput" lines="none">
+          <ion-label position="floating">Nome responsável <span style="color: red">*</span></ion-label>
+          <ion-input type="text" [(ngModel)]="empresa.responsavel"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item class="roundedInput" lines="none">
           <ion-label position="floating">CNPJ <span style="color: red">*</span></ion-label>
           <ion-input type="text" [(ngModel)]="empresa.cnpj" (ionBlur)="verificaCnpj()" placeholder="**.***.**/****-**" mask="**.***.**/****-**" maxlength="18">
           </ion-input>

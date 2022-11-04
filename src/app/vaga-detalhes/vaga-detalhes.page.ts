@@ -47,7 +47,7 @@ export class VagaDetalhesPage implements OnInit {
   async candidatar() {
     const alerta = await this.mensagem.create({
       header: 'Atenção',
-      message: 'Informe sua senha para se candidatar na vaga.',
+      message: 'Deseja realmente se candidatar para esta vaga?',
       buttons: [
         {
           text: 'Cancelar',
@@ -56,107 +56,78 @@ export class VagaDetalhesPage implements OnInit {
         },
         {
           text: 'Candidatar-se',
-          handler: (senha) => {
-            if (senha) {
-              this.authorize
-                .login(
-                  formatarCPF(localStorage.getItem('cpf')).toString(),
-                  senha[0],
-                  'empregado'
-                )
-                .then((response) => {
-                  this.resp = response;
-                  if (this.resp === undefined) {
-                    this.exibeToast('Erro de resposta com o servidor.');
-                  } else {
-                    this.servicoVaga
-                    .searchSubDoc()
-                    .then((resp) => {
-                      this.itemAux2 = resp;
-                      if (this.itemAux === undefined) {
-                        return;
-                      } else {
-                        const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux2));
-                        const vagaAtual = {
-                          dtCandidatura: this.formatDate(new Date()).toString(),
-                          aprovado: false,
-                          recusado: false,
-                          entrevista: 'null',
-                          userId: localStorage.getItem('idUser'),
-                          empresaId: localStorage.getItem('idEmp')
-                        };
-                        colecao.push(vagaAtual);
-                        this.servicoVaga
-                          .putVaga(colecao)
-                          .then((respFinal) => {
-                            if (!respFinal) {
-                              return;
-                            } else {
-                              this.mostrarConteudo = false;
-                              this.esconderConteudo = true;
-                              setTimeout(() => {
-                                this.nav.navigateForward('timeline-vaga');
-                              }, 2000);
-                            }
-                          })
-                          .catch();
-                      }
-                    })
-                    .catch();
-                    this.servicoEmpregado
-                    .searchSubDoc('candidaturas')
-                    .then((resp) => {
-                      this.itemAux2 = resp;
-                      if (this.itemAux === undefined) {
-                        return;
-                      } else {
-                        const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux2));
-                        const vagaAtual = {
-                          dtCandidatura: this.formatDate(new Date()).toString(),
-                          aprovado: false,
-                          recusado: false,
-                          entrevista: 'null',
-                          vagaId: localStorage.getItem('idVaga')
-                        };
-                        colecao.push(vagaAtual);
-                        this.servicoEmpregado
-                          .putUser(colecao, 'candidaturas')
-                          .then((respFinal) => {
-                            if (!respFinal) {
-                              return;
-                            } else {
-                              this.mostrarConteudo = false;
-                              this.esconderConteudo = true;
-                              localStorage.removeItem('idEmp');
-                              setTimeout(() => {
-                                this.nav.navigateForward('timeline-vaga');
-                              }, 2000);
-                            }
-                          })
-                          .catch();
-                      }
-                    })
-                    .catch();
-                  }
-                })
-                .catch((e) => {
-                  this.exibeToast('Senha inválida');
-                });
-            } else {
-              this.exibeToast('Senha inválido');
-            }
+          handler: () => {
+            this.servicoVaga
+            .searchSubDoc()
+            .then((resp) => {
+              this.itemAux2 = resp;
+              if (this.itemAux === undefined) {
+                return;
+              } else {
+                const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux2));
+                const vagaAtual = {
+                  dtCandidatura: this.formatDate(new Date()).toString(),
+                  aprovado: false,
+                  recusado: false,
+                  entrevista: 'null',
+                  userId: localStorage.getItem('idUser'),
+                  empresaId: localStorage.getItem('idEmp')
+                };
+                colecao.push(vagaAtual);
+                this.servicoVaga
+                  .putVaga(colecao)
+                  .then((respFinal) => {
+                    if (!respFinal) {
+                      return;
+                    } else {
+                      this.mostrarConteudo = false;
+                      this.esconderConteudo = true;
+                      setTimeout(() => {
+                        this.nav.navigateForward('timeline-vaga');
+                      }, 2000);
+                    }
+                  })
+                  .catch();
+              }
+            })
+            .catch();
+            this.servicoEmpregado
+            .searchSubDoc('candidaturas')
+            .then((resp) => {
+              this.itemAux2 = resp;
+              if (this.itemAux === undefined) {
+                return;
+              } else {
+                const colecao: any[] = JSON.parse(JSON.stringify(this.itemAux2));
+                const vagaAtual = {
+                  dtCandidatura: this.formatDate(new Date()).toString(),
+                  aprovado: false,
+                  recusado: false,
+                  entrevista: 'null',
+                  vagaId: localStorage.getItem('idVaga')
+                };
+                colecao.push(vagaAtual);
+                this.servicoEmpregado
+                  .putUser(colecao, 'candidaturas')
+                  .then((respFinal) => {
+                    if (!respFinal) {
+                      return;
+                    } else {
+                      this.mostrarConteudo = false;
+                      this.esconderConteudo = true;
+                      localStorage.removeItem('idEmp');
+                      setTimeout(() => {
+                        this.nav.navigateForward('timeline-vaga');
+                      }, 2000);
+                    }
+                  })
+                  .catch();
+              }
+            })
+            .catch();
           },
         },
-      ],
-      inputs: [
-        {
-          placeholder: 'Senha',
-          attributes: {
-            maxlength: 35,
-          },
-          type: 'password',
-        },
-      ],
+      ]
     });
     await alerta.present();
 
